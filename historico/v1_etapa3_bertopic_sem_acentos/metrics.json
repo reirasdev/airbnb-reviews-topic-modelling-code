@@ -1,0 +1,48 @@
+{
+ "etapa1": {
+  "imoveis_total": 42013,
+  "avaliacoes_total": 995072,
+  "imoveis_com_nota": 33140,
+  "imoveis_elegiveis(nota>0, v>=MIN_REVIEWS)": 28890,
+  "imoveis_analisados": 28890,
+  "avaliacoes_automaticas_removidas": 1,
+  "avaliacoes_duplicadas_removidas": 311,
+  "avaliacoes_dos_imoveis_analisados": 975193,
+  "avaliacoes_usadas": 475858,
+  "sentencas": 1512063,
+  "textos_unicos": 1366091,
+  "sentencas_por_avaliacao(media)": 3.18,
+  "tokens_por_sentenca(media)": 12.38
+ },
+ "etapa2": {
+  "textos_unicos": 1366091,
+  "stars_media": 4.189,
+  "stars_mediana": 4.642,
+  "prop_sentencas_stars_ge_4": 0.751,
+  "prop_sentencas_stars_le_2": 0.056
+ },
+ "etapa3_bertopic": {
+  "n_topicos": 185,
+  "outliers_fit_pct": 29.8,
+  "outliers_final_pct_textos": 1.0,
+  "c_v_medio": 0.3577
+ },
+ "etapa3_lda": {
+  "K_escolhido": 10,
+  "c_v_medio": 0.6254
+ },
+ "etapa4": {
+  "topicos_por_aspecto_sugerido": {
+   "localizacao": 86,
+   "comunicacao": 48,
+   "comodidades": 14,
+   "ruido_conforto": 11,
+   "limpeza": 8,
+   "custo_beneficio": 5,
+   "checkin": 4,
+   "precisao": 3,
+   "seguranca": 3,
+   "geral": 3
+  }
+ }
+}

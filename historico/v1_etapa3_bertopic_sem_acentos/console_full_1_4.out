@@ -1,0 +1,198 @@
+00:55:46 | INFO    | Execução 20261002_005544 | cache C:\Users\rapha\Downloads\mestrado\UCP\dissertacao\Airbnb_Reviews_Topic_Modelling\repo\airbnb-reviews-topic-modelling-code\outputs\cache\375f221f | etapas [1, 2, 3, 4] | dev=False
+00:55:46 | INFO    | ======================================================================
+00:55:46 | INFO    | INÍCIO  Etapa 1 — Ingestão e pré-processamento
+00:55:54 | INFO    | listings (42013, 79) | reviews (995072, 6)
+00:56:23 | INFO    | Detectando idioma em 475858 avaliações...
+00:57:04 | INFO    | Segmentando em sentenças...
+00:57:23 | INFO    |   [etapa1] imoveis_total = 42013
+00:57:23 | INFO    |   [etapa1] avaliacoes_total = 995072
+00:57:23 | INFO    |   [etapa1] imoveis_com_nota = 33140
+00:57:23 | INFO    |   [etapa1] imoveis_elegiveis(nota>0, v>=MIN_REVIEWS) = 28890
+00:57:23 | INFO    |   [etapa1] imoveis_analisados = 28890
+00:57:23 | INFO    |   [etapa1] avaliacoes_automaticas_removidas = 1
+00:57:23 | INFO    |   [etapa1] avaliacoes_duplicadas_removidas = 311
+00:57:23 | INFO    |   [etapa1] avaliacoes_dos_imoveis_analisados = 975193
+00:57:23 | INFO    |   [etapa1] avaliacoes_usadas = 475858
+00:57:23 | INFO    |   [etapa1] sentencas = 1512063
+00:57:23 | INFO    |   [etapa1] textos_unicos = 1366091
+00:57:23 | INFO    |   [etapa1] sentencas_por_avaliacao(media) = 3.18
+00:57:23 | INFO    |   [etapa1] tokens_por_sentenca(media) = 12.38
+00:57:23 | INFO    | FIM     Etapa 1 — Ingestão e pré-processamento (1.6 min)
+00:57:23 | INFO    | ======================================================================
+00:57:23 | INFO    | INÍCIO  Etapa 2 — Análise de sentimento
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+00:57:30 | WARNING | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 12172.85it/s]
+00:57:31 | INFO    | Modelo: cardiffnlp/twitter-xlm-roberta-base-sentiment (quantizado=False) | 1366091 textos únicos
+00:57:31 | INFO    |   sanity: O apartamento estava impecável, super limpo!            neg=0.02 neu=0.06 pos=0.92
+00:57:31 | INFO    |   sanity: Lugar sujo e barulhento, não recomendo.                 neg=0.95 neu=0.04 pos=0.01
+00:57:31 | INFO    |   sanity: The location is great but the bed was uncomfortable.    neg=0.88 neu=0.08 pos=0.04
+00:57:31 | INFO    |   sanity: Muy buena ubicación.                                    neg=0.01 neu=0.06 pos=0.92
+00:57:31 | INFO    |   sanity: Très bel appartement, hôte accueillant.                 neg=0.02 neu=0.06 pos=0.93
+00:57:31 | INFO    |   sanity: Fica a duas quadras do metrô.                           neg=0.09 neu=0.78 pos=0.13
+01:03:55 | INFO    |   chunk 1/69 | 52 textos/s | ETA 431 min
+01:09:44 | INFO    |   chunk 2/69 | 55 textos/s | ETA 405 min
+01:15:56 | INFO    |   chunk 3/69 | 54 textos/s | ETA 401 min
+01:21:32 | INFO    |   chunk 4/69 | 56 textos/s | ETA 386 min
+01:27:05 | INFO    |   chunk 5/69 | 56 textos/s | ETA 374 min
+01:32:25 | INFO    |   chunk 6/69 | 57 textos/s | ETA 363 min
+01:37:41 | INFO    |   chunk 7/69 | 58 textos/s | ETA 352 min
+01:43:13 | INFO    |   chunk 8/69 | 58 textos/s | ETA 344 min
+01:48:42 | INFO    |   chunk 9/69 | 59 textos/s | ETA 337 min
+01:54:04 | INFO    |   chunk 10/69 | 59 textos/s | ETA 330 min
+01:59:52 | INFO    |   chunk 11/69 | 59 textos/s | ETA 325 min
+02:05:52 | INFO    |   chunk 12/69 | 59 textos/s | ETA 321 min
+02:11:47 | INFO    |   chunk 13/69 | 58 textos/s | ETA 316 min
+02:17:39 | INFO    |   chunk 14/69 | 58 textos/s | ETA 311 min
+02:23:29 | INFO    |   chunk 15/69 | 58 textos/s | ETA 306 min
+02:29:21 | INFO    |   chunk 16/69 | 58 textos/s | ETA 300 min
+02:35:42 | INFO    |   chunk 17/69 | 58 textos/s | ETA 296 min
+02:41:58 | INFO    |   chunk 18/69 | 57 textos/s | ETA 292 min
+02:48:19 | INFO    |   chunk 19/69 | 57 textos/s | ETA 288 min
+02:54:41 | INFO    |   chunk 20/69 | 57 textos/s | ETA 283 min
+03:00:56 | INFO    |   chunk 21/69 | 57 textos/s | ETA 278 min
+03:07:50 | INFO    |   chunk 22/69 | 56 textos/s | ETA 274 min
+03:14:38 | INFO    |   chunk 23/69 | 56 textos/s | ETA 270 min
+03:21:32 | INFO    |   chunk 24/69 | 56 textos/s | ETA 266 min
+03:28:21 | INFO    |   chunk 25/69 | 55 textos/s | ETA 261 min
+03:35:20 | INFO    |   chunk 26/69 | 55 textos/s | ETA 257 min
+03:42:48 | INFO    |   chunk 27/69 | 54 textos/s | ETA 253 min
+03:50:13 | INFO    |   chunk 28/69 | 54 textos/s | ETA 249 min
+03:57:33 | INFO    |   chunk 29/69 | 54 textos/s | ETA 244 min
+04:04:51 | INFO    |   chunk 30/69 | 53 textos/s | ETA 239 min
+04:12:24 | INFO    |   chunk 31/69 | 53 textos/s | ETA 235 min
+04:20:14 | INFO    |   chunk 32/69 | 53 textos/s | ETA 230 min
+04:28:17 | INFO    |   chunk 33/69 | 52 textos/s | ETA 225 min
+04:36:09 | INFO    |   chunk 34/69 | 52 textos/s | ETA 221 min
+04:43:53 | INFO    |   chunk 35/69 | 52 textos/s | ETA 215 min
+04:52:12 | INFO    |   chunk 36/69 | 51 textos/s | ETA 211 min
+05:00:20 | INFO    |   chunk 37/69 | 51 textos/s | ETA 205 min
+05:08:34 | INFO    |   chunk 38/69 | 50 textos/s | ETA 200 min
+05:16:39 | INFO    |   chunk 39/69 | 50 textos/s | ETA 195 min
+05:25:47 | INFO    |   chunk 40/69 | 50 textos/s | ETA 190 min
+05:34:24 | INFO    |   chunk 41/69 | 49 textos/s | ETA 184 min
+05:43:03 | INFO    |   chunk 42/69 | 49 textos/s | ETA 179 min
+05:52:01 | INFO    |   chunk 43/69 | 49 textos/s | ETA 173 min
+06:01:17 | INFO    |   chunk 44/69 | 48 textos/s | ETA 168 min
+06:10:35 | INFO    |   chunk 45/69 | 48 textos/s | ETA 162 min
+06:19:57 | INFO    |   chunk 46/69 | 48 textos/s | ETA 156 min
+06:29:50 | INFO    |   chunk 47/69 | 47 textos/s | ETA 151 min
+06:39:33 | INFO    |   chunk 48/69 | 47 textos/s | ETA 145 min
+06:49:33 | INFO    |   chunk 49/69 | 46 textos/s | ETA 139 min
+06:59:50 | INFO    |   chunk 50/69 | 46 textos/s | ETA 133 min
+07:10:10 | INFO    |   chunk 51/69 | 46 textos/s | ETA 126 min
+07:21:12 | INFO    |   chunk 52/69 | 45 textos/s | ETA 120 min
+07:32:05 | INFO    |   chunk 53/69 | 45 textos/s | ETA 114 min
+07:43:16 | INFO    |   chunk 54/69 | 44 textos/s | ETA 107 min
+07:54:46 | INFO    |   chunk 55/69 | 44 textos/s | ETA 101 min
+08:06:37 | INFO    |   chunk 56/69 | 44 textos/s | ETA 94 min
+08:18:31 | INFO    |   chunk 57/69 | 43 textos/s | ETA 87 min
+08:31:09 | INFO    |   chunk 58/69 | 43 textos/s | ETA 81 min
+08:44:20 | INFO    |   chunk 59/69 | 42 textos/s | ETA 74 min
+08:58:08 | INFO    |   chunk 60/69 | 42 textos/s | ETA 67 min
+09:12:11 | INFO    |   chunk 61/69 | 41 textos/s | ETA 59 min
+09:27:29 | INFO    |   chunk 62/69 | 41 textos/s | ETA 52 min
+09:42:35 | INFO    |   chunk 63/69 | 40 textos/s | ETA 44 min
+09:58:26 | INFO    |   chunk 64/69 | 39 textos/s | ETA 36 min
+10:15:39 | INFO    |   chunk 65/69 | 39 textos/s | ETA 28 min
+10:34:24 | INFO    |   chunk 66/69 | 38 textos/s | ETA 20 min
+10:55:08 | INFO    |   chunk 67/69 | 37 textos/s | ETA 12 min
+11:21:17 | INFO    |   chunk 68/69 | 36 textos/s | ETA 3 min
+11:30:59 | INFO    |   chunk 69/69 | 36 textos/s | ETA -6 min
+11:31:01 | INFO    |   [etapa2] textos_unicos = 1366091
+11:31:01 | INFO    |   [etapa2] stars_media = 4.189
+11:31:01 | INFO    |   [etapa2] stars_mediana = 4.642
+11:31:01 | INFO    |   [etapa2] prop_sentencas_stars_ge_4 = 0.751
+11:31:01 | INFO    |   [etapa2] prop_sentencas_stars_le_2 = 0.056
+11:31:01 | INFO    | Sentimento médio por idioma:
+       count   mean
+lang               
+de     20891  4.035
+en    292513  4.177
+es    195827  4.135
+fr     38415  4.255
+it      4412  4.013
+pt    955831  4.236
+und     4174  3.942
+11:31:01 | INFO    | FIM     Etapa 2 — Análise de sentimento (633.6 min)
+11:31:01 | INFO    | ======================================================================
+11:31:01 | INFO    | INÍCIO  Etapa 3 — Tópicos (BERTopic e LDA)
+11:31:03 | INFO    | Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 2888.51it/s]
+11:31:07 | INFO    | Embedding: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 | 1366091 textos únicos
+11:34:08 | INFO    |   embeddings chunk 1/28 | 268 textos/s | ETA 82 min
+11:37:24 | INFO    |   embeddings chunk 2/28 | 261 textos/s | ETA 81 min
+11:40:57 | INFO    |   embeddings chunk 3/28 | 252 textos/s | ETA 80 min
+11:44:41 | INFO    |   embeddings chunk 4/28 | 244 textos/s | ETA 80 min
+11:48:42 | INFO    |   embeddings chunk 5/28 | 236 textos/s | ETA 79 min
+11:52:49 | INFO    |   embeddings chunk 6/28 | 229 textos/s | ETA 77 min
+11:57:14 | INFO    |   embeddings chunk 7/28 | 223 textos/s | ETA 76 min
+12:01:45 | INFO    |   embeddings chunk 8/28 | 217 textos/s | ETA 74 min
+12:06:30 | INFO    |   embeddings chunk 9/28 | 211 textos/s | ETA 72 min
+12:11:23 | INFO    |   embeddings chunk 10/28 | 207 textos/s | ETA 70 min
+12:16:29 | INFO    |   embeddings chunk 11/28 | 202 textos/s | ETA 67 min
+12:21:42 | INFO    |   embeddings chunk 12/28 | 197 textos/s | ETA 65 min
+12:27:19 | INFO    |   embeddings chunk 13/28 | 192 textos/s | ETA 62 min
+12:32:54 | INFO    |   embeddings chunk 14/28 | 189 textos/s | ETA 59 min
+12:38:44 | INFO    |   embeddings chunk 15/28 | 185 textos/s | ETA 56 min
+12:44:51 | INFO    |   embeddings chunk 16/28 | 181 textos/s | ETA 52 min
+12:51:01 | INFO    |   embeddings chunk 17/28 | 177 textos/s | ETA 49 min
+12:57:44 | INFO    |   embeddings chunk 18/28 | 173 textos/s | ETA 45 min
+13:04:48 | INFO    |   embeddings chunk 19/28 | 169 textos/s | ETA 41 min
+13:11:56 | INFO    |   embeddings chunk 20/28 | 165 textos/s | ETA 37 min
+13:19:34 | INFO    |   embeddings chunk 21/28 | 161 textos/s | ETA 33 min
+13:28:01 | INFO    |   embeddings chunk 22/28 | 157 textos/s | ETA 28 min
+13:36:32 | INFO    |   embeddings chunk 23/28 | 153 textos/s | ETA 24 min
+13:45:40 | INFO    |   embeddings chunk 24/28 | 149 textos/s | ETA 19 min
+13:55:36 | INFO    |   embeddings chunk 25/28 | 144 textos/s | ETA 13 min
+14:06:55 | INFO    |   embeddings chunk 26/28 | 139 textos/s | ETA 8 min
+14:21:17 | INFO    |   embeddings chunk 27/28 | 132 textos/s | ETA 2 min
+14:28:41 | INFO    |   embeddings chunk 28/28 | 128 textos/s | ETA -4 min
+14:28:56 | INFO    | BERTopic: ajustando em 200000 sentenças (>= 4 tokens)
+14:34:21 | INFO    | BERTopic descobriu 185 tópicos; outliers na amostra de ajuste: 29.8%
+14:35:28 | INFO    |   transform chunk 1/14
+14:36:16 | INFO    |   transform chunk 2/14
+14:37:03 | INFO    |   transform chunk 3/14
+14:37:49 | INFO    |   transform chunk 4/14
+14:38:36 | INFO    |   transform chunk 5/14
+14:39:23 | INFO    |   transform chunk 6/14
+14:40:10 | INFO    |   transform chunk 7/14
+14:40:58 | INFO    |   transform chunk 8/14
+14:41:46 | INFO    |   transform chunk 9/14
+14:42:33 | INFO    |   transform chunk 10/14
+14:43:20 | INFO    |   transform chunk 11/14
+14:44:06 | INFO    |   transform chunk 12/14
+14:44:52 | INFO    |   transform chunk 13/14
+14:45:23 | INFO    |   transform chunk 14/14
+14:45:28 | INFO    |   [etapa3_bertopic] n_topicos = 185
+14:45:28 | INFO    |   [etapa3_bertopic] outliers_fit_pct = 29.8
+14:45:28 | INFO    |   [etapa3_bertopic] outliers_final_pct_textos = 1.0
+14:45:28 | INFO    |   [etapa3_bertopic] c_v_medio = 0.3577
+14:45:40 | INFO    | LDA: 100000 sentenças, vocabulário 3942 | grade de K=(5, 10, 15, 20, 25, 30, 40) (critério: C_v máximo)
+14:46:39 | INFO    |   LDA K=5  C_v=0.6124
+14:47:35 | INFO    |   LDA K=10  C_v=0.6254
+14:48:32 | INFO    |   LDA K=15  C_v=0.5937
+14:49:32 | INFO    |   LDA K=20  C_v=0.5752
+14:50:31 | INFO    |   LDA K=25  C_v=0.5249
+14:51:31 | INFO    |   LDA K=30  C_v=0.5366
+14:52:40 | INFO    |   LDA K=40  C_v=0.5160
+14:52:40 | INFO    |   [etapa3_lda] K_escolhido = 10
+14:52:40 | INFO    |   [etapa3_lda] c_v_medio = 0.6254
+14:52:40 | INFO    | FIM     Etapa 3 — Tópicos (BERTopic e LDA) (201.7 min)
+14:52:40 | INFO    | ======================================================================
+14:52:40 | INFO    | INÍCIO  Etapa 4 — Mapa tópico × aspecto
+14:52:40 | INFO    | Loading SentenceTransformer model from sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 3123.85it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 32.05it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 45.18it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 30.53it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 32.00it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 25.47it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 26.18it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 33.06it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 49.65it/s]
+Batches:   0%|          | 0/1 [00:00<?, ?it/s]Batches: 100%|██████████| 1/1 [00:00<00:00, 33.05it/s]
+14:52:45 | WARNING | Modelo de mapeamento criado em C:\Users\rapha\Downloads\mestrado\UCP\dissertacao\Airbnb_Reviews_Topic_Modelling\repo\airbnb-reviews-topic-modelling-code\data\mapa_aspecto_confirmado.csv — REVISE e preencha 'aspecto_confirmado'.
+14:52:45 | INFO    |   [etapa4] topicos_por_aspecto_sugerido = {'localizacao': 86, 'comunicacao': 48, 'comodidades': 14, 'ruido_conforto': 11, 'limpeza': 8, 'custo_beneficio': 5, 'checkin': 4, 'precisao': 3, 'seguranca': 3, 'geral': 3}
+14:52:45 | INFO    | FIM     Etapa 4 — Mapa tópico × aspecto (0.1 min)
+14:52:45 | INFO    | Excel gravado em C:\Users\rapha\Downloads\mestrado\UCP\dissertacao\Airbnb_Reviews_Topic_Modelling\repo\airbnb-reviews-topic-modelling-code\outputs\resultados_20261002_005544.xlsx

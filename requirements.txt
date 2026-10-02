@@ -1,0 +1,19 @@
+# Instalar torch (CPU) antes: pip install torch --index-url https://download.pytorch.org/whl/cpu
+# No Windows, crie o venv em caminho curto (ex.: C:\vairbnb) para evitar o limite de 260 caracteres.
+numpy
+pandas
+pyarrow
+openpyxl
+scipy
+scikit-learn
+statsmodels
+torch
+transformers
+sentence-transformers
+bertopic
+umap-learn
+gensim
+lingua-language-detector
+sentencepiece
+protobuf
+stopwordsiso
