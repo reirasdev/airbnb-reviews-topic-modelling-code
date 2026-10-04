@@ -25,7 +25,8 @@ def run_absa(cfg, store: Store) -> None:
     with stage("Etapa 5 — ABSA por imóvel"):
         mapping, confirmed = resolve_mapping(cfg, store)
         S = store.load("sentences")[["sent_id", "review_id", "listing_id", "date", "lang", "text_id"]]
-        S = S.merge(store.load("text_topics")[["text_id", "topic"]], on="text_id")
+        S = S.merge(store.load("text_topics")[["text_id", "topic", "topic_raw"]], on="text_id")
+        S["topic_direto"] = S["topic_raw"] >= 0  # False = outlier reatribuído por similaridade (acerto de aspecto ~38% vs ~65%)
         S = S.merge(store.load("sentiment")[["text_id", "stars"]], on="text_id")
         S["aspecto"] = S["topic"].map(mapping).fillna(GENERAL_BUCKET)  # topic -1 (outlier) -> geral
         store.save("sentencas_aspecto", S)  # base das etapas 14-16: uma linha por sentença, com tópico, aspecto e estrelas

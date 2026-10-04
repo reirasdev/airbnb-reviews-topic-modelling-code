@@ -304,3 +304,28 @@ localização, precisão, limpeza, check-in) sustentam melhor a análise de impo
 
 **Ajuste de instrução.** O texto da aba `Instrucoes` gerado pela etapa 14 estava desatualizado (dizia usar "geral" para elogio genérico);
 corrigido no gerador (a planilha rotulada não foi alterada). Os rótulos "geral" (2) e "nenhum" (39) são tratados como o mesmo grupo.
+
+## 18. Etapa 15 — importância de aspectos e tópicos (2026-10-04; `run_20261004_200015.log`, abas `Imp_*`)
+
+- **Dados:** 28.889 anúncios com texto (inclui os de pouco texto: sentimento não observado de um aspecto é imputado pela média, o que
+  evita exigir 3 aspectos); alvo = percentil da nota (a nota é comprimida no teto). A tabela por sentença agora guarda `topic_direto`.
+- **Decomposição LMG do R² da nota global (R² total = 0,32):** comodidades 42,5%, limpeza 19,6%, satisfação geral 17,5%, comunicação
+  11,3%, check-in 3,4%, ruído/conforto 3,1%, precisão 1,7%, localização 0,6%, custo-benefício 0,3%, segurança 0,1%. O resultado é estável
+  entre variantes (>= 3 aspectos, v <= 30, só tópicos diretos, sem `satisfacao_geral`) e entre segmentos (casa inteira/quarto privado,
+  idioma predominante, 6 maiores bairros: comodidades 37%-43% em todos). Para cada subnota, o aspecto correspondente é um dos mais
+  importantes (localização explica 42% do R² da subnota de localização; limpeza 33% da de limpeza), mas a **nota global quase não depende
+  do sentimento sobre localização**.
+- **Modelos:** GBM com NaN nativo R² fora da amostra 0,44 (OLS imputado 0,39). Permutação (queda de R² fora da amostra): comodidades 0,23;
+  limpeza 0,08; satisfação geral 0,07; comunicação 0,03; check-in 0,02. Logística para "nota >= 4,9" (51% dos anúncios): AUC fora da amostra 0,82;
+  odds ratio por DP de sentimento: comodidades 2,46; limpeza 1,91; satisfação geral 1,48; comunicação 1,37; check-in 1,25; ruído/conforto 1,24.
+- **Tópicos (só diretos; 68 tópicos de queixa e 181 de elogio com amostra suficiente; BH):** as queixas que mais pesam (efeito sobre o
+  percentil da nota × prevalência) são banheiro/chuveiro (prevalência 14%; −20 pontos), ar-condicionado/calor (13%; −18), sujeira (7%; −26),
+  queixa genérica (9%; −20), cozinha (7%; −19), resposta do anfitrião (5%; −23), barulho (11%; −10), cheiro/mofo (5%; −22), cama/colchão
+  (5%; −18), claridade/cortinas (5%; −16), manutenção (3%; −21), wifi (3%; −19), fechadura eletrônica (3%; −20). 57 de 68 queixas e 145 de
+  181 elogios têm q < 0,05. Efeito médio de queixa por aspecto: custo-benefício −20, check-in −17, comodidades −15, limpeza −14.
+- **[L] Cuidados de interpretação:** (i) é associação, não causa; (ii) a importância relativa mistura efeito e confiabilidade da medida
+  (aspectos mais citados são medidos com menos erro; segurança e custo-benefício são pouco citados e imputados na maioria dos anúncios);
+  (iii) `comodidades` é um aspecto largo (33 tópicos) e sua dominância vem em parte disso, por isso a análise por tópico é a leitura
+  prática; (iv) a precisão da atribuição de aspecto varia de 0,41 a 0,74 (seção 17), com R² menor em tópicos diretos (0,24) por haver
+  menos frases; (v) o "efeito" de um tópico compara anúncios com e sem ao menos uma menção negativa nas 30 avaliações usadas, controlando
+  volume total e nº de sentenças; (vi) múltiplas comparações tratadas com Benjamini-Hochberg.
