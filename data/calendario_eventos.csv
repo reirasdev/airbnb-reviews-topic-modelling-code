@@ -6,7 +6,6 @@ feriado_curto,2016,2016-04-20,2016-04-22,Tiradentes
 feriado_curto,2016,2016-04-22,2016-04-24,São Jorge
 feriado_curto,2016,2016-04-30,2016-05-02,Dia do Trabalhador
 corpus_christi,2016,2016-05-26,2016-05-29,quinta-feira (feriado facultativo) até domingo
-olimpiadas,2016,2016-08-05,2016-08-21,Jogos Olímpicos
 feriado_curto,2016,2016-09-06,2016-09-08,Independência do Brasil
 feriado_curto,2016,2016-10-11,2016-10-13,Nossa Senhora Aparecida
 feriado_curto,2016,2016-11-01,2016-11-03,Finados
@@ -113,6 +112,7 @@ semana_santa,2024,2024-03-28,2024-03-31,quinta-feira santa até o domingo de Pá
 feriado_curto,2024,2024-04-20,2024-04-22,Tiradentes
 feriado_curto,2024,2024-04-22,2024-04-24,São Jorge
 feriado_curto,2024,2024-04-30,2024-05-02,Dia do Trabalhador
+todo_mundo_no_rio,2024,2024-05-02,2024-05-05,megashow gratuito em Copacabana
 corpus_christi,2024,2024-05-30,2024-06-02,quinta-feira (feriado facultativo) até domingo
 feriado_curto,2024,2024-09-06,2024-09-08,Independência do Brasil
 rock_in_rio,2024,2024-09-13,2024-09-22,datas do festival
@@ -127,6 +127,7 @@ semana_santa,2025,2025-04-17,2025-04-20,quinta-feira santa até o domingo de Pá
 feriado_curto,2025,2025-04-20,2025-04-22,Tiradentes
 feriado_curto,2025,2025-04-22,2025-04-24,São Jorge
 feriado_curto,2025,2025-04-30,2025-05-02,Dia do Trabalhador
+todo_mundo_no_rio,2025,2025-05-01,2025-05-04,megashow gratuito em Copacabana
 corpus_christi,2025,2025-06-19,2025-06-22,quinta-feira (feriado facultativo) até domingo
 feriado_curto,2025,2025-09-06,2025-09-08,Independência do Brasil
 feriado_curto,2025,2025-10-11,2025-10-13,Nossa Senhora Aparecida
@@ -134,3 +135,4 @@ feriado_curto,2025,2025-11-01,2025-11-03,Finados
 feriado_curto,2025,2025-11-14,2025-11-16,Proclamação da República
 feriado_curto,2025,2025-11-19,2025-11-21,Dia Nacional de Zumbi e da Consciência Negra
 reveillon,2025,2025-12-28,2026-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+todo_mundo_no_rio,2026,2026-04-30,2026-05-03,megashow gratuito em Copacabana

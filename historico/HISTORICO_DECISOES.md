@@ -380,3 +380,16 @@ custo-benefício e o tópico de valor), então a contagem independente é menor 
 o conteúdo é modesto, com o Carnaval como único caso com uma história coerente (queixas sobre fidelidade ao anúncio, valor e localização). Sugestão: seção curta
 de volume + Carnaval (ou apêndice); a decisão de incluir é do pesquisador. **[L]** data da avaliação não é a data da estadia; janelas de evento se sobrepõem em
 ~2% dos dias; feriados de calendário municipal e datas do Rock in Rio devem ser conferidos em fonte oficial; associações, não causas.
+
+## 21. Emenda ao plano da Etapa 16 (2026-10-04), feita DEPOIS de ver os resultados da seção 20, a pedido do pesquisador
+
+1. **Olimpíadas 2016 removidas** do calendário: evento único, não recorrente (e, na execução anterior, de um único bloco e IC que incluía 1).
+2. **Todo Mundo no Rio incluído** (megashow gratuito em Copacabana promovido pela prefeitura; uma noite de sábado; datas informadas pelo pesquisador):
+   04/mai/2024 (Madonna), 03/mai/2025 (Lady Gaga), 02/mai/2026 (Shakira). Janela de estadia = quinta a domingo do fim de semana do show.
+   **Só a edição de 2024 cai dentro dos dados** (que terminam em 20/mar/2025), portanto a estimativa vem de um único bloco; será tratada com a
+   mesma regra (HAC, critério (a)/(b) da seção 19) e declarada como evidência de uma única edição.
+3. Lista de eventos e critério de "interessante" **não** foram alterados além disso. As duas mudanças são pós-registro: o log anterior ao ajuste
+   fica em `outputs/s16_antes_da_emenda.out`.
+4. **Interpretação do pesquisador (hipótese, não testada):** as menores proporções de queixa no Rock in Rio e em Corpus Christi podem refletir o perfil do
+   hóspede (público mais jovem em festivais de música, possivelmente mais tolerante a ruído e a acomodações simples). Os dados não têm idade do hóspede;
+   seria preciso um indicador indireto para testá-la.

@@ -18,7 +18,7 @@ from .calendario import eventos, marcar_dias
 from .utils import Store, stage
 
 log = logging.getLogger("pipeline")
-LONG = ["carnaval", "reveillon", "semana_santa", "rock_in_rio", "corpus_christi"]
+LONG = ["carnaval", "reveillon", "semana_santa", "rock_in_rio", "corpus_christi", "todo_mundo_no_rio"]
 LAGS = (14, 7)  # principal e sensibilidade
 FIM = pd.Timestamp("2025-02-28")  # último mês COMPLETO (os dados terminam em 20/mar/2025: o mês truncado não tem linha de base)
 HAC_LAGS = 21  # autocorrelação dos contadores diários
@@ -86,7 +86,7 @@ def volume(cfg, E: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
                 continue
             My[c] = ((days >= r.aval_ini) & (days <= r.aval_fim)).astype(int)
             cols.append(c)
-        for c in ("feriado_curto", "olimpiadas"):
+        for c in ("feriado_curto",):
             if c in M.columns:
                 My[c] = M[c].to_numpy()
                 cols.append(c)
@@ -116,7 +116,7 @@ def conteudo(cfg, store: Store, E: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataF
     Ad = A[A["topic_direto"] & A["topic"].isin(Q["topic"])]
     tn = Ad[Ad["neg"]].groupby(["date", "topic"]).size().unstack(fill_value=0).reindex(days, fill_value=0)
     tot_d = A[A["topic_direto"]].groupby("date").size().reindex(days, fill_value=0)
-    ev_cols = ["carnaval", "reveillon", "semana_santa", "rock_in_rio", "corpus_christi", "feriado_curto"]
+    ev_cols = ["carnaval", "reveillon", "semana_santa", "rock_in_rio", "corpus_christi", "todo_mundo_no_rio", "feriado_curto"]
     fam = sm.families.Binomial()
     rows_a, rows_t = [], []
     for lag in LAGS:
