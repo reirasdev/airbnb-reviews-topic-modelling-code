@@ -275,3 +275,32 @@ disponibilidade/preço **não** está disponível (só uma foto da coleta).
 - **Validação manual:** gerada a planilha `data/validacao_manual_amostra.xlsx` (297 frases, estratificadas por aspecto × polaridade,
   rótulo cego: o gabarito do modelo fica em outra aba). Pendente de rotulagem pelo pesquisador; a etapa 14 calcula acurácia, kappa e
   matrizes de confusão quando a planilha estiver preenchida e **nunca sobrescreve** uma planilha existente.
+
+## 17. Validação manual (297 frases rotuladas pelo pesquisador; `run_20261004_193125.log`, aba `Val_Manual`)
+
+**Desenho.** Amostra estratificada por aspecto previsto pelo modelo (~27 por aspecto) × polaridade prevista, rótulo cego. Por ser
+estratificada pela previsão, a **precisão por aspecto** é uma estimativa direta, mas a acurácia global (54,5%) e o recall **não** são
+estimativas da população; ponderando a precisão de cada aspecto pela participação real do aspecto no corpus, a acurácia estimada é
+**~52%**. Com ~27 frases por aspecto, os intervalos são largos (± ~0,18). Rotulagem por um avaliador.
+
+**Sentimento (3 classes).** Acurácia 58,9%; F1 macro 0,57; kappa 0,39 (ponderado linear 0,48); Spearman humano × estrelas do modelo 0,64.
+Por idioma: francês 0,92 (n = 12), inglês 0,65 (n = 63), espanhol 0,62 (n = 45), **português 0,52 (n = 166, o idioma majoritário)**.
+O erro é sistemático e **conservador**: o modelo classifica como neutro 60 e como negativo 21 das 174 frases que o pesquisador considera
+positivas, e nunca chama de positiva uma frase negativa (0/77). Quando o modelo diz "positivo", acerta 95% (93/98); quando diz
+"negativo", 62% (52/84). Implicação: as estrelas esperadas comprimem o nível (média 4,2 contra 4,8 da nota oficial) mas preservam a
+ordenação; para análises de queixas, P(negativo) tem precisão moderada.
+
+**Aspecto.** Acurácia 54,5%, kappa 0,50. Precisão por aspecto previsto: custo-benefício 0,74, localização 0,74, precisão 0,70, limpeza 0,67,
+check-in 0,56, segurança 0,48, comodidades 0,44, comunicação 0,44, ruído/conforto 0,44, satisfação geral 0,41, geral 0,37.
+**Análise de erro:** frases cujo tópico original era *ruído* e foi reatribuído ao centroide mais próximo (111 de 297) têm acurácia de
+aspecto de **38%**, contra **65%** nas de tópico direto (186). A similaridade ao centroide **não** discrimina acertos de erros
+(25–44% em todas as faixas), então subir o limiar `OUTLIER_MIN_SIM` quase não melhora a acurácia e custa cobertura. Mandar essas
+frases para `geral` seria pior (19% de acerto contra 38%): elas contêm conteúdo de aspecto, só que de forma ambígua. Frases muito curtas
+(3-4 tokens) têm acurácia de aspecto de 39%.
+
+**Leitura conjunta com a Etapa 14.** O sentimento e o aspecto são **moderadamente adequados**, e o ruído de classificação ajuda a explicar
+as correlações moderadas com as subnotas (0,17 a 0,45) e a baixa confiabilidade split-half. Aspectos de maior precisão (custo-benefício,
+localização, precisão, limpeza, check-in) sustentam melhor a análise de importância; os demais devem ser lidos com cautela.
+
+**Ajuste de instrução.** O texto da aba `Instrucoes` gerado pela etapa 14 estava desatualizado (dizia usar "geral" para elogio genérico);
+corrigido no gerador (a planilha rotulada não foi alterada). Os rótulos "geral" (2) e "nenhum" (39) são tratados como o mesmo grupo.

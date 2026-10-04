@@ -163,9 +163,8 @@ def gerar_amostra_manual(cfg, store: Store, path: Path) -> None:
     for i, line in enumerate([
         "Rotule SEM olhar a aba Gabarito_modelo (evita ancoragem).",
         "sentimento_humano: negativo / neutro / positivo (a frase, isolada, expressa que sentimento sobre o imóvel/estadia?).",
-        "aspecto_humano: o aspecto principal da frase (lista). Use 'geral' para elogio/queixa genérico sem aspecto específico "
-        "(ex.: 'recomendo', 'adorei') e 'nenhum' se a frase não trata do imóvel/estadia.",
-        "A lista de aspectos é a taxonomia do estudo; 'satisfacao_geral' é elogio/queixa genérico sobre a experiência.",
+        "aspecto_humano: o aspecto principal da frase (lista). Elogio/queixa genérico sobre a experiência (ex.: 'recomendo', "
+        "'adorei') = satisfacao_geral. Use 'geral' ou 'nenhum' para frases que não tratam do imóvel/estadia (o estudo agrupa os dois).",
         "Salve o arquivo com o mesmo nome. Rode: python run_pipeline.py --stages 14  (calcula acurácia, kappa e matrizes de confusão).",
     ], 1):
         ws0.cell(i, 1, line)
