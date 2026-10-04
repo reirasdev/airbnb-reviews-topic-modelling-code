@@ -232,3 +232,23 @@ Variantes nomeadas na aba `Sensibilidade`: `sem_shrinkage` (principal), `com_shr
   (nota oficial) na amostra completa; ~0 no teto.
 - Sensibilidade: o artefato do shrinkage persiste só na correlação bruta (+0,35); com resíduo, ρ ≈ +0,01 a +0,04 em todas as
   variantes. O "−0,19" residual da seção 9 era consequência do controle de ltm.
+
+## 15. >>> MUDANÇA DE ESTRATÉGIA (2026-10-04) <<<
+
+**Ponto de rollback:** tag `estrategia-v1-tese-final` (commit `e9e2895`). Tudo até ali foi conduzido como teste de uma hipótese
+("o rating sintético recupera informação que a nota oficial esconde, sobretudo no teto"). Para voltar:
+`git checkout estrategia-v1-tese-final`.
+
+**Nova estratégia (mestrado profissional; ver `redacao/00_enquadramento.md`):** o objetivo não é provar uma tese. Um resultado
+que mostre que o sentimento é **adequado** às notas e subnotas já é uma contribuição; mostrar **quais aspectos e tópicos**
+se associam à nota ajuda anfitriões e empresas gestoras. Perguntas: (1) adequação/validade de construto; (2) importância de
+aspectos e tópicos; (3) diagnóstico prático por anúncio; (4) sazonalidade e eventos; (5) complementar: R_syn vs volume de
+avaliações (resultado da v1).
+
+**Plano (aprovado):** base comum (tabela de sentenças com aspecto persistida) + s14 validade de construto ampliada e amostra de
+validação manual → s15 importância de aspectos/tópicos (inclui anúncios com pouco texto, sem exigir 3 aspectos) → s16
+sazonalidade e feriados (versão restrita) → ferramenta de diagnóstico por anúncio (gera relatório de UM anúncio sob demanda,
+com referência ao bairro e tipo; exemplos anonimizados). **Sazonalidade, versão restrita:** volume de avaliações 2016-2025 (todas as
+avaliações) e conteúdo/sentimento por aspecto 2023-2025 (cobertura do sentimento por ano: 2023 37%, 2024 77%, 2025 96%);
+avaliações atribuídas ao evento por janela de até 14 dias após o check-out (limite da plataforma para avaliar); o calendário de
+disponibilidade/preço **não** está disponível (só uma foto da coleta).
