@@ -411,3 +411,18 @@ Ou seja, nos eventos de música e em Corpus Christi há um **deslocamento geral*
 janelas, e é compatível com a hipótese (público de festivais mais jovem/tolerante), embora os dados não tenham idade do hóspede e não distingam essa
 explicação de entusiasmo com o evento. Nas demais janelas (Carnaval, Réveillon) não há deslocamento geral, então os aumentos específicos de queixa
 (precisão do anúncio, custo-benefício, localização) são mais informativos. Interpretação: os testes por aspecto devem ser lidos relativamente ao nível geral.
+
+## 23. Material de sazonalidade guardado e ferramenta de diagnóstico por anúncio (2026-10-04; etapa 17 e `diagnostico.py`)
+
+- **Sazonalidade para a dissertação:** `redacao/03_sazonalidade_eventos.md` guarda o texto sugerido ("1,24 a 1,73 vez o de dias comuns do mesmo mês"; evitar "ocupação
+  2 vezes maior"), a ressalva de que os dados só incluem avaliações de anúncios ainda ativos na coleta, a tabela Evento × defasagem 14 dias × defasagem 7 dias
+  e a tendência a menos frases negativas nos eventos de música (Todo Mundo no Rio, Rock in Rio) e em Corpus Christi.
+- **Ferramenta de diagnóstico (pergunta de pesquisa 3):** `diagnostico.py` (CLI) + `src/diagnostico.py` (núcleo) + `src/s17_benchmarks.py`. Gera, sob demanda, um HTML de UM
+  anúncio com: sentimento médio por aspecto e posição (percentil) entre anúncios do mesmo bairro e tipo (se o bairro tem < 30, usa o tipo na cidade); evidência
+  por aspecto (poucas frases = baixa, sem rotular força/atenção); queixas e elogios recorrentes com a associação média, na cidade, com o percentil da nota
+  (só tópicos com q < 0,05 no sentido esperado, da etapa 15); evolução das 10 avaliações mais recentes; nota metodológica com as precisões da validação manual.
+  Funciona para anúncios novos (marca a evidência como baixa). `--anonimizar` oculta id, bairro e frases. A Etapa 17 grava tabelas de referência por bairro × tipo
+  (66 grupos com >= 30 anúncios; aba `Benchmark_Bairro_Tipo`) e o cache usado pela ferramenta.
+- **Exemplos anonimizados** em `redacao/exemplos_diagnostico/`: A (nota alta), B (nota baixa; comodidades e satisfação geral no 4º percentil entre os pares) e C (poucas
+  avaliações).
+- **Correções durante o desenvolvimento:** o campo de avaliações usadas mostrava frases em vez de avaliações; elogios com associação negativa deixaram de ser listados.
