@@ -28,9 +28,9 @@ from .utils import Store, stage
 log = logging.getLogger("pipeline")
 
 
-def build_frame(cfg, store: Store) -> tuple[pd.DataFrame, list[str]]:
+def build_frame(cfg, store: Store, rating_table: str = "rating_sintetico") -> tuple[pd.DataFrame, list[str]]:
     """Junta R_off, R_syn_raw, desfechos e controles. Retorna (df, colunas de controle)."""
-    R, L = store.load("rating_sintetico"), store.load("listings_elig")
+    R, L = store.load(rating_table), store.load("listings_elig")
     D = R[["id", "R_off", "R_syn_raw", "R_syn_cal", "v"]].merge(
         L[["id", "neighbourhood_cleansed", "room_type", "number_of_reviews_ltm", "price_num",
            cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME]], on="id")
@@ -62,9 +62,10 @@ def _cv(X: np.ndarray, y: np.ndarray, cfg) -> pd.DataFrame:
     return pd.DataFrame(out, columns=["r2", "rmse"])
 
 
-def run_analise_a(cfg, store: Store) -> None:
+def run_analise_a(cfg, store: Store, rating_table: str = "rating_sintetico", persist: bool = True):
+    """persist=False (sensibilidade): só devolve as tabelas, sem gravar nem sobrescrever os resultados principais."""
     with stage("Etapa 8 — Análise A (poder explicativo do desempenho)"):
-        D, ctrl = build_frame(cfg, store)
+        D, ctrl = build_frame(cfg, store, rating_table)
         res, diffs, coefs = [], [], []
         scopes = [("amostra completa", np.ones(len(D), bool))] + [
             (f"teto: R_off >= {t}", (D["R_off"] >= t).to_numpy()) for t in cfg.CEIL_THRESHOLDS]
@@ -105,6 +106,8 @@ def run_analise_a(cfg, store: Store) -> None:
                                       "coef": fit.params[i], "ep_HC3": fit.bse[i], "p": fit.pvalues[i],
                                       "r2_insample_M3": fit.rsquared})
         R, Dd, C = pd.DataFrame(res), pd.DataFrame(diffs), pd.DataFrame(coefs)
+        if not persist:
+            return R, Dd, C
         store.save("analise_a_modelos", R)
         store.save("analise_a_diferencas", Dd)
         store.save("analise_a_coefs", C)
@@ -115,9 +118,9 @@ def run_analise_a(cfg, store: Store) -> None:
                      n_amostra=len(D))
 
 
-def run_analise_b(cfg, store: Store) -> None:
+def run_analise_b(cfg, store: Store, rating_table: str = "rating_sintetico", persist: bool = True):
     with stage("Etapa 9 — Análise B (monotonicidade e reordenamento)"):
-        D, ctrl = build_frame(cfg, store)
+        D, ctrl = build_frame(cfg, store, rating_table)
         y = D["y_" + cfg.PRIMARY_OUTCOME].to_numpy(float)
         # desempenho residualizado nos controles (volume/bairro dominam o desfecho bruto)
         resid = y - LinearRegression().fit(D[ctrl].to_numpy(float), y).predict(D[ctrl].to_numpy(float))
@@ -142,7 +145,8 @@ def run_analise_b(cfg, store: Store) -> None:
                    "prop_desce": float((d["shift_pp"] <= -cfg.RANK_SHIFT_PCT).mean())}
             rows.append(row)
         B = pd.DataFrame(rows)
-        store.save("analise_b_faixas", B)
+        if persist:
+            store.save("analise_b_faixas", B)
         log.info("Correlação de posto e reordenamento por faixa de R_off:\n%s", B.round(3).to_string(index=False))
 
         # --- regressão isotônica (monotônica crescente) com validação out-of-sample ---
@@ -165,6 +169,8 @@ def run_analise_b(cfg, store: Store) -> None:
                                  "spearman_preditor_vs_desempenho_residual":
                                      stats.spearmanr(x, yy)[0] if np.unique(x).size > 1 else np.nan})
         I = pd.DataFrame(iso_rows)
+        if not persist:
+            return B, I
         store.save("analise_b_isotonica", I)
         log.info("Regressão isotônica (desempenho residualizado):\n%s", I.round(4).to_string(index=False))
         top = B[B["faixa_R_off"] == "= 5,0"]

@@ -16,12 +16,12 @@ from datetime import datetime
 from pathlib import Path
 
 from config import CONFIG
-from src import excel_writer, s1_ingestao, s2_sentimento, s3_topicos, s4_mapa_aspecto, s5_s7_rating, s8_s9_analises
+from src import excel_writer, s1_ingestao, s2_sentimento, s3_topicos, s4_mapa_aspecto, s5_s7_rating, s8_s9_analises, s10_sensibilidade
 from src.utils import Store, log, set_seed, setup_logging
 
 # artefato principal de cada etapa (para pular o que já foi feito)
 DONE = {1: "sentences", 2: "sentiment", 3: "topics_lda", 4: "mapa_topico_aspecto", 5: "perfil_absa",
-        6: "validacao_construto", 7: "rating_sintetico", 8: "analise_a_modelos", 9: "analise_b_faixas"}
+        6: "validacao_construto", 7: "rating_sintetico", 8: "analise_a_modelos", 9: "analise_b_faixas", 10: "sensibilidade"}
 
 
 def main() -> None:
@@ -49,12 +49,12 @@ def main() -> None:
 
     steps = {1: s1_ingestao.run, 2: s2_sentimento.run, 3: s3_topicos.run, 4: s4_mapa_aspecto.run,
              5: s5_s7_rating.run_absa, 6: s5_s7_rating.run_validation, 7: s5_s7_rating.run_rating,
-             8: s8_s9_analises.run_analise_a, 9: s8_s9_analises.run_analise_b}
+             8: s8_s9_analises.run_analise_a, 9: s8_s9_analises.run_analise_b, 10: s10_sensibilidade.run}
     for n in a.stages:
         if n in a.force:
             for sub in {1: ["sent_chunks"], 2: ["sent_chunks"], 3: ["topic_chunks"]}.get(n, []):
                 shutil.rmtree(store.root / sub, ignore_errors=True)
-        elif store.exists(DONE[n]) and n not in (4, 5, 6, 7, 8, 9):
+        elif store.exists(DONE[n]) and n not in (4, 5, 6, 7, 8, 9, 10):
             log.info("Etapa %d já concluída (cache) — pulando", n)
             continue
         steps[n](cfg, store)

@@ -71,28 +71,35 @@ def quantile_map(x: np.ndarray, target: np.ndarray) -> np.ndarray:
     return np.quantile(target, p)
 
 
+def build_rating(cfg, store: Store, exclude: tuple = (), shrink: bool = True) -> tuple[pd.DataFrame, float, float]:
+    """R_syn por imóvel. exclude = aspectos fora da média; shrink=False deixa R_syn_raw == R_syn_pre (sem encolhimento).
+    Retorna (tabela, m, R_global)."""
+    prof, L = store.load("perfil_absa"), store.load("listings_elig")
+    cols = list(cfg.ASPECT_SEEDS)
+    spec = [c for c in cols if c not in cfg.GENERIC_ASPECTS]
+    use = [c for c in cols if c not in exclude]
+    prof["n_aspectos"] = prof[spec].notna().sum(axis=1)  # só aspectos específicos contam para o mínimo
+    prof["n_sent_aspectos"] = prof[[f"n_{a}" for a in cols]].sum(axis=1)
+    ok = prof[prof["n_aspectos"] >= cfg.MIN_ASPECTS].copy()
+    log.info("Imóveis com >= %d aspectos específicos: %d de %d (excluídos por pouca evidência textual: %d)",
+             cfg.MIN_ASPECTS, len(ok), len(prof), len(prof) - len(ok))
+    ok["R_syn_pre"] = ok[use].mean(axis=1)  # média igual dos aspectos disponíveis
+    R = ok[["id", "R_syn_pre", "n_aspectos", "n_sent_aspectos"]].merge(
+        L[["id", "review_scores_rating", "number_of_reviews"]], on="id")
+    v = R["number_of_reviews"].to_numpy(float)  # v = total real de avaliações (não o amostrado)
+    m = cfg.SHRINKAGE_M if cfg.SHRINKAGE_M is not None else float(np.median(v))
+    r_global = float(R["R_syn_pre"].mean())
+    # média bayesiana: v/(v+m)*R_imovel + m/(v+m)*R_global (empirical Bayes, estilo beta-binomial)
+    R["R_syn_raw"] = v / (v + m) * R["R_syn_pre"] + m / (v + m) * r_global if shrink else R["R_syn_pre"]
+    R["R_syn_cal"] = np.clip(quantile_map(R["R_syn_raw"].to_numpy(), R["review_scores_rating"].to_numpy()), 1, 5)
+    R = R.rename(columns={"review_scores_rating": "R_off", "number_of_reviews": "v"})
+    R["diff_cal_menos_off"] = R["R_syn_cal"] - R["R_off"]
+    return R, m, r_global
+
+
 def run_rating(cfg, store: Store) -> None:
     with stage("Etapa 7 — Rating sintético"):
-        prof, L = store.load("perfil_absa"), store.load("listings_elig")
-        cols = list(cfg.ASPECT_SEEDS)
-        spec = [c for c in cols if c not in cfg.GENERIC_ASPECTS]
-        use = [c for c in cols if c not in cfg.RSYN_EXCLUDE_ASPECTS]
-        prof["n_aspectos"] = prof[spec].notna().sum(axis=1)  # só aspectos específicos contam para o mínimo
-        prof["n_sent_aspectos"] = prof[[f"n_{a}" for a in cols]].sum(axis=1)
-        ok = prof[prof["n_aspectos"] >= cfg.MIN_ASPECTS].copy()
-        log.info("Imóveis com >= %d aspectos específicos: %d de %d (excluídos por pouca evidência textual: %d)",
-                 cfg.MIN_ASPECTS, len(ok), len(prof), len(prof) - len(ok))
-        ok["R_syn_pre"] = ok[use].mean(axis=1)  # média igual dos aspectos disponíveis (RSYN_EXCLUDE_ASPECTS fora)
-        R = ok[["id", "R_syn_pre", "n_aspectos", "n_sent_aspectos"]].merge(
-            L[["id", "review_scores_rating", "number_of_reviews"]], on="id")
-        v = R["number_of_reviews"].to_numpy(float)  # v = total real de avaliações (não o amostrado)
-        m = cfg.SHRINKAGE_M if cfg.SHRINKAGE_M is not None else float(np.median(v))
-        r_global = float(R["R_syn_pre"].mean())
-        # média bayesiana: v/(v+m)*R_imovel + m/(v+m)*R_global (empirical Bayes, estilo beta-binomial)
-        R["R_syn_raw"] = v / (v + m) * R["R_syn_pre"] + m / (v + m) * r_global
-        R["R_syn_cal"] = np.clip(quantile_map(R["R_syn_raw"].to_numpy(), R["review_scores_rating"].to_numpy()), 1, 5)
-        R = R.rename(columns={"review_scores_rating": "R_off", "number_of_reviews": "v"})
-        R["diff_cal_menos_off"] = R["R_syn_cal"] - R["R_off"]
+        R, m, r_global = build_rating(cfg, store, exclude=cfg.RSYN_EXCLUDE_ASPECTS, shrink=True)
         store.save("rating_sintetico", R)
         rho = stats.spearmanr(R["R_syn_raw"], R["R_off"])[0]
         store.metric("etapa7", n_imoveis=len(R), shrinkage_m=m, R_global=round(r_global, 4),

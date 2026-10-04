@@ -105,3 +105,32 @@ correlacionando R_syn com volume). O −0,19 residual não foi investigado.
 
 **Pontos abertos para a escrita:** (i) sensibilidade a R_syn sem shrinkage (`R_syn_pre`) e sem `satisfacao_geral`;
 (ii) desfechos menos mecânicos que ocupação/receita estimadas; (iii) explicação do −0,19 residual na faixa 5,0.
+
+## 9. Sensibilidade do rating sintético (2026-10-03; `run_20261003_212801.log`, aba `Sensibilidade`)
+
+Variantes de R_syn_raw sobre a mesma amostra, folds e seed: **base** (shrinkage + `satisfacao_geral`), **sem_shrinkage**,
+**sem_satisfacao**, **sem_ambos** (módulo `src/s10_sensibilidade.py`, etapa opcional 10).
+
+| Variante | Spearman R_syn×R_off | Spearman R_syn×log v | Faixa R_off=5,0: ρ com desempenho bruto | idem, residual | ΔR² OOS (M3−M1), teto 5,0 |
+|---|---|---|---|---|---|
+| base | 0,564 | −0,013 | **+0,347** | **−0,193** | −0,0001 |
+| sem_shrinkage | 0,621 | −0,147 | −0,008 | −0,050 | +0,0006 |
+| sem_satisfacao | 0,555 | −0,019 | +0,331 | −0,184 | −0,0001 |
+| sem_ambos | 0,609 | −0,140 | −0,015 | −0,043 | +0,0006 |
+
+**Achados**
+1. **O +0,35 (bruto) e o −0,19 (residual) na faixa R_off = 5,0 são artefatos do shrinkage, não da `satisfacao_geral`.** Sem
+   shrinkage ambos somem (≈ 0). Dentro da faixa 5,0 (5.142 imóveis, v mediano 9 contra 31 fora dela), o shrinkage correlaciona
+   R_syn com o volume (ρ = +0,50 com log v, contra −0,04 sem shrinkage). Como o desfecho bruto é mecanicamente ligado ao
+   volume, R_syn "herda" correlação positiva; ao residualizar o desfecho nos controles de volume, o sinal inverte.
+2. **Excluir `satisfacao_geral` quase não muda nada** (ρ com R_off 0,555 vs 0,564; mesmos ΔR²).
+3. **A conclusão da Análise A não depende da variante:** ΔR² OOS entre −0,0001 e +0,0006 em todos os escopos, ou seja,
+   R_syn não explica ocupação além de R_off e dos controles.
+4. **[D] Implicação:** o shrinkage com `m = 23` mistura "sentimento" com "volume" justamente na faixa onde o teste do teto
+   importa (imóveis perfeitos têm poucas avaliações). Para a tese, reportar a variante **sem shrinkage** como análise
+   principal do teto, ou declarar a limitação. A decisão fica com o pesquisador.
+
+**Correção operacional (2026-10-03):** os CSVs brutos da raiz foram removidos do histórico git local (nunca haviam sido
+enviados) e passaram ao `.gitignore`; o push foi aceito. Um `filter-branch` apagou os arquivos do disco e eles foram
+restaurados do branch local `backup-antes-de-remover-csvs` (tamanhos e dimensões conferidos; `listings-dictionary.csv`
+pode diferir só em finais de linha).
