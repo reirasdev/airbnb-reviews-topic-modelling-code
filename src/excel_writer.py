@@ -51,6 +51,7 @@ def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
         "Sensibilidade": get("sensibilidade"),
         "Descritivo_Teto": get("descritivo_teto"),
         "Selecao": get("selecao"),
+        "Investigacao_Coef": pd.concat([get("investigacao_coef"), pd.DataFrame({"": [""]}), get("investigacao_coef_correlacoes")], ignore_index=True),
         "Resumo_Log": resumo,
     }
     with pd.ExcelWriter(path, engine="openpyxl") as xw:

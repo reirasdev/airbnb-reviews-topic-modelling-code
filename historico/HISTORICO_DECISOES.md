@@ -182,3 +182,16 @@ Variantes nomeadas na aba `Sensibilidade`: `sem_shrinkage` (principal), `com_shr
   não investigado (hipótese: composição de aspectos; não testada).
 - Análise B: ρ de R_syn com desempenho residual por faixa de R_off entre −0,05 e +0,06; na faixa 5,0 = −0,05. Isotônica OOS ≈ 0
   (R² entre −0,003 e +0,0007 para R_syn e R_off). 61% dos imóveis mudam ≥ 10 pp de posto entre R_off e R_syn (ρ = 0,62).
+
+## 12. Redação e investigação do coeficiente negativo (2026-10-04; `run_20261004_135242.log`)
+
+- **[A]** Rascunhos em `redacao/`: `01_resultados.md` (resultados completos com números rastreáveis às abas do Excel) e
+  `02_investigacao_coeficiente_negativo.md`.
+- **Investigação (exploratória, 51 especificações, módulo `src/s12_investigacao_coef.py`):** o coeficiente negativo de R_syn
+  nos tetos (−1,03 em R_off ≥ 4,9; −1,34 em = 5,0, noites por DP) **não foi explicado** por `minimum_nights`, características do
+  anúncio, quantidade de texto, zeros de ocupação ou qualquer aspecto isolado. É pequeno (~5% do DP residual), muda de sinal
+  conforme a especificação (amostra completa: +0,18 em S0, −0,75 com `minimum_nights`, +5,5 sem o volume recente) e não gera
+  ganho fora da amostra. Tratar como achado exploratório sem leitura de demanda. A ocupação tem ρ = 0,97 com as avaliações
+  dos últimos 12 meses no grupo de nota 5,0.
+- **[L]** A descrição do método de estimativa da ocupação (dependência de `minimum_nights`) vem de conhecimento externo ao
+  dicionário de dados; precisa ser confirmada na documentação oficial da Inside Airbnb antes de ser citada.
