@@ -43,12 +43,14 @@ def build_frame(cfg, store: Store, rating_table: str = "rating_sintetico") -> tu
     D["log_price"] = np.log1p(D["price_num"])
     for o in (cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME):
         D["y_" + o] = np.log1p(D[o]) if o in cfg.LOG_OUTCOMES else D[o].astype(float)
+    D["y_number_of_reviews_ltm"] = np.log1p(D["number_of_reviews_ltm"])  # desfecho adicional (volume recente, sem construção)
     nb = D["neighbourhood_cleansed"].where(
         D["neighbourhood_cleansed"].map(D["neighbourhood_cleansed"].value_counts()) >= cfg.RARE_NEIGHBOURHOOD_MIN, "OUTROS")
     dum = pd.get_dummies(nb, prefix="bairro", drop_first=True, dtype=float)
     dum = dum.join(pd.get_dummies(D["room_type"], prefix="tipo", drop_first=True, dtype=float))
     D = pd.concat([D, dum], axis=1)
-    return D, ["log_v", "log_ltm", "log_price", *dum.columns]
+    base = ["log_v", "log_ltm", "log_price"] if cfg.INCLUDE_LTM_CONTROL else ["log_v", "log_price"]
+    return D, [*base, *dum.columns]
 
 
 def _cv(X: np.ndarray, y: np.ndarray, cfg) -> pd.DataFrame:
@@ -62,7 +64,7 @@ def _cv(X: np.ndarray, y: np.ndarray, cfg) -> pd.DataFrame:
     return pd.DataFrame(out, columns=["r2", "rmse"])
 
 
-def run_analise_a(cfg, store: Store, rating_table: str = "rating_sintetico", persist: bool = True):
+def run_analise_a(cfg, store: Store, rating_table: str = "rating_sintetico", persist: bool = True, outcomes: tuple | None = None):
     """persist=False (sensibilidade): só devolve as tabelas, sem gravar nem sobrescrever os resultados principais."""
     with stage("Etapa 8 — Análise A (poder explicativo do desempenho)"):
         D, ctrl = build_frame(cfg, store, rating_table)
@@ -70,7 +72,7 @@ def run_analise_a(cfg, store: Store, rating_table: str = "rating_sintetico", per
         scopes = [("amostra completa", np.ones(len(D), bool))] + [
             (f"teto: R_off >= {t}", (D["R_off"] >= t).to_numpy()) for t in cfg.CEIL_THRESHOLDS]
         specs = {"M0 controles": [], "M1 R_off": ["R_off"], "M2 R_syn": ["R_syn_raw"], "M3 R_off + R_syn": ["R_off", "R_syn_raw"]}
-        for outcome in (cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME):
+        for outcome in (outcomes or (cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME)):
             ycol = "y_" + outcome
             for scope, mask in scopes:
                 d = D[mask]

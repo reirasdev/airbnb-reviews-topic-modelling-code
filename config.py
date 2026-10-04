@@ -137,6 +137,11 @@ class Config:
     PRIMARY_OUTCOME: str = "estimated_occupancy_l365d"
     SECONDARY_OUTCOME: str = "estimated_revenue_l365d"
     LOG_OUTCOMES: tuple = ("estimated_revenue_l365d",)   # desfechos modelados em log1p
+    # Controle de avaliações dos últimos 12 meses. A ocupação estimada é EXATAMENTE
+    # min(255, ltm * 2 * max(3, minimum_nights)) (verificado em 100% dos anúncios; ver historico/HISTORICO_DECISOES.md,
+    # seção 13). Com este controle ligado o desfecho fica quase determinístico e o teste perde sentido; a spec original
+    # pedia apenas o volume total de avaliações. True = análise anterior (reprodutibilidade); False = sem ltm.
+    INCLUDE_LTM_CONTROL: bool = True
     CEIL_THRESHOLD: float = 4.8
     CEIL_THRESHOLDS: tuple = (4.8, 4.9, 5.0)   # grade de sensibilidade do teste no teto
     K_FOLDS: int = 5

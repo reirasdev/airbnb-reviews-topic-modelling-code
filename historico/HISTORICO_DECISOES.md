@@ -195,3 +195,26 @@ Variantes nomeadas na aba `Sensibilidade`: `sem_shrinkage` (principal), `com_shr
   dos últimos 12 meses no grupo de nota 5,0.
 - **[L]** A descrição do método de estimativa da ocupação (dependência de `minimum_nights`) vem de conhecimento externo ao
   dicionário de dados; precisa ser confirmada na documentação oficial da Inside Airbnb antes de ser citada.
+
+## 13. Descoberta: a ocupação estimada é função exata de variáveis do anúncio (2026-10-04; `run_20261004_143317.log`)
+
+- **Fonte oficial** (Inside Airbnb, *Data Assumptions*): reservas = avaliações ÷ taxa de avaliação (50%); noites = reservas ×
+  duração média de estadia (3 noites ou o mínimo de noites, se maior); ocupação limitada a 70%; receita = ocupação × preço.
+  O dicionário do repositório (`listings-dictionary.csv`) **não define** `estimated_*` (o trecho citado sobre `availability_*`
+  descreve calendário, não a estimativa; além disso, define disponibilidade como "reservada ou bloqueada pelo anfitrião", o
+  que a torna um controle ambíguo).
+- **[C] Verificado nos dados (aba `Formula_Ocupacao`):** `ocupação = min(255, avaliações_12m × 2 × max(3, minimum_nights))` em
+  **100% dos 42.013 anúncios**; `receita = preço × ocupação` em 100% dos 38.356 com preço; ltm = 0 ⇒ ocupação = 0 (12.979/12.979).
+- **[C] Erro de especificação meu (assumido):** incluí `log(avaliações_12m)` como controle (recomendação do grill, item 5). A
+  especificação original pedia só o volume total. Com esse controle o desfecho fica quase determinístico: o "R² = 0,80 só com
+  controles" e o coeficiente negativo de R_syn no teto eram consequências disso.
+- **O coeficiente negativo é artefato:** com forma funcional flexível passa a −0,42 (p = 0,15) em R_off ≥ 4,9 e −0,09 (p = 0,62)
+  em = 5,0; com a fórmula exata, 0 (R² = 1). A primeira investigação (seção 12) não o resolvia por não incluir a forma exata.
+- **Reanálise sem o controle de ltm** (aba `Sem_LTM`; módulo `src/s13_sem_ltm.py`; `INCLUDE_LTM_CONTROL=False`): R² dos controles
+  cai a 0,475 (ocupação); a nota oficial acrescenta +0,008 [IC 0,005–0,010] e R_syn não acrescenta nada além dela
+  (M3 − M1 = 0,0000), nem nos tetos; R_syn sozinho é pior que a nota oficial (M2 − M1 = −0,005). Mesmo padrão para receita e para
+  avaliações dos últimos 12 meses (desfecho adicional sem construção algébrica).
+- **[D] Pendente:** decidir se `INCLUDE_LTM_CONTROL=False` vira a especificação principal (recomendado). Hoje o default segue
+  `True` para reprodutibilidade das execuções anteriores; as tabelas principais do Excel (`Analise_A/B`) ainda usam `True`.
+- **Documentos revisados:** `redacao/01_resultados.md` (nova seção 7.1) e `redacao/02_investigacao_coeficiente_negativo.md`
+  (reescrito: investigação resolvida).

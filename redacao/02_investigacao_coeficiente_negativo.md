@@ -1,81 +1,62 @@
-# Investigação do coeficiente negativo de R_syn no teto
+# Investigação do coeficiente negativo de R_syn no teto — **RESOLVIDA**
 
-> **Status:** análise **exploratória** (51 especificações; sem correção para comparações múltiplas), executada em
-> `run_20261004_135242` (módulo `src/s12_investigacao_coef.py`, aba `Investigacao_Coef` do Excel).
-> **Conclusão curta: a hipótese não foi identificada.** O efeito é pequeno, sensível à especificação e sem poder preditivo
-> fora da amostra; não deve ser interpretado como efeito de demanda.
+> **Status (revisado em 2026-10-04):** a investigação inicial (51 especificações, `run_20261004_135242`) não achou a causa.
+> Uma verificação posterior (`run_20261004_143317`, módulo `src/s13_sem_ltm.py`) a **encontrou: o coeficiente negativo é um
+> artefato de especificação**, provocado pela forma como o desfecho é construído. Ele não deve ser interpretado como efeito
+> sobre a demanda e **não deve ser reportado como achado**; reporte-se, no máximo, a explicação abaixo.
 
-## 1. O achado
+## 1. O achado original
 
-Na Análise A (especificação principal, sem shrinkage), o coeficiente de R_syn (padronizado) sobre a ocupação estimada,
-estimado dentro da amostra com controles e erro-padrão robusto HC3, é **negativo e significativo nos tetos**:
-−1,03 noite por desvio-padrão de R_syn em R_off ≥ 4,9 (n = 9.747; p = 0,003) e −1,34 em R_off = 5,0 (n = 4.711; p = 0,0001). Na
-amostra completa o coeficiente é ≈ 0 (+0,18; p = 0,44). Fora da amostra não há ganho de R² (ΔR² entre −0,0001 e +0,0006,
-intervalos incluem zero). O sinal é oposto ao da tese, o que justifica investigar se há uma explicação sistemática.
+Na Análise A (R_syn sem shrinkage, controles com avaliações dos últimos 12 meses), o coeficiente padronizado de R_syn sobre a
+ocupação estimada foi negativo e significativo nos tetos: −1,03 noite por desvio-padrão em R_off ≥ 4,9 (n = 9.747; p = 0,003)
+e −1,34 em R_off = 5,0 (n = 4.711; p = 0,0001); ≈ 0 na amostra completa (+0,18; p = 0,44). Sem ganho de R² fora da amostra.
 
-Dimensão do efeito: a ocupação média é ~87 noites; o RMSE out-of-sample dos controles no grupo de nota 5,0 é ~27 noites.
-Um coeficiente de −1,3 equivale a **~5% do desvio-padrão residual**.
+## 2. A causa: a ocupação estimada é uma função exata de duas variáveis
 
-## 2. Hipóteses testadas
+A documentação da Inside Airbnb (página *Data Assumptions*, consultada em 2026-10-04) descreve a ocupação estimada como:
+reservas = avaliações ÷ taxa de avaliação (50%); noites = reservas × duração média de estadia (3 noites, ou o mínimo de noites
+se maior); ocupação limitada a 70% (255 noites/ano); receita = ocupação × preço. **Verifiquei essa estrutura nos dados do
+estudo (aba `Formula_Ocupacao`):**
 
-| Hip. | Ideia | Como foi testada |
-|---|---|---|
-| H1 | A ocupação estimada depende de `minimum_nights` (duração de estadia) **[conferir na documentação da Inside Airbnb]** | acrescentar log de `minimum_nights` e `minimum_nights_avg_ntm` |
-| H2 | Características do anúncio | acrescentar capacidade, disponibilidade (365), reserva instantânea, nº de anúncios do anfitrião |
-| H3 | Quantidade de texto (anúncios com mais aspectos cobertos têm sentimento médio menor) | acrescentar nº de aspectos e log do nº de sentenças |
-| H4 | Zeros por construção (sem avaliação recente → ocupação 0) | restringir a ocupação > 0 |
-| H5 | Um único aspecto guia o efeito | R_syn sem cada aspecto (leave-one-out) |
-
-## 3. Resultados (coeficiente de R_syn em noites por desvio-padrão; EP HC3)
-
-| Especificação | Amostra completa (n = 20.882) | R_off ≥ 4,9 (n = 9.747) | R_off = 5,0 (n = 4.711) |
-|---|---:|---:|---:|
-| S0 controles da Análise A | +0,18 (p = 0,44) | −1,03 (p = 0,003) | −1,34 (p = 0,0001) |
-| S1 + `minimum_nights` (H1) | −0,75 (p = 0,0007) | −0,76 (p = 0,022) | −1,13 (p = 0,0005) |
-| S2 + características (H2) | −0,09 (p = 0,72) | −0,95 (p = 0,007) | −1,36 (p = 0,0001) |
-| S3 = S1 + S2 | −0,62 (p = 0,007) | −0,63 (p = 0,058) | −1,13 (p = 0,0006) |
-| S4 = S3 + quantidade de texto (H3) | −1,09 (p < 0,0001) | −1,35 (p = 0,0001) | −1,34 (p = 0,0001) |
-| S5 = S3 sem `log_ltm` | +5,50 (p < 0,0001) | +1,32 (p = 0,009) | +0,50 (p = 0,28) |
-| S6 = S3 só com ocupação > 0 (H4) | −1,00 (p < 0,0001) | −0,62 (p = 0,041) | −1,11 (p = 0,0005) |
-| S7 sem um aspecto (H5), faixa | de +0,02 a +0,27 | de −0,64 a −1,22 | de −0,94 a −1,57 |
-
-(S7: faixa entre as exclusões de cada um dos 10 aspectos; na exclusão de `seguranca` em R_off = 5,0 o erro-padrão não foi
-estimável por singularidade numérica e esse caso deve ser ignorado.)
-
-Correlações de postos no grupo de nota 5,0 (n = 4.711):
-
-| Variável | ρ com R_syn | ρ com ocupação |
+| Fórmula testada | Anúncios | Reprodução exata |
 |---|---:|---:|
-| avaliações nos últimos 12 meses (log) | −0,001 | **0,970** |
-| total de avaliações (log) | −0,035 | 0,667 |
-| nº de aspectos cobertos | −0,202 | 0,525 |
-| nº de sentenças (log) | −0,106 | 0,594 |
-| preço (log) | +0,038 | −0,121 |
-| `minimum_nights` (log) | −0,046 | −0,048 |
+| `ocupação = min(255, avaliações_12m × 2 × max(3, minimum_nights))` | 42.013 | **100,0%** (R² = 1) |
+| mesma, com `minimum_nights_avg_ntm` no lugar de `minimum_nights` | 42.013 | 95,0% |
+| mesma, com duração fixa de 3 noites | 42.013 | 89,7% |
+| `receita = preço × ocupação` | 38.356 | **100,0%** |
+| `avaliações_12m = 0 ⇒ ocupação = 0` | 12.979 | 100,0% |
 
-## 4. Interpretação
+(Nota: a página diz "avaliações × 0,50", mas os dados exigem multiplicar por 2, isto é, dividir pela taxa de avaliação.)
 
-1. **O desfecho é quase função de uma só variável.** A ocupação estimada tem ρ = 0,97 com as avaliações dos últimos 12
-   meses. Sobra pouca variância para qualquer rating explicar, e é nessa sobra que o coeficiente é estimado.
-2. **O sinal depende da especificação.** Na amostra completa, o coeficiente é ≈ 0 (S0), vira negativo ao acrescentar
-   `minimum_nights` (S1, S3: −0,6 a −0,8), e vira fortemente **positivo** (+5,5) ao retirar o volume recente (S5), porque o
-   sentimento se correlaciona com o volume. Isso é típico de efeito supressor em desfecho construído, não de uma relação
-   estável com a demanda.
-3. **No teto, nenhuma hipótese testada elimina o sinal.** `minimum_nights` explica parte em R_off ≥ 4,9 (de −1,03 para −0,63;
-   p = 0,058 em S3), mas em R_off = 5,0 o coeficiente permanece entre −1,1 e −1,4 em S1–S4 e S6; nenhum aspecto isolado o
-   gera (H5: −0,9 a −1,6); não é artefato de zeros (S6). Só desaparece em S5 (sem o controle de volume recente), o que
-   mostra que o coeficiente é condicional ao volume.
-4. **Quantidade de texto não explica.** R_syn tem ρ = −0,20 com o número de aspectos cobertos (anúncios com mais texto
-   tendem a ter sentimento médio menor, plausivelmente porque críticas ficam mais visíveis), e esse número correlaciona 0,53
-   com a ocupação; ainda assim, controlá-lo (S4) não altera o coeficiente em R_off = 5,0.
+**Consequência.** A ocupação e a receita estimadas **não medem demanda real**: são transformações determinísticas do número de
+avaliações dos últimos 12 meses, de `minimum_nights` e (receita) do preço.
 
-## 5. Conclusão e uso na dissertação
+## 3. Por que o coeficiente apareceu
 
-- O coeficiente negativo no teto é **estatisticamente significativo dentro da amostra, pequeno (~5% do DP residual), instável
-  entre especificações e sem ganho preditivo fora da amostra**. A causa não foi identificada pelas hipóteses testadas.
-- **Recomendação de redação:** reportá-lo como achado exploratório sem interpretação de demanda, junto com a ressalva de que o
-  desfecho é construído a partir do volume de avaliações, e de que o teste não foi pré-especificado nem corrigido para
-  múltiplas comparações.
-- **Se a banca pedir mais:** (a) um desfecho menos mecânico (por exemplo, avaliações ou notas posteriores ao período, ou
-  prêmio de preço), que exige outro recorte de dados e está fora do núcleo mínimo; (b) conferir na documentação oficial como a
-  ocupação estimada é construída, para sustentar H1 com referência.
+Os controles da Análise A incluíam `log(avaliações_12m)` linearmente. Como o desfecho é `min(255, 2 × ltm × max(3, minimum_nights))`
+(multiplicativo, com piso e teto), um controle linear em log não o captura, e a parte não modelada (não linear) pode se
+correlacionar com R_syn. Teste direto, em R_off = 5,0 (n = 4.711) e ≥ 4,9 (n = 9.747):
+
+| Controles | Coef. de R_syn (R_off ≥ 4,9) | Coef. de R_syn (R_off = 5,0) | R² dentro da amostra |
+|---|---:|---:|---:|
+| Os da Análise A (`log_ltm` linear) | −1,03 (p = 0,003) | −1,34 (p = 0,0001) | 0,81 / 0,75 |
+| + forma flexível (ltm, ltm², produto ltm×estadia, quadrado, indicador de teto) | −0,42 (p = 0,15) | −0,09 (p = 0,62) | 0,95 / 0,94 |
+| + a fórmula exata `min(255, 2·ltm·estadia)` | 0,00 | 0,00 | 1,00 / 1,00 |
+
+Com uma forma funcional flexível, o coeficiente se aproxima de zero e perde significância; com a fórmula exata, o desfecho é
+reproduzido sem resíduo e não resta nada para R_syn explicar. O sinal negativo era resíduo de má especificação.
+
+As 51 especificações da primeira investigação (`minimum_nights`, características, texto, zeros, aspectos) eram consistentes
+com isso: nenhuma incluía a forma exata, e o sinal variava com o conjunto de controles (efeito supressor típico).
+
+## 4. Implicações mais amplas (ver `01_resultados.md`, seção 7.1)
+
+1. **Controlar por `number_of_reviews_ltm` é "controlar o desfecho"**; foi uma escolha de controle minha (a especificação
+   original pedia só o volume total de avaliações). Os resultados "R² = 0,80 só com controles" vinham desse controle.
+2. Sem esse controle, o teste passa a ter poder: a nota oficial acrescenta R² detectável (+0,008 na ocupação), e R_syn não
+   acrescenta nada além dela (seção 7.1).
+3. Para a dissertação, as variáveis `estimated_occupancy_l365d` e `estimated_revenue_l365d` devem ser descritas como
+   **índices derivados do volume recente de avaliações**, e não como medidas de ocupação ou receita observadas; a leitura
+   adequada é "popularidade/volume recente de avaliações", com a ressalva de que depende também de `minimum_nights` e preço.
+4. A relação com a descrição da ocupação estimada vem de fonte oficial (Inside Airbnb) **e** foi verificada nos dados; o
+   dicionário de dados do repositório (`listings-dictionary.csv`) não define os campos `estimated_*`.
