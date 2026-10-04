@@ -218,3 +218,17 @@ Variantes nomeadas na aba `Sensibilidade`: `sem_shrinkage` (principal), `com_shr
   `True` para reprodutibilidade das execuções anteriores; as tabelas principais do Excel (`Analise_A/B`) ainda usam `True`.
 - **Documentos revisados:** `redacao/01_resultados.md` (nova seção 7.1) e `redacao/02_investigacao_coeficiente_negativo.md`
   (reescrito: investigação resolvida).
+
+## 14. Especificação principal final da Análise A: sem controle de avaliações recentes (2026-10-04; `run_20261004_144225.log`)
+
+- **[D] Aprovado pelo pesquisador:** `INCLUDE_LTM_CONTROL = False`. Controles: log do volume total, log do preço, tipo de
+  acomodação, bairro. Desfechos: ocupação, receita (log) e **número de avaliações em 12 meses (log; `EXTRA_OUTCOMES`)**.
+  `s12` (investigação) e `s13.coef_forma_flexivel` forçam `True` internamente para reproduzir a análise original.
+- **Resultados principais** (R_syn sem shrinkage; ver `redacao/01_resultados.md`, seções 7 a 9): nota oficial acrescenta ΔR² de
+  +0,008 (ocupação), +0,017 (receita), +0,016 (avaliações 12 m); R_syn no lugar da nota explica menos (−0,005 a −0,013); R_syn
+  além da nota ≈ 0 (IC cruzam zero), inclusive em R_off ≥ 4,8; 4,9; 5,0. Em R_off = 5,0, coeficientes in-sample positivos para
+  receita (+0,14; p = 0,0004) e avaliações (+0,040; p < 0,0001), sem confirmação OOS (ΔR² +0,0015–0,0019; IC cruzam zero).
+- Análise B: ρ(R_syn, desempenho residual) = +0,083 (todas) vs +0,168 da nota oficial; isotônica OOS R² 0,006 (R_syn) vs 0,029
+  (nota oficial) na amostra completa; ~0 no teto.
+- Sensibilidade: o artefato do shrinkage persiste só na correlação bruta (+0,35); com resíduo, ρ ≈ +0,01 a +0,04 em todas as
+  variantes. O "−0,19" residual da seção 9 era consequência do controle de ltm.

@@ -72,7 +72,7 @@ def run_analise_a(cfg, store: Store, rating_table: str = "rating_sintetico", per
         scopes = [("amostra completa", np.ones(len(D), bool))] + [
             (f"teto: R_off >= {t}", (D["R_off"] >= t).to_numpy()) for t in cfg.CEIL_THRESHOLDS]
         specs = {"M0 controles": [], "M1 R_off": ["R_off"], "M2 R_syn": ["R_syn_raw"], "M3 R_off + R_syn": ["R_off", "R_syn_raw"]}
-        for outcome in (outcomes or (cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME)):
+        for outcome in (outcomes or (cfg.PRIMARY_OUTCOME, cfg.SECONDARY_OUTCOME, *cfg.EXTRA_OUTCOMES)):
             ycol = "y_" + outcome
             for scope, mask in scopes:
                 d = D[mask]

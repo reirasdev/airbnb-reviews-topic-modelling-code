@@ -46,7 +46,7 @@ def verificar_formula(cfg) -> pd.DataFrame:
 def coef_forma_flexivel(cfg, store: Store) -> pd.DataFrame:
     """Coeficiente de R_syn (z) sobre a ocupação nos tetos, com controles da Análise A (log_ltm linear), com forma flexível
     em ltm/estadia e com a fórmula exata. Mostra que o coeficiente negativo é artefato de má especificação."""
-    D, ctrl = build_frame(cfg, store)  # cfg com INCLUDE_LTM_CONTROL=True (análise original)
+    D, ctrl = build_frame(dataclasses.replace(cfg, INCLUDE_LTM_CONTROL=True), store)  # análise original (com ltm)
     X = pd.read_csv(cfg.LISTINGS_CSV, usecols=["id", "minimum_nights"])
     D = D.merge(X, on="id")
     D["stay"] = np.maximum(3, D["minimum_nights"])

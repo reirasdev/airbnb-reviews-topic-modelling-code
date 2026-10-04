@@ -14,6 +14,7 @@ Saída: tabela `investigacao_coef` (aba Investigacao_Coef).
 """
 from __future__ import annotations
 
+import dataclasses
 import logging
 
 import numpy as np
@@ -41,6 +42,7 @@ def _fit(d: pd.DataFrame, ctrl: list[str], rsyn: str, extra: list[str]) -> dict:
 
 def run(cfg, store: Store) -> None:
     with stage("Investigação do coeficiente negativo de R_syn no teto"):
+        cfg = dataclasses.replace(cfg, INCLUDE_LTM_CONTROL=True)  # investigação sobre a análise ORIGINAL (com ltm)
         D, ctrl = build_frame(cfg, store)
         X = pd.read_csv(cfg.LISTINGS_CSV, usecols=["id", *EXTRA_COLS], low_memory=False)
         for c in ("instant_bookable",):

@@ -1,12 +1,11 @@
 # Resultados (rascunho para a dissertação)
 
-> **Revisão 2026-10-04 (importante):** a seção 7.1 e a seção 10 foram corrigidas após descobrirmos que a ocupação e a
-> receita estimadas são funções exatas de variáveis do próprio anúncio (ver `02_investigacao_coeficiente_negativo.md`). A
-> Análise A da seção 7 inclui o controle de avaliações dos últimos 12 meses, que torna o desfecho quase determinístico; a
-> seção 7.1 traz a versão sem esse controle, **recomendada como principal (pendente de confirmação do pesquisador)**.
+> **Revisão 2026-10-04 (importante):** a ocupação e a receita estimadas são funções exatas de variáveis do próprio anúncio
+> (ver `02_investigacao_coeficiente_negativo.md`). A **especificação principal** passou a **não** controlar por avaliações dos
+> últimos 12 meses (`INCLUDE_LTM_CONTROL = False`, aprovado pelo pesquisador); as seções 7 a 9 foram refeitas com ela
+> (`run_20261004_144225`). A análise anterior (com esse controle) fica apenas como referência (aba `Sem_LTM` / seção 7.2).
 >
-> **Status:** rascunho gerado a partir da execução `run_20261004_132021` (Excel `resultados_20261004_132021.xlsx`) e da
-> investigação `run_20261004_135242`. Todos os números vêm das abas do Excel / `historico/HISTORICO_DECISOES.md`.
+> **Status:** rascunho gerado a partir da execução `run_20261004_144225` (Excel `resultados_20261004_144225.xlsx`). Todos os números vêm das abas do Excel / `historico/HISTORICO_DECISOES.md`.
 > Trechos marcados **[conferir]** dependem de informação externa ao pipeline. Trabalho de **mensuração e associação**;
 > nenhuma afirmação causal.
 
@@ -97,100 +96,107 @@ subnotas também saturadas (45% a 85% iguais a 5,0).
 
 ## 7. Análise A — poder explicativo do desempenho
 
-Desfechos: ocupação estimada nos últimos 365 dias (principal) e receita estimada (secundária, em log). Controles: volume
-total de avaliações, avaliações nos últimos 12 meses, preço (log), tipo de acomodação e efeitos fixos de bairro. Validação
-**out-of-sample**: k-fold com 5 dobras repetido 5 vezes (seed fixa). Amostra: 20.882 anúncios (1.682 sem preço/receita foram
-excluídos).
+**Desfechos.** (i) Ocupação estimada nos últimos 365 dias (principal por especificação); (ii) receita estimada (em log);
+(iii) número de avaliações nos últimos 12 meses (em log), um desfecho **sem construção algébrica**. Os dois primeiros são
+funções exatas de variáveis do anúncio, a saber `ocupação = min(255, avaliações_12m × 2 × max(3, minimum_nights))` e
+`receita = preço × ocupação` (verificado em 100% dos 42.013 anúncios; consistente com a documentação da Inside Airbnb). Eles
+devem ser lidos como índices do volume recente de avaliações, não como ocupação ou receita observadas.
 
-**Os controles sozinhos já explicam R² out-of-sample = 0,798 da ocupação e 0,681 da receita.** Acrescentar a nota oficial, o
-rating sintético ou ambos praticamente não altera esses valores (ocupação: M1 0,7983; M2 0,7982; M3 0,7984; RMSE ≈ 33,9
-noites). A tabela mostra o ganho de R² out-of-sample de acrescentar R_syn à nota oficial (M3 − M1), com intervalo 2,5%–97,5%
-entre as dobras:
+**Controles.** Volume total de avaliações (log), preço (log), tipo de acomodação e efeitos fixos de bairro. **Não** se controla
+por avaliações dos últimos 12 meses, pois isso controlaria o próprio desfecho (seção 7.2). Validação out-of-sample: k-fold com
+5 dobras repetido 5 vezes, seed fixa, mesma amostra e mesmos folds em todos os modelos; amostra de 20.882 anúncios (1.682
+sem preço/receita foram excluídos). R_syn na especificação principal (sem shrinkage).
 
-| Escopo (ocupação) | n | ΔR² (M3 − M1) | IC 2,5%–97,5% |
-|---|---:|---:|---|
-| Amostra completa | 20.882 | +0,0001 | [−0,0000; +0,0002] |
-| Teto: R_off ≥ 4,8 | 14.451 | 0,0000 | [−0,0001; +0,0001] |
-| Teto: R_off ≥ 4,9 | 9.747 | +0,0002 | [−0,0002; +0,0007] |
-| Teto: R_off = 5,0 | 4.711 | +0,0006 | [−0,0006; +0,0015] |
+**R² out-of-sample** (M0 = controles; M1 = + nota oficial; M2 = + R_syn; M3 = + ambos):
 
-Para a receita os valores são do mesmo tamanho (|Δ| < 0,0005) e os intervalos também incluem zero. **Não há evidência de que
-o rating sintético explique desempenho além da nota oficial e dos controles, nem na amostra completa nem no teto.**
+| Desfecho | Escopo | n | M0 | M1 | M2 | M3 |
+|---|---|---:|---:|---:|---:|---:|
+| Ocupação | amostra completa | 20.882 | 0,475 | 0,483 | 0,478 | 0,483 |
+| Ocupação | R_off ≥ 4,8 | 14.451 | 0,502 | 0,509 | 0,503 | 0,509 |
+| Ocupação | R_off ≥ 4,9 | 9.747 | 0,538 | 0,541 | 0,538 | 0,541 |
+| Ocupação | R_off = 5,0 | 4.711 | 0,506 | 0,506 | 0,506 | 0,506 |
+| Receita (log) | amostra completa | 20.882 | 0,175 | 0,192 | 0,179 | 0,193 |
+| Avaliações 12 m (log) | amostra completa | 20.882 | 0,440 | 0,456 | 0,444 | 0,456 |
 
-## 7.1 Análise A sem o controle de avaliações dos últimos 12 meses (recomendada como principal)
+**Ganho de R² out-of-sample** (média entre dobras; IC 2,5%–97,5% entre dobras):
 
-A ocupação estimada é, em 100% dos anúncios, `min(255, avaliações_12m × 2 × max(3, minimum_nights))`, e a receita estimada é
-`preço × ocupação` (verificado nos dados; consistente com a documentação da Inside Airbnb). Controlar por avaliações dos
-últimos 12 meses "controla o desfecho" e explica o R² de 0,80 da seção 7. Refizemos a análise com os controles da
-especificação original (volume total de avaliações, preço, tipo de acomodação e bairro), para ocupação, receita e também o
-**número de avaliações dos últimos 12 meses** (log), um desfecho sem construção algébrica. Especificação principal de R_syn
-(sem shrinkage); mesmos folds e seed.
-
-R² out-of-sample:
-
-| Desfecho | Escopo | M0 controles | M1 R_off | M2 R_syn | M3 ambos |
-|---|---|---:|---:|---:|---:|
-| Ocupação | amostra completa | 0,475 | 0,483 | 0,478 | 0,483 |
-| Ocupação | R_off = 5,0 | 0,506 | 0,506 | 0,506 | 0,506 |
-| Receita (log) | amostra completa | 0,175 | 0,192 | 0,179 | 0,193 |
-| Avaliações 12 m (log) | amostra completa | 0,440 | 0,456 | 0,444 | 0,456 |
-
-Ganho de R² (IC 2,5%–97,5% entre dobras), amostra completa (n = 20.882):
-
-| Comparação | Ocupação | Receita | Avaliações 12 m |
+| Desfecho / escopo | M1 − M0 (nota oficial) | M2 − M1 (R_syn no lugar) | M3 − M1 (R_syn além da nota) |
 |---|---|---|---|
-| M1 − M0 (nota oficial sobre controles) | **+0,0079** [+0,0052; +0,0099] | **+0,0174** [+0,0089; +0,0239] | **+0,0163** [+0,0108; +0,0208] |
-| M2 − M1 (R_syn no lugar da nota oficial) | **−0,0050** [−0,0070; −0,0020] | **−0,0132** [−0,0206; −0,0050] | **−0,0116** [−0,0157; −0,0067] |
-| M3 − M1 (R_syn além da nota oficial) | 0,0000 [−0,0005; +0,0002] | +0,0010 [−0,0013; +0,0025] | +0,0006 [−0,0009; +0,0014] |
+| Ocupação, completa | **+0,0079** [+0,0052; +0,0099] | **−0,0050** [−0,0070; −0,0020] | 0,0000 [−0,0005; +0,0002] |
+| Ocupação, R_off ≥ 4,8 | **+0,0063** [+0,0038; +0,0091] | **−0,0059** [−0,0083; −0,0033] | 0,0000 [−0,0003; +0,0002] |
+| Ocupação, R_off ≥ 4,9 | **+0,0033** [+0,0009; +0,0057] | **−0,0033** [−0,0055; −0,0010] | −0,0001 [−0,0003; 0,0000] |
+| Ocupação, R_off = 5,0 | 0 (nota constante) | −0,0002 [−0,0009; 0,0000] | −0,0002 [−0,0009; 0,0000] |
+| Receita, completa | **+0,0174** [+0,0089; +0,0239] | **−0,0132** [−0,0206; −0,0050] | +0,0010 [−0,0013; +0,0025] |
+| Receita, R_off ≥ 4,9 | +0,0009 [−0,0015; +0,0028] | −0,0002 [−0,0029; +0,0029] | +0,0004 [−0,0010; +0,0012] |
+| Receita, R_off = 5,0 | 0 | +0,0019 [−0,0040; +0,0059] | +0,0019 [−0,0040; +0,0059] |
+| Avaliações 12 m, completa | **+0,0163** [+0,0108; +0,0208] | **−0,0116** [−0,0157; −0,0067] | +0,0006 [−0,0009; +0,0014] |
+| Avaliações 12 m, R_off ≥ 4,9 | +0,0028 [−0,0008; +0,0059] | −0,0020 [−0,0045; +0,0014] | +0,0003 [−0,0004; +0,0007] |
+| Avaliações 12 m, R_off = 5,0 | 0 | +0,0015 [−0,0020; +0,0041] | +0,0015 [−0,0020; +0,0041] |
 
-No teto (ocupação): M3 − M1 = 0,0000 em R_off ≥ 4,8 ([−0,0003; +0,0002]), −0,0001 em ≥ 4,9 ([−0,0003; 0,0000]) e −0,0002 em
-= 5,0 ([−0,0009; 0,0000]); para receita em = 5,0, +0,0019 [−0,0040; +0,0059]; para avaliações em 12 m, +0,0015 [−0,0020; +0,0041].
+**Leitura.** (1) A nota oficial acrescenta poder explicativo pequeno, mas detectável (de 0,8 a 1,7 pontos percentuais de R²),
+de modo que o teste tem poder para essa ordem de grandeza. (2) R_syn, **no lugar** da nota oficial, explica menos. (3) R_syn,
+**além** da nota oficial, não acrescenta nada na amostra completa (IC cruzam zero). (4) No teto, onde a nota oficial é
+constante (= 5,0) e o ganho de R_syn mede a informação própria dele, o acréscimo é pequeno (≤ 0,002) e com IC que inclui zero
+nos três desfechos.
 
-**Leitura.** Sem o controle que anulava o teste, a nota oficial passa a acrescentar poder explicativo detectável (≈ 1 a 2
-pontos percentuais de R²), de modo que o teste tem poder para detectar associações dessa ordem. R_syn, sozinho, explica
-**menos** do que a nota oficial, e **não acrescenta nada além dela**, na amostra completa nem nos tetos. A conclusão
-qualitativa da seção 7 se mantém, agora com um teste informativo. Na faixa R_off = 5,0 a nota oficial é constante, então M1 = M0
-por construção e o ganho de R_syn mede a informação extra que ele traz dentro do teto: nula, com intervalos que cruzam zero.
+**Coeficientes dentro da amostra** (R_syn padronizado em M3; EP robusto HC3). Em R_off = 5,0, o coeficiente de R_syn é positivo e
+significativo para receita (+0,14 em log por DP; p = 0,0004) e avaliações em 12 m (+0,040; ≈ +4% de avaliações por DP; p < 0,0001)
+e nulo para ocupação (+0,19 noite; p = 0,69); em R_off ≥ 4,9, para avaliações +0,020 (p = 0,006). Na amostra completa o
+coeficiente de R_syn é **negativo** (avaliações −0,037; p < 0,0001) enquanto o da nota oficial é positivo (+0,16). Esses sinais
+**não se confirmam fora da amostra** (ΔR² ≈ +0,0015 com IC cruzando zero) e vêm de 3 desfechos × 4 escopos sem correção para
+múltiplas comparações; tratar como evidência fraca e inconsistente, não como confirmação.
+
+### 7.2 Referência: análise anterior com o controle de avaliações dos últimos 12 meses
+
+Com esse controle, o R² dos controles sobe para 0,798 (ocupação) e 0,681 (receita), e o ganho de qualquer rating fica em
+|ΔR²| ≤ 0,001, com um coeficiente negativo de R_syn nos tetos (−1,0 a −1,3 noite por DP). Ambos são consequência de controlar o
+desfecho: o coeficiente desaparece com forma funcional flexível (−0,09; p = 0,62 em R_off = 5,0) ou com a fórmula exata (0).
+Esta análise não deve ser reportada como resultado; ver `02_investigacao_coeficiente_negativo.md` e aba `Formula_Ocupacao`.
 
 ## 8. Análise B — monotonicidade e reordenamento
 
-A correlação de postos de R_syn com o desempenho (ocupação), depois de residualizá-lo nos controles, é próxima de zero em
-todas as faixas da nota oficial:
+Correlação de postos entre R_syn e o desempenho (ocupação) **residualizado** nos controles da seção 7, por faixa da nota oficial:
 
-| Faixa de R_off | n | ρ (R_syn × desempenho residual) | ρ (R_syn × R_off) | % com mudança relevante de posto |
-|---|---:|---:|---:|---:|
-| Todas | 20.882 | +0,024 | 0,620 | 61% |
-| [0; 4,5) | 1.285 | +0,003 | 0,427 | 30% |
-| [4,5; 4,8) | 5.146 | +0,055 | 0,273 | 56% |
-| [4,8; 4,9) | 4.704 | +0,025 | 0,134 | 73% |
-| [4,9; 5,0) | 5.036 | −0,016 | 0,153 | 68% |
-| = 5,0 | 4.711 | −0,050 | — | 56% |
+| Faixa de R_off | n | ρ (R_syn × desempenho residual) | ρ (nota oficial × desempenho residual) | ρ (R_syn × R_off) | % com mudança relevante de posto |
+|---|---:|---:|---:|---:|---:|
+| Todas | 20.882 | +0,083 | +0,168 | 0,620 | 61% |
+| [0; 4,5) | 1.285 | −0,086 | −0,176 | 0,427 | 30% |
+| [4,5; 4,8) | 5.146 | −0,045 | +0,047 | 0,273 | 56% |
+| [4,8; 4,9) | 4.704 | −0,036 | +0,018 | 0,134 | 73% |
+| [4,9; 5,0) | 5.036 | −0,018 | +0,099 | 0,153 | 68% |
+| = 5,0 | 4.711 | +0,025 | — (constante) | — | 56% |
 
-A regressão isotônica (relação monótona crescente, avaliada fora da amostra) tem R² ≈ 0 para os dois ratings (R_syn: de
-−0,003 a −0,0004; nota oficial: de −0,002 a +0,0007). **R_syn reordena os anúncios em relação à nota oficial, e não apenas os
-reescala, mas essa reordenação não se associa ao desempenho medido.**
+"Mudança relevante" = diferença de 10 pontos percentuais ou mais entre os postos de R_syn e da nota oficial. **R_syn reordena
+os anúncios em relação à nota oficial, e não apenas os reescala** (ρ cai a 0,13–0,15 nas faixas altas), mas a reordenação não
+se associa ao desempenho residual (|ρ| ≤ 0,09), ao contrário da nota oficial na amostra completa (ρ = 0,17).
+
+Regressão isotônica (relação monótona crescente com o desempenho residual, R² out-of-sample): nota oficial 0,029 (completa),
+0,009 (≥ 4,8), 0,000 (≥ 4,9), −0,002 (= 5,0); R_syn 0,006, −0,001, −0,002, −0,003. **A nota oficial tem relação monótona
+detectável com o desempenho na amostra completa; R_syn tem relação muito mais fraca e nenhuma no teto.**
 
 ## 9. Sensibilidade e robustez
 
-Todas as variantes usam a mesma amostra, os mesmos folds e a mesma seed.
+Mesma amostra, mesmos folds e mesma seed em todas as variantes. A tabela mostra o ganho de R² de R_syn além da nota oficial
+(M3 − M1) no teto (R_off = 5,0), para ocupação e avaliações em 12 m, e a correlação de postos de R_syn com o desempenho dentro
+dessa faixa:
 
-| Variante | ρ(R_syn, desempenho bruto) na faixa 5,0 | idem, residual | ΔR² (M3 − M1), R_off = 5,0 |
-|---|---:|---:|---:|
-| **Sem shrinkage (principal)** | −0,01 | −0,05 | +0,0006 |
-| Com shrinkage (m = 23) | +0,35 | −0,19 | −0,0001 |
-| Sem shrinkage, sem `satisfacao_geral` | −0,02 | −0,04 | +0,0006 |
-| Com shrinkage, sem `satisfacao_geral` | +0,33 | −0,18 | −0,0001 |
-| Sem shrinkage, apenas v ≤ 30 (n = 12.128) | +0,02 | −0,06 | +0,0004 |
-| Com shrinkage, apenas v ≤ 30 | +0,26 | −0,11 | +0,0001 |
+| Variante | ΔR² ocupação | ΔR² avaliações 12 m [IC] | ρ bruto | ρ residual |
+|---|---:|---|---:|---:|
+| **Sem shrinkage (principal)** | −0,0002 | +0,0015 [−0,0020; +0,0041] | −0,01 | +0,03 |
+| Com shrinkage (m = 23) | +0,0001 | +0,0016 [−0,0026; +0,0044] | +0,35 | +0,02 |
+| Sem shrinkage, sem `satisfacao_geral` | −0,0002 | +0,0010 [−0,0011; +0,0032] | −0,02 | +0,02 |
+| Com shrinkage, sem `satisfacao_geral` | −0,0001 | +0,0011 [−0,0023; +0,0034] | +0,33 | +0,01 |
+| Sem shrinkage, apenas v ≤ 30 | −0,0003 | +0,0013 [−0,0037; +0,0046] | +0,02 | +0,03 |
+| Com shrinkage, apenas v ≤ 30 | −0,0003 | +0,0014 [−0,0043; +0,0052] | +0,26 | +0,04 |
 
-(1) Os valores de +0,35 e −0,19 da versão com shrinkage são um **artefato do encolhimento**: entre os anúncios de nota 5,0,
-que têm poucas avaliações (mediana 9, contra 31 nos demais), o shrinkage correlaciona R_syn com o volume (ρ = +0,50 com o
-log do volume, contra −0,04 sem shrinkage). Por isso a especificação principal não o aplica; a escolha foi feita após ver
-esse resultado e ambas as versões são reportadas. (2) Excluir `satisfacao_geral` quase não muda os resultados. (3) O limite
-de 30 avaliações por anúncio afeta 32% dos anúncios mas apenas 5,2% dos de nota 5,0; a confiabilidade (Spearman-Brown) do
-sentimento médio é ~0,50 com 30 avaliações, 0,67 com 60 e 0,80 com 120, e não há deriva temporal relevante (4,345 nas 10
-avaliações mais recentes vs 4,368 nas 20 mais antigas). Restringindo a anúncios com até 30 avaliações (sentimento com todas
-as avaliações), a conclusão não muda. (4) Todos os intervalos de ΔR² incluem zero em todas as variantes.
+(1) O ρ bruto de +0,35 com shrinkage é **artefato do encolhimento**: entre os anúncios de nota 5,0, que têm poucas avaliações
+(mediana 9 contra 31 nos demais), o shrinkage correlaciona R_syn com o volume (ρ = +0,50 com o log do volume; −0,04 sem
+shrinkage). Por isso a especificação principal não o aplica; a escolha foi feita após ver esse resultado e ambas as versões
+são reportadas. (2) Excluir `satisfacao_geral` quase não muda os resultados. (3) O limite de 30 avaliações afeta 32% dos
+anúncios mas só 5,2% dos de nota 5,0; a confiabilidade (Spearman-Brown) do sentimento médio é ~0,50 com 30 avaliações, 0,67 com
+60 e 0,80 com 120, e não há deriva temporal relevante (4,345 nas 10 mais recentes vs 4,368 nas 20 mais antigas). Restrito a
+anúncios com até 30 avaliações (sentimento com todas as avaliações; n = 12.128), a conclusão não muda. (4) No teto, os
+intervalos de ΔR² para avaliações em 12 m incluem zero em todas as variantes.
 
 ## 10. Seleção e limitações
 
@@ -198,23 +204,26 @@ as avaliações), a conclusão não muda. (4) Todos os intervalos de ΔR² inclu
   avaliações (mediana 3 vs 23), menor ocupação estimada (mediana 12 vs 66) e mais quartos privados (25% vs 14%). **Dos 9.373
   anúncios com nota 5,0, apenas 5.142 (55%) têm R_syn**: o teste do teto vale para anúncios perfeitos com volume suficiente
   de texto, não para os perfeitos com pouquíssimas avaliações.
-- **Desfechos construídos a partir do volume de avaliações.** Verificamos nos dados (100% dos 42.013 anúncios) que
-  `ocupação = min(255, avaliações_12m × 2 × max(3, minimum_nights))` e `receita = preço × ocupação`, em linha com a documentação
-  da Inside Airbnb (*Data Assumptions*). Esses campos não medem ocupação ou receita observadas, mas um índice do volume recente
-  de avaliações; devem ser descritos assim. O controle de avaliações dos últimos 12 meses, usado na seção 7, torna o desfecho
-  quase determinístico (por isso a seção 7.1 é a análise principal recomendada).
+- **Desfechos construídos a partir do volume de avaliações.** A ocupação e a receita estimadas são funções exatas de
+  avaliações nos últimos 12 meses, `minimum_nights` e preço (verificado nos dados; consistente com a documentação da Inside
+  Airbnb). Medem popularidade/volume recente, não ocupação observada. Por isso se usou também o número de avaliações em 12
+  meses como desfecho direto, e não se controlou por ele (seção 7).
 - **Sentimento e nota oficial cobrem períodos diferentes** (30 avaliações mais recentes vs todas), com efeito pequeno
   (seção 9).
 - **Modelo de sentimento** treinado em tweets e sem validação manual; **mapeamento por um só avaliador**, sem concordância
   entre avaliadores; **comparação de C_v** entre BERTopic e LDA apenas indicativa.
-- **Coeficiente negativo no teto (seção 7): artefato de especificação.** Ele desaparece com uma forma funcional flexível
-  ou com a fórmula exata do desfecho; não é um achado. Ver `redacao/02_investigacao_coeficiente_negativo.md`.
+- **Coeficiente negativo no teto da análise anterior (seção 7.2): artefato de especificação**, não um achado. Ver
+  `redacao/02_investigacao_coeficiente_negativo.md`.
+- **Comparações múltiplas.** Três desfechos × quatro escopos × seis variantes de R_syn foram examinados; os coeficientes
+  significativos dentro da amostra (seção 7) não são corrigidos para múltiplas comparações.
 
 ## 11. Síntese
 
 (i) O sentimento extraído do texto concorda moderadamente, e de modo consistente, com as subnotas oficiais por aspecto
 (validade de construto). (ii) Onde a nota oficial é constante (5,0), R_syn discrimina os anúncios e concorda fracamente, mas
-positivamente, com as subnotas. (iii) Apesar disso, R_syn **não explica ocupação, receita nem o volume recente de avaliações além da nota oficial e dos
-controles**, nem no teto; sozinho, explica menos do que a nota oficial. A conclusão é robusta a variantes de agregação, ao
-shrinkage e ao limite de avaliações, e vale com e sem o controle de avaliações recentes (seção 7.1). (iv) A
-interpretação é restrita pela natureza mecânica dos desfechos e pela seleção da amostra.
+positivamente, com as subnotas (ρ de +0,08 a +0,12). (iii) A nota oficial tem associação pequena, porém detectável, com o
+volume recente de avaliações (ΔR² de 0,8 a 1,7 pontos percentuais). R_syn, no lugar dela, explica menos, e **não acrescenta poder
+explicativo além dela**, na amostra completa nem nos tetos; no teto = 5,0 há coeficientes positivos dentro da amostra para
+receita e avaliações recentes, mas sem confirmação fora da amostra. (iv) A conclusão é robusta a variantes de agregação, ao
+shrinkage e ao limite de avaliações. (v) A interpretação é restrita pela natureza construída dos desfechos e pela seleção da
+amostra (apenas 55% dos anúncios de nota 5,0 entram).

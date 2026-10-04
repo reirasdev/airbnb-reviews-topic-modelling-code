@@ -49,12 +49,12 @@ reproduzido sem resíduo e não resta nada para R_syn explicar. O sinal negativo
 As 51 especificações da primeira investigação (`minimum_nights`, características, texto, zeros, aspectos) eram consistentes
 com isso: nenhuma incluía a forma exata, e o sinal variava com o conjunto de controles (efeito supressor típico).
 
-## 4. Implicações mais amplas (ver `01_resultados.md`, seção 7.1)
+## 4. Implicações mais amplas (ver `01_resultados.md`, seções 7 e 7.2)
 
 1. **Controlar por `number_of_reviews_ltm` é "controlar o desfecho"**; foi uma escolha de controle minha (a especificação
    original pedia só o volume total de avaliações). Os resultados "R² = 0,80 só com controles" vinham desse controle.
-2. Sem esse controle, o teste passa a ter poder: a nota oficial acrescenta R² detectável (+0,008 na ocupação), e R_syn não
-   acrescenta nada além dela (seção 7.1).
+2. Sem esse controle (**especificação principal desde 2026-10-04**), o teste passa a ter poder: a nota oficial acrescenta R²
+   detectável (+0,008 na ocupação), e R_syn não acrescenta nada além dela (seção 7).
 3. Para a dissertação, as variáveis `estimated_occupancy_l365d` e `estimated_revenue_l365d` devem ser descritas como
    **índices derivados do volume recente de avaliações**, e não como medidas de ocupação ou receita observadas; a leitura
    adequada é "popularidade/volume recente de avaliações", com a ressalva de que depende também de `minimum_nights` e preço.
