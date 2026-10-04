@@ -5,6 +5,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from .utils import Store
@@ -63,6 +64,9 @@ def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
         "Imp_Segmentos_Sens": pd.concat([get("imp_segmentos"), pd.DataFrame({"": [""]}), get("imp_sensibilidade")], ignore_index=True),
         "Imp_Topicos_Queixas": get("imp_topicos_queixas"),
         "Imp_Topicos_Elogios": get("imp_topicos_elogios"),
+        "Sazon_Volume": pd.concat([get("sazon_volume"), pd.DataFrame({"": [""]}), get("sazon_volume_por_ano")], ignore_index=True),
+        "Sazon_Conteudo": pd.concat([get("sazon_aspecto"), pd.DataFrame({"": [""]}), get("sazon_topico")], ignore_index=True),
+        "Sazon_Criterio": pd.concat([get("sazon_criterio"), pd.DataFrame({"": [""]}), get("sazon_calendario")], ignore_index=True),
         "Formula_Ocupacao": pd.concat([get("formula_ocupacao"), pd.DataFrame({"": [""]}), get("coef_forma_flexivel")], ignore_index=True),
         "Sem_LTM": pd.concat([get("sem_ltm_modelos"), pd.DataFrame({"": [""]}), get("sem_ltm_diferencas"), pd.DataFrame({"": [""]}), get("sem_ltm_faixas")], ignore_index=True),
         "Investigacao_Coef": pd.concat([get("investigacao_coef"), pd.DataFrame({"": [""]}), get("investigacao_coef_correlacoes")], ignore_index=True),
@@ -74,6 +78,6 @@ def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
             ws = xw.sheets[name]
             ws.freeze_panes = "A2"
             for i, col in enumerate(df.columns, 1):
-                width = min(60, max(10, len(str(col)) + 2, int(df[col].astype(str).str.len().head(200).max() or 0) + 2))
+                width = min(60, max(10, len(str(col)) + 2, int(np.nan_to_num(df[col].astype(str).str.len().head(200).max())) + 2))
                 ws.column_dimensions[ws.cell(1, i).column_letter].width = width
     log.info("Excel gravado em %s", path)

@@ -350,3 +350,33 @@ com maior prevalência × impacto): proporção de sentenças negativas do tópi
 **Critério de "interessante" (congelado):** (a) algum evento com IRR de volume cujo IC 95% exclui 1 e |IRR − 1| >= 10% nas duas defasagens
 (14 e 7), ou (b) pelo menos 3 aspectos/tópicos com q < 0,05 e razão de chances de queixa >= 1,15 em um mesmo evento, nas duas defasagens.
 Caso contrário, a etapa vira apêndice ou é descartada. Todas as estimativas são associações; datas de avaliação não são datas de estadia.
+
+## 20. Etapa 16 (opcional) — resultados e correções de implementação (2026-10-04; `run_20261004_202351.log`, abas `Sazon_*`)
+
+**Correções feitas DEPOIS de inspecionar a primeira execução (`run_20261004_202142`, log em `outputs/s16_primeira_versao_hc1.out`), declaradas aqui
+por transparência:** (1) o Carnaval de 2025 dava IRR = 27 (artefato: os dados terminam em 20/mar/2025 e a janela cobre quase todo o mês truncado,
+sem linha de base); (2) o Réveillon de 2019 dava IRR = 0,73 porque os dias de janeiro/2020 foram excluídos junto com a pandemia; (3) erros-padrão por
+dia ignoravam a autocorrelação. Correção: análise até 28/fev/2025 (último mês completo), eventos só entram se a janela de avaliações cai inteira nos
+dias analisados, e erro-padrão robusto HAC (21 defasagens). Com a primeira versão (HC1, sem filtros) os 7 eventos passavam no critério (a); após as
+correções, 6 de 7. O critério e a lista de eventos não foram alterados.
+
+**Volume de avaliações (todas as avaliações; IRR vs. dias fora de evento no mesmo ano-mês, defasagem 14 / 7 dias):** Rock in Rio 1,73 [1,16-2,58] / 2,43;
+Olimpíadas 2016 1,66 [0,79-3,49] / 3,34 (um único ano; IC inclui 1 com defasagem 14); Réveillon 1,34 [1,23-1,46] / 1,45; Corpus Christi 1,33 [1,14-1,55] / 1,63;
+Carnaval 1,26 [1,09-1,45] / 1,52; Semana Santa 1,25 [1,13-1,37] / 1,27; feriados curtos 1,24 [1,13-1,37] / 1,27. Consistência por ano de evento (primeira
+versão): Carnaval, Corpus Christi e Rock in Rio com IRR > 1 em todos os anos; Semana Santa e Réveillon em quase todos.
+
+**Conteúdo (2023-01 a 2025-02; só 2 Carnavais, 2023 e 2024; GLM binomial diário, EP HAC, BH por família):** poucas mudanças com explicação plausível.
+No Carnaval, a proporção de frases negativas aumenta em precisão do anúncio (OR 1,79; tópico "fotos/descrição" OR 2,57), custo-benefício (OR 1,57;
+tópico de valor OR 2,14) e localização (OR 1,23); no Réveillon, localização (OR 1,20) e custo-benefício (OR 1,60). Várias razões < 1 (ex.: Rock in
+Rio e Corpus Christi, menor proporção negativa em vários aspectos, incluindo ruído e segurança) não têm explicação confirmada: podem refletir um
+deslocamento geral de positividade nas janelas de evento ou composição de hóspedes, e não foram investigadas. Os testes por aspecto são relativos
+ao total de frases, não ao nível geral de sentimento.
+
+**Critério congelado (seção 19):** (a) volume: atendido por todos os eventos exceto Olimpíadas; (b) conteúdo: atendido só pelo Carnaval (5 itens de queixa com q < 0,05 e
+OR >= 1,15 na defasagem 14 e 4 na 7). Observação: os itens contados para o Carnaval incluem aspecto e o tópico correspondente (precisão e o tópico de fotos;
+custo-benefício e o tópico de valor), então a contagem independente é menor (~3).
+
+**Leitura:** o resultado de volume é robusto e prático (picos de 25% a 75% no volume de avaliações em eventos, até o dobro no Rock in Rio com defasagem de 7 dias);
+o conteúdo é modesto, com o Carnaval como único caso com uma história coerente (queixas sobre fidelidade ao anúncio, valor e localização). Sugestão: seção curta
+de volume + Carnaval (ou apêndice); a decisão de incluir é do pesquisador. **[L]** data da avaliação não é a data da estadia; janelas de evento se sobrepõem em
+~2% dos dias; feriados de calendário municipal e datas do Rock in Rio devem ser conferidos em fonte oficial; associações, não causas.
