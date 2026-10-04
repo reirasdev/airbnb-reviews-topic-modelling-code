@@ -158,6 +158,7 @@ def run(cfg, store: Store) -> None:
         keep = ["id", "neighbourhood_cleansed", "room_type", "number_of_reviews", "number_of_reviews_ltm",
                 "reviews_per_month", "estimated_occupancy_l365d", "estimated_revenue_l365d", "price_num",
                 "review_scores_rating", *cfg.ASPECT_TO_SUBSCORE.values()]
+        keep = list(dict.fromkeys(keep))
         store.save("listings_elig", elig[keep].reset_index(drop=True))
         store.save("sentences", S)
         store.save("texts", T)

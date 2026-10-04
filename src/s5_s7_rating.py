@@ -75,12 +75,14 @@ def run_rating(cfg, store: Store) -> None:
     with stage("Etapa 7 — Rating sintético"):
         prof, L = store.load("perfil_absa"), store.load("listings_elig")
         cols = list(cfg.ASPECT_SEEDS)
-        prof["n_aspectos"] = prof[cols].notna().sum(axis=1)
+        spec = [c for c in cols if c not in cfg.GENERIC_ASPECTS]
+        use = [c for c in cols if c not in cfg.RSYN_EXCLUDE_ASPECTS]
+        prof["n_aspectos"] = prof[spec].notna().sum(axis=1)  # só aspectos específicos contam para o mínimo
         prof["n_sent_aspectos"] = prof[[f"n_{a}" for a in cols]].sum(axis=1)
         ok = prof[prof["n_aspectos"] >= cfg.MIN_ASPECTS].copy()
-        log.info("Imóveis com >= %d aspectos: %d de %d (excluídos por pouca evidência textual: %d)",
+        log.info("Imóveis com >= %d aspectos específicos: %d de %d (excluídos por pouca evidência textual: %d)",
                  cfg.MIN_ASPECTS, len(ok), len(prof), len(prof) - len(ok))
-        ok["R_syn_pre"] = ok[cols].mean(axis=1)  # média igual dos aspectos disponíveis
+        ok["R_syn_pre"] = ok[use].mean(axis=1)  # média igual dos aspectos disponíveis (RSYN_EXCLUDE_ASPECTS fora)
         R = ok[["id", "R_syn_pre", "n_aspectos", "n_sent_aspectos"]].merge(
             L[["id", "review_scores_rating", "number_of_reviews"]], on="id")
         v = R["number_of_reviews"].to_numpy(float)  # v = total real de avaliações (não o amostrado)

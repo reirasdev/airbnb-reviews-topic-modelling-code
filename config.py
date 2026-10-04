@@ -25,6 +25,9 @@ ASPECT_TO_SUBSCORE = {
     "comunicacao": "review_scores_communication",
     "custo_beneficio": "review_scores_value",
     "precisao": "review_scores_accuracy",
+    # satisfação geral não tem subnota própria; a nota global é o análogo (checagem de construto, não circular:
+    # R_syn não é ajustado contra R_off).
+    "satisfacao_geral": "review_scores_rating",
 }
 
 # Taxonomia a priori + termos-semente multilíngues (pt, en, es, fr).
@@ -56,6 +59,12 @@ ASPECT_SEEDS = {
     "comodidades": ["cozinha equipada", "wifi", "piscina", "varanda", "vista", "utensílios", "máquina de lavar",
                     "equipped kitchen", "pool", "balcony", "view", "amenities", "washing machine",
                     "cocina equipada", "balcón", "équipements", "cuisine équipée", "piscine"],
+    # elogio/queixa genérico (recomendo, voltarei, adorei, experiência incrível). Decisão v2: aspecto próprio,
+    # em vez de diluir custo_beneficio/localizacao com sentimento que não é sobre esses aspectos.
+    "satisfacao_geral": ["recomendo", "adorei", "amei", "voltarei", "estadia incrível", "experiência maravilhosa", "superou as expectativas",
+                         "highly recommend", "loved it", "would come back", "wonderful stay", "great experience", "exceeded expectations",
+                         "recomiendo", "me encantó", "volveré", "estadía maravillosa", "excelente experiencia",
+                         "je recommande", "nous avons adoré", "séjour merveilleux", "reviendrons"],
 }
 GENERAL_BUCKET = "geral"  # tópicos genéricos/sem aspecto: fora do perfil ABSA e de R_syn
 
@@ -113,7 +122,9 @@ class Config:
     ASPECT_TO_SUBSCORE: dict = field(default_factory=lambda: ASPECT_TO_SUBSCORE)
     MAPPING_MIN_SIM: float = 0.25         # abaixo disto a sugestão automática é "geral"
     MIN_SENT_PER_ASPECT: int = 2          # sentenças mínimas para o aspecto existir no imóvel
-    MIN_ASPECTS: int = 3                  # aspectos mínimos para calcular R_syn
+    MIN_ASPECTS: int = 3                  # aspectos ESPECÍFICOS mínimos para calcular R_syn
+    GENERIC_ASPECTS: tuple = ("satisfacao_geral",)  # não contam para MIN_ASPECTS (estão em quase todo imóvel)
+    RSYN_EXCLUDE_ASPECTS: tuple = ()      # aspectos fora da média de R_syn (sensibilidade: ("satisfacao_geral",))
 
     # --- rating sintético ---
     SHRINKAGE_M: float | None = None      # None -> mediana de number_of_reviews dos imóveis com R_syn

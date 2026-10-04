@@ -42,7 +42,7 @@ def run(cfg, store: Store) -> None:
         store.save("mapa_topico_aspecto", M)
 
         path = Path(cfg.MAPPING_CSV)
-        if not path.exists():
+        if not path.exists() and not path.with_suffix(".xlsx").exists():
             path.parent.mkdir(parents=True, exist_ok=True)
             tpl = M[["topic", "n_fit", "top_words", "exemplos", "sugestao", "sim_max"]].copy()
             tpl["aspecto_confirmado"] = ""
@@ -57,8 +57,11 @@ def resolve_mapping(cfg, store: Store) -> tuple[dict[int, str], bool]:
     sug = dict(zip(M["topic"], M["sugestao"]))
     mapping, confirmed = dict(sug), False
     path = Path(cfg.MAPPING_CSV)
-    if path.exists():
-        H = pd.read_csv(path, encoding="utf-8-sig")
+    xlsx = path.with_suffix(".xlsx")  # o .xlsx (editado à mão) tem prioridade sobre o .csv gerado
+    if xlsx.exists() or path.exists():
+        path = xlsx if xlsx.exists() else path
+        log.info("Lendo mapeamento humano de %s", path)
+        H = pd.read_excel(path) if path.suffix == ".xlsx" else pd.read_csv(path, encoding="utf-8-sig")
         conf = H["aspecto_confirmado"].fillna("").astype(str).str.strip()
         valid = set(cfg.ASPECT_SEEDS) | {GENERAL_BUCKET}
         bad = set(conf[conf != ""]) - valid
