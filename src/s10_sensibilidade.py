@@ -1,10 +1,10 @@
 """Sensibilidade do rating sintético (fora das 9 etapas da spec; robustez pedida após os resultados principais).
 
 Variantes de R_syn_raw, mesma amostra de imóveis e mesmos folds/seed:
-  base            = com shrinkage, com satisfacao_geral na média (configuração principal)
-  sem_shrinkage   = média dos aspectos sem encolhimento (testa se o sinal vem do volume via shrinkage)
-  sem_satisfacao  = com shrinkage, sem satisfacao_geral na média (R_syn só de aspectos específicos)
-  sem_ambos
+  sem_shrinkage   = ESPECIFICAÇÃO PRINCIPAL: média dos aspectos sem encolhimento, com satisfacao_geral
+  com_shrinkage   = média bayesiana (spec original)
+  *_sem_satisfacao = R_syn só de aspectos específicos
+  *_v30           = só imóveis com v <= 30 (sentimento usa todas as avaliações)
 Resultado: tabela `sensibilidade` (aba Sensibilidade do Excel); NÃO sobrescreve os resultados principais.
 """
 from __future__ import annotations
@@ -22,13 +22,13 @@ from .utils import Store, stage
 log = logging.getLogger("pipeline")
 
 VARIANTS = {
-    "base": ((), True),
-    "sem_shrinkage": ((), False),
-    "sem_satisfacao": (("satisfacao_geral",), True),
-    "sem_ambos": (("satisfacao_geral",), False),
+    "sem_shrinkage": ((), False),                       # ESPECIFICAÇÃO PRINCIPAL (config RSYN_SHRINK=False)
+    "com_shrinkage": ((), True),                        # como na spec original (média bayesiana)
+    "sem_shrinkage_sem_satisfacao": (("satisfacao_geral",), False),
+    "com_shrinkage_sem_satisfacao": (("satisfacao_geral",), True),
     # imóveis com v <= MAX_REVIEWS_PER_LISTING: o sentimento usa TODAS as avaliações (sem descompasso com a nota oficial)
-    "base_v30": ((), True, 30),
     "sem_shrinkage_v30": ((), False, 30),
+    "com_shrinkage_v30": ((), True, 30),
 }
 
 

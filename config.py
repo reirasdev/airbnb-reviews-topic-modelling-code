@@ -128,6 +128,10 @@ class Config:
 
     # --- rating sintético ---
     SHRINKAGE_M: float | None = None      # None -> mediana de number_of_reviews dos imóveis com R_syn
+    # Especificação principal (decidida após ver a sensibilidade; ambas são reportadas): SEM shrinkage. Com m = mediana
+    # de v, o shrinkage correlaciona R_syn com o volume (ρ = +0,50 dentro de R_off = 5,0, onde v mediano é 9), o que
+    # contamina justamente o teste do teto. R_syn_shrink (com shrinkage, como na spec) fica sempre na tabela.
+    RSYN_SHRINK: bool = False
 
     # --- Análises A e B ---
     PRIMARY_OUTCOME: str = "estimated_occupancy_l365d"

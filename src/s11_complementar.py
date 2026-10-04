@@ -38,7 +38,7 @@ def descritivo_teto(cfg, store: Store) -> pd.DataFrame:
     L = store.load("listings_elig")
     prof = store.load("perfil_absa")[["id"] + list(cfg.ASPECT_SEEDS)]
     rows = []
-    for var in ("base", "sem_shrinkage"):
+    for var in ("sem_shrinkage", "com_shrinkage"):
         R = store.load(f"rating_sintetico__{var}")
         rows += [_compressao(R["R_off"], "R_off (nota oficial)", var),
                  _compressao(R["R_syn_raw"], "R_syn_raw", var)]

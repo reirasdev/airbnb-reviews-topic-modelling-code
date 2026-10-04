@@ -162,3 +162,23 @@ Resultado: ΔR² OOS (M3 − M1) entre −0,0001 e +0,0009 e **todos os IC 2,5�
 - **Consequência para a tese:** dos 9.373 imóveis elegíveis com R_off = 5,0, só 5.142 (55%) entram em R_syn; **o teste do teto
   descreve imóveis perfeitos com volume suficiente, não os perfeitos com pouquíssimas avaliações.**
 - Análise A exclui outros 1.682 imóveis sem preço/receita (menos avaliações e ocupação menor; dif. padronizada 0,2–0,4).
+
+## 11. Especificação principal passa a ser SEM shrinkage (2026-10-04; `run_20261004_132021.log`)
+
+**[D] Decisão** (tomada DEPOIS de ver a sensibilidade da seção 9; por isso as duas especificações são reportadas lado a lado,
+sem esconder a escolha): `RSYN_SHRINK = False` no `config.py`. `R_syn_raw` é a média igual dos aspectos sem encolhimento;
+`R_syn_shrink` (média bayesiana da spec original, m = 23) permanece em toda tabela e na aba `Sensibilidade`
+(variante `com_shrinkage`). **Motivo metodológico, não estatístico:** o shrinkage com m = mediana de v correlaciona R_syn com o
+volume (ρ = +0,50 dentro de R_off = 5,0, onde v mediano é 9 contra 31 fora), contaminando o teste do teto; sem shrinkage
+ρ = −0,04. As seções 8–10 descrevem a variante com shrinkage como "base" (histórico); a partir daqui "principal" = sem shrinkage.
+Variantes nomeadas na aba `Sensibilidade`: `sem_shrinkage` (principal), `com_shrinkage`, `*_sem_satisfacao`, `*_v30`.
+
+**Resultados da especificação principal (ocupação; n = 20.882 na Análise A)**
+- ΔR² OOS (M3 − M1): +0,0001 (completa), 0,0000 (R_off ≥ 4,8), +0,0002 (≥ 4,9), +0,0005 (= 5,0); todos os IC 2,5–97,5% incluem
+  zero. M2 − M1 é ligeiramente negativo (−0,0004 a +0,0006), também com IC cruzando zero. Receita: idem (|Δ| < 0,0005).
+  **Sem evidência de que R_syn explique desempenho além de R_off e dos controles.**
+- Coeficiente in-sample (z) de R_syn em M3: **negativo e estatisticamente significativo nos tetos 4,9 e 5,0** (−1,35 noites por
+  DP, p = 0,0001; ocupação média ≈ 87, dp ≈ 70), mas sem ganho fora da amostra. Efeito pequeno, no sentido oposto ao da tese;
+  não investigado (hipótese: composição de aspectos; não testada).
+- Análise B: ρ de R_syn com desempenho residual por faixa de R_off entre −0,05 e +0,06; na faixa 5,0 = −0,05. Isotônica OOS ≈ 0
+  (R² entre −0,003 e +0,0007 para R_syn e R_off). 61% dos imóveis mudam ≥ 10 pp de posto entre R_off e R_syn (ρ = 0,62).
