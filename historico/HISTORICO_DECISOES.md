@@ -393,3 +393,21 @@ de volume + Carnaval (ou apêndice); a decisão de incluir é do pesquisador. **
 4. **Interpretação do pesquisador (hipótese, não testada):** as menores proporções de queixa no Rock in Rio e em Corpus Christi podem refletir o perfil do
    hóspede (público mais jovem em festivais de música, possivelmente mais tolerante a ruído e a acomodações simples). Os dados não têm idade do hóspede;
    seria preciso um indicador indireto para testá-la.
+
+## 22. Etapa 16 após a emenda (`run_20261004_203720.log`) e checagem exploratória do deslocamento geral de positividade
+
+**Volume (IRR; defasagem 14 / 7; HAC):** Rock in Rio 1,73 / 2,42; Corpus Christi 1,34 / 1,65; Réveillon 1,34 / 1,45; Carnaval 1,26 / 1,51;
+Semana Santa 1,25 / 1,27; feriados curtos 1,24 / 1,26; **Todo Mundo no Rio 2024: 1,31 [1,02-1,69] / 1,66 [1,37-2,00]** (uma única edição dentro dos dados;
+2025 e 2026 são posteriores ao fim da coleta; o limite inferior do IC com defasagem 14 está colado em 1, então a evidência é fraca nessa defasagem).
+
+**Conteúdo no Todo Mundo no Rio 2024:** nenhuma queixa aumenta; várias proporções negativas caem (custo-benefício OR 0,22; limpeza 0,78; comodidades 0,87;
+comunicação 0,79). As menções mudam pouco (comunicação 1,16; check-in 1,12; precisão 1,08; comodidades 0,91). Critério (b) não atendido (0 itens de
+queixa com OR >= 1,15 na defasagem 14; 2 na 7).
+
+**Checagem exploratória (pós-hoc) da hipótese do pesquisador (perfil do hóspede / deslocamento geral de positividade):** proporção de frases
+negativas **no corpus inteiro** nas janelas de evento (binomial diário, mesmos efeitos fixos, HAC), OR com defasagem 14: **Todo Mundo no Rio 0,84 [0,78-0,92];
+Rock in Rio 0,87 [0,83-0,92]; Corpus Christi 0,91 [0,86-0,95]**; sem mudança geral em Carnaval (0,99), Réveillon (1,02), Semana Santa (1,05) e feriados curtos (1,00).
+Ou seja, nos eventos de música e em Corpus Christi há um **deslocamento geral** para menos frases negativas, o que explica as razões < 1 por aspecto naquelas
+janelas, e é compatível com a hipótese (público de festivais mais jovem/tolerante), embora os dados não tenham idade do hóspede e não distingam essa
+explicação de entusiasmo com o evento. Nas demais janelas (Carnaval, Réveillon) não há deslocamento geral, então os aumentos específicos de queixa
+(precisão do anúncio, custo-benefício, localização) são mais informativos. Interpretação: os testes por aspecto devem ser lidos relativamente ao nível geral.
