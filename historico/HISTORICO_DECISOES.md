@@ -134,3 +134,31 @@ Variantes de R_syn_raw sobre a mesma amostra, folds e seed: **base** (shrinkage 
 enviados) e passaram ao `.gitignore`; o push foi aceito. Um `filter-branch` apagou os arquivos do disco e eles foram
 restaurados do branch local `backup-antes-de-remover-csvs` (tamanhos e dimensões conferidos; `listings-dictionary.csv`
 pode diferir só em finais de linha).
+
+## 10. Complementares: limite de 30 avaliações, descritivo do teto e seleção (2026-10-04; `run_20261004_130216.log`, `..._130435.xlsx`)
+
+**Limite de 30 avaliações (decisão: não reprocessar o corpus inteiro).** 32% dos imóveis elegíveis (9.266) têm v > 30, mas só
+5,2% dos imóveis com R_off = 5,0 (imóveis perfeitos têm poucas avaliações). Deriva temporal desprezível (sentimento médio das
+10 avaliações mais recentes 4,345 vs 4,368 das 20 mais antigas). O efeito é **ruído, não viés**: correlação split-half
+(15 recentes × 15 antigas) = 0,34, logo confiabilidade Spearman-Brown ≈ 0,50 com 30 avaliações, 0,67 com 60 e 0,80 com 120.
+Reprocessar custaria ~13–14 h (≈ 1,3 M textos únicos a mais). **Sensibilidade gratuita:** análises restritas a v ≤ 30
+(sentimento com TODAS as avaliações; n = 13.298 com R_syn, 12.128 na Análise A; variantes `base_v30` e `sem_shrinkage_v30`).
+Resultado: ΔR² OOS (M3 − M1) entre −0,0001 e +0,0009 e **todos os IC 2,5–97,5% incluem zero**; o artefato do shrinkage na faixa
+5,0 persiste atenuado (ρ bruto 0,26 / residual −0,11 com shrinkage; ≈ 0 sem). A conclusão nula não depende do limite de 30.
+
+**Descritivo do teto (aba `Descritivo_Teto`).**
+- Compressão: 22,8% dos imóveis com R_syn estão exatamente em R_off = 5,0 (valor modal); o valor modal de R_syn_raw concentra
+  só 3,9% (com shrinkage) ou 1,6% (sem). As medidas de empate por valor arredondado a 2 casas (≈ 100% em empate) **não
+  discriminam** e não devem ser usadas.
+- Dentro de R_off = 5,0 (n = 5.142), R_syn_raw espalha os imóveis (percentil de R_syn: dp 0,19–0,22; p5–p95 = 0,34–0,94 com
+  shrinkage, 0,27–0,98 sem).
+- Concordância de R_syn com as 6 subnotas dentro de R_off = 5,0: **ρ entre −0,04 e +0,01 com shrinkage** e **entre +0,08 e +0,12
+  sem shrinkage** (positivo nas 6). As subnotas também são saturadas (45–85% iguais a 5,0), o que atenua os coeficientes.
+  Leitura cautelosa: evidência modesta de informação recuperada no teto, apenas na variante sem shrinkage.
+
+**Seleção (aba `Selecao`) — limitação importante.**
+- R_syn exige ≥ 3 aspectos específicos com ≥ 2 frases: 22.564 de 28.890 elegíveis (6.326 excluídos). Os excluídos são de **baixo
+  volume**: v mediano 3 vs 23; ocupação estimada mediana 12 vs 66; 25% quartos privados vs 13,6%; nota oficial mediana 5,0.
+- **Consequência para a tese:** dos 9.373 imóveis elegíveis com R_off = 5,0, só 5.142 (55%) entram em R_syn; **o teste do teto
+  descreve imóveis perfeitos com volume suficiente, não os perfeitos com pouquíssimas avaliações.**
+- Análise A exclui outros 1.682 imóveis sem preço/receita (menos avaliações e ocupação menor; dif. padronizada 0,2–0,4).

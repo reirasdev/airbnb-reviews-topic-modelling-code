@@ -71,7 +71,7 @@ def quantile_map(x: np.ndarray, target: np.ndarray) -> np.ndarray:
     return np.quantile(target, p)
 
 
-def build_rating(cfg, store: Store, exclude: tuple = (), shrink: bool = True) -> tuple[pd.DataFrame, float, float]:
+def build_rating(cfg, store: Store, exclude: tuple = (), shrink: bool = True, max_v: int | None = None) -> tuple[pd.DataFrame, float, float]:
     """R_syn por imóvel. exclude = aspectos fora da média; shrink=False deixa R_syn_raw == R_syn_pre (sem encolhimento).
     Retorna (tabela, m, R_global)."""
     prof, L = store.load("perfil_absa"), store.load("listings_elig")
@@ -81,6 +81,8 @@ def build_rating(cfg, store: Store, exclude: tuple = (), shrink: bool = True) ->
     prof["n_aspectos"] = prof[spec].notna().sum(axis=1)  # só aspectos específicos contam para o mínimo
     prof["n_sent_aspectos"] = prof[[f"n_{a}" for a in cols]].sum(axis=1)
     ok = prof[prof["n_aspectos"] >= cfg.MIN_ASPECTS].copy()
+    if max_v is not None:  # só imóveis cujo sentimento usa TODAS as avaliações (v <= limite de avaliações por imóvel)
+        ok = ok[ok["id"].isin(L.loc[L["number_of_reviews"] <= max_v, "id"])]
     log.info("Imóveis com >= %d aspectos específicos: %d de %d (excluídos por pouca evidência textual: %d)",
              cfg.MIN_ASPECTS, len(ok), len(prof), len(prof) - len(ok))
     ok["R_syn_pre"] = ok[use].mean(axis=1)  # média igual dos aspectos disponíveis

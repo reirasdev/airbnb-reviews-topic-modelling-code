@@ -26,14 +26,19 @@ VARIANTS = {
     "sem_shrinkage": ((), False),
     "sem_satisfacao": (("satisfacao_geral",), True),
     "sem_ambos": (("satisfacao_geral",), False),
+    # imóveis com v <= MAX_REVIEWS_PER_LISTING: o sentimento usa TODAS as avaliações (sem descompasso com a nota oficial)
+    "base_v30": ((), True, 30),
+    "sem_shrinkage_v30": ((), False, 30),
 }
 
 
 def run(cfg, store: Store) -> None:
     with stage("Sensibilidade — variantes de R_syn"):
         rows = []
-        for name, (excl, shrink) in VARIANTS.items():
-            R, m, _ = build_rating(cfg, store, exclude=excl, shrink=shrink)
+        for name, spec in VARIANTS.items():
+            excl, shrink = spec[0], spec[1]
+            max_v = spec[2] if len(spec) > 2 else None
+            R, m, _ = build_rating(cfg, store, exclude=excl, shrink=shrink, max_v=max_v)
             tab = f"rating_sintetico__{name}"
             store.save(tab, R)
             _, Dd, _ = run_analise_a(cfg, store, tab, persist=False)
