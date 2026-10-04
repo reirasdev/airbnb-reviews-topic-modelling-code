@@ -24,10 +24,11 @@ log = logging.getLogger("pipeline")
 def run_absa(cfg, store: Store) -> None:
     with stage("Etapa 5 — ABSA por imóvel"):
         mapping, confirmed = resolve_mapping(cfg, store)
-        S = store.load("sentences")[["listing_id", "text_id"]]
+        S = store.load("sentences")[["sent_id", "review_id", "listing_id", "date", "lang", "text_id"]]
         S = S.merge(store.load("text_topics")[["text_id", "topic"]], on="text_id")
         S = S.merge(store.load("sentiment")[["text_id", "stars"]], on="text_id")
         S["aspecto"] = S["topic"].map(mapping).fillna(GENERAL_BUCKET)  # topic -1 (outlier) -> geral
+        store.save("sentencas_aspecto", S)  # base das etapas 14-16: uma linha por sentença, com tópico, aspecto e estrelas
         share = S["aspecto"].value_counts(normalize=True).round(4).to_dict()
         log.info("Distribuição de sentenças por aspecto: %s", share)
         A = S[S["aspecto"] != GENERAL_BUCKET]

@@ -133,6 +133,10 @@ class Config:
     # contamina justamente o teste do teto. R_syn_shrink (com shrinkage, como na spec) fica sempre na tabela.
     RSYN_SHRINK: bool = False
 
+    # --- Etapa 14: validade de construto ampliada ---
+    MANUAL_SAMPLE_N: int = 300            # frases da amostra de validação manual (estratificada por aspecto × polaridade)
+    MANUAL_VALIDATION_XLSX: str = str(ROOT / "data" / "validacao_manual_amostra.xlsx")  # nunca sobrescrito se já existir
+
     # --- Análises A e B ---
     PRIMARY_OUTCOME: str = "estimated_occupancy_l365d"
     SECONDARY_OUTCOME: str = "estimated_revenue_l365d"

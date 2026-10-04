@@ -252,3 +252,26 @@ com referência ao bairro e tipo; exemplos anonimizados). **Sazonalidade, versã
 avaliações) e conteúdo/sentimento por aspecto 2023-2025 (cobertura do sentimento por ano: 2023 37%, 2024 77%, 2025 96%);
 avaliações atribuídas ao evento por janela de até 14 dias após o check-out (limite da plataforma para avaliar); o calendário de
 disponibilidade/preço **não** está disponível (só uma foto da coleta).
+
+## 16. Base comum e etapa 14 — validade de construto ampliada (2026-10-04; `run_20261004_153735.log`)
+
+- **Base comum:** a Etapa 5 passa a persistir `sentencas_aspecto` (uma linha por sentença, com tópico, aspecto, estrelas, data e idioma);
+  é a base das etapas 14, 15 e 16. Novos parâmetros no `config.py` (`MANUAL_SAMPLE_N`, `MANUAL_VALIDATION_XLSX`).
+- **Etapa 14 (`src/s14_validade_construto.py`)**, abas `Val_*` do Excel. Resultados (Spearman, nível do anúncio):
+  - **(a) Por volume:** a concordância é estável entre faixas de volume e entre anúncios com ≤ 30 avaliações (sentimento com todas)
+    e > 30 (ex.: limpeza 0,44 vs 0,46; comunicação 0,27 vs 0,29); a hipótese de que o corte de 30 avaliações enfraqueceria a
+    concordância **não se confirma**.
+  - **(b) Convergente/discriminante:** a subnota correspondente tem a maior correlação com o aspecto em 5 de 7 casos e a 2ª maior em
+    limpeza e precisão (as subnotas são muito correlacionadas entre si). Controlando a nota global (correlação parcial), resta
+    informação específica em limpeza (0,17), localização (0,22), check-in (0,23) e comunicação (0,15); em custo-benefício (0,08) e
+    precisão (0,04) quase nada.
+  - **(c) Atenuação:** a confiabilidade split-half do sentimento por aspecto é baixa (0,10 a 0,40 após Spearman-Brown), o que atenua as
+    correlações. As correlações corrigidas (0,57 a 0,96) são **ilustrativas e instáveis** (com confiabilidades tão baixas a correção
+    é muito sensível; ver nota da etapa) e corrigem só o lado do sentimento.
+  - **(d) Subnotas saturadas:** AUC (sentimento maior quando a subnota é 5 do que quando < 5) de 0,57 (precisão) a 0,69 (limpeza); Kendall
+    tau-b de 0,12 a 0,32.
+  - **(e) Recortes:** padrão semelhante em inglês, espanhol e português (ex.: limpeza 0,39/0,45/0,35; check-in 0,43/0,44/0,38), o que
+    sustenta o uso de um modelo multilíngue; e entre casa inteira e quarto privado.
+- **Validação manual:** gerada a planilha `data/validacao_manual_amostra.xlsx` (297 frases, estratificadas por aspecto × polaridade,
+  rótulo cego: o gabarito do modelo fica em outra aba). Pendente de rotulagem pelo pesquisador; a etapa 14 calcula acurácia, kappa e
+  matrizes de confusão quando a planilha estiver preenchida e **nunca sobrescreve** uma planilha existente.
