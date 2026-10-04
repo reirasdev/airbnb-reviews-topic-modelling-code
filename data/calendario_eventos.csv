@@ -1,0 +1,136 @@
+﻿evento,ano,estadia_ini,estadia_fim,descricao
+feriado_curto,2016,2016-01-19,2016-01-21,São Sebastião (municipal)
+carnaval,2016,2016-02-05,2016-02-10,sexta antes até quarta-feira de cinzas
+semana_santa,2016,2016-03-24,2016-03-27,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2016,2016-04-20,2016-04-22,Tiradentes
+feriado_curto,2016,2016-04-22,2016-04-24,São Jorge
+feriado_curto,2016,2016-04-30,2016-05-02,Dia do Trabalhador
+corpus_christi,2016,2016-05-26,2016-05-29,quinta-feira (feriado facultativo) até domingo
+olimpiadas,2016,2016-08-05,2016-08-21,Jogos Olímpicos
+feriado_curto,2016,2016-09-06,2016-09-08,Independência do Brasil
+feriado_curto,2016,2016-10-11,2016-10-13,Nossa Senhora Aparecida
+feriado_curto,2016,2016-11-01,2016-11-03,Finados
+feriado_curto,2016,2016-11-14,2016-11-16,Proclamação da República
+feriado_curto,2016,2016-11-19,2016-11-21,Consciência Negra
+reveillon,2016,2016-12-28,2017-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2017,2017-01-19,2017-01-21,São Sebastião (municipal)
+carnaval,2017,2017-02-24,2017-03-01,sexta antes até quarta-feira de cinzas
+semana_santa,2017,2017-04-13,2017-04-16,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2017,2017-04-20,2017-04-22,Tiradentes
+feriado_curto,2017,2017-04-22,2017-04-24,São Jorge
+feriado_curto,2017,2017-04-30,2017-05-02,Dia do Trabalhador
+corpus_christi,2017,2017-06-15,2017-06-18,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2017,2017-09-06,2017-09-08,Independência do Brasil
+rock_in_rio,2017,2017-09-15,2017-09-24,datas do festival
+feriado_curto,2017,2017-10-11,2017-10-13,Nossa Senhora Aparecida
+feriado_curto,2017,2017-11-01,2017-11-03,Finados
+feriado_curto,2017,2017-11-14,2017-11-16,Proclamação da República
+feriado_curto,2017,2017-11-19,2017-11-21,Consciência Negra
+reveillon,2017,2017-12-28,2018-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2018,2018-01-19,2018-01-21,São Sebastião (municipal)
+carnaval,2018,2018-02-09,2018-02-14,sexta antes até quarta-feira de cinzas
+semana_santa,2018,2018-03-29,2018-04-01,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2018,2018-04-20,2018-04-22,Tiradentes
+feriado_curto,2018,2018-04-22,2018-04-24,São Jorge
+feriado_curto,2018,2018-04-30,2018-05-02,Dia do Trabalhador
+corpus_christi,2018,2018-05-31,2018-06-03,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2018,2018-09-06,2018-09-08,Independência do Brasil
+feriado_curto,2018,2018-10-11,2018-10-13,Nossa Senhora Aparecida
+feriado_curto,2018,2018-11-01,2018-11-03,Finados
+feriado_curto,2018,2018-11-14,2018-11-16,Proclamação da República
+feriado_curto,2018,2018-11-19,2018-11-21,Consciência Negra
+reveillon,2018,2018-12-28,2019-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2019,2019-01-19,2019-01-21,São Sebastião (municipal)
+carnaval,2019,2019-03-01,2019-03-06,sexta antes até quarta-feira de cinzas
+semana_santa,2019,2019-04-18,2019-04-21,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2019,2019-04-20,2019-04-22,Tiradentes
+feriado_curto,2019,2019-04-22,2019-04-24,São Jorge
+feriado_curto,2019,2019-04-30,2019-05-02,Dia do Trabalhador
+corpus_christi,2019,2019-06-20,2019-06-23,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2019,2019-09-06,2019-09-08,Independência do Brasil
+rock_in_rio,2019,2019-09-27,2019-10-06,datas do festival
+feriado_curto,2019,2019-10-11,2019-10-13,Nossa Senhora Aparecida
+feriado_curto,2019,2019-11-01,2019-11-03,Finados
+feriado_curto,2019,2019-11-14,2019-11-16,Proclamação da República
+feriado_curto,2019,2019-11-19,2019-11-21,Consciência Negra
+reveillon,2019,2019-12-28,2020-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2020,2020-01-19,2020-01-21,São Sebastião (municipal)
+carnaval,2020,2020-02-21,2020-02-26,sexta antes até quarta-feira de cinzas
+semana_santa,2020,2020-04-09,2020-04-12,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2020,2020-04-20,2020-04-22,Tiradentes
+feriado_curto,2020,2020-04-22,2020-04-24,São Jorge
+feriado_curto,2020,2020-04-30,2020-05-02,Dia do Trabalhador
+corpus_christi,2020,2020-06-11,2020-06-14,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2020,2020-09-06,2020-09-08,Independência do Brasil
+feriado_curto,2020,2020-10-11,2020-10-13,Nossa Senhora Aparecida
+feriado_curto,2020,2020-11-01,2020-11-03,Finados
+feriado_curto,2020,2020-11-14,2020-11-16,Proclamação da República
+feriado_curto,2020,2020-11-19,2020-11-21,Consciência Negra
+reveillon,2020,2020-12-28,2021-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2021,2021-01-19,2021-01-21,São Sebastião (municipal)
+carnaval,2021,2021-02-12,2021-02-17,sexta antes até quarta-feira de cinzas
+semana_santa,2021,2021-04-01,2021-04-04,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2021,2021-04-20,2021-04-22,Tiradentes
+feriado_curto,2021,2021-04-22,2021-04-24,São Jorge
+feriado_curto,2021,2021-04-30,2021-05-02,Dia do Trabalhador
+corpus_christi,2021,2021-06-03,2021-06-06,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2021,2021-09-06,2021-09-08,Independência do Brasil
+feriado_curto,2021,2021-10-11,2021-10-13,Nossa Senhora Aparecida
+feriado_curto,2021,2021-11-01,2021-11-03,Finados
+feriado_curto,2021,2021-11-14,2021-11-16,Proclamação da República
+feriado_curto,2021,2021-11-19,2021-11-21,Consciência Negra
+reveillon,2021,2021-12-28,2022-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2022,2022-01-19,2022-01-21,São Sebastião (municipal)
+carnaval,2022,2022-02-25,2022-03-02,sexta antes até quarta-feira de cinzas
+semana_santa,2022,2022-04-14,2022-04-17,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2022,2022-04-20,2022-04-22,Tiradentes
+feriado_curto,2022,2022-04-22,2022-04-24,São Jorge
+feriado_curto,2022,2022-04-30,2022-05-02,Dia do Trabalhador
+corpus_christi,2022,2022-06-16,2022-06-19,quinta-feira (feriado facultativo) até domingo
+rock_in_rio,2022,2022-09-02,2022-09-11,datas do festival
+feriado_curto,2022,2022-09-06,2022-09-08,Independência do Brasil
+feriado_curto,2022,2022-10-11,2022-10-13,Nossa Senhora Aparecida
+feriado_curto,2022,2022-11-01,2022-11-03,Finados
+feriado_curto,2022,2022-11-14,2022-11-16,Proclamação da República
+feriado_curto,2022,2022-11-19,2022-11-21,Consciência Negra
+reveillon,2022,2022-12-28,2023-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2023,2023-01-19,2023-01-21,São Sebastião (municipal)
+carnaval,2023,2023-02-17,2023-02-22,sexta antes até quarta-feira de cinzas
+semana_santa,2023,2023-04-06,2023-04-09,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2023,2023-04-20,2023-04-22,Tiradentes
+feriado_curto,2023,2023-04-22,2023-04-24,São Jorge
+feriado_curto,2023,2023-04-30,2023-05-02,Dia do Trabalhador
+corpus_christi,2023,2023-06-08,2023-06-11,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2023,2023-09-06,2023-09-08,Independência do Brasil
+feriado_curto,2023,2023-10-11,2023-10-13,Nossa Senhora Aparecida
+feriado_curto,2023,2023-11-01,2023-11-03,Finados
+feriado_curto,2023,2023-11-14,2023-11-16,Proclamação da República
+feriado_curto,2023,2023-11-19,2023-11-21,Consciência Negra
+reveillon,2023,2023-12-28,2024-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2024,2024-01-19,2024-01-21,São Sebastião (municipal)
+carnaval,2024,2024-02-09,2024-02-14,sexta antes até quarta-feira de cinzas
+semana_santa,2024,2024-03-28,2024-03-31,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2024,2024-04-20,2024-04-22,Tiradentes
+feriado_curto,2024,2024-04-22,2024-04-24,São Jorge
+feriado_curto,2024,2024-04-30,2024-05-02,Dia do Trabalhador
+corpus_christi,2024,2024-05-30,2024-06-02,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2024,2024-09-06,2024-09-08,Independência do Brasil
+rock_in_rio,2024,2024-09-13,2024-09-22,datas do festival
+feriado_curto,2024,2024-10-11,2024-10-13,Nossa Senhora Aparecida
+feriado_curto,2024,2024-11-01,2024-11-03,Finados
+feriado_curto,2024,2024-11-14,2024-11-16,Proclamação da República
+feriado_curto,2024,2024-11-19,2024-11-21,Dia Nacional de Zumbi e da Consciência Negra
+reveillon,2024,2024-12-28,2025-01-02,28/dez a 02/jan (ano = o do mês de dezembro)
+feriado_curto,2025,2025-01-19,2025-01-21,São Sebastião (municipal)
+carnaval,2025,2025-02-28,2025-03-05,sexta antes até quarta-feira de cinzas
+semana_santa,2025,2025-04-17,2025-04-20,quinta-feira santa até o domingo de Páscoa
+feriado_curto,2025,2025-04-20,2025-04-22,Tiradentes
+feriado_curto,2025,2025-04-22,2025-04-24,São Jorge
+feriado_curto,2025,2025-04-30,2025-05-02,Dia do Trabalhador
+corpus_christi,2025,2025-06-19,2025-06-22,quinta-feira (feriado facultativo) até domingo
+feriado_curto,2025,2025-09-06,2025-09-08,Independência do Brasil
+feriado_curto,2025,2025-10-11,2025-10-13,Nossa Senhora Aparecida
+feriado_curto,2025,2025-11-01,2025-11-03,Finados
+feriado_curto,2025,2025-11-14,2025-11-16,Proclamação da República
+feriado_curto,2025,2025-11-19,2025-11-21,Dia Nacional de Zumbi e da Consciência Negra
+reveillon,2025,2025-12-28,2026-01-02,28/dez a 02/jan (ano = o do mês de dezembro)

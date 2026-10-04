@@ -329,3 +329,24 @@ corrigido no gerador (a planilha rotulada não foi alterada). Os rótulos "geral
   prática; (iv) a precisão da atribuição de aspecto varia de 0,41 a 0,74 (seção 17), com R² menor em tópicos diretos (0,24) por haver
   menos frases; (v) o "efeito" de um tópico compara anúncios com e sem ao menos uma menção negativa nas 30 avaliações usadas, controlando
   volume total e nº de sentenças; (vi) múltiplas comparações tratadas com Benjamini-Hochberg.
+
+## 19. Etapa 16 (OPCIONAL) — sazonalidade e feriados: plano congelado ANTES de ver resultados (2026-10-04)
+
+**Status:** etapa opcional; só entra na dissertação se os resultados forem interessantes (critério abaixo, definido antes da execução).
+
+**Calendário** (`src/calendario.py`, `data/calendario_eventos.csv`, 135 janelas, 2016-2025): carnaval (sexta a quarta de cinzas), semana santa
+(quinta a domingo), corpus christi (quinta a domingo), réveillon (28/dez a 02/jan), rock in rio (2017, 2019, 2022, 2024), olimpíadas 2016,
+e feriados curtos (nacionais e do RJ pela biblioteca `holidays`, mais São Sebastião 20/jan municipal). Natal e Confraternização ficam
+contidos na janela do réveillon. **[conferir]** São Sebastião (lei municipal) e as datas do Rock in Rio (site oficial).
+**Atribuição:** a plataforma só permite avaliar após o check-out e até 14 dias depois; a avaliação pertence ao evento se estiver datada em
+[início da estadia + 1, fim da estadia + defasagem]; defasagem 14 dias (eventos longos) e 5 dias (feriados de um dia, para não cobrir ~30%
+do calendário); sensibilidade: 7 e 3.
+
+**Análises (fixas):** (V) volume: contagem diária de TODAS as avaliações (2016-2019 e 2022-2025/03, excluindo 2020-2021), GLM de Poisson com efeitos
+fixos de ano-mês e dia da semana, dummies dos 7 grupos de evento, EP robusto; razão de taxas (IRR) com IC 95%, e por ano de evento para os longos.
+(C) conteúdo (2023-01 a 2025-03; sentimento cobre 37%/77%/96% das avaliações): GLM binomial diário por aspecto, com os mesmos efeitos fixos, para
+(i) participação do aspecto nas sentenças e (ii) proporção de sentenças negativas dentro do aspecto; e por tópico (30 tópicos de queixa da etapa 15
+com maior prevalência × impacto): proporção de sentenças negativas do tópico. Correção de Benjamini-Hochberg dentro de cada família.
+**Critério de "interessante" (congelado):** (a) algum evento com IRR de volume cujo IC 95% exclui 1 e |IRR − 1| >= 10% nas duas defasagens
+(14 e 7), ou (b) pelo menos 3 aspectos/tópicos com q < 0,05 e razão de chances de queixa >= 1,15 em um mesmo evento, nas duas defasagens.
+Caso contrário, a etapa vira apêndice ou é descartada. Todas as estimativas são associações; datas de avaliação não são datas de estadia.

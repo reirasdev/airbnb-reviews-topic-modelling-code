@@ -17,3 +17,4 @@ lingua-language-detector
 sentencepiece
 protobuf
 stopwordsiso
+holidays
