@@ -8,7 +8,9 @@ Fontes:
   * Feriados nacionais e do estado do RJ: biblioteca `holidays` (BR, subdivisão RJ), versão registrada no log.
   * Carnaval, Semana Santa e Corpus Christi: calculados a partir da data da Páscoa (dateutil.easter).
   * São Sebastião (20/jan): feriado municipal do Rio, incluído manualmente [conferir em lei municipal].
-  * Rock in Rio: datas das edições de 2017, 2019, 2022 e 2024 (Wikipédia; [conferir no site oficial]).
+  * Rock in Rio: edições de 2017 (15 a 24/set; shows em 15-17 e 21-24), 2019 (27 a 29/set e 3 a 6/out), 2022 (2 a 11/set; shows em 2-4 e 8-11)
+    e 2024 (13 a 22/set; shows em 13-15 e 19-22). Conferidas em 2026-10-04 nas páginas pt.wikipedia de cada edição (2017, 2019, Rock in Rio IX)
+    e em notícias do setor (2024). A janela usa início e fim contínuos, incluindo os poucos dias sem show entre os dois fins de semana.
   * Todo Mundo no Rio (megashow gratuito em Copacabana, uma noite): 04/mai/2024 (Madonna), 03/mai/2025 (Lady Gaga), 02/mai/2026
     (Shakira) [datas informadas pelo pesquisador]. Só a edição de 2024 cai dentro do período dos dados (até 20/mar/2025).
 Eventos NÃO incluídos de propósito: Natal e Confraternização (contidos na janela do Réveillon); Copa 2014 (antes do período com volume

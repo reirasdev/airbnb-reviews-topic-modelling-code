@@ -433,3 +433,11 @@ O rascunho de resultados foi reorganizado pelas perguntas de pesquisa de `00_enq
 3 **adequação** do sentimento às notas (concordância, robustez, validação manual); 4 **importância** de aspectos e tópicos; 5 **diagnóstico** por anúncio; 6 sazonalidade
 (opcional, remete a `03_sazonalidade_eventos.md`); 7 resultado **complementar** do rating sintético (poder explicativo, Análise B, sensibilidades); 8 limitações; 9 conclusões.
 A versão anterior (escrita como teste de hipótese) permanece no git (tag `estrategia-v1-tese-final`). Todos os números foram conferidos contra as tabelas geradas pelo pipeline.
+
+## 25. Conferência das datas do Rock in Rio (2026-10-04)
+
+A página geral `pt.wikipedia.org/wiki/Rock_in_Rio` só traz as datas de 1985 e 1991. Datas conferidas em fontes por edição: **2017** (pt.wikipedia, "Rock in Rio 2017"): 15, 16, 17, 21, 22, 23 e 24/set;
+**2019** (pt.wikipedia, "Rock in Rio 2019"): 27, 28 e 29/set e 3 a 6/out; **2022** (pt.wikipedia, "Rock in Rio IX"): 2, 3, 4, 8, 9, 10 e 11/set; **2024** (notícias do setor, páginas pt.wikipedia da edição retornaram 404):
+13, 14, 15, 19, 20, 21 e 22/set. Todas coincidem com o calendário usado (início e fim contínuos: 15-24/set/2017, 27/set-6/out/2019, 2-11/set/2022, 13-22/set/2024). A janela inclui os dias sem show entre os dois
+fins de semana (3 a 4 dias; em 2019, 30/set a 2/out), uma simplificação: hóspedes que ficam os dois fins de semana são atribuídos ao evento. Resultados da Etapa 16 não mudam. Permanece **[conferir]** apenas o feriado
+municipal de São Sebastião (20/jan).
