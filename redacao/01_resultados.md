@@ -4,9 +4,12 @@
 > sazonalidade e resultado complementar). A versão anterior, escrita como teste de hipótese, está no git (tag `estrategia-v1-tese-final`).
 > Números vindos das abas do Excel e de `historico/HISTORICO_DECISOES.md` (execuções `run_20261004_144225` a `run_20261004_203720`).
 > Trechos **[conferir]** dependem de informação externa ao pipeline. **Todas as medidas são de associação**, sem linguagem causal.
-> Seção 6 (sazonalidade) é opcional: o texto completo e as tabelas ficam em `03_sazonalidade_eventos.md`.
+> **Planilha de apoio:** `resultados_20261004_215620.xlsx`; cada seção abre indicando as abas correspondentes (*Abas da planilha*). Seção 6 (sazonalidade) é opcional: o texto completo e as tabelas ficam em `03_sazonalidade_eventos.md`.
 
 ## 1. Dados e amostra
+
+*Abas da planilha:* `Estat_Corpus`, `Config`, `Resumo_Log`.
+
 
 O estudo usa 42.013 anúncios do Airbnb no Rio de Janeiro e 995.072 avaliações textuais. Dos anúncios, 33.140 têm nota oficial e subnotas;
 após exigir nota maior que zero e ao menos duas avaliações, restaram **28.890 anúncios elegíveis**. Para conter o custo computacional, o
@@ -16,6 +19,9 @@ avaliações usadas: português 66,2%, inglês 15,5%, espanhol 14,2%, francês 2
 A nota oficial é fortemente comprimida: 22,8% dos anúncios analisados têm nota exatamente 5,0 (média 4,82; desvio-padrão 0,22).
 
 ## 2. Medição: sentimento, tópicos e aspectos
+
+*Abas da planilha:* `Topicos_BERTopic`, `Topicos_LDA`, `Mapa_Topico_Aspecto` (tópico → aspecto), `Perfil_ABSA` (sentimento por anúncio e aspecto).
+
 
 **Sentimento.** Um único modelo multilíngue (`cardiffnlp/twitter-xlm-roberta-base-sentiment`, três classes) foi aplicado a cada sentença e convertido em
 estrelas esperadas, 1·P(neg) + 3·P(neu) + 5·P(pos), na mesma escala 1–5 das notas. A média é 4,19 estrelas (mediana 4,64); 75,1% das sentenças têm 4
@@ -36,7 +42,13 @@ custo-benefício 1,0%; fora do perfil 2,5%. Para cada anúncio e aspecto, o perf
 
 ## 3. Pergunta 1 — O sentimento por aspecto é adequado às notas e subnotas oficiais?
 
+*Abas da planilha:* `Validacao_Construto`, `Val_Volume_Convergente`, `Val_Matriz`, `Val_Confiab_AUC`, `Val_Recortes`, `Val_Manual`.
+
+
 ### 3.1 Concordância por aspecto
+
+*Abas da planilha:* `Validacao_Construto`.
+
 
 Correlação, no nível do anúncio, entre o sentimento do aspecto e a subnota oficial correspondente (sem limiar de aprovação; interessa a força e o sinal):
 
@@ -55,6 +67,9 @@ Todos os coeficientes são positivos e significativos (p < 0,001). A concordânc
 
 ### 3.2 Robustez da concordância
 
+*Abas da planilha:* `Val_Volume_Convergente` (por volume e convergente/discriminante), `Val_Matriz`, `Val_Confiab_AUC` (confiabilidade, AUC e Kendall), `Val_Recortes` (idioma e tipo).
+
+
 - **Por volume (Spearman, ≤ 30 avaliações, em que o sentimento usa todas, vs > 30):** limpeza 0,44 vs 0,46; check-in 0,49 vs 0,37; comunicação 0,27 vs 0,29; localização 0,23 vs 0,29; custo-benefício 0,26 vs 0,23;
   precisão 0,17 vs 0,16; satisfação geral 0,33 vs 0,35. O corte de 30 avaliações não enfraquece a concordância de modo sistemático.
 - **Convergente/discriminante.** A subnota correspondente é a mais correlacionada com o aspecto em 5 de 7 casos e a segunda em limpeza e precisão (as subnotas são muito correlacionadas entre si, efeito halo). Controlando a nota
@@ -67,6 +82,9 @@ Todos os coeficientes são positivos e significativos (p < 0,001). A concordânc
   baixas a correção é muito sensível) e corrigem apenas o lado do sentimento.
 
 ### 3.3 Validação manual (297 frases rotuladas pelo pesquisador, rótulo cego)
+
+*Abas da planilha:* `Val_Manual` (métricas, matrizes de confusão e desempenho por classe).
+
 
 Amostra estratificada por aspecto previsto (~27 por aspecto) e por polaridade prevista (um terço de cada), portanto **rica em frases difíceis**: 81,5% das frases do corpus são previstas como positivas, e na amostra só
 um terço. Por isso as acurácias da amostra (59% e 54,5%) subestimam o desempenho no corpus. Ponderando cada frase pelo tamanho do seu estrato (aspecto × polaridade) na população, a **acurácia de sentimento estimada é de 87%
@@ -82,15 +100,24 @@ previsto é uma estimativa direta; o recall e as acurácias da amostra não repr
 
 ### 3.4 Síntese da pergunta 1
 
+*Abas da planilha:* síntese dos resultados das abas acima.
+
+
 O sentimento por aspecto é **moderadamente adequado** às notas e subnotas: positivo e significativo em todos os aspectos, estável entre volumes, idiomas e tipos, e com informação específica além do halo da nota global em limpeza,
 localização, check-in e comunicação. A concordância é limitada pelo ruído da medição (na validação manual, sentimento 59% e aspecto 55% de acerto na amostra estratificada, e ~87% e ~67% ponderados pela população; confiabilidade split-half baixa) e pela compressão das subnotas. Os aspectos mais
 confiáveis são custo-benefício, localização, precisão, limpeza e check-in (em precisão de atribuição); os demais devem ser lidos com cautela.
 
 ## 4. Pergunta 2 — Quais aspectos e tópicos mais se associam à nota?
 
+*Abas da planilha:* `Imp_Aspectos`, `Imp_Modelos`, `Imp_Segmentos_Sens`, `Imp_Topicos_Queixas`, `Imp_Topicos_Elogios`.
+
+
 Análise no nível do anúncio (28.889 anúncios com texto, **incluindo os de pouco texto**: o sentimento não observado de um aspecto é imputado pela média). O alvo é o percentil da nota (a nota é comprimida no teto).
 
 ### 4.1 Importância dos aspectos para a nota global
+
+*Abas da planilha:* `Imp_Aspectos` (decomposição LMG e betas), `Imp_Modelos` (GBM, permutação e regressão logística), `Imp_Segmentos_Sens` (segmentos e sensibilidades).
+
 
 Decomposição LMG/Shapley do R² (R² total = 0,32): **comodidades 42,5%**, **limpeza 19,6%**, **satisfação geral 17,5%**, **comunicação 11,3%**, check-in 3,4%, ruído/conforto 3,1%, precisão 1,7%, localização 0,6%, custo-benefício
 0,3%, segurança 0,1%. O padrão é estável nas sensibilidades (≥ 3 aspectos, ≤ 30 avaliações, só tópicos diretos, sem satisfação geral como preditor) e entre segmentos (casa inteira/quarto privado, idioma predominante, os 6 maiores
@@ -100,6 +127,9 @@ Na regressão logística para "nota ≥ 4,9" (51% dos anúncios; AUC fora da amo
 e 1,25 em check-in.
 
 ### 4.2 Queixas e elogios por tópico
+
+*Abas da planilha:* `Imp_Topicos_Queixas`, `Imp_Topicos_Elogios`.
+
 
 Apenas tópicos diretos (precisão de aspecto ~65%). O "efeito" compara o percentil da nota entre anúncios com e sem ao menos uma menção negativa (ou positiva) no tópico, controlando volume de avaliações e de frases; q de
 Benjamini-Hochberg (57 de 68 queixas e 145 de 181 elogios com q < 0,05). Queixas que mais pesam (efeito × prevalência):
@@ -125,10 +155,16 @@ em custo-benefício, −17 em check-in, −15 em comodidades e −14 em limpeza.
 
 ### 4.3 Cuidados de interpretação
 
+*Abas da planilha:* interpretação dos resultados das abas `Imp_*`.
+
+
 (i) É associação, não causa. (ii) A importância relativa mistura efeito e confiabilidade da medida: aspectos pouco citados (segurança, custo-benefício) são medidos com mais erro e imputados na maioria dos anúncios. (iii)
 `comodidades` é um aspecto largo (33 tópicos); a leitura prática está na análise por tópico. (iv) A precisão da atribuição de aspecto varia de 0,41 a 0,74. (v) O R² cai para 0,24 quando só se usam tópicos diretos, por haver menos frases.
 
 ## 5. Pergunta 3 — Diagnóstico para anfitriões e empresas gestoras
+
+*Abas da planilha:* `Benchmark_Bairro_Tipo`; exemplos de relatório em `redacao/exemplos_diagnostico/`.
+
 
 A ferramenta `diagnostico.py` gera, a pedido, o relatório de **um** anúncio: sentimento por aspecto e posição (percentil) entre anúncios do mesmo bairro e tipo (ou do tipo na cidade, se o bairro tiver menos de 30), evidência por
 aspecto (poucas frases = baixa), queixas e elogios recorrentes com a associação média na cidade (seção 4.2), evolução das 10 avaliações mais recentes e nota metodológica com as precisões da validação manual. Funciona para
@@ -138,12 +174,18 @@ a maior parte dos aspectos sem evidência suficiente. O relatório prioriza onde
 
 ## 6. Pergunta 4 (opcional) — Sazonalidade e eventos
 
+*Abas da planilha:* `Sazon_Volume`, `Sazon_Conteudo`, `Sazon_Criterio`.
+
+
 O volume de avaliações em janelas de eventos foi de 1,24 a 1,73 vez o de dias comuns do mesmo mês (IC 95% excluindo 1; defasagem de 14 dias): Rock in Rio 1,73; Corpus Christi 1,34; Réveillon 1,34; Todo Mundo no Rio (2024)
 1,31; Carnaval 1,26; Semana Santa 1,25; feriados curtos 1,24. É volume de avaliações escritas, **não ocupação**, e os dados só incluem anúncios ainda ativos na coleta. Nos eventos de música e em Corpus Christi, a proporção de frases
 negativas é menor (razão de chances de 0,84 a 0,91), compatível com um público diferente; no Carnaval e no Réveillon não há deslocamento geral e aumentam as queixas de fidelidade ao anúncio, custo-benefício e localização.
 Tabelas completas, defasagem de 7 dias, intervalos e limitações em `03_sazonalidade_eventos.md`.
 
 ## 7. Pergunta 5 (complementar) — O rating sintético acrescenta algo à nota oficial?
+
+*Abas da planilha:* `Rating_Sintetico`, `Descritivo_Teto`, `Formula_Ocupacao`, `Analise_A`, `Analise_B`, `Sensibilidade`; referência da análise anterior em `REF_Sem_LTM` e `REF_Investigacao_Coef`.
+
 
 **Rating sintético (R_syn).** Média igual do sentimento dos aspectos disponíveis (mínimo de 3 aspectos específicos; `satisfacao_geral` entra na média mas não conta para o mínimo), na escala 1–5, para **22.564 anúncios**. A especificação
 principal não aplica shrinkage; a versão com média bayesiana (m = 23) é reportada como sensibilidade. A calibração por quantis (`R_syn_cal`) serve só para exibição em estrelas.
@@ -204,6 +246,9 @@ com 120, sem deriva temporal relevante (4,345 nas 10 mais recentes vs 4,368 nas 
 
 ## 8. Limitações
 
+*Abas da planilha:* `Selecao`, `Estat_Corpus`, `REF_Sem_LTM`, `REF_Investigacao_Coef`.
+
+
 - **Seleção.** Dos 28.890 elegíveis, 6.326 ficaram sem R_syn (menos de 3 aspectos com evidência textual): têm menos avaliações (mediana 3 vs 23), menor ocupação estimada (mediana 12 vs 66) e mais quartos privados (25% vs 14%). Dos 9.373 anúncios de nota 5,0,
   apenas 5.142 (55%) têm R_syn. A análise de importância (seção 4) não exige R_syn e inclui os anúncios com pouco texto.
 - **Sentimento e nota oficial cobrem períodos diferentes** (30 avaliações mais recentes vs todas), com efeito pequeno (seção 7).
@@ -214,6 +259,9 @@ com 120, sem deriva temporal relevante (4,345 nas 10 mais recentes vs 4,368 nas 
 - **Sazonalidade (opcional):** data da avaliação não é data da estadia; só uma edição do *Todo Mundo no Rio* dentro dos dados; anúncios ainda ativos na coleta.
 
 ## 9. Conclusões
+
+*Abas da planilha:* síntese das seções anteriores.
+
 
 1. O sentimento por aspecto extraído do texto é **moderadamente adequado** às notas e subnotas oficiais (ρ de 0,17 a 0,45), de modo consistente entre volumes, idiomas e tipos, e com informação específica além da nota global em vários aspectos.
 2. A nota global se associa sobretudo ao que o hóspede escreve sobre **comodidades e instalações** (42% do R² explicado), **limpeza** (20%), satisfação geral e **comunicação**; queixas de banheiro, ar-condicionado, sujeira, cozinha, resposta do anfitrião,
