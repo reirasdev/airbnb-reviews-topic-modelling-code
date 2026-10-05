@@ -426,3 +426,10 @@ explicação de entusiasmo com o evento. Nas demais janelas (Carnaval, Réveillo
 - **Exemplos anonimizados** em `redacao/exemplos_diagnostico/`: A (nota alta), B (nota baixa; comodidades e satisfação geral no 4º percentil entre os pares) e C (poucas
   avaliações).
 - **Correções durante o desenvolvimento:** o campo de avaliações usadas mostrava frases em vez de avaliações; elogios com associação negativa deixaram de ser listados.
+
+## 24. Consolidação de `redacao/01_resultados.md` na estrutura v2 (2026-10-04)
+
+O rascunho de resultados foi reorganizado pelas perguntas de pesquisa de `00_enquadramento.md`: 1 dados e amostra; 2 medição (sentimento, tópicos, aspectos);
+3 **adequação** do sentimento às notas (concordância, robustez, validação manual); 4 **importância** de aspectos e tópicos; 5 **diagnóstico** por anúncio; 6 sazonalidade
+(opcional, remete a `03_sazonalidade_eventos.md`); 7 resultado **complementar** do rating sintético (poder explicativo, Análise B, sensibilidades); 8 limitações; 9 conclusões.
+A versão anterior (escrita como teste de hipótese) permanece no git (tag `estrategia-v1-tese-final`). Todos os números foram conferidos contra as tabelas geradas pelo pipeline.
