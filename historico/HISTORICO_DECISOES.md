@@ -455,3 +455,9 @@ avaliada por validação cruzada 5 × 20 com pesos populacionais: acurácia pond
 ajudando o estrato grande e prejudicando as classes pequenas). Estrelas médias das sentenças 4,23 → 4,66. Efeito nas correlações aspecto × subnota: diferença média de +0,006 (satisfação geral +0,030; comunicação +0,017;
 check-in +0,008; limpeza +0,002; custo-benefício −0,003; precisão −0,006; localização −0,009). **Conclusão: a recalibração corrige o nível das estrelas, mas quase não melhora a informação de ordenação em que as
 análises se apoiam; não vale refazer o pipeline com ela.** O espaço de melhora está mais na atribuição de aspecto (67% ponderado) do que no sentimento (87%).
+
+## 27. Pacote para revisão do orientador (2026-10-04)
+
+`redacao/01_resultados.pdf` (8 páginas, gerado de `01_resultados.md` por `redacao/gerar_pdf.py`: Markdown → HTML → PDF pelo Edge em modo oculto) e a planilha `outputs/resultados_20261004_215620.xlsx` (mesmas
+tabelas do cache; execução final, 32 abas). As abas da análise anterior com o controle de avaliações recentes e a investigação já resolvida foram movidas para o fim e renomeadas `REF_Sem_LTM` e
+`REF_Investigacao_Coef` (marcadas como referência); `src/excel_writer.py` passa a gerá-las assim.
