@@ -461,3 +461,12 @@ análises se apoiam; não vale refazer o pipeline com ela.** O espaço de melhor
 `redacao/01_resultados.pdf` (8 páginas, gerado de `01_resultados.md` por `redacao/gerar_pdf.py`: Markdown → HTML → PDF pelo Edge em modo oculto) e a planilha `outputs/resultados_20261004_215620.xlsx` (mesmas
 tabelas do cache; execução final, 32 abas). As abas da análise anterior com o controle de avaliações recentes e a investigação já resolvida foram movidas para o fim e renomeadas `REF_Sem_LTM` e
 `REF_Investigacao_Coef` (marcadas como referência); `src/excel_writer.py` passa a gerá-las assim.
+
+## 28. Esclarecimento das acurácias da validação manual e correção da estimativa de aspecto na população (2026-10-04)
+
+**Sentimento.** A diferença entre 59% (amostra) e 87% (população) vem da composição: a amostra tem um terço de frases de cada polaridade prevista, e o corpus tem 81,5% positivas, 10,4% neutras e
+8,1% negativas. Acerto por polaridade prevista na amostra: positiva 93%, negativa 56%, neutra 27%. Ponderando só pela polaridade: ~83%; com estratos aspecto × polaridade: 87% (IC 82-91%).
+**Aspecto.** O acerto na amostra é parecido nas três polaridades (negativa 54,5%, neutra 52,6%, positiva 56,6%), então a polaridade não explica a diferença entre os 54,5% da amostra e os 67% da
+seção 26. Ponderando só por aspecto: ~52%; com aspecto × polaridade: ~67% (IC 56-76%), instável (tamanho efetivo ~72 frases; pesos de 0,01 a 7,13). **Correção:** a seção 26 apresentava 67% como a acurácia
+de aspecto na população; o correto é "entre ~52% e ~67% conforme o esquema de pesos". As precisões por aspecto previsto (0,41 a 0,74) e os 54,5% da amostra continuam sendo as estimativas robustas.
+`redacao/01_resultados.md` (e o PDF), o texto do relatório de diagnóstico e os exemplos anonimizados foram atualizados.
