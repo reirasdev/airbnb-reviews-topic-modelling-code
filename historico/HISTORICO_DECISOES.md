@@ -441,3 +441,17 @@ A página geral `pt.wikipedia.org/wiki/Rock_in_Rio` só traz as datas de 1985 e 
 13, 14, 15, 19, 20, 21 e 22/set. Todas coincidem com o calendário usado (início e fim contínuos: 15-24/set/2017, 27/set-6/out/2019, 2-11/set/2022, 13-22/set/2024). A janela inclui os dias sem show entre os dois
 fins de semana (3 a 4 dias; em 2019, 30/set a 2/out), uma simplificação: hóspedes que ficam os dois fins de semana são atribuídos ao evento. Resultados da Etapa 16 não mudam. Permanece **[conferir]** apenas o feriado
 municipal de São Sebastião (20/jan).
+
+## 26. CORREÇÃO das acurácias da validação manual e estimativa do ganho de uma recalibração (2026-10-04; `run_20261004_214250.log`, aba `Calib_Sentimento`)
+
+**Correção.** As acurácias de 59% (sentimento) e 54,5% (aspecto) das seções 17 e 24 são as da **amostra de validação**, que foi estratificada por aspecto previsto e por polaridade
+prevista (um terço cada), logo rica em frases difíceis; no corpus 81,5% das frases são previstas como positivas, onde o modelo acerta muito mais (95% de precisão em "positivo"). Ponderando cada frase pelo
+tamanho do seu estrato (aspecto × polaridade) na população: **sentimento 87% (IC 95% bootstrap 82-91%), kappa 0,55 (0,44-0,64); aspecto 67% (56-76%)**. O tamanho efetivo da amostra ponderada é ~72 frases
+(pesos de 0,01 a 7,13), então os intervalos são largos e a estimativa depende do esquema de pesos. A estimativa anterior de "~52%" para o aspecto ponderava só pela participação do aspecto, ignorando a polaridade, e fica
+substituída. `redacao/01_resultados.md`, o texto do relatório de diagnóstico e os exemplos anonimizados foram atualizados com os dois números (amostra e população).
+
+**Recalibração exploratória (etapa 18; não altera nenhuma análise principal).** Regressão logística multinomial sobre log(P(neg)/P(neu)), log(P(pos)/P(neu)) e indicador de português, ajustada com os 297 rótulos e
+avaliada por validação cruzada 5 × 20 com pesos populacionais: acurácia ponderada 0,866 → 0,908, mas kappa 0,545 → 0,538 e F1 macro 0,67 → 0,58 (a recalibração passa a prever "positivo" com mais frequência,
+ajudando o estrato grande e prejudicando as classes pequenas). Estrelas médias das sentenças 4,23 → 4,66. Efeito nas correlações aspecto × subnota: diferença média de +0,006 (satisfação geral +0,030; comunicação +0,017;
+check-in +0,008; limpeza +0,002; custo-benefício −0,003; precisão −0,006; localização −0,009). **Conclusão: a recalibração corrige o nível das estrelas, mas quase não melhora a informação de ordenação em que as
+análises se apoiam; não vale refazer o pipeline com ela.** O espaço de melhora está mais na atribuição de aspecto (67% ponderado) do que no sentimento (87%).

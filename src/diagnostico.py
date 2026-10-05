@@ -169,9 +169,9 @@ quanto mais à direita, melhor o sentimento relativo. Aspectos com poucas frases
 {bloco('Queixas recorrentes (por prioridade = menções × associação)', d['queixas'], True)}
 {bloco('Elogios recorrentes', d['elogios'], False)}
 <h2>Evolução recente</h2>{ev_txt}
-<div class="nota"><b>Como ler.</b> Medidas de associação construídas a partir do texto das avaliações (até as 30 mais recentes do anúncio), por modelos de linguagem multilíngues. A
-atribuição de cada frase a um aspecto acerta cerca de 55% das vezes (de 41% a 74% conforme o aspecto) e o sentimento, cerca de 59% (validação manual com 297 frases): use este
-relatório para priorizar investigações, não como medida exata. A "associação com o percentil da nota" é a diferença média, na cidade, entre anúncios que têm e que não têm esse tipo
+<div class="nota"><b>Como ler.</b> Medidas de associação construídas a partir do texto das avaliações (até as 30 mais recentes do anúncio), por modelos de linguagem multilíngues. Na
+validação manual (297 frases, amostra estratificada com muitas frases difíceis), a atribuição de aspecto acertou 55% (41% a 74% conforme o aspecto) e o sentimento 59%; ponderando pela população do corpus, a
+estimativa é de ~67% e ~87%, com intervalos largos. Use este relatório para priorizar investigações, não como medida exata. A "associação com o percentil da nota" é a diferença média, na cidade, entre anúncios que têm e que não têm esse tipo
 de menção, controlada por volume de avaliações; não é efeito causal de corrigir o problema. Anúncios com poucas avaliações têm estimativas instáveis.</div>
 </body></html>"""
 

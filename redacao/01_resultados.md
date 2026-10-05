@@ -68,20 +68,22 @@ Todos os coeficientes são positivos e significativos (p < 0,001). A concordânc
 
 ### 3.3 Validação manual (297 frases rotuladas pelo pesquisador, rótulo cego)
 
-Amostra estratificada por aspecto previsto (~27 por aspecto) e polaridade; a precisão por aspecto é uma estimativa direta, mas a acurácia global e o recall não representam a população (ponderando pela participação
-de cada aspecto no corpus, a acurácia de aspecto estimada é de ~52%). Intervalos largos (± ~0,18 por aspecto).
+Amostra estratificada por aspecto previsto (~27 por aspecto) e por polaridade prevista (um terço de cada), portanto **rica em frases difíceis**: 81,5% das frases do corpus são previstas como positivas, e na amostra só
+um terço. Por isso as acurácias da amostra (59% e 54,5%) subestimam o desempenho no corpus. Ponderando cada frase pelo tamanho do seu estrato (aspecto × polaridade) na população, a **acurácia de sentimento estimada é de 87%
+(IC 95% bootstrap 82% a 91%) e a de aspecto de 67% (56% a 76%)**; o tamanho efetivo da amostra ponderada é de apenas ~72 frases, então os intervalos são largos e o procedimento depende do esquema de pesos. A precisão por aspecto
+previsto é uma estimativa direta; o recall e as acurácias da amostra não representam a população.
 
-- **Sentimento (3 classes):** acurácia 58,9%; F1 macro 0,57; kappa 0,39 (0,48 ponderado linear); Spearman com as estrelas do modelo 0,64. Por idioma: francês 0,92 (n = 12), inglês 0,65 (63), espanhol 0,62 (45), **português
+- **Sentimento (3 classes):** na amostra, acurácia 58,9%; F1 macro 0,57; kappa 0,39 (0,48 ponderado linear); **ponderado pela população, acurácia 87% e kappa 0,55 (IC 0,44 a 0,64)**; Spearman com as estrelas do modelo 0,64. Por idioma: francês 0,92 (n = 12), inglês 0,65 (63), espanhol 0,62 (45), **português
   0,52 (166)**. O erro é **conservador**: das 174 frases positivas, o modelo classifica 60 como neutras e 21 como negativas, e nunca chamou de positiva uma frase negativa (0 de 77); quando diz "positivo" acerta 95%, quando diz
   "negativo", 62%. As estrelas comprimem o nível, mas preservam a ordenação.
-- **Aspecto:** acurácia 54,5%; kappa 0,50. Precisão por aspecto previsto: custo-benefício 0,74; localização 0,74; precisão 0,70; limpeza 0,67; check-in 0,56; segurança 0,48; comodidades 0,44; comunicação 0,44; ruído/conforto
+- **Aspecto:** na amostra, acurácia 54,5%; kappa 0,50; ponderada pela população, 67%. Precisão por aspecto previsto: custo-benefício 0,74; localização 0,74; precisão 0,70; limpeza 0,67; check-in 0,56; segurança 0,48; comodidades 0,44; comunicação 0,44; ruído/conforto
   0,44; satisfação geral 0,41. Frases cujo tópico original era ruído e foi reatribuído têm acerto de aspecto de 38%, contra 65% nos tópicos diretos; a similaridade ao centroide não separa acertos de erros, e mandar essas frases
   para `geral` seria pior (19%).
 
 ### 3.4 Síntese da pergunta 1
 
 O sentimento por aspecto é **moderadamente adequado** às notas e subnotas: positivo e significativo em todos os aspectos, estável entre volumes, idiomas e tipos, e com informação específica além do halo da nota global em limpeza,
-localização, check-in e comunicação. A concordância é limitada pelo ruído da medição (sentimento 59% e aspecto 55% de acerto na validação manual; confiabilidade split-half baixa) e pela compressão das subnotas. Os aspectos mais
+localização, check-in e comunicação. A concordância é limitada pelo ruído da medição (na validação manual, sentimento 59% e aspecto 55% de acerto na amostra estratificada, e ~87% e ~67% ponderados pela população; confiabilidade split-half baixa) e pela compressão das subnotas. Os aspectos mais
 confiáveis são custo-benefício, localização, precisão, limpeza e check-in (em precisão de atribuição); os demais devem ser lidos com cautela.
 
 ## 4. Pergunta 2 — Quais aspectos e tópicos mais se associam à nota?
@@ -205,7 +207,7 @@ com 120, sem deriva temporal relevante (4,345 nas 10 mais recentes vs 4,368 nas 
 - **Seleção.** Dos 28.890 elegíveis, 6.326 ficaram sem R_syn (menos de 3 aspectos com evidência textual): têm menos avaliações (mediana 3 vs 23), menor ocupação estimada (mediana 12 vs 66) e mais quartos privados (25% vs 14%). Dos 9.373 anúncios de nota 5,0,
   apenas 5.142 (55%) têm R_syn. A análise de importância (seção 4) não exige R_syn e inclui os anúncios com pouco texto.
 - **Sentimento e nota oficial cobrem períodos diferentes** (30 avaliações mais recentes vs todas), com efeito pequeno (seção 7).
-- **Qualidade da medição:** modelo de sentimento treinado em tweets, com acerto de 59% (52% em português) e aspecto com 55% na validação manual; o mapeamento tópico → aspecto e a validação manual foram feitos por um pesquisador;
+- **Qualidade da medição:** modelo de sentimento treinado em tweets, com acerto de 59% na amostra de validação (87% ponderado pela população; 52% em português na amostra) e aspecto com 55% (67% ponderado); o mapeamento tópico → aspecto e a validação manual foram feitos por um pesquisador;
   comparação de C_v entre BERTopic e LDA apenas indicativa.
 - **Desfechos construídos a partir do volume de avaliações** (seção 7). Ocupação e receita não são observadas.
 - **Associação, não causa.** Comparações múltiplas (três desfechos × quatro escopos × seis variantes de R_syn; 249 testes de tópicos) tratadas com Benjamini-Hochberg apenas nos tópicos e na sazonalidade; os coeficientes da seção 7 não são corrigidos.

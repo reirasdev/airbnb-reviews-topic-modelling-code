@@ -68,6 +68,7 @@ def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
         "Sazon_Conteudo": pd.concat([get("sazon_aspecto"), pd.DataFrame({"": [""]}), get("sazon_topico")], ignore_index=True),
         "Sazon_Criterio": pd.concat([get("sazon_criterio"), pd.DataFrame({"": [""]}), get("sazon_calendario")], ignore_index=True),
         "Benchmark_Bairro_Tipo": pd.concat([get("benchmark_cidade_tipo"), pd.DataFrame({"": [""]}), get("benchmark_bairro_tipo")], ignore_index=True),
+        "Calib_Sentimento": pd.concat([get("calib_cv"), pd.DataFrame({"": [""]}), get("calib_correlacoes")], ignore_index=True),
         "Formula_Ocupacao": pd.concat([get("formula_ocupacao"), pd.DataFrame({"": [""]}), get("coef_forma_flexivel")], ignore_index=True),
         "Sem_LTM": pd.concat([get("sem_ltm_modelos"), pd.DataFrame({"": [""]}), get("sem_ltm_diferencas"), pd.DataFrame({"": [""]}), get("sem_ltm_faixas")], ignore_index=True),
         "Investigacao_Coef": pd.concat([get("investigacao_coef"), pd.DataFrame({"": [""]}), get("investigacao_coef_correlacoes")], ignore_index=True),
