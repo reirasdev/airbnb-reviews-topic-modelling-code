@@ -470,3 +470,18 @@ tabelas do cache; execução final, 32 abas). As abas da análise anterior com o
 seção 26. Ponderando só por aspecto: ~52%; com aspecto × polaridade: ~67% (IC 56-76%), instável (tamanho efetivo ~72 frases; pesos de 0,01 a 7,13). **Correção:** a seção 26 apresentava 67% como a acurácia
 de aspecto na população; o correto é "entre ~52% e ~67% conforme o esquema de pesos". As precisões por aspecto previsto (0,41 a 0,74) e os 54,5% da amostra continuam sendo as estimativas robustas.
 `redacao/01_resultados.md` (e o PDF), o texto do relatório de diagnóstico e os exemplos anonimizados foram atualizados.
+
+## 29. Estratégia v3 — fase 0: reconhecimento e linha de base (2026-10-09; branch `estrategia-v3-sentimento-b-unificado`)
+
+**Pedido do orientador** (execução avaliada como boa): (1) incorporar um segundo modelo de sentimento treinado em avaliações (B) e refazer as análises; (2) corrigir o enquadramento (os
+desfechos "econômicos" são volume de avaliações; a contribuição não é o rating sintético); (3) fundir as duas estratégias em um único texto de resultados com linha de raciocínio contínua.
+Branch criado a partir de `main` (commit `9cc84c0`). Um commit/push por fase.
+
+**Linha de base.** As etapas 5 a 18 foram reexecutadas a partir dos caches (sem tocar em segmentação, sentimento A, tópicos ou mapa) e a planilha resultante
+(`resultados_20261009_201540.xlsx`) foi comparada aba a aba com `resultados_20261004_215620.xlsx` (`src/comparar_planilhas.py`; tolerância relativa 1e-6): **30 de 32 abas idênticas
+(diferença máxima 0)**. As 2 restantes diferem só na representação: `Resumo_Log` (um dicionário de métricas impresso como `np.float64(...)` por mudança de representação) e `REF_Investigacao_Coef`
+(um erro-padrão `inf` da exclusão de `segurança`, já documentado como singularidade numérica). A linha de base está confirmada.
+
+**Equivalências de nomes.** Os scripts por etapa são `src/s1_ingestao.py` ... `src/s18_calibracao_sentimento.py`; configuração em `config.py`; caches em `outputs/cache/375f221f/` (tabelas em `tables/`); rótulos manuais em
+`data/validacao_manual_amostra.xlsx`. **GPU:** há uma GeForce MX110 (2 GB, driver 457), mas o PyTorch instalado é a build de CPU e uma GPU desse porte não aceleraria a inferência: a inferência do modelo B roda em CPU.
+Limpeza: um arquivo vazio `python` (artefato de um comando antigo) foi removido da raiz do repositório.
