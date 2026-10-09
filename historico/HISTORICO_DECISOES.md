@@ -485,3 +485,21 @@ Branch criado a partir de `main` (commit `9cc84c0`). Um commit/push por fase.
 **Equivalências de nomes.** Os scripts por etapa são `src/s1_ingestao.py` ... `src/s18_calibracao_sentimento.py`; configuração em `config.py`; caches em `outputs/cache/375f221f/` (tabelas em `tables/`); rótulos manuais em
 `data/validacao_manual_amostra.xlsx`. **GPU:** há uma GeForce MX110 (2 GB, driver 457), mas o PyTorch instalado é a build de CPU e uma GPU desse porte não aceleraria a inferência: a inferência do modelo B roda em CPU.
 Limpeza: um arquivo vazio `python` (artefato de um comando antigo) foi removido da raiz do repositório.
+
+## 30. Fase 1 (v3): segundo modelo de sentimento — REGRA PRÉ-REGISTRADA (2026-10-09, antes de rodar o modelo B)
+
+**Modelos.** A (atual): `cardiffnlp/twitter-xlm-roberta-base-sentiment` (tweets; 3 classes; estrelas esperadas 1·P(neg) + 3·P(neu) + 5·P(pos)). B (novo): `nlptown/bert-base-multilingual-uncased-sentiment`
+(avaliações de produtos e serviços; 5 classes de 1 a 5 estrelas). Estrelas esperadas de B = Σ k·P(k), k = 1..5.
+
+**Definições (provisórias, adotadas antes de ver resultados de B).**
+- Polaridade discreta de **A**: classe de maior probabilidade entre (negativo, neutro, positivo), exatamente como no pipeline atual (`argmax` das três probabilidades); "menção negativa" = polaridade negativa.
+- Polaridade discreta de **B**: negativo se a classe mais provável (entre 1 e 5 estrelas) é 1 ou 2; neutro se 3; positivo se 4 ou 5. As colunas `p_neg`, `p_neu`, `p_pos` de B guardam P(1)+P(2), P(3) e P(4)+P(5)
+  (apenas descritivas); toda análise de polaridade usa a coluna `cls`, definida pela classe mais provável de 5 classes (e não pelo argmax das três somas).
+- Para as análises por frase, "menção negativa" e "menção positiva" passam a ser lidas de `cls` nos dois modelos (para A, equivale ao argmax das três probabilidades: sem mudança).
+- Nível anúncio × aspecto, para o kappa entre modelos: polaridade modal das frases do anúncio no aspecto; empate entre classes vale "neutro".
+
+**REGRA 1.6 (registrada antes da execução da fase 2 e antes da avaliação de B nas frases rotuladas).** O modelo principal é **B** se o intervalo de confiança de 95% (bootstrap estratificado) da diferença
+**B − A no kappa ponderado linear populacional de sentimento** (frases rotuladas, pesos de população dos estratos originais aspecto × polaridade previstos por A) **excluir zero a favor de B** (limite inferior > 0);
+caso contrário o principal continua sendo **A**. O outro modelo é sempre reportado integralmente como robustez. Também se reporta a diferença na acurácia populacional (total e só em português), sem papel na regra.
+
+**Implementação.** Fonte do sentimento selecionável por configuração (`SENTIMENT_SOURCE`: A ou B); tabelas dependentes do modelo recebem o sufixo `__B` no cache; segmentação, idioma, tópicos e mapa de aspectos são compartilhados e não são refeitos.
