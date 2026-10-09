@@ -30,6 +30,8 @@ def main() -> None:
     ap.add_argument("--force", type=int, nargs="*", default=[])
     ap.add_argument("--dev", action="store_true", help="2%% dos imóveis, amostras e tópicos reduzidos (não é resultado final)")
     ap.add_argument("--max-reviews", type=int, default=None)
+    ap.add_argument("--sentimento", choices=["A", "B"], default=None, help="fonte do sentimento (padrão: SENTIMENT_SOURCE do config)")
+    ap.add_argument("--sem-excel", action="store_true", help="não gera a planilha ao final (a planilha final é gerada por --excel-final)")
     a = ap.parse_args()
 
     cfg = CONFIG
@@ -37,6 +39,8 @@ def main() -> None:
         cfg = dataclasses.replace(cfg, DEV_SAMPLE_FRAC=0.02, BERTOPIC_FIT_SAMPLE=30_000, HDBSCAN_MIN_CLUSTER_SIZE=30,
                                   HDBSCAN_MIN_SAMPLES=5, VECTORIZER_MIN_DF=3, LDA_SAMPLE=20_000, COHERENCE_SAMPLE=5_000,
                                   LDA_K_GRID=(5, 10), MAPPING_CSV=str(Path(cfg.OUTPUT_DIR) / "mapa_aspecto_dev.csv"))
+    if a.sentimento:
+        cfg = dataclasses.replace(cfg, SENTIMENT_SOURCE=a.sentimento)
     if a.max_reviews is not None:
         cfg = dataclasses.replace(cfg, MAX_REVIEWS_PER_LISTING=a.max_reviews)
 
@@ -58,7 +62,8 @@ def main() -> None:
             log.info("Etapa %d já concluída (cache) — pulando", n)
             continue
         steps[n](cfg, store)
-    excel_writer.write_excel(cfg, store, out / f"resultados_{ts}.xlsx", ts)
+    if not a.sem_excel and cfg.SENTIMENT_SOURCE == "A":
+        excel_writer.write_excel(cfg, store, out / f"resultados_{ts}.xlsx", ts)
 
 
 if __name__ == "__main__":

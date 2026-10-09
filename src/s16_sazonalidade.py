@@ -15,6 +15,7 @@ import statsmodels.api as sm
 
 from config import GENERAL_BUCKET
 from .calendario import eventos, marcar_dias
+from .sentimento import load_sentiment
 from .utils import Store, stage
 
 log = logging.getLogger("pipeline")
@@ -101,9 +102,8 @@ def volume(cfg, E: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 def conteudo(cfg, store: Store, E: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     A = store.load("sentencas_aspecto")
     A["date"] = pd.to_datetime(A["date"]).dt.normalize()
-    Sn = store.load("sentiment")[["text_id", "p_neg", "p_neu", "p_pos"]]
-    A = A.merge(Sn, on="text_id")
-    A["neg"] = (A[["p_neg", "p_neu", "p_pos"]].to_numpy().argmax(1) == 0)
+    A = A.merge(load_sentiment(store)[["text_id", "cls"]], on="text_id")
+    A["neg"] = (A["cls"] == 0)
     days = pd.date_range("2023-01-01", min(A["date"].max(), FIM))
     A = A[A["date"] >= days[0]]
     tot = A.groupby("date").size().reindex(days, fill_value=0)

@@ -26,6 +26,7 @@ from sklearn.metrics import r2_score, roc_auc_score
 from sklearn.model_selection import KFold, cross_val_predict
 
 from config import GENERAL_BUCKET
+from .sentimento import POLARIDADE, load_sentiment
 from .utils import Store, stage
 
 log = logging.getLogger("pipeline")
@@ -155,10 +156,8 @@ def importancia_aspectos(cfg, store: Store, F: pd.DataFrame) -> dict[str, pd.Dat
 def importancia_topicos(cfg, store: Store, F: pd.DataFrame) -> dict[str, pd.DataFrame]:
     A = store.load("sentencas_aspecto")
     A = A[A["topic_direto"] & (A["topic"] >= 0)]
-    Sn = store.load("sentiment")[["text_id", "p_neg", "p_neu", "p_pos"]]
-    A = A.merge(Sn, on="text_id")
-    cls = np.array(["neg", "neu", "pos"])[A[["p_neg", "p_neu", "p_pos"]].to_numpy().argmax(1)]
-    A["cls"] = cls
+    A = A.merge(load_sentiment(store)[["text_id", "cls"]], on="text_id")
+    A["cls"] = POLARIDADE[A["cls"].to_numpy()]
     T = store.load("topics_bertopic")[["topic", "top_words"]]
     asp_of = A.drop_duplicates("topic").set_index("topic")["aspecto"]
     F = F.set_index("id")

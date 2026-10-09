@@ -14,6 +14,7 @@ import pandas as pd
 
 from config import GENERAL_BUCKET
 from .s15_importancia import tabela_anuncio_aspecto
+from .sentimento import POLARIDADE, load_sentiment
 from .utils import Store
 
 ROTULO = {"limpeza": "Limpeza", "localizacao": "Localização", "checkin": "Check-in", "comunicacao": "Comunicação com o anfitrião",
@@ -57,9 +58,8 @@ def dados_anuncio(cfg, store: Store, listing_id: int) -> dict:
     peers, peers_desc = pares(F, row)
     asp = []
     A = pd.read_parquet(store.path("sentencas_aspecto"), filters=[("listing_id", "==", int(listing_id))])
-    Sn = store.load("sentiment")[["text_id", "p_neg", "p_neu", "p_pos"]]
-    A = A.merge(Sn, on="text_id")
-    A["cls"] = np.array(["neg", "neu", "pos"])[A[["p_neg", "p_neu", "p_pos"]].to_numpy().argmax(1)]
+    A = A.merge(load_sentiment(store)[["text_id", "cls"]], on="text_id")
+    A["cls"] = POLARIDADE[A["cls"].to_numpy()]
     cnt = A[A["aspecto"] != GENERAL_BUCKET].groupby("aspecto").size()
     for a in cfg.ASPECT_SEEDS:
         x = row.get(f"s_{a}")

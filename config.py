@@ -89,6 +89,11 @@ class Config:
 
     # --- modelos ---
     SENTIMENT_MODEL: str = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+    # Segundo modelo (B): treinado em avaliações de produtos/serviços, 5 classes (1 a 5 estrelas). O pipeline roda com UMA fonte por vez
+    # (SENTIMENT_SOURCE); as tabelas dependentes do modelo recebem o sufixo "__B" no cache. Segmentação, tópicos e mapa são compartilhados.
+    SENTIMENT_MODEL_B: str = "nlptown/bert-base-multilingual-uncased-sentiment"
+    SENTIMENT_SOURCE: str = "A"           # "A" (principal até a regra 1.6) ou "B"
+    SENTIMENT_MAIN: str = "A"             # modelo principal nos textos e na planilha (definido pela regra 1.6; ver historico)
     SENTIMENT_QUANTIZE: bool = False      # int8 dinâmico DESTRÓI este modelo (saída ~uniforme; testado) — manter False
     SENTIMENT_BATCH: int = 64
     SENTIMENT_MAX_LEN: int = 96

@@ -58,13 +58,20 @@ def stage(name: str):
     log.info("FIM     %s (%.1f min)", name, (time.time() - t0) / 60)
 
 
+# Tabelas que NÃO dependem do modelo de sentimento (compartilhadas entre A e B); o resto recebe o sufixo do modelo ("__B").
+SHARED = {"listings_elig", "sentences", "texts", "corpus_stats", "lang_dist", "text_topics", "topics_bertopic", "topics_lda", "lda_grid",
+          "mapa_topico_aspecto", "sazon_calendario", "sazon_volume", "sazon_volume_por_ano", "formula_ocupacao", "coef_forma_flexivel"}
+SHARED_PREFIXES = ("cmp_", "lda_shared_")  # comparações entre modelos e artefatos do LDA que não dependem do sentimento
+
+
 class Store:
     """Artefatos intermediários em outputs/cache/<hash>/ (parquet) + métricas por etapa.
 
     O hash da configuração garante que mudar amostra/modelo não reutilize cache velho.
     """
 
-    def __init__(self, cfg):
+    def __init__(self, cfg, suffix: str | None = None):
+        self.suffix = suffix if suffix is not None else ("" if cfg.SENTIMENT_SOURCE == "A" else f"__{cfg.SENTIMENT_SOURCE}")
         self.root = Path(cfg.OUTPUT_DIR) / "cache" / cfg.cache_key()
         self.tables = self.root / "tables"
         self.tables.mkdir(parents=True, exist_ok=True)
@@ -72,7 +79,8 @@ class Store:
         self.metrics = json.loads(self.metrics_path.read_text(encoding="utf-8")) if self.metrics_path.exists() else {}
 
     def path(self, name: str) -> Path:
-        return self.tables / f"{name}.parquet"
+        shared = (not self.suffix) or name in SHARED or name.startswith(SHARED_PREFIXES)
+        return self.tables / f"{name if shared else name + self.suffix}.parquet"
 
     def exists(self, name: str) -> bool:
         return self.path(name).exists()
@@ -90,6 +98,7 @@ class Store:
 
     def metric(self, stage_name: str, **kv) -> None:
         """Registra métricas-chave (vão para a aba Resumo_Log) e as loga."""
+        stage_name = stage_name + self.suffix
         self.metrics.setdefault(stage_name, {}).update(kv)
         self.metrics_path.write_text(json.dumps(self.metrics, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
         for k, v in kv.items():
