@@ -24,7 +24,6 @@ anfitriões e empresas gestoras.
 2. **Associação com a nota.** Estimar quais aspectos e tópicos mais se associam à nota global e a cada subnota, e quais concentram as queixas. *O que o texto revela sobre a nota?* (Associação; sem linguagem causal.) **É a contribuição central.**
 3. **Aplicação.** Entregar o resultado como diagnóstico por anúncio, comparado ao bairro e ao tipo de acomodação. *Como um anfitrião usa isso?*
 4. **Índice único.** Verificar se um índice sintético (R_syn) acrescenta algo à nota oficial. *Um número único substitui a decomposição por aspecto?* Resultado secundário; um resultado nulo é legítimo e esperado.
-5. **Sazonalidade (exploratório).** Como feriados e eventos se associam ao volume de avaliações e às queixas por aspecto?
 
 ## 4. Contribuições esperadas
 
@@ -41,10 +40,10 @@ anfitriões e empresas gestoras.
 ## 6. Estrutura da dissertação (alinhada ao texto unificado de resultados)
 
 1. Introdução e perguntas de pesquisa · 2. Dados e o que eles permitem medir · 3. Método: como o texto é medido · 4. A medição é confiável? · 5. O que o texto revela sobre a nota · 6. Aplicação: diagnóstico por anúncio ·
-7. Um índice único acrescenta algo? · 8. Sazonalidade e eventos (exploratório) · 9. Limitações · 10. Conclusões.
+7. Um índice único acrescenta algo? · 8. Limitações · 9. Conclusões.
 
 ## 7. Limitações a declarar (resumo)
 
 Sentimento calculado sobre as 30 avaliações mais recentes por anúncio; anúncios com pouco texto ficam fora de R_syn (só ~55% dos de nota 5,0 entram); mapeamento tópico → aspecto e validação manual feitos por um pesquisador
-(segundo anotador em 100 frases: kappa 0,86 no sentimento e 0,62 no aspecto); desfechos `estimated_*` construídos algebricamente; análise de sazonalidade restrita (data da avaliação ≠ data da estadia; só anúncios ativos na coleta); todas as associações são
+(segundo anotador em 100 frases: kappa 0,86 no sentimento e 0,62 no aspecto); desfechos `estimated_*` construídos algebricamente; só anúncios ativos na coleta; todas as associações são
 descritivas, sem inferência causal.

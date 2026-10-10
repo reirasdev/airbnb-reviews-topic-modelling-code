@@ -1,6 +1,6 @@
 # Resultados unificados (rascunho para a dissertação)
 
-> **Planilha de apoio:** `resultados_final_20261010_122818.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. O mapa tópico → aspecto do LDA e a segunda anotação foram confirmados pelo pesquisador. A organização por perguntas está em `00_enquadramento.md`.
+> **Planilha de apoio:** `resultados_final_20261010_160227.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. O mapa tópico → aspecto do LDA e a segunda anotação foram confirmados pelo pesquisador. A organização por perguntas está em `00_enquadramento.md`.
 
 ## 1. Dados e amostra
 
@@ -462,58 +462,7 @@ com 30 avaliações, 0,67 com 60 e 0,80 com 120, e não há deriva temporal rele
 O resultado é nulo e secundário: o índice sintético não acrescenta poder explicativo sobre os índices de volume além da nota oficial, em nenhum dos dois modelos de sentimento. Há duas leituras, que não se excluem. A primeira é que **o sentimento do texto tem pouca razão teórica para prever uma contagem de avaliações**: os desfechos disponíveis são índices de volume (seção 2), e o nulo é em
 parte consequência do desfecho que a base permite. A segunda é que **o valor do texto está na decomposição por aspecto da seção 5, e não em substituir a nota**: a nota oficial já resume bem a satisfação geral do hóspede, e o texto acrescenta o porquê. Em nenhum ponto este estudo apresenta o R_syn como "rating melhor".
 
-## 8. Sazonalidade e eventos (análise exploratória)
-
-*Abas da planilha:* `Sazon_Volume`, `Sazon_NegativaGeral`, `Sazon_NegativaGeral_mB`, `Sazon_Criterio`, `Sazon_Criterio_mB`, `LadoALado_sazon_aspecto`, `LadoALado_sazon_criterio`, `Config`.
-
-Esta seção é **exploratória** e vem depois das demais porque não sustenta nenhuma conclusão das seções 5 a 7; ela mostra uma aplicação do mesmo texto a uma pergunta diferente, a de como o conteúdo das avaliações muda em períodos de grande procura. Três limitações valem para tudo o que segue. A data da avaliação não é a da estadia (as avaliações foram atribuídas a cada evento por uma janela entre o
-dia seguinte ao início da estadia e 14 dias depois do fim, prazo máximo para avaliar), de modo que há erro de atribuição. Os dados só incluem avaliações de anúncios ainda ativos na coleta, e os anos mais antigos ficam sub-representados. Os eventos têm poucas edições dentro do período (o *Todo Mundo no Rio* tem uma, e o conteúdo do Carnaval vem de duas). O plano e os critérios foram congelados antes dos resultados (histórico de decisões), mas a
-comparação de conteúdo por aspecto e por tópico envolve muitos testes, corrigidos por Benjamini-Hochberg, e deve ser lida como geração de hipóteses.
-
-### 8.1 Volume de avaliações
-A medida é o volume diário de **avaliações escritas** na janela do evento em relação ao de dias comuns do mesmo ano-mês (GLM de Poisson com efeitos fixos de ano-mês e dia da semana, erro-padrão robusto HAC; 2020 e 2021 excluídos). Ela indica estadias que terminaram no período, e **não** a ocupação dos imóveis. Em todos os eventos o volume é maior do que em dias comuns:
-
-| Evento | Defasagem 14 dias [IC 95%] | Defasagem 7 dias [IC 95%] |
-|---|---|---|
-| Rock in Rio | 1,73 [1,16; 2,58] | 2,42 [2,12; 2,77] |
-| Corpus Christi | 1,34 [1,15; 1,56] | 1,65 [1,45; 1,89] |
-| Réveillon | 1,34 [1,22; 1,46] | 1,45 [1,32; 1,59] |
-| Todo Mundo no Rio (2024) | 1,31 [1,01; 1,69] | 1,66 [1,37; 2,01] |
-| Carnaval | 1,26 [1,09; 1,45] | 1,51 [1,36; 1,69] |
-| Semana Santa | 1,25 [1,13; 1,37] | 1,27 [1,16; 1,39] |
-| Feriados curtos | 1,24 [1,13; 1,36] | 1,26 [1,16; 1,37] |
-
-A defasagem de 7 dias dá razões maiores porque considera só os dias logo após o check-out, onde o efeito se concentra; a de 14 dias inclui mais dias comuns. No *Todo Mundo no Rio*, o limite inferior com 14 dias fica praticamente em 1, e a evidência é mais fraca.
-
-### 8.2 Tom geral das avaliações: não replica entre os modelos
-Em uma checagem exploratória (binomial diário, janelas de 14 dias), a proporção de frases negativas no corpus inteiro nas janelas de evento, em relação a dias comuns, é menor em Rock in Rio, Corpus Christi, Todo Mundo no Rio (2024) com o modelo A. Com o modelo B, o resultado não aparece (eventos com q < 0,05: nenhum):
-
-| Evento | Razão de chances de frase negativa (A) [IC 95%] | q (A) | Razão de chances (B) [IC 95%] | q (B) |
-|---|---|---:|---|---:|
-| Rock in Rio | 0,87 [0,82; 0,92] | 0,000 | 0,97 [0,91; 1,05] | 0,506 |
-| Corpus Christi | 0,91 [0,86; 0,95] | 0,000 | 0,99 [0,95; 1,02] | 0,506 |
-| Réveillon | 1,02 [0,92; 1,14] | 0,839 | 1,01 [0,99; 1,04] | 0,506 |
-| Todo Mundo no Rio (2024) | 0,84 [0,78; 0,91] | 0,000 | 0,98 [0,93; 1,03] | 0,506 |
-| Carnaval | 0,99 [0,89; 1,10] | 0,907 | 0,91 [0,84; 0,99] | 0,349 |
-| Semana Santa | 1,05 [0,98; 1,12] | 0,307 | 1,03 [0,99; 1,08] | 0,442 |
-| Feriados curtos | 1,00 [0,95; 1,05] | 0,933 | 1,03 [0,99; 1,06] | 0,389 |
-
-Portanto, a menor proporção de frases negativas nos eventos de música **depende do modelo de sentimento** e não deve ser tratada como achado; a interpretação que havíamos aventado (público mais jovem e tolerante a ruído) fica sem sustentação empírica neste ponto. O modelo B classifica mais frases como positivas que o A (seção 4.2), e é plausível que a diferença entre janelas dependa do limiar entre neutro e negativo.
-
-### 8.3 Conteúdo por aspecto
-Para cada evento e aspecto, comparou-se a proporção de frases negativas dentro do aspecto com a de dias comuns (razão de chances; janelas de 14 dias; 70 combinações). Com q < 0,05, 20 combinações aparecem em A e 13 em B; **só 5 aparecem nos dois com o mesmo sentido**, 0 com sentidos opostos, 15 apenas em A e 8 apenas em B. As que coincidem:
-
-| Evento | Aspecto | Razão de chances (A) [IC] | Razão de chances (B) [IC] |
-|---|---|---|---|
-| Semana Santa | Limpeza | 1,21 [1,06; 1,38] | 1,24 [1,09; 1,41] |
-| Semana Santa | Localização | 0,81 [0,74; 0,89] | 0,83 [0,77; 0,89] |
-| Corpus Christi | Check-in | 0,71 [0,62; 0,81] | 0,70 [0,60; 0,83] |
-| Corpus Christi | Comunicação | 1,18 [1,07; 1,30] | 1,18 [1,05; 1,33] |
-| Todo Mundo no Rio (2024) | Custo-benefício | 0,22 [0,09; 0,52] | 0,23 [0,14; 0,38] |
-
-Por exemplo, os aumentos de queixa no Carnaval que aparecem só em A: Localização (razão de chances 1,23 em A e 0,99 em B); Custo-benefício (razão de chances 1,57 em A e 0,78 em B); Precisão do anúncio (razão de chances 1,79 em A e 1,07 em B). O critério de conteúdo definido de antemão (ao menos um aspecto ou tópico com aumento de queixa relevante e significativo) é satisfeito em Carnaval com A e em Réveillon, Todo Mundo no Rio (2024), Semana Santa com B: o conteúdo é **sensível ao modelo**, e só as combinações da tabela acima podem ser tomadas como indicativas.
-
-## 9. Limitações
+## 8. Limitações
 
 *Abas da planilha:* `Config`, `Estat_Corpus`, `Limite_30_Avaliacoes`, `Avaliacao_Rotuladas_AB`, `Aspecto_Rotuladas`, `Val_Confiab_AUC`, `Checagem_LDA`, `Segundo_Anotador`.
 
@@ -525,17 +474,16 @@ Reunimos aqui o que limita a leitura de todo o texto, na ordem das seções.
 - **Medição do texto (seções 3 e 4).** Os rótulos de referência vêm de um único pesquisador, que também revisou o mapa de tópicos para aspectos; um segundo anotador rotulou 100 frases (seção 4.6), com concordância moderada no aspecto (kappa 0,62), de modo que a atribuição de aspecto tem erro de rotulagem além do erro do modelo. A amostra rotulada tem 297 frases e, ponderada pela população, tamanho efetivo de cerca de 72 frases, de modo que os intervalos são largos e as
   comparações entre modelos são frágeis (a diferença de kappa B − A é de −0,141, com IC que mal exclui zero). A confiabilidade split-half do sentimento por aspecto é baixa, e as subnotas oficiais usadas como referência são comprimidas. Sete dos dez aspectos pedem cautela (seção 4.6); em especial, comodidades, o aspecto de maior peso,
   tem atribuição imprecisa e não tem subnota para validar. O mapa do LDA foi confirmado pelo pesquisador; o LDA só checa quatro aspectos.
-- **Dois modelos de sentimento (seção 4).** O modelo A é o principal por uma regra fixada antes da execução do B, mas B é melhor na amostra rotulada e A na população; a escolha não é óbvia, e por isso os resultados de B acompanham todos os blocos. Onde os dois divergem (seções 7.3 e 8), as duas leituras são relatadas sem preferência.
+- **Dois modelos de sentimento (seção 4).** O modelo A é o principal por uma regra fixada antes da execução do B, mas B é melhor na amostra rotulada e A na população; a escolha não é óbvia, e por isso os resultados de B acompanham todos os blocos. Onde os dois divergem (seção 7.3), as duas leituras são relatadas sem preferência.
 - **Importância dos aspectos (seção 5).** A importância relativa de um aspecto mistura efeito e confiabilidade da medida, e as associações com a nota são entre anúncios, não dentro do anúncio; nada disso autoriza falar em causa. Anúncios sem aspectos suficientes têm sentimento imputado.
 - **Índice sintético (seção 7).** Só 5.142 dos anúncios de nota 5,0 têm o índice, e os que ficam de fora têm menos avaliações; as conclusões sobre o teto valem para esse subconjunto. A decisão de não aplicar shrinkage foi tomada depois de ver o resultado com shrinkage. Coeficientes dentro da amostra não são robustos e não foram confirmados fora dela.
-- **Sazonalidade (seção 8).** Exploratória, com poucas edições por evento e conteúdo sensível ao modelo; o feriado municipal de São Sebastião (20 de janeiro) foi confirmado pelo pesquisador e entra com janela de 19 a 21 de janeiro.
 - **Generalização.** Um só município, uma só plataforma e uma só coleta.
 
-## 10. Conclusões
+## 9. Conclusões
 
-*Abas da planilha:* `Avaliacao_Rotuladas_AB`, `Diferenca_B_menos_A`, `Validacao_Construto`, `Checagem_LDA`, `Segundo_Anotador`, `Imp_Aspectos`, `LadoALado_imp_lmg`, `Imp_Topicos_Queixas`, `RSyn_Resumo_AB`, `Selecao_Teto`, `Analise_A`, `Comparacoes_Multiplas`, `Sazon_Volume`, `Config`.
+*Abas da planilha:* `Avaliacao_Rotuladas_AB`, `Diferenca_B_menos_A`, `Validacao_Construto`, `Checagem_LDA`, `Segundo_Anotador`, `Imp_Aspectos`, `LadoALado_imp_lmg`, `Imp_Topicos_Queixas`, `RSyn_Resumo_AB`, `Selecao_Teto`, `Analise_A`, `Comparacoes_Multiplas`, `Config`.
 
-As conclusões seguem a ordem da linha de raciocínio. Todas são associações, e todas valem com as ressalvas da seção 9.
+As conclusões seguem a ordem da linha de raciocínio. Todas são associações, e todas valem com as ressalvas da seção 8.
 
 1. **A medição do texto é utilizável, com restrições.** Em 297 frases rotuladas por um pesquisador, a acurácia populacional do sentimento é de 87% no modelo A e 85% no B, e o kappa ponderado populacional é 0,66 e 0,51. Pela regra fixada antes da execução do B (diferença de kappa B − A de −0,141, IC [−0,272; −0,012]), o modelo principal é A, e B acompanha todos os resultados. Os dois modelos concordam em ordenar
    frases e anúncios, mas não são intercambiáveis. O sentimento dos aspectos concorda com as subnotas oficiais de forma moderada e positiva; só Limpeza, Localização, Custo-benefício satisfazem o critério de confiança da seção 4.6, e Check-in, Comunicação, Ruído e conforto, Segurança, Precisão do anúncio, Comodidades, Satisfação geral pedem cautela. Um segundo método de tópicos (LDA) reproduz o sinal nos aspectos que consegue checar. Entre dois anotadores, a concordância é alta no sentimento (kappa 0,86) e moderada no aspecto (0,62).
@@ -545,4 +493,4 @@ As conclusões seguem a ordem da linha de raciocínio. Todas são associações,
 4. **Um índice único não acrescenta poder explicativo.** O índice sintético reordena os anúncios em relação à nota oficial e discrimina os anúncios de nota 5,0 que o têm (5.142 de 9.373), mas não acrescenta poder explicativo sobre os índices de volume além da nota oficial, em nenhum dos dois modelos. O resultado é nulo e secundário, com duas leituras que não se excluem: o sentimento tem pouca razão teórica para
    prever uma contagem de avaliações, e o valor do texto está na decomposição por aspecto. Os coeficientes dentro da amostra não são robustos e ficam fora desta síntese.
 
-O que o estudo **não** conclui: que o índice sintético seja um "rating melhor", que consertar um problema aponte para aumento de nota, que haja efeito sobre receita ou ocupação, ou que os eventos alterem o tom das avaliações (seção 8, exploratória e sensível ao modelo).
+O que o estudo **não** conclui: que o índice sintético seja um "rating melhor", que consertar um problema aponte para aumento de nota, que haja efeito sobre receita ou ocupação.

@@ -561,3 +561,7 @@ aspectos para a nota global é parecida (comodidades 47,8% vs 42,5% do R²; sati
 - **Mapa do LDA:** segue pendente; criado `data/mapa_lda_para_confirmar.xlsx` (coluna `aspecto_confirmado`, preenchida com a proposta provisória).
 
 - **Mapa do LDA:** confirmado pelo pesquisador sem alterações (`data/mapa_lda_para_confirmar.xlsx`, 2026-10-10); deixa de ser provisório.
+
+## 36. Retirada da sazonalidade (2026-10-10)
+
+Por decisão do pesquisador, a análise de sazonalidade e eventos (opcional; só entraria com resultado excelente, o que não ocorreu) foi retirada do trabalho: removidas a seção 8 do texto unificado (limitações e conclusões passam a seções 8 e 9), as abas `Sazon_*` da planilha final e as menções em `00_enquadramento.md`. O rascunho antigo foi arquivado em `historico/rascunhos_v2/`. O código da etapa 16 e as seções 19 a 22 e 33 deste histórico permanecem apenas como registro.

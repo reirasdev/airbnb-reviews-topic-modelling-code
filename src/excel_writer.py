@@ -161,6 +161,7 @@ def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd
     sheets["Analise_A_Intersecao"] = juntar(g("cmp_inter_diferencas"))
     for nome in ("validacao_construto", "analise_a_diferencas", "imp_lmg", "sensibilidade", "val_convergente", "imp_gbm", "imp_logit", "analise_b_faixas", "perfil_cobertura", "imp_segmentos", "imp_sensibilidade", "analise_a_coefs", "sazon_aspecto"):
         sheets[f"LadoALado_{nome}"[:31]] = g(f"cmp_ladoalado_{nome}")
+    sheets = {k: v for k, v in sheets.items() if "azon" not in k}  # sazonalidade retirada do trabalho
     ordem = ["Config", "Resumo_AB"] if "Resumo_AB" in sheets else ["Config"]
     sheets = {k: sheets[k] for k in ordem + [k for k in sheets if k not in ordem]}
     _salvar(sheets, path)

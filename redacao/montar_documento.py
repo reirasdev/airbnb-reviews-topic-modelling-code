@@ -22,8 +22,8 @@ try:  # seções seguintes, adicionadas à medida que ficam prontas
 except ImportError:
     pass
 try:
-    import sec_8_10  # noqa: E402
-    SECOES += [sec_8_10.secao8, sec_8_10.secao9, sec_8_10.secao10]
+    import sec_8_9  # noqa: E402
+    SECOES += [sec_8_9.secao8, sec_8_9.secao9]
 except ImportError:
     pass
 
