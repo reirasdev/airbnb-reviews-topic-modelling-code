@@ -1,6 +1,6 @@
 # Referências verificadas (para o `referencias.bib`)
 
-Arquivo BibTeX: `redacao/latex/referencias.bib` (33 entradas). Cada uma foi conferida em 2026-10-10 em fonte primária: **Crossref** (autores, título, periódico, volume, páginas e DOI), **JMLR**, **ACL Anthology**, **arXiv**, **Hugging Face** e a página do **Inside Airbnb**. Onde não há DOI (JMLR, arXiv, livros), o `.bib` traz URL ou ISBN. O uso indicado é uma sugestão; nenhum trecho de texto foi escrito.
+Arquivo BibTeX: `redacao/latex/referencias.bib` (52 entradas). Cada uma foi conferida em 2026-10-10 em fonte primária: **Crossref** (autores, título, periódico, volume, páginas e DOI), **JMLR**, **ACL Anthology**, **arXiv**, **Hugging Face** e a página do **Inside Airbnb**. Onde não há DOI (JMLR, arXiv, livros), o `.bib` traz URL ou ISBN. O uso indicado é uma sugestão; nenhum trecho de texto foi escrito.
 
 ## Plataforma, notas e avaliações online
 | Chave | Referência | Para que serve |
@@ -43,5 +43,21 @@ Arquivo BibTeX: `redacao/latex/referencias.bib` (33 entradas). Cada uma foi conf
 - **Kirkos (2021)**, **Sengupta et al.**, **Safari (2025)** e outras do PDF não foram verificadas.
 - **Spearman-Brown, Shapley (1953) e livros-texto de regressão** não foram incluídos; entram se o texto os citar.
 
+## Bloco 2 (19 entradas, verificadas no Crossref pelo DOI, em 2026-10-10)
+| Tema | Chaves |
+|---|---|
+| Análise de sentimento por aspecto (pesquisas e tarefas) | `schouten2016` (*IEEE TKDE* 28), `zhang2023absa` (*IEEE TKDE* 35), `pontiki2016` (SemEval-2016 Tarefa 5) |
+| Sentimento em português | `souza2020` (BERTimbau, BRACIS 2020), `freitas2013` (opinião por característica em avaliações em português, WWW 2013) |
+| Viés e inflação de avaliações online | `dellarocas2008` (*Management Science* 54), `filippas2022` (*Marketing Science* 41), `proserpio2017` (*Marketing Science* 36), `thorndike1920` (efeito halo) |
+| Texto de avaliações do Airbnb | `sutherland2020` (*Sustainability* 12; tópicos da experiência do hóspede) |
+| Concordância entre anotadores | `cohen1968` (kappa ponderado), `hallgren2012`, `mchugh2012`; para a amostra ponderada pela população, `kish1965` (tamanho efetivo da amostra; livro, sem DOI) |
+| Inferência e coerência | `efron1979` (bootstrap), `roder2015` (coerência de tópicos, base do C_v), `gromping2006` (pacote *relaimpo*, LMG), `brown1910` e `spearman1910` (confiabilidade corrigida de Spearman-Brown) |
+
+Observações:
+- `hallgren2012` tem um erratum publicado (`10.20982/tqmp.09.2.p095`); vale citar o artigo corrigido.
+- `kish1965` foi incluído de memória (sem DOI) e não foi checado em catálogo; confirme editora e ano antes de citar.
+- O Crossref grafava "Marry L. McHugh"; corrigi para Mary L. McHugh.
+- Não encontrei, com a verificação por DOI, um trabalho específico de ABSA aplicada a hospedagem em português; `freitas2013` é sobre opinião em português em geral. Se existir referência brasileira que você já conheça, me diga o título.
+
 ## Ainda falta (revisão de literatura)
-Nada aqui cobre sozinho o referencial: faltam trabalhos sobre ABSA aplicada a hospedagem em português, vieses de seleção em avaliações (quem avalia) e métodos de medida de concordância para amostras estratificadas. Posso procurar e verificar esses blocos se você pedir.
+Estas referências sustentam o método, mas a revisão de literatura propriamente dita (o que se sabe sobre o que explica a nota de hospedagem, e a lacuna que a dissertação preenche) ainda precisa ser lida e organizada por você e por mim, a partir dos próprios artigos.
