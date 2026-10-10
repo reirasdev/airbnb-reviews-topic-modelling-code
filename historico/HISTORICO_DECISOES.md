@@ -559,3 +559,5 @@ aspectos para a nota global é parecida (comodidades 47,8% vs 42,5% do R²; sati
 - **Título escolhido:** *O que as avaliações revelam sobre a nota: decomposição por aspecto do sentimento em avaliações de hóspedes do Airbnb no Rio de Janeiro.*
 - **Feriado de São Sebastião:** confirmado em 20 de janeiro (calendário já usa janela 19–21).
 - **Mapa do LDA:** segue pendente; criado `data/mapa_lda_para_confirmar.xlsx` (coluna `aspecto_confirmado`, preenchida com a proposta provisória).
+
+- **Mapa do LDA:** confirmado pelo pesquisador sem alterações (`data/mapa_lda_para_confirmar.xlsx`, 2026-10-10); deixa de ser provisório.

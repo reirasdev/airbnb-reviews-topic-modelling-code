@@ -185,7 +185,7 @@ custo-benefício e, sobretudo, satisfação geral). Ela deve ser lida à luz de 
 
 ### 4.5 Checagem com um segundo método de tópicos (LDA)
 {abas("Checagem_LDA", "Topicos_LDA")}
-Para saber se os resultados por aspecto dependem do método de tópicos, atribuímos cada sentença ao tópico dominante do LDA ({n(len(mapa))} tópicos) e comparamos. O mapa tópico LDA → aspecto é **[provisório: a confirmar pelo pesquisador]**: só recebe aspecto o tópico cuja leitura das palavras de maior peso, aspecto mais similar aos termos-semente
+Para saber se os resultados por aspecto dependem do método de tópicos, atribuímos cada sentença ao tópico dominante do LDA ({n(len(mapa))} tópicos) e comparamos. O mapa tópico LDA → aspecto foi **confirmado pelo pesquisador** (`data/mapa_lda_para_confirmar.xlsx`, sem alterações): só recebe aspecto o tópico cuja leitura das palavras de maior peso, aspecto mais similar aos termos-semente
 e margem entre o primeiro e o segundo aspecto (≥ 0,05) concordam; senão é "misto" e fica fora do perfil. Apenas {n(len(mapeados))} dos {n(len(mapa))} tópicos receberam aspecto (comodidades, comunicação, satisfação geral e localização), e {pc(lc['prop_sentencas_misto_no_lda'], 0)} das sentenças caem em tópicos mistos, de modo que o LDA só permite checar esses quatro aspectos.
 Entre as sentenças com aspecto nos dois métodos, {pc(lc['prop_mesmo_aspecto_entre_as_com_aspecto_nos_dois'], 1)} recebem o mesmo aspecto.
 

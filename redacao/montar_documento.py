@@ -31,8 +31,7 @@ if __name__ == "__main__":
     xlsx = Path(sys.argv[1]).name
     cab = f"""# Resultados unificados (rascunho para a dissertação)
 
-> **Planilha de apoio:** `{xlsx}`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. Trechos marcados **[provisório]** dependem de
-> confirmação do pesquisador (mapa tópico → aspecto do LDA; segundo anotador). A organização por perguntas está em `00_enquadramento.md`.
+> **Planilha de apoio:** `{xlsx}`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. O mapa tópico → aspecto do LDA e a segunda anotação foram confirmados pelo pesquisador. A organização por perguntas está em `00_enquadramento.md`.
 """
     texto = cab + "\n" + "\n".join(s() for s in SECOES)
     out = Path(__file__).resolve().parent / "01_resultados_unificado.md"

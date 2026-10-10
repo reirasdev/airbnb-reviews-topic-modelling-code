@@ -126,7 +126,7 @@ def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd
              ["MODELO_COMPARACAO_(robustez)", f"{outro} ({cfg.SENTIMENT_MODEL if outro == 'A' else cfg.SENTIMENT_MODEL_B})"],
              ["REGRA_1.6", "principal = B se o IC 95% (bootstrap estratificado) de (B − A) no kappa ponderado linear populacional de sentimento exclui 0 a favor de B; senão A. Registrada antes da execução (historico, seção 30)."],
              ["SEGUNDO_ANOTADOR", "rotulado (data/validacao_segundo_anotador.xlsx); concordância na aba Segundo_Anotador"],
-             ["MAPA_LDA", "provisório: a confirmar pelo pesquisador (aba Checagem_LDA, coluna decisao_pesquisador)"]]
+             ["MAPA_LDA", "confirmado pelo pesquisador em 2026-10-10 (data/mapa_lda_para_confirmar.xlsx, sem alterações)"]]
     if regra is not None and len(regra):
         r = regra.iloc[0]
         extra.append(["REGRA_1.6_RESULTADO", f"diferença B − A = {r['diferenca_B_menos_A']:.4f}; IC95% [{r['ic_inf']:.4f}; {r['ic_sup']:.4f}]; principal = {r['modelo_principal']}"])
