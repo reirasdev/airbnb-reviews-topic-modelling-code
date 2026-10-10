@@ -503,3 +503,23 @@ Limpeza: um arquivo vazio `python` (artefato de um comando antigo) foi removido 
 caso contrário o principal continua sendo **A**. O outro modelo é sempre reportado integralmente como robustez. Também se reporta a diferença na acurácia populacional (total e só em português), sem papel na regra.
 
 **Implementação.** Fonte do sentimento selecionável por configuração (`SENTIMENT_SOURCE`: A ou B); tabelas dependentes do modelo recebem o sufixo `__B` no cache; segmentação, idioma, tópicos e mapa de aspectos são compartilhados e não são refeitos.
+
+## 31. Fase 4 (v3): segundo anotador — preparação (2026-10-09)
+
+`python segundo_anotador.py gerar` sorteou 100 das 297 frases com a mesma estratificação (aspecto previsto × polaridade prevista; ~3 por célula, completando por sorteio) e gerou
+`data/validacao_segundo_anotador.xlsx` (enviar: id cego, texto e colunas de rótulo com listas; sem rótulos do primeiro anotador, sem previsões de modelo, sem idioma; página de instruções com a definição de
+cada aspecto) e `data/validacao_segundo_anotador_CHAVE.xlsx` (NÃO enviar: liga o id cego ao id original e traz os rótulos do primeiro anotador). `python segundo_anotador.py kappa <planilha preenchida>` calcula
+concordância simples, kappa de Cohen e kappa ponderado linear (sentimento) e kappa (aspecto), com IC 95% por bootstrap, mais concordância por aspecto e matrizes de confusão; "nenhum" e "geral" são tratados
+como o mesmo grupo. O script foi **testado com rótulos simulados (descartados)**; nenhum rótulo real foi preenchido. A concordância entre anotadores consta como **pendente**.
+
+## 32. Fase 3 (v3): LDA como checagem do método de tópicos — preparação e primeira checagem com o modelo A (2026-10-09; `src/s22_lda_checagem.py`)
+
+- **Papel do LDA:** checar se os resultados por aspecto dependem do método de tópicos; o BERTopic continua sendo o método. O LDA (K = 10) foi **reajustado** (o modelo não havia sido gravado) com a mesma amostra, dicionário e
+  semente da etapa 3: os **10 tópicos reproduzem exatamente os gravados** (aba `Topicos_LDA`). Atribuição: todos os 1.366.091 textos únicos ao tópico dominante (3,0% das sentenças sem palavras no vocabulário do LDA ficam sem tópico).
+- **Mapa provisório tópico LDA → aspecto (a confirmar pelo pesquisador; coluna `decisao_pesquisador` em branco).** Regra: o tópico recebe aspecto só se a leitura das palavras de maior peso indica um aspecto
+  dominante, esse aspecto coincide com o de maior similaridade com os termos-semente e a margem entre o 1º e o 2º é ≥ 0,05; senão é "misto" (fora do perfil). Resultado: tópico 4 → comodidades; 6 → comunicação; 7 → satisfação geral;
+  8 → localização; tópicos 0, 1, 2, 3, 5 e 9 → misto (3 e 9 são tópicos genéricos em inglês e espanhol; 1 junta prédio, portaria, piscina e funcionários; 5 junta ar-condicionado, cama e internet, mas a similaridade
+  aponta ruído/conforto). **55,1% das sentenças caem em tópicos mistos do LDA**, de modo que o LDA só permite checar quatro dos dez aspectos.
+- **Checagem com A:** entre as sentenças com aspecto nos dois métodos, 68,8% recebem o mesmo aspecto; correlação (Spearman) do perfil por anúncio BERTopic × LDA: comodidades 0,67, localização 0,61, comunicação 0,54, satisfação geral 0,46.
+  Validade de construto com o perfil LDA (Spearman com a subnota): localização 0,20 (BERTopic 0,24), comunicação 0,28 (0,30), satisfação geral 0,19 (0,34): mesmo sinal. LMG da nota global (4 aspectos): comodidades é o primeiro nos dois métodos;
+  correlação de postos da ordenação 0,80 (apenas 4 aspectos). Os números finais serão refeitos com o modelo principal definitivo (etapa 23).

@@ -122,6 +122,13 @@ class Config:
     LDA_PASSES: int = 5
     COHERENCE_SAMPLE: int = 30_000        # textos usados para estimar C_v (custo)
 
+    # Mapa PROVISÓRIO tópico LDA -> aspecto ("misto" = mistura aspectos, fica fora do perfil); a confirmar pelo pesquisador (coluna decisao_pesquisador na aba da checagem LDA)
+    # Regra do mapa provisório: o tópico recebe aspecto só se (a) a leitura das palavras de maior peso indica um aspecto dominante, (b) coincide com o aspecto de maior
+    # similaridade com os termos-semente e (c) a margem entre o 1º e o 2º aspecto é >= 0,05; senão é "misto" (não se força). Tópicos 0, 1, 2, 3, 5 e 9 misturam
+    # aspectos (3 e 9 são tópicos genéricos em inglês/espanhol; 1 junta prédio, portaria, piscina e funcionários; 5 junta ar-condicionado, cama, sofá e internet,
+    # mas a similaridade aponta ruído/conforto: discordância => misto).
+    LDA_ASPECT_MAP_PROVISORIO: dict = field(default_factory=lambda: {4: "comodidades", 6: "comunicacao", 7: "satisfacao_geral", 8: "localizacao"})
+
     # --- aspectos ---
     ASPECT_SEEDS: dict = field(default_factory=lambda: ASPECT_SEEDS)
     ASPECT_TO_SUBSCORE: dict = field(default_factory=lambda: ASPECT_TO_SUBSCORE)
