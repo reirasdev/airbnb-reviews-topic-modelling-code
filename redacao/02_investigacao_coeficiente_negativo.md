@@ -1,5 +1,8 @@
 # Investigação do coeficiente negativo de R_syn no teto — **RESOLVIDA**
 
+> **ATUALIZAÇÃO (v3, 2026-10-10):** esta investigação foi refeita sem o controle de avaliações dos últimos 12 meses e com os dois modelos de sentimento; os coeficientes de R_syn dentro da amostra não são robustos (mudam de sinal conforme escopo e modelo) e não se confirmam fora da amostra. Texto vigente: seções 2 e 7.3 de `01_resultados_unificado.md`.
+
+
 > **Status (revisado em 2026-10-04):** a investigação inicial (51 especificações, `run_20261004_135242`) não achou a causa.
 > Uma verificação posterior (`run_20261004_143317`, módulo `src/s13_sem_ltm.py`) a **encontrou: o coeficiente negativo é um
 > artefato de especificação**, provocado pela forma como o desfecho é construído. Ele não deve ser interpretado como efeito

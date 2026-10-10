@@ -40,6 +40,18 @@ def run(cfg, store: Store) -> None:
         rec = full[full["posto"] < 10].groupby("listing_id")["stars"].mean()
         old = full[full["posto"] >= 10].groupby("listing_id")["stars"].mean()
         rows += [("estrelas médias das 10 avaliações mais recentes", float(rec.mean())), (f"estrelas médias das {lim - 10} avaliações mais antigas", float(old.mean()))]
+        # shrinkage × volume: entre os anúncios de nota 5,0 (poucas avaliações), o encolhimento correlaciona R_syn com o volume
+        from scipy import stats
+        for nome, tab in (("com shrinkage", "rating_sintetico__com_shrinkage"), ("sem shrinkage", "rating_sintetico__sem_shrinkage")):
+            if store.exists(tab):
+                Rt = store.load(tab)
+                b5 = Rt[Rt["R_off"] == 5.0]
+                rows += [(f"Spearman R_syn {nome} × log(avaliações totais), anúncios de nota 5,0", float(stats.spearmanr(b5["R_syn_raw"], np.log1p(b5["v"]))[0])),
+                         (f"número de anúncios de nota 5,0 com R_syn ({nome})", len(b5))]
+        b5 = store.load("rating_sintetico")
+        b5 = b5[b5["R_off"] == 5.0]
+        rows += [("mediana de avaliações totais, nota 5,0 com R_syn", float(b5["v"].median())),
+                 ("mediana de avaliações totais, nota < 5,0 com R_syn", float(store.load("rating_sintetico").query("R_off < 5.0")["v"].median()))]
         T = pd.DataFrame(rows, columns=["medida", "valor"])
         store.save("limite30", T)
         log.info("Limite de avaliações:\n%s", T.round(4).to_string(index=False))

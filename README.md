@@ -3,6 +3,7 @@
 Pipeline em Python (mestrado profissional) de análise de sentimento por aspecto sobre avaliações do Airbnb no Rio de Janeiro,
 confrontado com as notas e subnotas oficiais. Ver `redacao/00_enquadramento.md` (perguntas de pesquisa) e
 `historico/HISTORICO_DECISOES.md` (decisões, correções e resultados; a estratégia anterior termina na tag `estrategia-v1-tese-final`).
+Texto de resultados vigente: `redacao/01_resultados_unificado.md` (gerado por `python redacao/montar_documento.py outputs/resultados_final_<carimbo>.xlsx` e conferido com `python redacao/verificar_numeros.py redacao/01_resultados_unificado.md outputs/resultados_final_<carimbo>.xlsx`). Rascunhos anteriores em `historico/rascunhos_v2/`.
 
 ## Como rodar
 1. Python 3.11 em um venv de caminho curto (ex.: `C:\vairbnb`); `pip install torch --index-url https://download.pytorch.org/whl/cpu` e depois `pip install -r requirements.txt`.

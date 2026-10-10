@@ -1,5 +1,8 @@
 # Sazonalidade e eventos (Etapa 16, opcional) — texto e tabelas para a dissertação
 
+> **ATUALIZAÇÃO (v3, 2026-10-10):** a seção 3 abaixo (menor proporção de frases negativas nos eventos de música e em Corpus Christi) vale **só para o modelo A**; com o modelo B o resultado não replica (razões de chances de 0,97 a 0,99, sem significância após BH). O conteúdo por aspecto também é sensível ao modelo (apenas 5 de 70 combinações coincidem). Texto vigente: seção 8 de `01_resultados_unificado.md`. O volume de avaliações por evento não depende do sentimento e não muda.
+
+
 > **Status:** material preparado para inclusão na dissertação. Fonte: `run_20261004_203720` (abas `Sazon_Volume`, `Sazon_Conteudo`, `Sazon_Criterio`) e
 > checagem exploratória do histórico (seção 22). Plano e critério foram congelados antes dos resultados (histórico, seção 19); correções de
 > implementação e emenda posterior (remoção das Olimpíadas; inclusão do *Todo Mundo no Rio*) estão nas seções 20 e 21.
