@@ -1,0 +1,96 @@
+\section{UM ÍNDICE ÚNICO ACRESCENTA ALGO?}
+
+Com a decomposição da Seção 5 estabelecida, resta uma pergunta secundária: o que se ganha ao resumir o perfil de aspectos em um único número, um índice sintético que substitua a nota oficial? Um resultado nulo seria legítimo, porque a contribuição do estudo está na decomposição por aspecto, e o índice apenas a submete a teste.
+
+\subsection{Construção do índice}
+
+O índice sintético, representado por $R_{syn}$, é a média simples do sentimento dos aspectos disponíveis do anúncio, em estrelas de 1 a 5, com exigência de ao menos três aspectos específicos com evidência. A satisfação geral entra na média e não conta para o mínimo. Há 22.564 anúncios com índice.
+
+A especificação principal não aplica encolhimento empírico-bayesiano com $m = 23$ (a mediana de avaliações) \citep{efron1975}. A razão é teórica. O encolhimento aproxima da média global os anúncios com poucas avaliações e, com isso, correlaciona o índice com o volume de avaliações justamente onde a nota é 5,0. Os anúncios de nota 5,0 têm mediana de 9 avaliações, contra 31 nos demais. Entre eles, a correlação de postos do índice com o logaritmo do volume é de 0,50 com encolhimento e de $-0{,}04$ sem encolhimento (0,45 e 0,03 em B). Registra-se que essa decisão foi tomada depois de ver o resultado com encolhimento. Por isso as duas versões são reportadas (Seção 7.5).
+
+\subsection{Compressão da nota oficial e reordenamento}
+
+A nota oficial concentra 22,8\% dos anúncios com índice no valor 5,0. O valor mais frequente do índice sintético concentra 1,6\% em A e 1,9\% em B. A correlação de postos entre o índice e a nota oficial é 0,62 em A e 0,58 em B, e 61\% (A) e 63\% (B) dos anúncios mudam 10 pontos percentuais de posto ou mais entre os dois rankings. Os índices de A e de B têm correlação de postos de 0,82.
+
+Entre os 5.142 anúncios de nota exatamente 5,0 que têm índice, o índice os distribui entre o percentil 27 e o 98 (do 5º ao 95º; em B, de 22 a 98) e concorda de forma fraca, mas positiva, com as seis subnotas (correlação de postos de 0,08 a 0,12 em A e de 0,04 a 0,10 em B, já que as subnotas também são saturadas). Essa capacidade de discriminar vale para os anúncios de nota 5,0 que têm índice, ou seja, 5.142 dos 9.373 anúncios de nota 5,0 (54,9\%). Os que ficam de fora são sobretudo os de pouquíssimas avaliações, justamente os mais comprimidos (Tabela~\ref{tab:selecao}).
+
+\begin{table}[htb]
+\centering
+\caption{Anúncios de nota 5,0 com e sem índice sintético.}
+\small
+\begin{tabular}{l|r|r}
+\hline
+Característica (nota 5,0) & Com índice & Sem índice\\
+\hline
+Anúncios & 5.142 & 4.231\\
+Avaliações totais (mediana) & 9 & 3\\
+Preço (mediana) & 345 & 331\\
+Casa ou apartamento inteiro & 81\% & 72\%\\
+Quarto privado & 18\% & 26\%\\
+Português predominante & 74\% & 73\%\\
+\hline
+\end{tabular}
+\label{tab:selecao}
+\end{table}
+
+\subsection{Poder explicativo sobre os índices de volume}
+
+Os controles são o volume total de avaliações (em logaritmo), o preço (em logaritmo), o tipo de acomodação e o bairro. Não se controla pelas avaliações dos últimos 12 meses (Seção 3). A validação é feita fora da amostra, com cinco dobras repetidas cinco vezes, com a mesma semente e as mesmas dobras em todos os modelos. O modelo M0 contém os controles, M1 acrescenta a nota oficial, M2 acrescenta o índice sintético no lugar da nota e M3 acrescenta os dois. No índice de ocupação, na amostra completa, os controles têm $R^2$ fora da amostra de 0,475 e a nota oficial o eleva a 0,483. A Tabela~\ref{tab:ganho} mostra os ganhos de $R^2$ fora da amostra, com a média entre dobras e o intervalo de 2,5\% a 97,5\% entre dobras.
+
+\begin{table}[htb]
+\centering
+\caption{Ganho de $R^2$ fora da amostra: média entre dobras e intervalo entre dobras.}
+\scriptsize
+\begin{tabular}{l|l|c|c|c|c}
+\hline
+Desfecho & Escopo & M1 $-$ M0 (A) & M2 $-$ M1 (A) & M3 $-$ M1 (A) & M3 $-$ M1 (B)\\
+\hline
+Índice de ocupação & amostra completa & $+0{,}0079$ [$+0{,}0052$; $+0{,}0099$] & $-0{,}0050$ [$-0{,}0070$; $-0{,}0020$] & $+0{,}0000$ [$-0{,}0005$; $+0{,}0002$] & $+0{,}0002$ [$-0{,}0007$; $+0{,}0006$]\\
+Índice de ocupação & nota = 5,0 & $+0{,}0000$ & $-0{,}0002$ [$-0{,}0009$; $+0{,}0000$] & $-0{,}0002$ [$-0{,}0009$; $+0{,}0000$] & $-0{,}0002$ [$-0{,}0007$; $+0{,}0000$]\\
+Índice de receita (log) & amostra completa & $+0{,}0174$ [$+0{,}0089$; $+0{,}0239$] & $-0{,}0132$ [$-0{,}0206$; $-0{,}0050$] & $+0{,}0010$ [$-0{,}0013$; $+0{,}0025$] & $+0{,}0014$ [$-0{,}0015$; $+0{,}0027$]\\
+Índice de receita (log) & nota = 5,0 & $+0{,}0000$ & $+0{,}0019$ [$-0{,}0040$; $+0{,}0059$] & $+0{,}0019$ [$-0{,}0040$; $+0{,}0059$] & $+0{,}0016$ [$-0{,}0019$; $+0{,}0040$]\\
+Avaliações em 12 meses (log) & amostra completa & $+0{,}0163$ [$+0{,}0108$; $+0{,}0208$] & $-0{,}0116$ [$-0{,}0157$; $-0{,}0067$] & $+0{,}0006$ [$-0{,}0009$; $+0{,}0014$] & $+0{,}0012$ [$-0{,}0008$; $+0{,}0025$]\\
+Avaliações em 12 meses (log) & nota = 5,0 & $+0{,}0000$ & $+0{,}0015$ [$-0{,}0020$; $+0{,}0041$] & $+0{,}0015$ [$-0{,}0020$; $+0{,}0041$] & $+0{,}0005$ [$-0{,}0018$; $+0{,}0017$]\\
+\hline
+\end{tabular}
+\label{tab:ganho}
+\end{table}
+
+A nota oficial acrescenta um poder explicativo pequeno, mas detectável nos três desfechos na amostra completa. O índice, no lugar da nota, explica menos. O índice não acrescenta poder explicativo além da nota oficial: nas 12 comparações de M3 com M1 (três desfechos em quatro escopos), o intervalo inclui zero em todas, tanto em A quanto em B. Restritas aos 22.564 anúncios com índice nos dois modelos, as diferenças de M3 $-$ M1 entre A e B são de no máximo 0,0010.
+
+Os coeficientes dentro da amostra mostram outra coisa. Em M3, o coeficiente padronizado do índice (erro-padrão robusto HC3) aparece significativo em vários desfechos e escopos. Reunindo os 12 coeficientes de cada modelo em uma família e aplicando a correção de Benjamini e Hochberg, 6 de 12 têm $q < 0{,}05$ em A e 8 de 12 em B. Esses coeficientes não são robustos. Mudam de sinal conforme o escopo (negativos na amostra completa e positivos em parte dos tetos) e conforme o modelo de sentimento (no índice de ocupação da amostra completa, o coeficiente é não significativo em A, com $q = 0{,}106$, e negativo e significativo em B, com $q = 0{,}003$), e não se confirmam fora da amostra, onde os ganhos de M3 $-$ M1 têm intervalos que incluem zero. Por isso ficam fora da síntese e das conclusões.
+
+\subsection{Monotonicidade e reordenamento}
+
+O índice reordena os anúncios em relação à nota oficial, e resta saber se a reordenação se associa ao desfecho. A Tabela~\ref{tab:faixas} mostra a correlação de postos entre cada medida e o índice de ocupação residualizado nos controles, por faixa da nota oficial.
+
+\begin{table}[htb]
+\centering
+\caption{Correlação de postos com o índice de ocupação residualizado, por faixa da nota oficial.}
+\small
+\begin{tabular}{l|r|r|r|r}
+\hline
+Faixa da nota oficial & $n$ & $\rho$ do índice (A) & $\rho$ do índice (B) & $\rho$ da nota oficial\\
+\hline
+Todas & 20.882 & 0,083 & 0,071 & 0,168\\
+$[0; 4{,}5)$ & 1.285 & $-0{,}086$ & $-0{,}108$ & $-0{,}176$\\
+$[4{,}5; 4{,}8)$ & 5.146 & $-0{,}045$ & $-0{,}063$ & 0,047\\
+$[4{,}8; 4{,}9)$ & 4.704 & $-0{,}036$ & $-0{,}063$ & 0,018\\
+$[4{,}9; 5)$ & 5.036 & $-0{,}018$ & $-0{,}004$ & 0,099\\
+$= 5{,}0$ & 4.711 & 0,025 & 0,028 & --\\
+\hline
+\end{tabular}
+\label{tab:faixas}
+\end{table}
+
+Nos dois modelos a associação do índice com o desfecho residual é pequena e muda de sinal entre as faixas, e na faixa de nota 5,0 é próxima de zero. A regressão isotônica, que impõe relação monótona crescente e é avaliada fora da amostra, tem $R^2$ de 0,029 para a nota oficial e de 0,006 para o índice na amostra completa (0,004 em B). Nos tetos, o $R^2$ é aproximadamente zero para ambos (na nota 5,0, $-0{,}003$ para o índice em A).
+
+\subsection{Sensibilidade}
+
+O resultado foi repetido em seis variantes: com e sem encolhimento, com e sem a satisfação geral, e com todos os anúncios ou apenas os de até 30 avaliações. O ganho de $R^2$ do índice além da nota oficial no teto (nota 5,0) permanece próximo de zero em todas, e o intervalo do ganho no número de avaliações em 12 meses inclui zero em todas (por exemplo, $+0{,}0015$, com intervalo de $-0{,}0020$ a $+0{,}0041$, na especificação principal, e $+0{,}0016$, com intervalo de $-0{,}0026$ a $+0{,}0044$, com encolhimento). A correlação de postos do índice com o índice de ocupação bruto, dentro da faixa de nota 5,0, é de $-0{,}01$ sem encolhimento e de $+0{,}35$ com encolhimento, e esse valor é um artefato do encolhimento (Seção 7.1). Sem ele, e com o desfecho residualizado, a correlação é próxima de zero em todas as variantes. Excluir a satisfação geral quase não altera os resultados.
+
+O limite de 30 avaliações por anúncio atinge 32\% dos anúncios elegíveis, mas apenas 5,2\% dos de nota 5,0. A confiabilidade do sentimento médio por anúncio, com correção de Spearman-Brown, é de 0,50 com 30 avaliações, de 0,67 com 60 e de 0,80 com 120. Não há deriva temporal relevante: as estrelas médias são de 4,345 nas 10 avaliações mais recentes e de 4,368 nas 20 mais antigas.
+
+\subsection{Como ler o resultado}
+
+O resultado é nulo e secundário: o índice sintético não acrescenta poder explicativo sobre os índices de volume além da nota oficial, nos dois modelos de sentimento. Há duas leituras, que não se excluem. A primeira é que o sentimento do texto tem pouca razão teórica para prever uma contagem de avaliações, porque os desfechos disponíveis são índices de volume (Seção 3). O nulo é, em parte, consequência do desfecho que a base permite. A segunda é que o valor do texto está na decomposição por aspecto da Seção 5. A nota oficial já resume bem a satisfação geral do hóspede, e o texto acrescenta o porquê. O índice sintético não é apresentado em nenhum ponto como uma nota melhor.

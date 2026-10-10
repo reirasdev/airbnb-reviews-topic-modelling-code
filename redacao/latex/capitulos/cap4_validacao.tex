@@ -1,0 +1,148 @@
+\section{VALIDAÇÃO DA MEDIÇÃO}
+
+Antes de usar o sentimento por aspecto para dizer algo sobre a nota, é preciso saber o quanto essa medida merece confiança. Esta seção reúne cinco tipos de evidência, da mais direta à mais indireta: frases rotuladas por um pesquisador, concordância entre os dois modelos, uma regra fixada de antemão para escolher o modelo principal, concordância com as subnotas oficiais e uma checagem com um segundo método de tópicos e com um segundo anotador. A seção termina com uma classificação dos aspectos, que as Seções 5 a 7 respeitam.
+
+\subsection{Evidência direta: frases rotuladas}
+
+Um pesquisador rotulou, sem ver as classificações automáticas, 297 sentenças, indicando o sentimento (negativo, neutro ou positivo) e o aspecto principal. A amostra foi estratificada pelo aspecto e pela polaridade previstos pelo modelo A, com cerca de um terço de sentenças de cada polaridade por aspecto. Por isso a amostra é rica em sentenças difíceis: no corpus, 78,9\% das sentenças são positivas segundo A. Cada métrica é lida de duas formas, na amostra e ponderada pela população, em que cada sentença pesa o tamanho do seu estrato original (aspecto e polaridade previstos por A). Os pesos são os mesmos para A e B. O tamanho efetivo da amostra ponderada é de apenas 72 sentenças, e os intervalos de confiança são, em consequência, largos.
+
+A Tabela~\ref{tab:rotuladas} apresenta as métricas de sentimento. Na amostra, o modelo B tem acurácia maior (63,3\% contra 58,9\%). Ponderando pela população, o modelo A é superior, com acurácia de 87,2\% contra 84,9\% e kappa ponderado linear de 0,66 contra 0,51.
+
+\begin{table}[htb]
+\centering
+\caption{Sentimento: desempenho dos modelos A e B nas 297 sentenças rotuladas.}
+\small
+\begin{tabular}{l|r|r}
+\hline
+Medida & A & B\\
+\hline
+Acurácia na amostra & 58,9\% & 63,3\%\\
+$F_1$ macro na amostra & 0,57 & 0,52\\
+Kappa de Cohen na amostra & 0,39 & 0,38\\
+Kappa ponderado linear na amostra & 0,48 & 0,50\\
+Correlação de postos, rótulo humano $\times$ estrelas esperadas & 0,64 & 0,63\\
+Acurácia ponderada pela população & 87,2\% & 84,9\%\\
+Kappa ponderado pela população & 0,55 & 0,43\\
+Kappa ponderado linear pela população & 0,66 & 0,51\\
+\hline
+\end{tabular}
+\label{tab:rotuladas}
+\end{table}
+
+A discordância entre a amostra e a população tem explicação. A amostra foi construída a partir das previsões de A e concentra as sentenças em que A erra, sobretudo as que A chama de neutras. Nos dois modelos o erro mais comum é classificar como neutras sentenças que o pesquisador considera positivas: quando A prevê positivo, acerta em 94,9\% dos casos, mas quando prevê neutro acerta em apenas 26,1\%. O modelo B classifica mais sentenças como positivas (151 contra 98 das 297) e acerta menos nas previstas como neutras (16,9\%) e negativas (51,7\%, contra 61,9\% de A). Por idioma, o português, que responde por 66\% das avaliações, é o de menor acerto na amostra para o modelo A (51,8\%, contra 61,4\% de B); ponderada pela população, a acurácia em português é de 85,0\% em A e de 82,7\% em B.
+
+Quanto ao aspecto, a atribuição não depende do modelo de sentimento. Acerta 54,5\% na amostra (kappa 0,50). Ponderando apenas pela participação de cada aspecto no corpus, a estimativa é de 52\%, e com os estratos de aspecto e polaridade, de 66\% (IC 95\% por \textit{bootstrap} de 57\% a 75\%), uma estimativa instável por causa de células com poucas sentenças e pesos muito desiguais. Na população, a acurácia de aspecto situa-se, portanto, entre 52\% e 66\%. O acerto é parecido nas três polaridades previstas (54\%, 53\% e 57\%), porém muito diferente conforme o tópico: 65\% nas sentenças de tópico direto (186) e 38\% nas de tópico reatribuído por similaridade (111). A Tabela~\ref{tab:precisao} mostra a precisão por aspecto, com cerca de 27 sentenças rotuladas em cada um (intervalos de aproximadamente $\pm 0{,}18$).
+
+\begin{table}[htb]
+\centering
+\caption{Precisão da atribuição de aspecto, por aspecto previsto (27 sentenças rotuladas em cada).}
+\small
+\begin{tabular}{l|r}
+\hline
+Aspecto previsto & Precisão\\
+\hline
+Custo-benefício & 74\%\\
+Localização & 74\%\\
+Precisão do anúncio & 70\%\\
+Limpeza & 67\%\\
+Check-in & 56\%\\
+Segurança & 48\%\\
+Comodidades & 44\%\\
+Comunicação & 44\%\\
+Ruído e conforto & 44\%\\
+Satisfação geral & 41\%\\
+Fora do perfil (\texttt{geral}) & 37\%\\
+\hline
+\end{tabular}
+\label{tab:precisao}
+\end{table}
+
+\subsection{Concordância entre os dois modelos}
+
+Com a evidência direta limitada a 297 sentenças, o corpus inteiro permite comparar os modelos entre si. Nas 1.512.063 sentenças, a correlação de postos das estrelas esperadas de A e B é 0,61 (Pearson 0,66) e o kappa ponderado linear das polaridades é 0,45. Por idioma, o kappa é 0,40 em português, 0,54 em inglês e 0,54 em espanhol. No nível de anúncio e aspecto, a concordância é maior (correlação de postos de 0,69 e kappa de 0,55), porque a média de várias sentenças reduz o ruído, e varia de 0,46 (precisão do anúncio) a 0,86 (comodidades). Os dois modelos ordenam sentenças e anúncios de modo semelhante, mas não são intercambiáveis: das 1.192.861 sentenças que A classifica como positivas, B concorda em 1.087.384, e das 215.635 que A classifica como neutras, B chama 128.723 de positivas.
+
+\subsection{Regra pré-registrada e modelo principal}
+
+A regra de escolha foi registrada antes da execução do modelo B (Seção 3). A diferença B menos A no kappa ponderado linear populacional é de $-0{,}141$ (IC 95\% de $-0{,}272$ a $-0{,}012$). O intervalo exclui zero, mas a favor de A, e por isso o modelo principal é A. Na acurácia populacional a diferença é de $-0{,}023$ (IC de $-0{,}078$ a $0{,}021$), e apenas em português, no kappa ponderado linear, de $-0{,}169$ (IC de $-0{,}323$ a $0{,}011$), intervalo que inclui zero. A escolha não é óbvia, porque B é melhor na amostra e A na população. A regra foi fixada de antemão justamente para não escolher o resultado mais conveniente. Daqui em diante o modelo principal é A, e os resultados de B acompanham cada análise como verificação de robustez.
+
+\subsection{Validade de construto: concordância com as subnotas oficiais}
+
+A evidência indireta mais importante é a concordância com as subnotas dadas pelos próprios hóspedes. Para cada aspecto com subnota correspondente, correlacionou-se, no nível do anúncio, o sentimento do aspecto com a subnota, e a satisfação geral com a nota global. Não há limiar de aprovação, e interessam a força e o sinal da correlação. A Tabela~\ref{tab:construto} apresenta os resultados.
+
+\begin{table}[htb]
+\centering
+\caption{Correlação entre o sentimento do aspecto e a subnota oficial correspondente, no nível do anúncio.}
+\small
+\begin{tabular}{l|l|r|r|r|r|r}
+\hline
+Aspecto & Subnota & $n$ & Spearman (A) & Pearson (A) & Spearman (B) & Pearson (B)\\
+\hline
+Limpeza & \texttt{cleanliness} & 19.095 & 0,45 & 0,58 & 0,42 & 0,52\\
+Localização & \texttt{location} & 24.101 & 0,24 & 0,31 & 0,24 & 0,27\\
+Check-in & \texttt{checkin} & 8.919 & 0,42 & 0,40 & 0,43 & 0,42\\
+Comunicação & \texttt{communication} & 25.418 & 0,30 & 0,44 & 0,30 & 0,43\\
+Custo-benefício & \texttt{value} & 3.552 & 0,24 & 0,26 & 0,22 & 0,23\\
+Precisão do anúncio & \texttt{accuracy} & 16.638 & 0,17 & 0,22 & 0,15 & 0,21\\
+Satisfação geral & nota global & 26.378 & 0,34 & 0,52 & 0,26 & 0,38\\
+\hline
+\end{tabular}
+\label{tab:construto}
+\end{table}
+
+Todos os coeficientes são positivos e significativos nos dois modelos. A concordância é moderada, de 0,17 a 0,45 em A e de 0,15 a 0,43 em B, sem um modelo sistematicamente melhor: B é um pouco maior em check-in e comunicação, e A em limpeza, custo-benefício e, sobretudo, satisfação geral. As correlações devem ser lidas à luz de que as subnotas também são comprimidas, com muitos empates em 5,0, o que as atenua. Cinco verificações de robustez complementam o resultado.
+
+Na primeira, por volume de avaliações, a concordância dos anúncios com até 30 avaliações (em que o sentimento usa todas as avaliações) difere da dos anúncios com mais de 30 em no máximo 0,11 (check-in), sem padrão sistemático. A segunda trata da validade convergente e discriminante: a subnota correspondente é a mais correlacionada com o aspecto em 5 de 7 casos em A e em 3 de 7 em B, e nos demais fica em segundo ou terceiro lugar, porque as subnotas são muito correlacionadas entre si (efeito halo). Controlando a nota global por correlação parcial, resta informação específica em limpeza (0,17), localização (0,22), check-in (0,23) e comunicação (0,15), e quase nenhuma em custo-benefício (0,08) e precisão do anúncio (0,04). Na terceira, a probabilidade de o sentimento ser maior nos anúncios de subnota 5 do que nos de subnota menor (AUC) vai de 0,57 a 0,69 em A e de 0,55 a 0,67 em B. Na quarta, as correlações são positivas em português, inglês e espanhol (de 0,13 a 0,45 em A) e em casa ou apartamento inteiro e quarto privado (de 0,17 a 0,46), o que sustenta o uso de modelos multilíngues. Na quinta, a confiabilidade das metades do sentimento por aspecto, com correção de Spearman-Brown, é baixa, de 0,10 a 0,40 em A e de 0,06 a 0,40 em B. As correlações corrigidas por essa atenuação (de 0,57 a 0,96 em A) são apenas ilustrativas, porque com confiabilidades tão baixas a correção é instável e corrige só o lado do sentimento.
+
+\subsection{Checagem com um segundo método de tópicos e com um segundo anotador}
+
+Para saber se os resultados por aspecto dependem do método de tópicos, cada sentença foi atribuída ao tópico dominante de um modelo LDA com 10 tópicos. O mapa dos tópicos do LDA para aspectos seguiu uma regra: o tópico recebe aspecto apenas quando a leitura das palavras de maior peso, o aspecto mais similar aos termos-semente e uma margem de 0,05 entre o primeiro e o segundo aspecto coincidem; caso contrário, o tópico é considerado misto e fica fora do perfil. O mapa foi confirmado pelo pesquisador. Quatro dos dez tópicos receberam aspecto (comodidades, comunicação, satisfação geral e localização), e 55\% das sentenças caem em tópicos mistos, de modo que o LDA permite checar apenas esses quatro aspectos. Entre as sentenças com aspecto nos dois métodos, 68,8\% recebem o mesmo aspecto. A Tabela~\ref{tab:lda} compara os resultados.
+
+\begin{table}[htb]
+\centering
+\caption{Checagem com LDA: correlação do perfil, validade de construto e parcela do $R^2$ da nota global.}
+\small
+\begin{tabular}{l|r|r|r|r|r}
+\hline
+Aspecto & Perfil BERTopic $\times$ LDA & Subnota (LDA) & Subnota (BERTopic) & $R^2$ (LDA) & $R^2$ (BERTopic)\\
+\hline
+Localização & 0,61 & 0,20 & 0,24 & 1,6\% & 0,9\%\\
+Comunicação & 0,54 & 0,28 & 0,30 & 22,7\% & 15,5\%\\
+Comodidades & 0,67 & -- & -- & 62,3\% & 59,0\%\\
+Satisfação geral & 0,46 & 0,19 & 0,34 & 13,4\% & 24,6\%\\
+\hline
+\end{tabular}
+\label{tab:lda}
+\end{table}
+
+O sinal da validade de construto se mantém nos três aspectos que têm subnota, com correlações do mesmo tamanho nos dois mais específicos e menores em satisfação geral. Na decomposição do $R^2$ da nota global, comodidades fica em primeiro nos dois métodos, e satisfação geral e comunicação trocam de posição (correlação de postos de 0,80, com apenas quatro aspectos).
+
+Um segundo anotador rotulou, sem ver as classificações do primeiro nem as dos modelos, 100 sentenças da amostra. A concordância no sentimento é de 91\% (kappa de Cohen de 0,86, IC de 0,76 a 0,94; kappa ponderado linear de 0,88) e, no aspecto, de 67\% (kappa de 0,62, IC de 0,51 a 0,73). Os anotadores concordam bem quanto ao sentimento e de forma moderada quanto ao aspecto. A concordância é baixa justamente em satisfação geral (19\%, $n = 16$, em geral confundida com o grupo \texttt{geral}) e em limpeza (33\%, $n = 6$), e alta em custo-benefício e precisão do anúncio (100\% nos dois). A amostra é pequena, e as concordâncias por aspecto se apoiam em 4 a 20 sentenças.
+
+\subsection{Classificação dos aspectos}
+
+A partir das evidências, cada aspecto foi classificado por um critério descritivo, fixado antes das seções seguintes. O aspecto é considerado confiável quando a precisão de atribuição na amostra é de ao menos 0,60 e a correlação com a subnota correspondente é de ao menos 0,20 nos dois modelos. Nos demais casos pede cautela. A Tabela~\ref{tab:classif} apresenta o resultado.
+
+\begin{table}[htb]
+\centering
+\caption{Classificação dos aspectos quanto à confiança da medida.}
+\small
+\begin{tabular}{l|r|r|r|l}
+\hline
+Aspecto & Precisão & Spearman (A) & Spearman (B) & Classificação\\
+\hline
+Limpeza & 67\% & 0,45 & 0,42 & confiável\\
+Localização & 74\% & 0,24 & 0,24 & confiável\\
+Custo-benefício & 74\% & 0,24 & 0,22 & confiável\\
+Check-in & 56\% & 0,42 & 0,43 & cautela\\
+Comunicação & 44\% & 0,30 & 0,30 & cautela\\
+Precisão do anúncio & 70\% & 0,17 & 0,15 & cautela\\
+Satisfação geral & 41\% & 0,34 & 0,26 & cautela\\
+Ruído e conforto & 44\% & -- & -- & cautela (sem subnota)\\
+Segurança & 48\% & -- & -- & cautela (sem subnota)\\
+Comodidades & 44\% & -- & -- & cautela (sem subnota)\\
+\hline
+\end{tabular}
+\label{tab:classif}
+\end{table}
+
+São confiáveis limpeza, localização e custo-benefício. Os sete restantes pedem cautela. Duas consequências valem para as seções seguintes. O aspecto de maior peso na Seção 5, comodidades, está entre os que pedem cautela, por ter atribuição imprecisa e nenhuma subnota que o valide. Por isso a leitura prática se apoia nos tópicos finos de queixa e elogio, cuja atribuição é melhor (65\% de acerto de aspecto nos tópicos diretos), e os pesos por aspecto são apresentados como indicativos. Além disso, nenhum resultado por aspecto deve ser lido sem a classificação correspondente.
