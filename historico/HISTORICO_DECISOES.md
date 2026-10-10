@@ -523,3 +523,24 @@ como o mesmo grupo. O script foi **testado com rótulos simulados (descartados)*
 - **Checagem com A:** entre as sentenças com aspecto nos dois métodos, 68,8% recebem o mesmo aspecto; correlação (Spearman) do perfil por anúncio BERTopic × LDA: comodidades 0,67, localização 0,61, comunicação 0,54, satisfação geral 0,46.
   Validade de construto com o perfil LDA (Spearman com a subnota): localização 0,20 (BERTopic 0,24), comunicação 0,28 (0,30), satisfação geral 0,19 (0,34): mesmo sinal. LMG da nota global (4 aspectos): comodidades é o primeiro nos dois métodos;
   correlação de postos da ordenação 0,80 (apenas 4 aspectos). Os números finais serão refeitos com o modelo principal definitivo (etapa 23).
+
+## 33. Fases 1 e 2 (v3): modelo B concluído; REGRA 1.6 aplicada; cadeia a jusante com os dois modelos (2026-10-10)
+
+**Execução.** Inferência do modelo B nos 1.366.091 textos únicos (igual à aba `Estat_Corpus`): 757 min em CPU, sem falhas (`outputs/sentimento_B.out`). Cadeia a jusante com B (etapas 5 a 11 e 14 a 17, `--sentimento B`) e comparações (19, 20, 24, 25).
+Sanidade: A e B têm distribuições de polaridade diferentes por sentença (A: 6,9% negativa, 14,3% neutra, 78,9% positiva; B: 10,4%, 8,1%, 81,5%); estrelas médias por texto único 4,19 (A) e 4,06 (B).
+
+**REGRA 1.6 (registrada na seção 30 antes de rodar B), resultado com o B completo = o preliminar:** diferença B − A no kappa ponderado linear populacional = **−0,141** (IC 95% bootstrap estratificado [−0,272; −0,012]),
+isto é, o IC exclui zero **a favor de A**. **O modelo principal permanece A**; B é reportado integralmente como robustez (`Config`: `SENTIMENT_MAIN = "A"`). Discordância entre a amostra e a população, descrita sem escolher
+o resultado mais conveniente: **na amostra de 297 frases B tem acurácia maior** (63,3% vs 58,9%; em português 61,4% vs 51,8%), mas a amostra foi estratificada pelas previsões de A (rica em frases que A classifica como
+neutras, onde A erra); **ponderando pela população dos estratos originais, A é melhor** (acurácia 87,2% vs 85,0%; kappa linear 0,656 vs 0,515). Em português, o IC da diferença no kappa linear populacional é [−0,323; +0,011]
+(inclui zero). B classifica mais frases como positivas (151 vs 98 das 297) e acerta menos nas previstas como neutras (17% vs 26%) e negativas (52% vs 62%).
+
+**Concordância A × B no corpus:** sentença, Spearman das estrelas 0,61 e kappa ponderado linear das polaridades 0,45 (português 0,40; inglês 0,54; espanhol 0,54); anúncio × aspecto, Spearman 0,69 e kappa 0,55.
+**Resultados com B (resumo; tabelas em `Resumo_AB`/`LadoALado_*`):** a validade de construto é semelhante (Spearman com a subnota correspondente entre 0,15 e 0,43; satisfação geral × nota global 0,26 vs 0,34 de A); a ordem de importância dos
+aspectos para a nota global é parecida (comodidades 47,8% vs 42,5% do R²; satisfação geral 9,9% vs 17,5%); o R_syn de B correlaciona 0,82 com o de A; o poder explicativo de R_syn além da nota oficial permanece nulo nos dois modelos.
+**Sazonalidade:** o **deslocamento geral de positividade nos eventos de música e em Corpus Christi (seção 22) não se replica com B** (razões de chances 0,97 a 0,99, ICs incluindo 1); os aumentos de queixas por aspecto no Carnaval também diferem entre os modelos
+(A: precisão, custo-benefício e localização; B: segurança). O resultado de volume de avaliações (independe do sentimento) não muda. O conteúdo da sazonalidade é, portanto, **sensível ao modelo de sentimento**.
+
+**Tabelas novas para sustentar o texto (antes só em scripts ad hoc):** `cmp_manual_aspecto` (acurácia de aspecto: amostra, ponderada, por polaridade, tópico direto vs reatribuído), `limite30` (limite de 30 avaliações), `sazon_negativa_geral`;
+`n_efetivo_ponderado` nas métricas da validação manual (72,5 frases). **Diagnóstico (2.12):** regenerado com o modelo principal (A); os três exemplos anonimizados saem idênticos aos anteriores.
+**Regressão:** as abas do modelo principal da nova planilha são idênticas às da planilha de 2026-10-04 (nenhuma diferença).

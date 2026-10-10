@@ -100,6 +100,20 @@ DEPENDENTES = ["Validacao_Construto", "Perfil_ABSA", "Rating_Sintetico", "Analis
                "Sazon_Conteudo", "Sazon_Criterio", "Benchmark_Bairro_Tipo"]
 
 
+def _mapa_revisao(cfg) -> pd.DataFrame:
+    """Contagens da revisão humana do mapa tópico → aspecto (a partir de data/mapa_aspecto_confirmado.xlsx)."""
+    p = Path(cfg.MAPPING_CSV).with_suffix(".xlsx")
+    M = pd.read_excel(p)
+    n = len(M)
+    c = lambda m: int(m.sum())
+    resumo = pd.DataFrame({"medida": ["tópicos", "sugestão automática aceita pelo pesquisador (aspecto_usuario == sugestao)", "alterados pelo pesquisador (aspecto_usuario != sugestao)",
+                                      "reclassificados após discussão (alterado_por_claude)", "tópicos no mapa final em satisfacao_geral", "tópicos no mapa final em geral"],
+                           "valor": [n, c(M["aspecto_usuario"] == M["sugestao"]), c(M["aspecto_usuario"] != M["sugestao"]), c(M["alterado_por_claude"]),
+                                     c(M["aspecto_confirmado"] == "satisfacao_geral"), c(M["aspecto_confirmado"] == "geral")]})
+    por = M.groupby("aspecto_confirmado").agg(topicos=("topic", "size"), frases_na_amostra_de_ajuste=("n_fit", "sum")).reset_index()
+    return pd.concat([resumo, pd.DataFrame({"": [""]}), por], ignore_index=True)
+
+
 def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd.DataFrame | None) -> None:
     """Planilha única: abas do modelo principal com os nomes atuais, as do outro modelo com sufixo _mA/_mB, e as abas novas de comparação entre modelos."""
     sA, sB = Store(cfg, suffix=""), Store(cfg, suffix="__B")
@@ -135,11 +149,16 @@ def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd
     sheets["Diferenca_B_menos_A"] = juntar(g("cmp_regra_modelo_principal"), g("cmp_manual_diferenca"))
     sheets["Checagem_LDA"] = juntar(g("lda_shared_mapa"), g("lda_concordancia_sentencas", sp), g("lda_perfil_correlacao", sp), g("lda_validade", sp), g("lda_importancia_comparacao", sp))
     sheets["Resumo_AB"] = g("cmp_resumo_AB")
+    sheets["Aspecto_Rotuladas"] = juntar(g("cmp_manual_aspecto"), g("cmp_manual_aspecto_por_classe"))
+    sheets["Limite_30_Avaliacoes"] = g("limite30", sp)
+    sheets["Sazon_NegativaGeral"] = g("sazon_negativa_geral", sp)
+    sheets["Sazon_NegativaGeral_m" + outro] = g("sazon_negativa_geral", so)
+    sheets["Mapa_Revisao"] = _mapa_revisao(cfg)
     sheets["Comparacoes_Multiplas"] = g("cmp_comparacoes_multiplas")
     sheets["Selecao_Teto"] = g("cmp_selecao_teto")
     sheets["RSyn_Resumo_AB"] = juntar(g("cmp_rsyn_resumo"), g("cmp_queixas_sobreposicao"), g("cmp_queixas_listas"))
     sheets["Analise_A_Intersecao"] = juntar(g("cmp_inter_diferencas"))
-    for nome in ("validacao_construto", "analise_a_diferencas", "imp_lmg", "sensibilidade", "val_convergente", "imp_gbm", "imp_logit", "analise_b_faixas"):
+    for nome in ("validacao_construto", "analise_a_diferencas", "imp_lmg", "sensibilidade", "val_convergente", "imp_gbm", "imp_logit", "analise_b_faixas", "perfil_cobertura", "imp_segmentos", "imp_sensibilidade", "analise_a_coefs", "sazon_aspecto"):
         sheets[f"LadoALado_{nome}"[:31]] = g(f"cmp_ladoalado_{nome}")
     ordem = ["Config", "Resumo_AB"] if "Resumo_AB" in sheets else ["Config"]
     sheets = {k: sheets[k] for k in ordem + [k for k in sheets if k not in ordem]}

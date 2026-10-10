@@ -202,6 +202,7 @@ def run(cfg, store: Store) -> None:
                         listas["B"][["topic", "top_words", "aspecto", "prevalencia", "efeito_pontos_percentil_nota"]].assign(lista="B", posto=range(1, len(listas["B"]) + 1))])
         sA.save("cmp_queixas_sobreposicao", resumo)
         sA.save("cmp_queixas_listas", Lq)
+        sA.save("cmp_resumo_AB", _resumo_ab(sA, cfg))
         log.info("Resumo do R_syn A × B:\n%s", T.round(4).to_string(index=False))
         log.info("Seleção no teto:\n%s", Sel.round(3).to_string(index=False))
         log.info("Comparações múltiplas (R_syn):\n%s", pd.concat(rows if False else [sA.load("cmp_comparacoes_multiplas")]).round(4).to_string(index=False))

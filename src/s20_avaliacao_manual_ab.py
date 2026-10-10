@@ -74,6 +74,7 @@ def run(cfg, store: Store) -> None:
             rows.append({"modelo": nome, "n": len(H), **{f"{k}_amostra": v for k, v in m_amostra.items()}, **{f"{k}_populacao": v for k, v in m_pop.items()},
                          "spearman_rotulo_estrelas": float(stats.spearmanr(y, stars)[0])})
         Mods = pd.DataFrame(rows)
+        Mods["n_efetivo_ponderado"] = float(w.sum() ** 2 / (w ** 2).sum())
 
         # confusões (linhas = humano) e acerto por classe prevista; por idioma
         cl = np.array(CLASSES)
@@ -125,6 +126,35 @@ def run(cfg, store: Store) -> None:
         R = pd.DataFrame([{"regra": "B se o IC 95% de (B − A) no kappa ponderado linear populacional exclui 0 a favor de B; senão A",
                            "diferenca_B_menos_A": regra["B_menos_A"], "ic_inf": regra["dif_ic_inf"], "ic_sup": regra["dif_ic_sup"], "modelo_principal": principal,
                            "origem_das_probabilidades_de_B": origem_b}])
+        # ---- aspecto (independe do modelo de sentimento): amostra, população (aspecto × polaridade e só aspecto), por polaridade, tópico direto vs reatribuído
+        Tx = sA.load("texts")[["text_id", "n_tok"]]
+        SA = sA.load("sentencas_aspecto")[["text_id", "aspecto"]].merge(Tx, on="text_id")
+        SA = SA[SA["n_tok"] >= cfg.MIN_SENT_TOKENS].drop_duplicates("text_id")
+        n_pop = SA.groupby("aspecto").size()
+        asp_h = H["aspecto_humano"].replace({"nenhum": "geral"})
+        ok_a = (asp_h == H["aspecto_modelo"]).to_numpy()
+        n_lab = H.groupby("aspecto_modelo").size()
+        w_asp = H["aspecto_modelo"].map(n_pop / n_lab).fillna(1.0).to_numpy()
+        tt = sA.load("text_topics")[["text_id", "topic_raw"]]
+        direto = (H[["text_id"]].merge(tt, on="text_id", how="left")["topic_raw"].to_numpy() >= 0)
+        rng2 = np.random.default_rng(cfg.SEED + 11)
+        cells = {c: np.flatnonzero((cel == c).to_numpy()) for c in cel.unique()}
+        bs = []
+        for _ in range(BOOT):
+            i = np.concatenate([rng2.choice(v, len(v), replace=True) for v in cells.values()])
+            bs.append(np.average(ok_a[i], weights=w[i]))
+        asp_rows = [("acurácia de aspecto na amostra", float(ok_a.mean()), np.nan, np.nan, len(H)),
+                    ("acurácia de aspecto ponderada (estratos aspecto × polaridade)", float(np.average(ok_a, weights=w)), float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5)), len(H)),
+                    ("acurácia de aspecto ponderada (só pela participação do aspecto)", float(np.average(ok_a, weights=w_asp)), np.nan, np.nan, len(H)),
+                    ("kappa de Cohen do aspecto na amostra", float(cohen_kappa_score(asp_h, H["aspecto_modelo"])), np.nan, np.nan, len(H))]
+        for pol_, d in H.assign(ok=ok_a).groupby("pol", observed=True):
+            asp_rows.append((f"acurácia de aspecto na amostra, polaridade prevista {pol_}", float(d["ok"].mean()), np.nan, np.nan, len(d)))
+        asp_rows += [("acurácia de aspecto, tópico direto", float(ok_a[direto].mean()), np.nan, np.nan, int(direto.sum())),
+                     ("acurácia de aspecto, tópico reatribuído (outlier)", float(ok_a[~direto].mean()), np.nan, np.nan, int((~direto).sum()))]
+        Asp = pd.DataFrame(asp_rows, columns=["medida", "valor", "ic_inf", "ic_sup", "n"])
+        PA = H.assign(ok=ok_a).groupby("aspecto_modelo").agg(n=("ok", "size"), precisao=("ok", "mean")).reset_index().rename(columns={"aspecto_modelo": "aspecto_previsto"})
+        sA.save("cmp_manual_aspecto", Asp)
+        sA.save("cmp_manual_aspecto_por_classe", PA)
         for nome, t in (("cmp_manual_modelos", Mods), ("cmp_manual_por_classe", pd.DataFrame(por_classe)), ("cmp_manual_idioma", pd.DataFrame(idi)),
                         ("cmp_manual_diferenca", Dif), ("cmp_regra_modelo_principal", R)):
             sA.save(nome, t)

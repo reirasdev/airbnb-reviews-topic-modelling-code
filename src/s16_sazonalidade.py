@@ -140,6 +140,21 @@ def conteudo(cfg, store: Store, E: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataF
             endog = np.column_stack([tn[t].to_numpy()[m], (tot_d - tn[t]).to_numpy()[m]])
             o = _fit(endog, D[m].reset_index(drop=True), ec, fam)
             rows_t.append(o.assign(defasagem=lag, topic=int(t)))
+    rows_g = []  # proporção GERAL de frases negativas (corpus inteiro) por evento: deslocamento geral de positividade
+    for lag in LAGS:
+        M = marcar_dias(days, completos(E, days, lag), lag)
+        M = M[[c for c in ev_cols if c in M.columns]]
+        M = M.loc[:, M.sum() > 0]
+        D = _design(days, M)
+        m = tot.to_numpy() > 0
+        neg_all = A[A["neg"]].groupby("date").size().reindex(days, fill_value=0)
+        endog = np.column_stack([neg_all.to_numpy()[m], (tot - neg_all).to_numpy()[m]])
+        rows_g.append(_fit(endog, D[m].reset_index(drop=True), list(M.columns), fam).assign(defasagem=lag))
+    G = pd.concat(rows_g)
+    G["q_BH"] = np.nan
+    for _, idx in G.groupby("defasagem").groups.items():
+        G.loc[idx, "q_BH"] = _bh(G.loc[idx, "p"]).to_numpy()
+    store.save("sazon_negativa_geral", G)
     Ra, Rt = pd.concat(rows_a), pd.concat(rows_t)
     for R, keys in ((Ra, ["defasagem", "medida"]), (Rt, ["defasagem"])):
         R["q_BH"] = np.nan
