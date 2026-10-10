@@ -137,3 +137,11 @@ def kappa(cfg, preenchida: str | Path, chave: str | Path | None = None, boot: in
     por_aspecto = D.assign(igual=(a1 == a2)).groupby("aspecto_anotador1")["igual"].agg(["size", "mean"]).rename(columns={"size": "n", "mean": "concordancia"}).reset_index()
     return {"resumo": R, "por_aspecto": por_aspecto, "conf_sentimento": pd.crosstab(D["sentimento_anotador1"], D["sentimento_anotador2"]).reset_index(),
             "conf_aspecto": pd.crosstab(D["aspecto_anotador1"], D["aspecto_anotador2"]).reset_index()}
+
+
+def salvar_kappa(cfg, store, preenchida: str | Path = "data/validacao_segundo_anotador.xlsx") -> dict[str, pd.DataFrame]:
+    """Calcula a concordância entre anotadores e guarda as tabelas no cache (prefixo cmp_, usadas na aba Segundo_Anotador)."""
+    r = kappa(cfg, preenchida)
+    for k, v in r.items():
+        store.save(f"cmp_segundo_anotador_{k}", v)
+    return r

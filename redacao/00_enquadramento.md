@@ -32,9 +32,9 @@ anfitriões e empresas gestoras.
   escolha implica.
 - **Aplicada (mestrado profissional):** ranking de aspectos e tópicos associados à nota (e das queixas que mais pesam), e uma ferramenta de diagnóstico por anúncio com referência a anúncios semelhantes.
 
-## 5. Título (provisório; a escolher pelo pesquisador)
+## 5. Título (escolhido pelo pesquisador)
 
-- **Proposto:** *O que as avaliações revelam sobre a nota: decomposição por aspecto do sentimento em avaliações de hóspedes do Airbnb no Rio de Janeiro.*
+- **Escolhido:** *O que as avaliações revelam sobre a nota: decomposição por aspecto do sentimento em avaliações de hóspedes do Airbnb no Rio de Janeiro.*
 - Opção 2: *Decompondo a nota do Airbnb: aspectos e tópicos nas avaliações de hóspedes no Rio de Janeiro.*
 - Opção 3: *Além da nota: análise de sentimento por aspecto em avaliações do Airbnb e diagnóstico para anfitriões no Rio de Janeiro.*
 
@@ -46,5 +46,5 @@ anfitriões e empresas gestoras.
 ## 7. Limitações a declarar (resumo)
 
 Sentimento calculado sobre as 30 avaliações mais recentes por anúncio; anúncios com pouco texto ficam fora de R_syn (só ~55% dos de nota 5,0 entram); mapeamento tópico → aspecto e validação manual feitos por um pesquisador
-(segundo anotador pendente); desfechos `estimated_*` construídos algebricamente; análise de sazonalidade restrita (data da avaliação ≠ data da estadia; só anúncios ativos na coleta); todas as associações são
+(segundo anotador em 100 frases: kappa 0,86 no sentimento e 0,62 no aspecto); desfechos `estimated_*` construídos algebricamente; análise de sazonalidade restrita (data da avaliação ≠ data da estadia; só anúncios ativos na coleta); todas as associações são
 descritivas, sem inferência causal.

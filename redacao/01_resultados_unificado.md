@@ -1,6 +1,6 @@
 # Resultados unificados (rascunho para a dissertação)
 
-> **Planilha de apoio:** `resultados_final_20261010_094742.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. Trechos marcados **[provisório]** dependem de
+> **Planilha de apoio:** `resultados_final_20261010_121141.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. Trechos marcados **[provisório]** dependem de
 > confirmação do pesquisador (mapa tópico → aspecto do LDA; segundo anotador). A organização por perguntas está em `00_enquadramento.md`.
 
 ## 1. Dados e amostra
@@ -224,7 +224,7 @@ O sinal da validade de construto se mantém nos três aspectos que têm subnota 
 
 ### 4.6 O que é confiável e o que pede cautela
 
-*Abas da planilha:* `Aspecto_Rotuladas`, `Validacao_Construto`, `LadoALado_validacao_construto`.
+*Abas da planilha:* `Aspecto_Rotuladas`, `Validacao_Construto`, `LadoALado_validacao_construto`, `Segundo_Anotador`.
 
 Resumindo as evidências, classificamos cada aspecto com um critério descritivo, fixado antes das seções seguintes: **confiável** se a precisão de atribuição na amostra é de ao menos 0,60 e a correlação com a subnota correspondente é de ao menos 0,20 nos dois modelos; **cautela** nos demais casos.
 
@@ -242,8 +242,7 @@ Resumindo as evidências, classificamos cada aspecto com um critério descritivo
 | Satisfação geral | 41% | 0,34 | 0,26 | cautela | precisão de atribuição < 0,60 |
 
 São confiáveis: Limpeza, Localização, Custo-benefício. Pedem cautela: Check-in, Comunicação, Ruído e conforto, Segurança, Precisão do anúncio, Comodidades, Satisfação geral. Duas consequências valem para as seções 5 a 7. Primeiro, o aspecto de maior peso na seção 5, comodidades, pede cautela (atribuição imprecisa e sem subnota para validar); por isso a leitura prática da seção 5 se apoia nos tópicos finos de queixa e
-elogio, cuja atribuição é melhor (tópicos diretos, 65% de acerto de aspecto), e os pesos por aspecto são apresentados como indicativos. Segundo, nenhum resultado por aspecto deve ser lido sem a classificação ao lado. A concordância entre dois anotadores ainda
-não foi medida (**pendente**): uma planilha cega de 100 frases e o script de kappa estão prontos.
+elogio, cuja atribuição é melhor (tópicos diretos, 65% de acerto de aspecto), e os pesos por aspecto são apresentados como indicativos. Segundo, nenhum resultado por aspecto deve ser lido sem a classificação ao lado. Um segundo anotador rotulou, sem ver as classificações do primeiro nem dos modelos, 100 frases da amostra. A concordância no sentimento é de 91% (kappa de Cohen 0,86, IC [0,76; 0,94]; kappa ponderado linear 0,88) e, no aspecto, de 67% (kappa 0,62, IC [0,51; 0,73]). Os dois anotadores concordam bem no sentimento e só moderadamente no aspecto, o que é coerente com a classificação acima: a concordância é baixa justamente em satisfação geral (19%, n = 16, em geral confundida com o grupo geral) e em limpeza (33%, n = 6), e é alta em custo-benefício e precisão do anúncio (100% nos dois). A amostra de 100 frases é pequena, e as concordâncias por aspecto têm de 4 a 20 frases.
 
 ## 5. O que o texto revela sobre a nota
 
@@ -517,30 +516,30 @@ Por exemplo, os aumentos de queixa no Carnaval que aparecem só em A: Localizaç
 
 ## 9. Limitações
 
-*Abas da planilha:* `Config`, `Estat_Corpus`, `Limite_30_Avaliacoes`, `Avaliacao_Rotuladas_AB`, `Aspecto_Rotuladas`, `Val_Confiab_AUC`, `Checagem_LDA`.
+*Abas da planilha:* `Config`, `Estat_Corpus`, `Limite_30_Avaliacoes`, `Avaliacao_Rotuladas_AB`, `Aspecto_Rotuladas`, `Val_Confiab_AUC`, `Checagem_LDA`, `Segundo_Anotador`.
 
 Reunimos aqui o que limita a leitura de todo o texto, na ordem das seções.
 
 - **Recorte do corpus (seção 1).** O sentimento usa as 30 avaliações mais recentes de cada anúncio; 32% dos anúncios elegíveis (9.266) têm mais avaliações que o limite. O truncamento afeta pouco os de nota 5,0 (5,2%), mas reduz a confiabilidade do sentimento médio por anúncio (Spearman-Brown de 0,50 com 30 avaliações).
   Os dados só têm anúncios ativos na coleta, e as avaliações não indicam a data da estadia.
 - **Desfechos (seção 2).** Não há ocupação nem receita observadas; os campos disponíveis são funções do número de avaliações recentes. Nenhum resultado fala de desempenho econômico.
-- **Medição do texto (seções 3 e 4).** Os rótulos de referência vêm de um único pesquisador, que também revisou o mapa de tópicos para aspectos; a concordância com um segundo anotador ainda não foi medida (**pendente**: planilha cega de 100 frases e script de kappa prontos). A amostra rotulada tem 297 frases e, ponderada pela população, tamanho efetivo de cerca de 72 frases, de modo que os intervalos são largos e as
+- **Medição do texto (seções 3 e 4).** Os rótulos de referência vêm de um único pesquisador, que também revisou o mapa de tópicos para aspectos; um segundo anotador rotulou 100 frases (seção 4.6), com concordância moderada no aspecto (kappa 0,62), de modo que a atribuição de aspecto tem erro de rotulagem além do erro do modelo. A amostra rotulada tem 297 frases e, ponderada pela população, tamanho efetivo de cerca de 72 frases, de modo que os intervalos são largos e as
   comparações entre modelos são frágeis (a diferença de kappa B − A é de −0,141, com IC que mal exclui zero). A confiabilidade split-half do sentimento por aspecto é baixa, e as subnotas oficiais usadas como referência são comprimidas. Sete dos dez aspectos pedem cautela (seção 4.6); em especial, comodidades, o aspecto de maior peso,
   tem atribuição imprecisa e não tem subnota para validar. O mapa do LDA é **provisório** e depende de confirmação do pesquisador; o LDA só checa quatro aspectos.
 - **Dois modelos de sentimento (seção 4).** O modelo A é o principal por uma regra fixada antes da execução do B, mas B é melhor na amostra rotulada e A na população; a escolha não é óbvia, e por isso os resultados de B acompanham todos os blocos. Onde os dois divergem (seções 7.3 e 8), as duas leituras são relatadas sem preferência.
 - **Importância dos aspectos (seção 5).** A importância relativa de um aspecto mistura efeito e confiabilidade da medida, e as associações com a nota são entre anúncios, não dentro do anúncio; nada disso autoriza falar em causa. Anúncios sem aspectos suficientes têm sentimento imputado.
 - **Índice sintético (seção 7).** Só 5.142 dos anúncios de nota 5,0 têm o índice, e os que ficam de fora têm menos avaliações; as conclusões sobre o teto valem para esse subconjunto. A decisão de não aplicar shrinkage foi tomada depois de ver o resultado com shrinkage. Coeficientes dentro da amostra não são robustos e não foram confirmados fora dela.
-- **Sazonalidade (seção 8).** Exploratória, com poucas edições por evento e conteúdo sensível ao modelo; o feriado municipal de São Sebastião deve ser conferido em lei municipal.
+- **Sazonalidade (seção 8).** Exploratória, com poucas edições por evento e conteúdo sensível ao modelo; o feriado municipal de São Sebastião (20 de janeiro) foi confirmado pelo pesquisador e entra com janela de 19 a 21 de janeiro.
 - **Generalização.** Um só município, uma só plataforma e uma só coleta.
 
 ## 10. Conclusões
 
-*Abas da planilha:* `Avaliacao_Rotuladas_AB`, `Diferenca_B_menos_A`, `Validacao_Construto`, `Checagem_LDA`, `Imp_Aspectos`, `LadoALado_imp_lmg`, `Imp_Topicos_Queixas`, `RSyn_Resumo_AB`, `Selecao_Teto`, `Analise_A`, `Comparacoes_Multiplas`, `Sazon_Volume`, `Config`.
+*Abas da planilha:* `Avaliacao_Rotuladas_AB`, `Diferenca_B_menos_A`, `Validacao_Construto`, `Checagem_LDA`, `Segundo_Anotador`, `Imp_Aspectos`, `LadoALado_imp_lmg`, `Imp_Topicos_Queixas`, `RSyn_Resumo_AB`, `Selecao_Teto`, `Analise_A`, `Comparacoes_Multiplas`, `Sazon_Volume`, `Config`.
 
 As conclusões seguem a ordem da linha de raciocínio. Todas são associações, e todas valem com as ressalvas da seção 9.
 
 1. **A medição do texto é utilizável, com restrições.** Em 297 frases rotuladas por um pesquisador, a acurácia populacional do sentimento é de 87% no modelo A e 85% no B, e o kappa ponderado populacional é 0,66 e 0,51. Pela regra fixada antes da execução do B (diferença de kappa B − A de −0,141, IC [−0,272; −0,012]), o modelo principal é A, e B acompanha todos os resultados. Os dois modelos concordam em ordenar
-   frases e anúncios, mas não são intercambiáveis. O sentimento dos aspectos concorda com as subnotas oficiais de forma moderada e positiva; só Limpeza, Localização, Custo-benefício satisfazem o critério de confiança da seção 4.6, e Check-in, Comunicação, Ruído e conforto, Segurança, Precisão do anúncio, Comodidades, Satisfação geral pedem cautela. Um segundo método de tópicos (LDA, mapa provisório) reproduz o sinal nos aspectos que consegue checar. A concordância entre dois anotadores está **pendente**.
+   frases e anúncios, mas não são intercambiáveis. O sentimento dos aspectos concorda com as subnotas oficiais de forma moderada e positiva; só Limpeza, Localização, Custo-benefício satisfazem o critério de confiança da seção 4.6, e Check-in, Comunicação, Ruído e conforto, Segurança, Precisão do anúncio, Comodidades, Satisfação geral pedem cautela. Um segundo método de tópicos (LDA, mapa provisório) reproduz o sinal nos aspectos que consegue checar. Entre dois anotadores, a concordância é alta no sentimento (kappa 0,86) e moderada no aspecto (0,62).
 2. **O texto das avaliações revela o que se associa à nota.** Nos dois modelos, comodidades é o aspecto de maior parcela do R² da nota global (42% em A e 48% em B), seguida de limpeza (20% e 19%), e isso se mantém em todos os segmentos e sensibilidades.
    Como comodidades pede cautela, a leitura que mais se sustenta é a dos tópicos finos: 13 das 15 queixas de maior peso são as mesmas nos dois modelos (banheiro e chuveiro, ar-condicionado, sujeira, cozinha, cheiro, cama, wi-Fi, resposta do anfitrião), associadas a quedas de 10 a 26 pontos no percentil da nota.
 3. **A decomposição é aplicável ao anúncio.** O diagnóstico por anúncio (seção 6) compara cada aspecto com anúncios do mesmo bairro e tipo, mostra a evidência de cada um e as queixas e elogios recorrentes, e indica onde investigar, sem prever nota nem prescrever causas.

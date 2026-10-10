@@ -10,6 +10,12 @@ def _val(s) -> pd.DataFrame:
 
 def secao4() -> str:
     man = L(sA, "cmp_manual_modelos").set_index("modelo")
+    sg = L(sA, "cmp_segundo_anotador_resumo").set_index("medida")
+    spa = L(sA, "cmp_segundo_anotador_por_aspecto").set_index("aspecto_anotador1")
+    seg_txt = (f"Um segundo anotador rotulou, sem ver as classificações do primeiro nem dos modelos, {n(sg.loc['n frases rotuladas pelos dois', 'valor'])} frases da amostra. A concordância no sentimento é de {pc(sg.loc['sentimento: concordância simples', 'valor'], 0)} (kappa de Cohen {f(sg.loc['sentimento: kappa de Cohen', 'valor'])}, IC {ic(sg.loc['sentimento: kappa de Cohen', 'ic_inf'], sg.loc['sentimento: kappa de Cohen', 'ic_sup'])}; "
+               f"kappa ponderado linear {f(sg.loc['sentimento: kappa ponderado linear', 'valor'])}) e, no aspecto, de {pc(sg.loc['aspecto: concordância simples', 'valor'], 0)} (kappa {f(sg.loc['aspecto: kappa de Cohen', 'valor'])}, IC {ic(sg.loc['aspecto: kappa de Cohen', 'ic_inf'], sg.loc['aspecto: kappa de Cohen', 'ic_sup'])}). "
+               f"Os dois anotadores concordam bem no sentimento e só moderadamente no aspecto, o que é coerente com a classificação acima: a concordância é baixa justamente em satisfação geral ({pc(spa.loc['satisfacao_geral', 'concordancia'], 0)}, n = {n(spa.loc['satisfacao_geral', 'n'])}, em geral confundida com o grupo geral) e em limpeza ({pc(spa.loc['limpeza', 'concordancia'], 0)}, n = {n(spa.loc['limpeza', 'n'])}), "
+               f"e é alta em custo-benefício e precisão do anúncio ({pc(spa.loc['custo_beneficio', 'concordancia'], 0)} nos dois). A amostra de 100 frases é pequena, e as concordâncias por aspecto têm de 4 a 20 frases.")
     pcl = L(sA, "cmp_manual_por_classe")
     idi = L(sA, "cmp_manual_idioma")
     dif = L(sA, "cmp_manual_diferenca")
@@ -188,12 +194,11 @@ Entre as sentenças com aspecto nos dois métodos, {pc(lc['prop_mesmo_aspecto_en
 O sinal da validade de construto se mantém nos três aspectos que têm subnota (localização, comunicação e satisfação geral), com correlações do mesmo tamanho nos dois mais específicos e menores em satisfação geral. Na decomposição do R² da nota global, comodidades fica em primeiro nos dois métodos; satisfação geral e comunicação trocam de posição (correlação de postos {f(rho_l)}, com apenas quatro aspectos).
 
 ### 4.6 O que é confiável e o que pede cautela
-{abas("Aspecto_Rotuladas", "Validacao_Construto", "LadoALado_validacao_construto")}
+{abas("Aspecto_Rotuladas", "Validacao_Construto", "LadoALado_validacao_construto", "Segundo_Anotador")}
 Resumindo as evidências, classificamos cada aspecto com um critério descritivo, fixado antes das seções seguintes: **confiável** se a precisão de atribuição na amostra é de ao menos 0,60 e a correlação com a subnota correspondente é de ao menos 0,20 nos dois modelos; **cautela** nos demais casos.
 
 {t_cls}
 
 São confiáveis: {', '.join(ROT[a] for a in conf_ok)}. Pedem cautela: {', '.join(caut)}. Duas consequências valem para as seções 5 a 7. Primeiro, o aspecto de maior peso na seção 5, comodidades, pede cautela (atribuição imprecisa e sem subnota para validar); por isso a leitura prática da seção 5 se apoia nos tópicos finos de queixa e
-elogio, cuja atribuição é melhor (tópicos diretos, {pc(asp['acurácia de aspecto, tópico direto'], 0)} de acerto de aspecto), e os pesos por aspecto são apresentados como indicativos. Segundo, nenhum resultado por aspecto deve ser lido sem a classificação ao lado. A concordância entre dois anotadores ainda
-não foi medida (**pendente**): uma planilha cega de 100 frases e o script de kappa estão prontos.
+elogio, cuja atribuição é melhor (tópicos diretos, {pc(asp['acurácia de aspecto, tópico direto'], 0)} de acerto de aspecto), e os pesos por aspecto são apresentados como indicativos. Segundo, nenhum resultado por aspecto deve ser lido sem a classificação ao lado. {seg_txt}
 """

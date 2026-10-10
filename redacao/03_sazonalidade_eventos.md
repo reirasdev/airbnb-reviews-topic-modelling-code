@@ -61,5 +61,5 @@ dos aspectos:** nessas janelas as razões de chances por aspecto abaixo de 1 ref
 
 ## 4. Limitações a declarar
 
-Data da avaliação não é data da estadia; janelas de evento se sobrepõem em ~2% dos dias; o feriado municipal de São Sebastião deve ser conferido em lei municipal (as datas do Rock in Rio foram conferidas); só uma edição do *Todo Mundo no Rio* está nos dados; conteúdo do Carnaval vem de apenas duas edições (2023 e 2024); todas as medidas são
+Data da avaliação não é data da estadia; janelas de evento se sobrepõem em ~2% dos dias; o feriado municipal de São Sebastião (20 de janeiro) foi confirmado pelo pesquisador (as datas do Rock in Rio foram conferidas); só uma edição do *Todo Mundo no Rio* está nos dados; conteúdo do Carnaval vem de apenas duas edições (2023 e 2024); todas as medidas são
 associações, não efeitos causais; o conteúdo por aspecto e por tópico foi testado com correção de Benjamini-Hochberg, mas é exploratório.

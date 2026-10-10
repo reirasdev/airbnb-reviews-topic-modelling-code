@@ -125,7 +125,7 @@ def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd
     extra = [["MODELO_PRINCIPAL_DE_SENTIMENTO", f"{principal} ({cfg.SENTIMENT_MODEL if principal == 'A' else cfg.SENTIMENT_MODEL_B})"],
              ["MODELO_COMPARACAO_(robustez)", f"{outro} ({cfg.SENTIMENT_MODEL if outro == 'A' else cfg.SENTIMENT_MODEL_B})"],
              ["REGRA_1.6", "principal = B se o IC 95% (bootstrap estratificado) de (B − A) no kappa ponderado linear populacional de sentimento exclui 0 a favor de B; senão A. Registrada antes da execução (historico, seção 30)."],
-             ["SEGUNDO_ANOTADOR", "pendente (planilha cega e script de kappa prontos; nenhum rótulo real preenchido)"],
+             ["SEGUNDO_ANOTADOR", "rotulado (data/validacao_segundo_anotador.xlsx); concordância na aba Segundo_Anotador"],
              ["MAPA_LDA", "provisório: a confirmar pelo pesquisador (aba Checagem_LDA, coluna decisao_pesquisador)"]]
     if regra is not None and len(regra):
         r = regra.iloc[0]
@@ -149,6 +149,7 @@ def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd
     sheets["Diferenca_B_menos_A"] = juntar(g("cmp_regra_modelo_principal"), g("cmp_manual_diferenca"))
     sheets["Checagem_LDA"] = juntar(g("lda_shared_mapa"), g("lda_concordancia_sentencas", sp), g("lda_perfil_correlacao", sp), g("lda_validade", sp), g("lda_importancia_comparacao", sp))
     sheets["Resumo_AB"] = g("cmp_resumo_AB")
+    sheets["Segundo_Anotador"] = juntar(g("cmp_segundo_anotador_resumo"), g("cmp_segundo_anotador_por_aspecto"), g("cmp_segundo_anotador_conf_sentimento"), g("cmp_segundo_anotador_conf_aspecto"))
     sheets["Aspecto_Rotuladas"] = juntar(g("cmp_manual_aspecto"), g("cmp_manual_aspecto_por_classe"))
     sheets["Limite_30_Avaliacoes"] = g("limite30", sp)
     sheets["Sazon_NegativaGeral"] = g("sazon_negativa_geral", sp)
