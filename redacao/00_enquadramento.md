@@ -1,61 +1,50 @@
-# Enquadramento da pesquisa (v2 — a partir de 2026-10-04)
+# Enquadramento da pesquisa (v3 — 2026-10-09, após a avaliação do orientador)
 
-> **Mudança de estratégia.** Até o commit `e9e2895` (tag `estrategia-v1-tese-final`) o trabalho foi conduzido como o teste de uma
-> hipótese: *o rating sintético por sentimento recupera informação que a nota oficial esconde, sobretudo no teto da escala*.
-> A partir deste ponto o enquadramento passa a ser o de um **mestrado profissional**, de mensuração e aplicação, sem hipótese
-> a ser "provada". Os resultados da v1 continuam válidos e são reaproveitados (seção 4).
+> **Histórico do enquadramento.** v1 (até a tag `estrategia-v1-tese-final`): teste da hipótese de que um rating sintético por sentimento recupera informação que a nota oficial esconde. v2 (2026-10-04):
+> mestrado profissional de mensuração e aplicação, sem hipótese a provar. **v3 (este documento)** incorpora três correções pedidas pelo orientador: (1) um segundo modelo de sentimento, treinado em
+> avaliações; (2) o enquadramento passa a deixar claro que os desfechos "econômicos" disponíveis são **índices de volume recente de avaliações** e que a contribuição **não é o rating sintético**; (3) um
+> único texto de resultados, com linha de raciocínio contínua (`01_resultados_unificado.md`).
 
-## 1. Contexto e objetivo
+## 1. Contexto
 
-Avaliações de hóspedes no Airbnb são ricas em texto, mas a plataforma resume a experiência em notas fortemente comprimidas
-no topo da escala (no Rio de Janeiro, 22,8% dos anúncios analisados têm nota exatamente 5,0). O texto pode dizer **o que**
-agrada e desagrada, e isso interessa a anfitriões de temporada e a empresas que administram imóveis. O trabalho constrói um
-pipeline reprodutível de análise de sentimento por aspecto sobre ~1,5 milhão de sentenças em vários idiomas, e o confronta
-com as notas e subnotas oficiais.
+As avaliações de hóspedes no Airbnb são ricas em texto, mas a plataforma as resume em notas fortemente comprimidas no topo da escala (no Rio de Janeiro, 22,8% dos anúncios analisados têm nota exatamente
+5,0). O texto diz **o que** agrada e desagrada, e isso interessa a anfitriões de temporada e a empresas que administram imóveis. Os dados (Inside Airbnb) trazem a nota e seis subnotas por anúncio, mas **não trazem
+ocupação nem receita observadas**: os campos `estimated_occupancy_l365d` e `estimated_revenue_l365d` são funções exatas do número de avaliações em 12 meses, da estadia mínima e do preço (verificado em 100% dos
+anúncios). O objeto central do estudo são, portanto, a nota, as subnotas e o texto; o volume de avaliações entra apenas como desfecho auxiliar.
 
-## 2. Perguntas de pesquisa
+## 2. Objetivo geral
 
-1. **Adequação (validade de construto).** O sentimento por aspecto extraído do texto é adequado às notas e subnotas
-   oficiais? Em que medida e para quais aspectos concorda, e onde diverge?
-2. **Importância.** Quais aspectos e tópicos mais se associam à nota que o imóvel recebe, e quais concentram as queixas?
-   (Associação; sem linguagem causal.)
-3. **Aplicação.** Como transformar isso em diagnóstico prático para um anfitrião ou empresa gestora (comparação com o bairro
-   e o tipo de imóvel, tópicos prioritários)?
-4. **Sazonalidade.** Como feriados e eventos se associam ao volume de avaliações e às queixas por aspecto?
-5. **Complementar.** O rating sintético (R_syn) acrescenta poder explicativo sobre o volume recente de avaliações além da
-   nota oficial? (Resultado já obtido na v1: não acrescenta; consistente com a Pergunta 1, pois o texto e a nota carregam
-   informação semelhante.)
+Medir, por análise de sentimento por aspecto sobre avaliações de hóspedes do Airbnb no Rio de Janeiro, **o que o texto revela sobre a nota e as subnotas oficiais**, e transformar essa medição em diagnóstico prático para
+anfitriões e empresas gestoras.
 
-## 3. Contribuições esperadas
+## 3. Objetivos específicos e perguntas de pesquisa (em ordem de importância)
 
-- **Científica:** evidência sobre a validade de sentimento multilíngue por aspecto frente às notas oficiais, com limites
-  (atenuação por notas comprimidas, volume de avaliações, idioma).
-- **Aplicada (mestrado profissional):** ranking de aspectos e tópicos de maior associação com a nota, calendário de eventos e
-  queixas, e uma ferramenta de diagnóstico por anúncio com referência ao bairro e tipo.
+1. **Medição.** Construir e validar a medição do sentimento por aspecto (dois modelos de sentimento, tópicos por BERTopic, mapa tópico → aspecto). *A medição é confiável? Para quais aspectos?* Evidência: frases rotuladas, concordância
+   entre modelos, validade de construto contra as subnotas, checagem com um segundo método de tópicos (LDA).
+2. **Associação com a nota.** Estimar quais aspectos e tópicos mais se associam à nota global e a cada subnota, e quais concentram as queixas. *O que o texto revela sobre a nota?* (Associação; sem linguagem causal.) **É a contribuição central.**
+3. **Aplicação.** Entregar o resultado como diagnóstico por anúncio, comparado ao bairro e ao tipo de acomodação. *Como um anfitrião usa isso?*
+4. **Índice único.** Verificar se um índice sintético (R_syn) acrescenta algo à nota oficial. *Um número único substitui a decomposição por aspecto?* Resultado secundário; um resultado nulo é legítimo e esperado.
+5. **Sazonalidade (exploratório).** Como feriados e eventos se associam ao volume de avaliações e às queixas por aspecto?
 
-## 4. O que se mantém da v1 e o que muda
+## 4. Contribuições esperadas
 
-| Elemento | Situação |
-|---|---|
-| Pipeline de dados, sentimento, tópicos, mapeamento de aspectos, perfil ABSA (Etapas 1 a 7) | **Mantido** |
-| Análises A e B (poder explicativo/monotonicidade) e sensibilidades | **Mantidas como complementares** (Pergunta 5) |
-| Teste do teto | Vira análise descritiva complementar |
-| Shrinkage e quantile mapping | Secundários (R_syn principal é sem shrinkage; calibração só para exibição) |
-| Desfechos `estimated_*` | Descritos como índices de volume recente de avaliações (fórmula verificada), não como ocupação/receita |
-| Linguagem | De "tese não sustentada" para "o sentimento é adequado às notas; R_syn não acrescenta além delas" |
-| **Novo** | Validação ampliada de construto (s14), importância de aspectos/tópicos (s15), sazonalidade (s16), diagnóstico por anúncio |
+- **Científica:** evidência sobre a validade de sentimento multilíngue por aspecto frente a notas oficiais comprimidas, comparando um modelo genérico (treinado em tweets) com um treinado em avaliações, e o que cada
+  escolha implica.
+- **Aplicada (mestrado profissional):** ranking de aspectos e tópicos associados à nota (e das queixas que mais pesam), e uma ferramenta de diagnóstico por anúncio com referência a anúncios semelhantes.
 
-## 5. Estrutura prevista da dissertação
+## 5. Título (provisório; a escolher pelo pesquisador)
 
-1. Introdução e perguntas de pesquisa · 2. Dados e método (pipeline, modelos, mapeamento de aspectos) · 3. Adequação do sentimento
-às notas · 4. Importância de aspectos e tópicos · 5. Sazonalidade e eventos · 6. Diagnóstico para anfitriões e gestoras
-(ferramenta e exemplos anonimizados) · 7. Resultado complementar: R_syn e volume de avaliações · 8. Limitações · 9. Conclusões
-e recomendações práticas.
+- **Proposto:** *O que as avaliações revelam sobre a nota: decomposição por aspecto do sentimento em avaliações de hóspedes do Airbnb no Rio de Janeiro.*
+- Opção 2: *Decompondo a nota do Airbnb: aspectos e tópicos nas avaliações de hóspedes no Rio de Janeiro.*
+- Opção 3: *Além da nota: análise de sentimento por aspecto em avaliações do Airbnb e diagnóstico para anfitriões no Rio de Janeiro.*
 
-## 6. Limitações a declarar (resumo)
+## 6. Estrutura da dissertação (alinhada ao texto unificado de resultados)
 
-Sentimento calculado sobre as 30 avaliações mais recentes por anúncio; anúncios com pouco texto ficam fora de R_syn (55% dos de
-nota 5,0 entram); modelo de sentimento treinado em tweets; mapeamento tópico → aspecto feito por um pesquisador; desfechos
-`estimated_*` construídos algebricamente; análise temporal restrita a 2023-2025 para conteúdo (volume de avaliações cobre
-2016-2025); data da avaliação ≠ data da estadia (janela de até 14 dias após o check-out); todas as associações são
+1. Introdução e perguntas de pesquisa · 2. Dados e o que eles permitem medir · 3. Método: como o texto é medido · 4. A medição é confiável? · 5. O que o texto revela sobre a nota · 6. Aplicação: diagnóstico por anúncio ·
+7. Um índice único acrescenta algo? · 8. Sazonalidade e eventos (exploratório) · 9. Limitações · 10. Conclusões.
+
+## 7. Limitações a declarar (resumo)
+
+Sentimento calculado sobre as 30 avaliações mais recentes por anúncio; anúncios com pouco texto ficam fora de R_syn (só ~55% dos de nota 5,0 entram); mapeamento tópico → aspecto e validação manual feitos por um pesquisador
+(segundo anotador pendente); desfechos `estimated_*` construídos algebricamente; análise de sazonalidade restrita (data da avaliação ≠ data da estadia; só anúncios ativos na coleta); todas as associações são
 descritivas, sem inferência causal.

@@ -23,7 +23,7 @@ def _flat(d: dict, prefix: str = "") -> list[tuple[str, str]]:
     return out
 
 
-def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
+def build_sheets(cfg, store: Store, timestamp: str) -> dict:
     def get(name):
         return store.load(name) if store.exists(name) else pd.DataFrame({"aviso": [f"'{name}' não gerado nesta execução"]})
 
@@ -75,12 +75,73 @@ def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
         "REF_Sem_LTM": pd.concat([get("sem_ltm_modelos"), pd.DataFrame({"": [""]}), get("sem_ltm_diferencas"), pd.DataFrame({"": [""]}), get("sem_ltm_faixas")], ignore_index=True),
         "REF_Investigacao_Coef": pd.concat([get("investigacao_coef"), pd.DataFrame({"": [""]}), get("investigacao_coef_correlacoes")], ignore_index=True),
     }
+    return sheets
+
+
+def _salvar(sheets: dict, path: Path) -> None:
     with pd.ExcelWriter(path, engine="openpyxl") as xw:
         for name, df in sheets.items():
-            df.to_excel(xw, sheet_name=name, index=False)
-            ws = xw.sheets[name]
+            df.to_excel(xw, sheet_name=name[:31], index=False)
+            ws = xw.sheets[name[:31]]
             ws.freeze_panes = "A2"
             for i, col in enumerate(df.columns, 1):
                 width = min(60, max(10, len(str(col)) + 2, int(np.nan_to_num(df[col].astype(str).str.len().head(200).max())) + 2))
                 ws.column_dimensions[ws.cell(1, i).column_letter].width = width
     log.info("Excel gravado em %s", path)
+
+
+def write_excel(cfg, store: Store, path: Path, timestamp: str) -> None:
+    _salvar(build_sheets(cfg, store, timestamp), path)
+
+
+# abas que dependem do modelo de sentimento (a planilha final traz as do modelo principal com o nome normal e as do outro com sufixo)
+DEPENDENTES = ["Validacao_Construto", "Perfil_ABSA", "Rating_Sintetico", "Analise_A", "Analise_B", "Sensibilidade", "Descritivo_Teto", "Selecao", "Val_Volume_Convergente",
+               "Val_Matriz", "Val_Confiab_AUC", "Val_Recortes", "Val_Manual", "Imp_Aspectos", "Imp_Modelos", "Imp_Segmentos_Sens", "Imp_Topicos_Queixas", "Imp_Topicos_Elogios",
+               "Sazon_Conteudo", "Sazon_Criterio", "Benchmark_Bairro_Tipo"]
+
+
+def write_excel_final(cfg, path: Path, timestamp: str, principal: str, regra: pd.DataFrame | None) -> None:
+    """Planilha única: abas do modelo principal com os nomes atuais, as do outro modelo com sufixo _mA/_mB, e as abas novas de comparação entre modelos."""
+    sA, sB = Store(cfg, suffix=""), Store(cfg, suffix="__B")
+    sp, so = (sA, sB) if principal == "A" else (sB, sA)
+    outro = "B" if principal == "A" else "A"
+    sheets = build_sheets(cfg, sp, timestamp)
+    other = build_sheets(cfg, so, timestamp)
+    conf = sheets["Config"]
+    extra = [["MODELO_PRINCIPAL_DE_SENTIMENTO", f"{principal} ({cfg.SENTIMENT_MODEL if principal == 'A' else cfg.SENTIMENT_MODEL_B})"],
+             ["MODELO_COMPARACAO_(robustez)", f"{outro} ({cfg.SENTIMENT_MODEL if outro == 'A' else cfg.SENTIMENT_MODEL_B})"],
+             ["REGRA_1.6", "principal = B se o IC 95% (bootstrap estratificado) de (B − A) no kappa ponderado linear populacional de sentimento exclui 0 a favor de B; senão A. Registrada antes da execução (historico, seção 30)."],
+             ["SEGUNDO_ANOTADOR", "pendente (planilha cega e script de kappa prontos; nenhum rótulo real preenchido)"],
+             ["MAPA_LDA", "provisório: a confirmar pelo pesquisador (aba Checagem_LDA, coluna decisao_pesquisador)"]]
+    if regra is not None and len(regra):
+        r = regra.iloc[0]
+        extra.append(["REGRA_1.6_RESULTADO", f"diferença B − A = {r['diferenca_B_menos_A']:.4f}; IC95% [{r['ic_inf']:.4f}; {r['ic_sup']:.4f}]; principal = {r['modelo_principal']}"])
+    sheets["Config"] = pd.concat([conf, pd.DataFrame(extra, columns=conf.columns)], ignore_index=True)
+    for nome in DEPENDENTES:
+        if nome in other:
+            sheets[f"{nome}_m{outro}"[:31]] = other[nome]
+
+    def g(nome, store=sA):
+        return store.load(nome) if store.exists(nome) else pd.DataFrame({"aviso": [f"'{nome}' não gerado"]})
+
+    def juntar(*dfs):
+        out = []
+        for d in dfs:
+            out += [d, pd.DataFrame({"": [""]})]
+        return pd.concat(out[:-1], ignore_index=True)
+
+    sheets["Comparacao_Sentimento_AB"] = juntar(g("cmp_descritivas"), g("cmp_concordancia"), g("cmp_confusao_polaridade"), g("cmp_concordancia_aspecto"))
+    sheets["Avaliacao_Rotuladas_AB"] = juntar(g("cmp_manual_modelos"), g("cmp_manual_por_classe"), g("cmp_manual_idioma"), g("cmp_manual_confusao_A"), g("cmp_manual_confusao_B"))
+    sheets["Diferenca_B_menos_A"] = juntar(g("cmp_regra_modelo_principal"), g("cmp_manual_diferenca"))
+    sheets["Checagem_LDA"] = juntar(g("lda_shared_mapa"), g("lda_concordancia_sentencas", sp), g("lda_perfil_correlacao", sp), g("lda_validade", sp), g("lda_importancia_comparacao", sp))
+    sheets["Resumo_AB"] = g("cmp_resumo_AB")
+    sheets["Comparacoes_Multiplas"] = g("cmp_comparacoes_multiplas")
+    sheets["Selecao_Teto"] = g("cmp_selecao_teto")
+    sheets["RSyn_Resumo_AB"] = juntar(g("cmp_rsyn_resumo"), g("cmp_queixas_sobreposicao"), g("cmp_queixas_listas"))
+    sheets["Analise_A_Intersecao"] = juntar(g("cmp_inter_diferencas"))
+    for nome in ("validacao_construto", "analise_a_diferencas", "imp_lmg", "sensibilidade", "val_convergente", "imp_gbm", "imp_logit", "analise_b_faixas"):
+        sheets[f"LadoALado_{nome}"[:31]] = g(f"cmp_ladoalado_{nome}")
+    ordem = ["Config", "Resumo_AB"] if "Resumo_AB" in sheets else ["Config"]
+    sheets = {k: sheets[k] for k in ordem + [k for k in sheets if k not in ordem]}
+    _salvar(sheets, path)
+

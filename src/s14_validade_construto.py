@@ -201,7 +201,13 @@ def avaliar_amostra_manual(cfg, store: Store, path: Path) -> bool:
     if len(H) < 20:
         log.info("Amostra manual: %d frases rotuladas (< 20); métricas não calculadas.", len(H))
         return False
-    H["sent_modelo"] = np.array(["negativo", "neutro", "positivo"])[H[["p_neg", "p_neu", "p_pos"]].to_numpy().argmax(1)]
+    if store.suffix:  # modelo B: as probabilidades/estrelas/classe vêm da tabela de B (a planilha de rótulos guarda as de A, arredondadas)
+        from .sentimento import load_sentiment
+        M = load_sentiment(store)[["text_id", "stars", "p_neg", "p_neu", "p_pos", "cls"]].rename(columns={"stars": "estrelas_modelo"})
+        H = H.drop(columns=["estrelas_modelo", "p_neg", "p_neu", "p_pos"]).merge(store.load("sentences")[["sent_id", "text_id"]], on="sent_id").merge(M, on="text_id")
+        H["sent_modelo"] = np.array(["negativo", "neutro", "positivo"])[H["cls"].to_numpy()]
+    else:
+        H["sent_modelo"] = np.array(["negativo", "neutro", "positivo"])[H[["p_neg", "p_neu", "p_pos"]].to_numpy().argmax(1)]
     H["asp_humano"] = H["aspecto_humano"].replace({"nenhum": GENERAL_BUCKET})
     labs = ["negativo", "neutro", "positivo"]
     num = {"negativo": -1, "neutro": 0, "positivo": 1}
