@@ -4,7 +4,7 @@ Estabelecido quais medidas merecem confiança, esta seção apresenta o resultad
 
 \subsection{Importância dos aspectos}
 
-A análise usa os 28.889 anúncios com texto, inclusive os de pouco texto. Quando um aspecto não tem sentenças suficientes, seu sentimento é imputado pela média, o que evita exigir três aspectos por anúncio. O alvo é o percentil da nota, porque a nota é comprimida no topo. A decomposição LMG reparte o $R^2$ da regressão da nota global sobre o sentimento dos dez aspectos, e o $R^2$ total é de 0,320 em A e 0,291 em B. A Tabela~\ref{tab:lmg} mostra a parcela de cada aspecto.
+A análise usa os 28.889 anúncios com texto, inclusive os de pouco texto. Quando um aspecto não tem sentenças suficientes, seu sentimento é imputado pela média, o que evita exigir três aspectos por anúncio. O alvo é o percentil da nota, porque a nota é comprimida no topo. A decomposição LMG reparte o $R^2$ da regressão da nota global sobre o sentimento dos dez aspectos. O $R^2$ total é de 0,320 em A e 0,291 em B. A Tabela~\ref{tab:lmg} mostra a parcela de cada aspecto.
 
 \begin{table}[htb]
 \centering
@@ -29,9 +29,9 @@ Segurança & 0,1\% & 0,1\% & cautela\\
 \label{tab:lmg}
 \end{table}
 
-Comodidades responde por 42,5\% do $R^2$ em A e 47,8\% em B, seguida de limpeza (19,6\% e 18,8\%). Satisfação geral e comunicação vêm depois. Localização, custo-benefício e segurança contribuem pouco para a nota global, embora a localização seja o aspecto que mais explica a sua própria subnota (Tabela~\ref{tab:subnotas}). O hóspede parece avaliar o local em separado, e a nota global reflete mais o que ele viveu dentro do imóvel. A ordem das parcelas é muito parecida entre os modelos (correlação de postos de 0,99), e a diferença mais visível está na satisfação geral, que pesa menos em B. Valem as ressalvas da Seção 4: comodidades e satisfação geral estão na classe de cautela, e a importância relativa de um aspecto mistura efeito e confiabilidade da medida, porque aspectos pouco citados, como segurança e custo-benefício, são medidos com mais erro e imputados na maioria dos anúncios.
+Comodidades responde por 42,5\% do $R^2$ em A e 47,8\% em B, seguida de limpeza (19,6\% e 18,8\%). Satisfação geral e comunicação vêm depois. Localização, custo-benefício e segurança contribuem pouco para a nota global, embora a localização seja o aspecto que mais explica a sua própria subnota (Tabela~\ref{tab:subnotas}). O hóspede parece avaliar o local em separado; a nota global reflete mais o que ele viveu dentro do imóvel. A ordem das parcelas é muito parecida entre os modelos (correlação de postos de 0,99). A diferença mais visível está na satisfação geral, que pesa menos em B. Valem as ressalvas da Seção 4: comodidades e satisfação geral estão na classe de cautela. A importância relativa de um aspecto mistura efeito e confiabilidade da medida, porque aspectos pouco citados, como segurança e custo-benefício, são medidos com mais erro e imputados na maioria dos anúncios.
 
-A Tabela~\ref{tab:subnotas} mostra o mesmo exercício para cada subnota. O aspecto correspondente está entre os que mais a explicam, e em localização é o primeiro. Nas demais subnotas, comodidades tem a maior parcela.
+A Tabela~\ref{tab:subnotas} mostra o mesmo exercício para cada subnota. O aspecto correspondente está entre os que mais a explicam; em localização ela é a primeira. Nas demais subnotas, comodidades tem a maior parcela.
 
 \begin{table}[htb]
 \centering
@@ -85,7 +85,7 @@ wifi, sinal, senha, único & Comodidades (cautela) & 3\% & $-19{,}5$ pontos\\
 \label{tab:queixas}
 \end{table}
 
-Destacam-se as queixas de instalações e manutenção (banheiro, ar-condicionado, cozinha, cama, \textit{wi-fi} e reparos), de limpeza (sujeira e cheiro) e de resposta do anfitrião. Elas se associam a quedas de 10 a 26 pontos no percentil da nota nos anúncios que as recebem. Entre as 15 queixas de maior peso, 13 coincidem nos dois modelos, o que torna a lista robusta à escolha do modelo. As divergências são reparos, manutenção e repelente em A, e \textit{check-in} flexível e reserva em B. A Tabela~\ref{tab:elogios} traz os elogios mais associados a notas altas no modelo A.
+Destacam-se as queixas de instalações e manutenção (banheiro, ar-condicionado, cozinha, cama, \textit{wi-fi} e reparos), de limpeza (sujeira e cheiro) e de resposta do anfitrião. Elas se associam a quedas de 10 a 26 pontos no percentil da nota nos anúncios que as recebem. Entre as 15 queixas de maior peso, 13 coincidem nos dois modelos, o que torna a lista robusta à escolha do modelo. As divergências são reparos, manutenção e repelente em A e \textit{check-in} flexível e reserva em B. A Tabela~\ref{tab:elogios} traz os elogios mais associados a notas altas no modelo A.
 
 \begin{table}[htb]
 \centering
@@ -106,8 +106,8 @@ limpo, organizado, \textit{limpio}, \textit{clean} & Limpeza (confiável) & 34\%
 \label{tab:elogios}
 \end{table}
 
-A queixa genérica (decepção e problemas) e os elogios genéricos (sentir-se em casa, voltar) pertencem à satisfação geral, aspecto que pede cautela, e funcionam sobretudo como termômetro.
+A queixa genérica (decepção e problemas) e os elogios genéricos (sentir-se em casa, voltar) pertencem à satisfação geral, aspecto que pede cautela e funcionam sobretudo como termômetro.
 
 \subsection{Cuidados de interpretação}
 
-Os resultados não têm leitura causal. Um anúncio com queixa de banheiro tem nota menor, e isso não permite afirmar que consertar o banheiro eleve a nota. O efeito apresentado é a diferença média, na cidade, entre anúncios com e sem a menção, controlada por volume. A atribuição de aspecto acerta entre 52\% e 66\% na população (Seção 4), e a importância por aspecto fica abaixo da dos tópicos em confiabilidade, o que reforça a leitura por tópico.
+Os resultados não têm leitura causal. Um anúncio com queixa de banheiro tem nota menor e isso não permite afirmar que consertar o banheiro eleve a nota. O efeito apresentado é a diferença média, na cidade, entre anúncios com e sem a menção, controlada por volume. A atribuição de aspecto acerta entre 52\% e 66\% na população (Seção 4). A importância por aspecto fica abaixo da dos tópicos em confiabilidade, o que reforça a leitura por tópico.
