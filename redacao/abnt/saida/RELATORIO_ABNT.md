@@ -15,7 +15,7 @@ Capa; folha de rosto; ficha catalográfica (página reservada); folha de aprova�
 ## 3. Decisões adotadas (e origem)
 | Item | Decisão | Origem |
 | --- | --- | --- |
-| Sistema de citação | Autor-data (`(HU; ZHANG; PAVLOU, 2009)` e `Hu, Zhang e Pavlou (2009)`); mais de 3 autores: `et al.` | NBR 10520:2023 |
+| Sistema de citação | Autor-data com sobrenome em maiúscula e minúscula, convenção da NBR 10520:2023 (`(Hu; Zhang; Pavlou, 2009)` e `Hu, Zhang e Pavlou (2009)`); mais de 3 autores: `et al.`. Nas referências, o sobrenome continua em caixa-alta (NBR 6023) | NBR 10520:2023 |
 | Referências | Ordem alfabética, uma entrada por obra, destaque em negrito no título do periódico ou da obra, DOI quando existe, `Disponível em` e `Acesso em: 10 out. 2026` para fontes só com URL (datas em que as páginas foram consultadas) | NBR 6023 |
 | Local e editora não informados | `[S. l.]` e `[s. n.]` | NBR 6023 |
 | Formato de página, fonte, espaçamento | Template: A4, margens 3 cm (sup. e esq.) e 2 cm (inf. e dir.), Times New Roman 12, entrelinha 1,5 | Convenção usual do template, a confirmar no manual |
@@ -57,3 +57,7 @@ Os dois defeitos abaixo foram corrigidos no LaTeX (commit `ab89c37`) e o arquivo
 | Ilustrações | 13 tabelas com número, título, fonte e chamada no texto; não há figuras |
 | Arquivo final | DOCX gerado e campos atualizados; **PDF pendente** (exportar no Word) |
 | Transparência | Incertezas e pendências listadas acima |
+
+## 8. Atualização de 2026-10-12 (noite)
+- Citações no estilo da NBR 10520:2023 (inicial maiúscula), a pedido do autor; antes estavam em caixa-alta.
+- Páginas de Reimers e Gurevych (2019) corrigidas para 3982-3992 (conferidas no PDF do artigo) em `referencias.bib`.

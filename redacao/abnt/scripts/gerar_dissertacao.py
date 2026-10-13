@@ -122,7 +122,7 @@ def cite_p(keys: list[str]) -> str:
     items = []
     for k in keys:
         i = info(k)
-        f = [x.upper() for x in i["fam"]]
+        f = list(i["fam"])  # NBR 10520:2023: sobrenome com inicial maiuscula
         txt = "; ".join(f) if len(f) <= 3 else f[0] + " et al."
         items.append((norm(i["fam"][0]), i["year"], f"{txt}, {i['year']}"))
     items.sort()
