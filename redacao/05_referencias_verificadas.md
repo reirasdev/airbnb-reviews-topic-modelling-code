@@ -68,3 +68,4 @@ Estas referências sustentam o método, mas a revisão de literatura propriament
 - `kish1965` substituida por `kish1992` (Journal of Official Statistics, 8(2), 183-200); PDF nao localizado em acesso aberto.
 - `souza2020` agora referencia a dissertacao (Unicamp, 2020), que e o PDF obtido; o artigo do BRACIS nao foi obtido.
 - Quatro frases do Capitulo 2 ajustadas para acompanhar o que os artigos dizem (Chevalier & Mayzlin, Wang & Nicolau, Deboosere et al., Zervas et al.).
+- Kish 1992: PDF obtido e conferido (eq. 4.3 e tamanho efetivo n/Deff, p. 192). Zervas 2017 removida do .bib (nao citada). Total de entradas no .bib: 51.
