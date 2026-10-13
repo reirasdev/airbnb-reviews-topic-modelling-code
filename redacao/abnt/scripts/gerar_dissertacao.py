@@ -17,7 +17,7 @@ from docx import Document  # noqa: E402
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK  # noqa: E402
 from docx.oxml import OxmlElement  # noqa: E402
 from docx.oxml.ns import qn  # noqa: E402
-from docx.shared import Cm, Pt  # noqa: E402
+from docx.shared import Cm, Pt, RGBColor  # noqa: E402
 
 LATEX = ABNT.parent / "latex"
 CAPS = sorted((LATEX / "capitulos").glob("cap*.tex"))
@@ -34,6 +34,7 @@ ACC = {"'": "\u0301", "`": "\u0300", "^": "\u0302", '"': "\u0308", "~": "\u0303"
 
 def tex2uni(s: str) -> str:
     s = s.replace(BS + BS, BS)
+    s = s.replace("{" + BS + "L}", "Ł").replace("{" + BS + "l}", "ł")
     s = re.sub(r"\{(['`^\"~])([A-Za-z])\}", lambda m: unicodedata.normalize("NFC", m.group(2) + ACC[m.group(1)]), s)
     s = re.sub(r"\\(['`^\"~c])\s*\{?([A-Za-z])\}?", lambda m: unicodedata.normalize("NFC", m.group(2) + ACC[m.group(1)]), s)
     s = re.sub(r"\{\$P_i\$\}", "Pi", s)
@@ -435,6 +436,17 @@ def cell_borders(cell, top=None, bottom=None):
     tcPr.append(b)
 
 
+def forcar_times(doc):
+    """Remove as fontes de tema (Calibri/Cambria) de todos os estilos e fixa Times New Roman."""
+    W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+    for rf in doc.styles.element.iter("{%s}rFonts" % W):
+        for att in list(rf.attrib):
+            if att.lower().endswith("theme"):
+                del rf.attrib[att]
+        for att in ("ascii", "hAnsi", "cs", "eastAsia"):
+            rf.set("{%s}%s" % (W, att), "Times New Roman")
+
+
 def page_break_par(anchor):
     p = anchor.insert_paragraph_before("")
     p.add_run().add_break(WD_BREAK.PAGE)
@@ -514,6 +526,7 @@ def build_table(doc, anchor, tb: dict, num: int):
     for r in cp.runs:
         r.bold = False
         r.font.size = Pt(10)
+        r.font.color.rgb = RGBColor(0, 0, 0)
     rows = []
     for raw in tb["rows"].replace(BS + "hline", "").split(BS + BS):
         raw = raw.strip()
@@ -539,6 +552,7 @@ def build_table(doc, anchor, tb: dict, num: int):
             par.paragraph_format.space_after = Pt(1)
             par.paragraph_format.space_before = Pt(1)
             par.paragraph_format.first_line_indent = Cm(0)
+            par.paragraph_format.keep_with_next = True
             par.alignment = {"l": WD_ALIGN_PARAGRAPH.LEFT, "r": WD_ALIGN_PARAGRAPH.RIGHT, "c": WD_ALIGN_PARAGRAPH.CENTER}[al[ci]]
             txt = row[ci] if ci < len(row) else ""
             add_runs(par, parse_inline(txt), size=fs, base_bold=(ri == 0))
@@ -546,6 +560,9 @@ def build_table(doc, anchor, tb: dict, num: int):
                 cell_borders(cell, top=8, bottom=4)
             if ri == len(rows) - 1:
                 cell_borders(cell, bottom=8)
+    for row in table.rows:
+        trPr = row._tr.get_or_add_trPr()
+        trPr.append(OxmlElement("w:cantSplit"))
     fp = anchor.insert_paragraph_before("")
     fp.paragraph_format.space_before = Pt(3)
     fp.paragraph_format.space_after = Pt(12)
@@ -615,6 +632,7 @@ def main():
     set_par_text(P[11], f"Orientador: {orient}")
     remove(P[12])  # sem coorientador
     set_par_text(P[13], "Petrópolis")
+    P[13].paragraph_format.space_before = Pt(200)  # local e ano no pe da folha de rosto
     set_par_text(P[14], "2026")
     # --- aprovacao
     set_par_text(P[19], autor.upper())
@@ -686,6 +704,7 @@ def main():
     remove(P[58])
     remove(P[59])
     remove(P[60])
+    forcar_times(doc)
     out = OUT / (NOME + ".docx")
     doc.save(str(out))
     print("salvo:", out, "| tabelas:", tnum, "| referencias:", len(keys))
