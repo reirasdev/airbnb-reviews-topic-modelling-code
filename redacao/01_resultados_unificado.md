@@ -1,6 +1,6 @@
 # Resultados unificados (rascunho para a dissertação)
 
-> **Planilha de apoio:** `resultados_final_20261010_160227.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. O mapa tópico → aspecto do LDA e a segunda anotação foram confirmados pelo pesquisador. A organização por perguntas está em `00_enquadramento.md`.
+> **Planilha de apoio:** `resultados_final_20261013_000705.xlsx`. Cada seção abre indicando as abas correspondentes (*Abas da planilha*). Todas as medidas são de associação, sem linguagem causal. O mapa tópico → aspecto do LDA e a segunda anotação foram confirmados pelo pesquisador. A organização por perguntas está em `00_enquadramento.md`.
 
 ## 1. Dados e amostra
 

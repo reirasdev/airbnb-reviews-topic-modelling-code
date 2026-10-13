@@ -4,6 +4,7 @@ Uso: python redacao/gerar_pdf.py redacao/01_resultados.md
 from __future__ import annotations
 
 import subprocess
+import tempfile
 import sys
 from pathlib import Path
 
@@ -35,7 +36,7 @@ def main(md_path: str) -> Path:
     pdf = src.with_suffix(".pdf")
     for exe in (r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", r"C:\Program Files\Google\Chrome\Application\chrome.exe"):
         if Path(exe).exists():
-            subprocess.run([exe, "--headless", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={pdf.resolve()}", out_html.resolve().as_uri()],
+            subprocess.run([exe, "--headless", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={tempfile.mkdtemp()}", f"--print-to-pdf={pdf.resolve()}", out_html.resolve().as_uri()],
                            check=True, timeout=120, capture_output=True)
             out_html.unlink()
             return pdf
