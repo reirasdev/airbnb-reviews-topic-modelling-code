@@ -49,7 +49,7 @@ Tabela 1 – Participação dos aspectos nas sentenças e anúncios com perfil d
 Tabela 2 – Sentimento: desempenho dos modelos A e B nas 297 sentenças rotuladas.	20
 Tabela 3 – Precisão da atribuição de aspecto, por aspecto previsto (27 sentenças rotuladas em cada).	21
 Tabela 4 – Correlação entre o sentimento do aspecto e a subnota oficial correspondente, no nível do anúncio.	22
-Tabela 5 – Checagem com LDA: correlação do perfil, validade de construto e parcela do R2 da nota global.	23
+Tabela 5 – Checagem com LDA: correlação do perfil, validade de construto e parcela do R2 da nota global.	24
 Tabela 6 – Classificação dos aspectos quanto à confiança da medida.	24
 Tabela 7 – Parcela do R2 da nota global atribuída a cada aspecto (decomposição LMG).	26
 Tabela 8 – Decomposição LMG de cada subnota: parcela do aspecto correspondente.	27
@@ -397,7 +397,7 @@ EFRON, Bradley; MORRIS, Carl. Data Analysis Using Stein's Estimator and its Gene
 EFRON, B. Bootstrap Methods: Another Look at the Jackknife. The Annals of Statistics, [S. l.], v. 7, n. 1, p. 1-26, 1979. DOI: 10.1214/aos/1176344552.
 FILIPPAS, Apostolos; HORTON, John J.; GOLDEN, Joseph M. Reputation Inflation. Marketing Science, [S. l.], v. 41, n. 4, p. 733-745, 2022. DOI: 10.1287/mksc.2022.1350.
 FRADKIN, Andrey; GREWAL, Elena; HOLTZ, David. Reciprocity and Unveiling in Two-Sided Reputation Systems: Evidence from an Experiment on Airbnb. Marketing Science, [S. l.], v. 40, n. 6, p. 1013-1029, 2021. DOI: 10.1287/mksc.2021.1311.
-FREITAS, Larissa A.; VIEIRA, Renata. Ontology based feature level opinion mining for portuguese reviews. In: INTERNATIONAL CONFERENCE ON WORLD WIDE WEB, 22., 2013, [S. l.]. Proceedings [...]. [S. l.]: [s. n.], 2013. p. 367-370. DOI: 10.1145/2487788.2487944.
+FREITAS, Larissa A.; VIEIRA, Renata. Ontology based feature level opinion mining for Portuguese reviews. In: INTERNATIONAL CONFERENCE ON WORLD WIDE WEB, 22., 2013, [S. l.]. Proceedings [...]. [S. l.]: [s. n.], 2013. p. 367-370. DOI: 10.1145/2487788.2487944.
 GRÖMPING, Ulrike. Relative Importance for Linear Regression in R : The Package relaimpo. Journal of Statistical Software, [S. l.], v. 17, n. 1, p. 1-27, 2006. DOI: 10.18637/jss.v017.i01.
 GRÖMPING, Ulrike. Estimators of Relative Importance in Linear Regression Based on Variance Decomposition. The American Statistician, [S. l.], v. 61, n. 2, p. 139-147, 2007. DOI: 10.1198/000313007x188252.
 GROOTENDORST, Maarten. BERTopic: Neural topic modeling with a class-based TF-IDF procedure. [S. l.]: arXiv, 2022. Disponível em: https://arxiv.org/abs/2203.05794. Acesso em: 10 out. 2026.

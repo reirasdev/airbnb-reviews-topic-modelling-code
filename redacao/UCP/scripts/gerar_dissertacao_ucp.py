@@ -214,6 +214,7 @@ def main():
     P[11].add_run(f"Orientador: {orient}").font.size = Pt(10)
     g.remove(P[12])
     g.set_par_text(P[13], "Petrópolis")
+    P[13].paragraph_format.space_before = Pt(200)  # local e ano no pe da folha de rosto
     g.set_par_text(P[14], "2026")
     # folha de aprovacao: autor, titulo, natureza, orientador, nota, data, banca
     autor_par(P[19])
@@ -312,6 +313,7 @@ def main():
     # paginacao: tamanho 10, a 2 cm da borda superior
     doc.sections[1].header_distance = Cm(2)
     doc.styles["Header"].font.size = Pt(10)
+    g.forcar_times(doc)
     out = SAIDA / (NOME + ".docx")
     doc.save(str(out))
     print("salvo:", out, "| tabelas:", tnum, "| secoes numeradas:", h1, "| referencias:", len(chaves))
