@@ -10,7 +10,7 @@ A análise usa os 28.889 anúncios com texto, inclusive os de pouco texto. Quand
 \centering
 \caption{Parcela do $R^2$ da nota global atribuída a cada aspecto (decomposição LMG).}
 \small
-\begin{tabular}{l|r|r|l}
+\ajusta{\begin{tabular}{l|r|r|l}
 \hline
 Aspecto & Modelo A & Modelo B & Classificação (Seção 4)\\
 \hline
@@ -25,7 +25,7 @@ Localização & 0,6\% & 0,8\% & confiável\\
 Custo-benefício & 0,3\% & 0,4\% & confiável\\
 Segurança & 0,1\% & 0,1\% & cautela\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:lmg}
 \end{table}
 
@@ -37,7 +37,7 @@ A Tabela~\ref{tab:subnotas} mostra o mesmo exercício para cada subnota. O aspec
 \centering
 \caption{Decomposição LMG de cada subnota: parcela do aspecto correspondente.}
 \small
-\begin{tabular}{l|r|l|r|r|l}
+\ajusta{\begin{tabular}{l|r|l|r|r|l}
 \hline
 Subnota & $R^2$ total (A) & Aspecto correspondente & Parcela (A) & Parcela (B) & Maior parcela (A)\\
 \hline
@@ -48,7 +48,7 @@ Subnota & $R^2$ total (A) & Aspecto correspondente & Parcela (A) & Parcela (B) &
 \texttt{value} & 0,239 & Custo-benefício & 0,7\% & 0,7\% & Comodidades\\
 \texttt{accuracy} & 0,258 & Precisão do anúncio & 2,1\% & 1,4\% & Comodidades\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:subnotas}
 \end{table}
 
@@ -64,7 +64,7 @@ A leitura prática está nos tópicos finos, cuja atribuição de aspecto é mai
 \centering
 \caption{Queixas de maior peso e associação com o percentil da nota (modelo A).}
 \small
-\begin{tabular}{p{5.2cm}|p{3.4cm}|r|r}
+\ajusta{\begin{tabular}{p{4.4cm}|p{3.2cm}|r|r}
 \hline
 Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Efeito no percentil\\
 \hline
@@ -81,7 +81,7 @@ dormir, cortina, luz, cortinas & Ruído e conforto (cautela) & 5\% & $-15{,}7$ p
 reparos, precisa, manutenção, melhorias & Comodidades (cautela) & 3\% & $-21{,}5$ pontos\\
 wifi, sinal, senha, único & Comodidades (cautela) & 3\% & $-19{,}5$ pontos\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:queixas}
 \end{table}
 
@@ -91,7 +91,7 @@ Destacam-se as queixas de instalações e manutenção (banheiro, ar-condicionad
 \centering
 \caption{Elogios de maior peso e associação com o percentil da nota (modelo A).}
 \small
-\begin{tabular}{p{5.2cm}|p{3.4cm}|r|r}
+\ajusta{\begin{tabular}{p{4.4cm}|p{3.2cm}|r|r}
 \hline
 Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Efeito no percentil\\
 \hline
@@ -102,7 +102,7 @@ voltaremos, voltar, esperamos, iremos & Satisfação geral (cautela) & 44\% & $+
 agradeço, \textit{gracias}, agradecer, atenção & Comunicação (cautela) & 31\% & $+5{,}7$ pontos\\
 limpo, organizado, \textit{limpio}, \textit{clean} & Limpeza (confiável) & 34\% & $+4{,}8$ pontos\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:elogios}
 \end{table}
 

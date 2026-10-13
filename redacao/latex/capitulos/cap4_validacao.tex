@@ -12,7 +12,7 @@ A Tabela~\ref{tab:rotuladas} apresenta as métricas de sentimento. Na amostra, o
 \centering
 \caption{Sentimento: desempenho dos modelos A e B nas 297 sentenças rotuladas.}
 \small
-\begin{tabular}{l|r|r}
+\ajusta{\begin{tabular}{l|r|r}
 \hline
 Medida & A & B\\
 \hline
@@ -25,7 +25,7 @@ Acurácia ponderada pela população & 87,2\% & 84,9\%\\
 Kappa ponderado pela população & 0,55 & 0,43\\
 Kappa ponderado linear pela população & 0,66 & 0,51\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:rotuladas}
 \end{table}
 
@@ -37,7 +37,7 @@ Quanto ao aspecto, a atribuição não depende do modelo de sentimento. Acerta 5
 \centering
 \caption{Precisão da atribuição de aspecto, por aspecto previsto (27 sentenças rotuladas em cada).}
 \small
-\begin{tabular}{l|r}
+\ajusta{\begin{tabular}{l|r}
 \hline
 Aspecto previsto & Precisão\\
 \hline
@@ -53,7 +53,7 @@ Ruído e conforto & 44\%\\
 Satisfação geral & 41\%\\
 Fora do perfil (\texttt{geral}) & 37\%\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:precisao}
 \end{table}
 
@@ -73,7 +73,7 @@ A evidência indireta mais importante é a concordância com as subnotas dadas p
 \centering
 \caption{Correlação entre o sentimento do aspecto e a subnota oficial correspondente, no nível do anúncio.}
 \small
-\begin{tabular}{l|l|r|r|r|r|r}
+\ajusta{\begin{tabular}{l|l|r|r|r|r|r}
 \hline
 Aspecto & Subnota & $n$ & Spearman (A) & Pearson (A) & Spearman (B) & Pearson (B)\\
 \hline
@@ -85,7 +85,7 @@ Custo-benefício & \texttt{value} & 3.552 & 0,24 & 0,26 & 0,22 & 0,23\\
 Precisão do anúncio & \texttt{accuracy} & 16.638 & 0,17 & 0,22 & 0,15 & 0,21\\
 Satisfação geral & nota global & 26.378 & 0,34 & 0,52 & 0,26 & 0,38\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:construto}
 \end{table}
 
@@ -101,7 +101,7 @@ Para saber se os resultados por aspecto dependem do método de tópicos, cada se
 \centering
 \caption{Checagem com LDA: correlação do perfil, validade de construto e parcela do $R^2$ da nota global.}
 \small
-\begin{tabular}{l|r|r|r|r|r}
+\ajusta{\begin{tabular}{l|r|r|r|r|r}
 \hline
 Aspecto & Perfil BERTopic $\times$ LDA & Subnota (LDA) & Subnota (BERTopic) & $R^2$ (LDA) & $R^2$ (BERTopic)\\
 \hline
@@ -110,7 +110,7 @@ Comunicação & 0,54 & 0,28 & 0,30 & 22,7\% & 15,5\%\\
 Comodidades & 0,67 & -- & -- & 62,3\% & 59,0\%\\
 Satisfação geral & 0,46 & 0,19 & 0,34 & 13,4\% & 24,6\%\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:lda}
 \end{table}
 
@@ -126,7 +126,7 @@ A partir das evidências, cada aspecto foi classificado por um critério descrit
 \centering
 \caption{Classificação dos aspectos quanto à confiança da medida.}
 \small
-\begin{tabular}{l|r|r|r|l}
+\ajusta{\begin{tabular}{l|r|r|r|l}
 \hline
 Aspecto & Precisão & Spearman (A) & Spearman (B) & Classificação\\
 \hline
@@ -141,7 +141,7 @@ Ruído e conforto & 44\% & -- & -- & cautela (sem subnota)\\
 Segurança & 48\% & -- & -- & cautela (sem subnota)\\
 Comodidades & 44\% & -- & -- & cautela (sem subnota)\\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:classif}
 \end{table}
 
