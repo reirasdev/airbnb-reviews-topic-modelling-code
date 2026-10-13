@@ -1,0 +1,232 @@
+{
+  "tool": "audit_dissertation_text",
+  "warning": "Triagem automática; os achados precisam de confirmação visual e normativa.",
+  "metrics": {
+    "characters": 81191,
+    "lines": 432,
+    "distinct_year_tokens": 36,
+    "citation_calls_detected": 57,
+    "reference_entries_detected": 51,
+    "citacoes_sem_referencia": 10,
+    "referencias_sem_citacao": 21,
+    "disponivel_em": 9,
+    "acesso_em": 9
+  },
+  "sections": {
+    "resumo": {
+      "present": true,
+      "locations": [
+        {
+          "line": 38,
+          "snippet": "_____________________ ([Nome completo, titulação e instituição a que pertence]) RESUMO As notas das avaliações do Airbnb se concentram no topo da escala e dizem pouco sobre as razões da"
+        }
+      ]
+    },
+    "abstract": {
+      "present": true,
+      "locations": [
+        {
+          "line": 42,
+          "snippet": "ecto; avaliações online; Airbnb; modelagem de tópicos; diagnóstico de anúncios. ABSTRACT Ratings on Airbnb are concentrated at the top of the scale and say little about the reasons for gue"
+        }
+      ]
+    },
+    "palavras-chave": {
+      "present": true,
+      "locations": [
+        {
+          "line": 41,
+          "snippet": "osta é um diagnóstico por anúncio, comparado ao bairro e ao tipo de acomodação. Palavras-chave: análise de sentimento por aspecto; avaliações online; Airbnb; modelagem de tópicos; diagnóstico de"
+        }
+      ]
+    },
+    "keywords": {
+      "present": false,
+      "locations": []
+    },
+    "sumário": {
+      "present": true,
+      "locations": [
+        {
+          "line": 61,
+          "snippet": "de postos com o índice de ocupação residualizado, por faixa da nota oficial. 33 SUMÁRIO INTRODUÇÃO 9 1 REFERENCIAL TEÓRICO 11 1.1 AVALIAÇÕES ONLINE: COMPRESSÃO DAS NOTAS E VIESES DE RELAT"
+        }
+      ]
+    },
+    "introdução": {
+      "present": true,
+      "locations": [
+        {
+          "line": 105,
+          "snippet": "NFITRIÕES E EMPRESAS GESTORAS 36 7.3 LIMITAÇÕES 36 CONCLUSÕES 38 REFERÊNCIAS 40 INTRODUÇÃO A nota média de um anúncio no Airbnb resume a opinião de dezenas ou centenas de hóspedes em um únic"
+        }
+      ]
+    },
+    "conclusão": {
+      "present": true,
+      "locations": [
+        {
+          "line": 373,
+          "snippet": "lataforma e uma coleta e os resultados podem não se estender a outros mercados. CONCLUSÕES As conclusões seguem a ordem das perguntas de pesquisa. Todas são associações e valem com as ressal"
+        }
+      ]
+    },
+    "referências": {
+      "present": true,
+      "locations": [
+        {
+          "line": 381,
+          "snippet": "specto. A replicação em outras cidades testaria a generalidade da decomposição. REFERÊNCIAS BARBIERI, Francesco; ESPINOSA ANKE, Luis; CAMACHO-COLLADOS, Jose. XLM-T: Multilingual language mode"
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "severity": "attention",
+      "category": "estrutura",
+      "issue": "Seção não localizada: keywords",
+      "recommendation": "Conferir se a seção existe com outro título ou se está ausente; validar contra o manual institucional."
+    },
+    {
+      "severity": "high",
+      "category": "revisão editorial",
+      "issue": "marcador TODO",
+      "locations": [
+        {
+          "line": 150,
+          "snippet": "mento das sentenças do aspecto, calculada quando há ao menos duas sentenças. Ao todo, 28.889 anúncios têm perfil. A Tabela 1 mostra a participação de cada aspecto no corpus e o número"
+        }
+      ],
+      "recommendation": "Substituir ou remover o marcador antes de gerar a versão final."
+    },
+    {
+      "severity": "high",
+      "category": "revisão editorial",
+      "issue": "texto de exemplo",
+      "locations": [
+        {
+          "line": 26,
+          "snippet": "______________________________ (Prof. Dr. Rodolfo Nicolay – orientador) Nota: [a definir pela banca] Aprovado em: [dia] de [mês] de [ano]. BANCA EXAMINADORA: _____________________________"
+        }
+      ],
+      "recommendation": "Substituir ou remover o marcador antes de gerar a versão final."
+    },
+    {
+      "severity": "attention",
+      "category": "referências",
+      "issue": "Chamadas de citação sem entrada correspondente na lista de referências",
+      "locations": [
+        {
+          "call": "BRIDGES (2018)",
+          "line": 142
+        },
+        {
+          "call": "BYERS (2021)",
+          "line": 108
+        },
+        {
+          "call": "PAVLOU (2009)",
+          "line": 116
+        },
+        {
+          "call": "WOOD (2008)",
+          "line": 116
+        },
+        {
+          "call": "GOLDEN (2022)",
+          "line": 116
+        },
+        {
+          "call": "HOLTZ (2021)",
+          "line": 119
+        },
+        {
+          "call": "VASQUEZ (2018)",
+          "line": 119
+        },
+        {
+          "call": "JIN (2019)",
+          "line": 120
+        },
+        {
+          "call": "TANG (2019)",
+          "line": 120
+        },
+        {
+          "call": "KIATKAWSIN (2020)",
+          "line": 120
+        }
+      ],
+      "recommendation": "Conciliação heurística: confirmar manualmente conforme o passo 7 do SKILL.md. Falsos positivos comuns: entidade citada por sigla (ex.: ABNT, IBGE), 'apud', sobrenomes compostos e falhas de OCR."
+    },
+    {
+      "severity": "attention",
+      "category": "referências",
+      "issue": "Entradas da lista de referências sem chamada localizada no texto",
+      "locations": [
+        {
+          "call": "BRIDGES (2057)",
+          "line": 385
+        },
+        {
+          "call": "CARDIFF NLP (2023)",
+          "line": 387
+        },
+        {
+          "call": "CHENG (2019)",
+          "line": 388
+        },
+        {
+          "call": "DEBOOSERE (2019)",
+          "line": 393
+        },
+        {
+          "call": "DELLAROCAS (2008)",
+          "line": 394
+        },
+        {
+          "call": "DEVLIN (2019)",
+          "line": 395
+        },
+        {
+          "call": "FRADKIN (2021)",
+          "line": 399
+        },
+        {
+          "call": "GROMPING (2007)",
+          "line": 402
+        },
+        {
+          "call": "GYODI (2021)",
+          "line": 404
+        },
+        {
+          "call": "HU (2009)",
+          "line": 405
+        },
+        {
+          "call": "LINDEMAN (1980)",
+          "line": 409
+        },
+        {
+          "call": "LUO (2019)",
+          "line": 411
+        },
+        {
+          "call": "PEDREGOSA (2011)",
+          "line": 416
+        },
+        {
+          "call": "PONTIKI (2014)",
+          "line": 417
+        },
+        {
+          "call": "PONTIKI (2016)",
+          "line": 418
+        }
+      ],
+      "recommendation": "Conciliação heurística: confirmar manualmente conforme o passo 7 do SKILL.md. Falsos positivos comuns: entidade citada por sigla (ex.: ABNT, IBGE), 'apud', sobrenomes compostos e falhas de OCR."
+    }
+  ]
+}
