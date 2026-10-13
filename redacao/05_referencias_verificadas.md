@@ -61,3 +61,10 @@ Observações:
 
 ## Ainda falta (revisão de literatura)
 Estas referências sustentam o método, mas a revisão de literatura propriamente dita (o que se sabe sobre o que explica a nota de hospedagem, e a lacuna que a dissertação preenche) ainda precisa ser lida e organizada por você e por mim, a partir dos próprios artigos.
+
+## Atualizacao 2026-10-12
+- Conferidos 47 PDFs contra as citacoes (ver `fontes/referencias/conferencia_citacoes.xlsx`, fora do repositorio).
+- `hallgren2012` removida (PDF nao obtido; McHugh 2012 cobre o assunto).
+- `kish1965` substituida por `kish1992` (Journal of Official Statistics, 8(2), 183-200); PDF nao localizado em acesso aberto.
+- `souza2020` agora referencia a dissertacao (Unicamp, 2020), que e o PDF obtido; o artigo do BRACIS nao foi obtido.
+- Quatro frases do Capitulo 2 ajustadas para acompanhar o que os artigos dizem (Chevalier & Mayzlin, Wang & Nicolau, Deboosere et al., Zervas et al.).
