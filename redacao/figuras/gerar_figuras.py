@@ -23,6 +23,7 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch  # noqa: E402
 
+EDGE = next((Path(x) for x in (r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", r"C:\Program Files\Microsoft\Edge\Application\msedge.exe") if Path(x).exists()), Path("msedge"))
 AQUI = Path(__file__).resolve().parent
 REPO = AQUI.parents[1]
 DADOS = REPO / "outputs" / "ajustes_v2"
@@ -107,7 +108,7 @@ def fig2():
     axs[0].set_ylabel("Número de anúncios")
     axs[0].text(4.62, ymax * 0.62, f"{pt(r.loc['% = 5,0', 'nota_oficial'])}% dos anúncios\ntêm nota 5,0", ha="right", fontsize=8, color=AZUL)
     fig.tight_layout(w_pad=1.2)
-    salvar(fig, 2)
+    salvar(fig, 5)
 
 
 # ------------------------------------------------------------------------------------------------ 3. LMG
@@ -128,7 +129,7 @@ def fig3():
     fig.legend(handles=[Patch(color=AZUL, label="aspecto confiável"), Patch(color=CINZA, label="aspecto que pede cautela")], loc="lower center", ncol=2, frameon=False, fontsize=8.5,
                bbox_to_anchor=(0.5, -0.05))
     fig.tight_layout(w_pad=1.0)
-    salvar(fig, 3)
+    salvar(fig, 2)
 
 
 # ------------------------------------------------------------------------------------------------ 4. diferencas com intervalos
@@ -166,14 +167,12 @@ def fig4():
     fig.legend(handles=[Line2D([0], [0], marker="o", color=AZUL, lw=1.4, label="aspecto confiável"), Line2D([0], [0], marker="o", color=CINZA, lw=1.4, label="aspecto que pede cautela")],
                loc="lower center", ncol=2, frameon=False, fontsize=8.5, bbox_to_anchor=(0.5, -0.04))
     fig.tight_layout(h_pad=1.8)
-    salvar(fig, 4)
+    salvar(fig, 3)
 
 
 # ------------------------------------------------------------------------------------------------ 5. relatorios anonimizados
 def render_html(html: Path, png: Path, largura=1000, altura=2600):
-    edge = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
-    if not edge.exists():
-        edge = Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe")
+    edge = EDGE
     tmp = tempfile.mkdtemp()
     subprocess.run([str(edge), "--headless", "--disable-gpu", f"--user-data-dir={tmp}", f"--window-size={largura},{altura}", "--hide-scrollbars",
                     "--force-device-scale-factor=2", f"--screenshot={png}", html.resolve().as_uri()], check=True, timeout=120, capture_output=True)
@@ -192,13 +191,49 @@ def recorta(png: Path):
     im.crop((0, 0, im.width, min(im.height, int(nao_branco.max()) + 30))).save(png)
 
 
+def divide(png: Path):
+    """Divide a pagina do relatorio em duas partes (parte superior e inferior), cortando numa faixa em branco perto do meio, para caber na pagina com letra legivel."""
+    from PIL import Image
+
+    im = Image.open(png).convert("RGB")
+    a = np.array(im)
+    branco = (a >= 250).all(axis=2).all(axis=1)
+    lo, hi = int(0.50 * im.height), int(0.68 * im.height)
+    melhor, atual, ini = (0, lo), 0, lo
+    for y in range(lo, hi):
+        if branco[y]:
+            if atual == 0:
+                ini = y
+            atual += 1
+            if atual > melhor[0]:
+                melhor = (atual, ini + atual // 2)
+        else:
+            atual = 0
+    corte = melhor[1]
+    im.crop((0, 0, im.width, corte)).save(png.with_name(png.stem + "_a.png"))
+    im.crop((0, corte, im.width, im.height)).save(png.with_name(png.stem + "_b.png"))
+
+
 def relatorios():
     htmls = sorted((REPO / "outputs" / "diagnosticos").glob("diagnostico_*.html"))
     for i, h in enumerate(htmls, 1):
         png = SAIDA / f"relatorio_{i}.png"
         render_html(h, png)
         recorta(png)
+        divide(png)
+        pdf = SAIDA / f"relatorio_{i}.pdf"
+        subprocess.run([str(EDGE), "--headless", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={tempfile.mkdtemp()}", f"--print-to-pdf={pdf}", h.resolve().as_uri()],
+                       check=True, timeout=120, capture_output=True)
+        for _ in range(40):
+            if pdf.exists() and pdf.stat().st_size > 0:
+                break
+            time.sleep(0.5)
         print("relatorio", i, h.name)
+    # Figura 4 do texto: parte superior do relatorio do anuncio de nota baixa (3o HTML em ordem alfabetica)
+    import shutil
+
+    shutil.copy(SAIDA / "relatorio_3_a.png", SAIDA / "figura_4.png")
+    shutil.copy(SAIDA / "relatorio_3.pdf", SAIDA / "figura_4.pdf")
 
 
 if __name__ == "__main__":

@@ -10,13 +10,20 @@ A especificação principal não aplica encolhimento bayesiano empírico com $m 
 
 \subsection{Compressão da nota oficial e reordenamento}
 
-A nota oficial concentra 22,8\% dos anúncios com índice no valor 5,0. O valor mais frequente do índice sintético concentra 1,6\% em A e 1,9\% em B. A correlação de postos entre o índice e a nota oficial é 0,62 em A e 0,58 em B. Além disso, 61\% (A) e 63\% (B) dos anúncios mudam 10 pontos percentuais de posto ou mais entre os dois rankings. Os índices de A e de B têm correlação de postos de 0,82.
+A nota oficial concentra 22,8\% dos anúncios com índice no valor 5,0. O valor mais frequente do índice sintético concentra 1,6\% em A e 1,9\% em B. A Figura~\ref{fig:compressao} compara as duas distribuições na mesma amostra de 22.564 anúncios. A correlação de postos entre o índice e a nota oficial é 0,62 em A e 0,58 em B. Além disso, 61\% (A) e 63\% (B) dos anúncios mudam 10 pontos percentuais de posto ou mais entre os dois rankings. Os índices de A e de B têm correlação de postos de 0,82.
 
-Entre os 5.142 anúncios de nota exatamente 5,0 que têm índice, o índice os distribui entre o percentil 27 e o 98 (do 5º ao 95º; em B, de 22 a 98). Ele concorda de forma fraca, mas positiva, com as seis subnotas (correlação de postos de 0,08 a 0,12 em A e de 0,04 a 0,10 em B, já que as subnotas também são saturadas). Essa capacidade de discriminar vale para os anúncios de nota 5,0 que têm índice, ou seja, 5.142 dos 9.373 anúncios de nota 5,0 (54,9\%). Os que ficam de fora são sobretudo os de pouquíssimas avaliações, justamente os mais comprimidos (Tabela~\ref{tab:selecao}).
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{figura_5}
+\caption{Distribuição da nota oficial e do índice sintético (modelo A) nos 22.564 anúncios com índice.}
+\label{fig:compressao}
+\end{figure}
+
+Entre os 5.142 anúncios de nota exatamente 5,0 que têm índice, o índice os distribui entre o percentil 27 e o 98 (do 5º ao 95º; em B, de 22 a 98). Esses percentis são calculados sobre a distribuição dos 22.564 anúncios com índice, o que inclui os de nota inferior a 5,0. Ele concorda de forma fraca, mas positiva, com as seis subnotas (correlação de postos de 0,08 a 0,12 em A e de 0,04 a 0,10 em B, já que as subnotas também são saturadas). Essa capacidade de discriminar vale para os anúncios de nota 5,0 que têm índice, ou seja, 5.142 dos 9.373 anúncios de nota 5,0 (54,9\%). Os que ficam de fora são sobretudo os de pouquíssimas avaliações, justamente os mais comprimidos (Tabela~\ref{tab:selecao}).
 
 \begin{table}[htb]
 \centering
-\caption{Anúncios de nota 5,0 com e sem índice sintético.}
+\caption{Anúncios de nota 5,0 com e sem índice sintético (preço por diária em reais).}
 \small
 \ajusta{\begin{tabular}{l|r|r}
 \hline
@@ -24,7 +31,7 @@ Característica (nota 5,0) & Com índice & Sem índice\\
 \hline
 Anúncios & 5.142 & 4.231\\
 Avaliações totais (mediana) & 9 & 3\\
-Preço (mediana) & 345 & 331\\
+Preço por diária (mediana, em R\$) & 345 & 331\\
 Casa ou apartamento inteiro & 81\% & 72\%\\
 Quarto privado & 18\% & 26\%\\
 Português predominante & 74\% & 73\%\\
@@ -35,11 +42,11 @@ Português predominante & 74\% & 73\%\\
 
 \subsection{Poder explicativo sobre os índices de volume}
 
-Os controles são o volume total de avaliações (em logaritmo), o preço (em logaritmo), o tipo de acomodação e o bairro. Não se controla pelas avaliações dos últimos 12 meses (Seção 3). A validação é feita fora da amostra, com cinco dobras repetidas cinco vezes, com a mesma semente e as mesmas dobras em todos os modelos. O modelo M0 contém os controles, M1 acrescenta a nota oficial, M2 acrescenta o índice sintético no lugar da nota e M3 acrescenta os dois. No índice de ocupação, na amostra completa, os controles têm $R^2$ fora da amostra de 0,475 e a nota oficial o eleva a 0,483. A Tabela~\ref{tab:ganho} mostra os ganhos de $R^2$ fora da amostra, com a média entre dobras e o intervalo de 2,5\% a 97,5\% entre dobras.
+Os controles são o volume total de avaliações (em logaritmo), o preço (em logaritmo), o tipo de acomodação e o bairro. Não se controla pelas avaliações dos últimos 12 meses (Seção 3). A validação é feita fora da amostra, com cinco dobras repetidas cinco vezes, com a mesma semente e as mesmas dobras em todos os modelos. O modelo M0 contém os controles, M1 acrescenta a nota oficial, M2 acrescenta o índice sintético no lugar da nota e M3 acrescenta os dois. No índice de ocupação, na amostra completa, os controles têm $R^2$ fora da amostra de 0,475 e a nota oficial o eleva a 0,483. A Tabela~\ref{tab:ganho} mostra os ganhos de $R^2$ fora da amostra, com a média entre dobras e o intervalo de 2,5\% a 97,5\% entre dobras, para a amostra completa e para o teto de nota 5,0. A tabela completa, com os quatro escopos de cada desfecho (12 linhas), está no Apêndice C.
 
 \begin{table}[htb]
 \centering
-\caption{Ganho de $R^2$ fora da amostra: média entre dobras e intervalo entre dobras.}
+\caption{Ganho de $R^2$ fora da amostra: média entre dobras e intervalo entre dobras (versão resumida; as 12 comparações estão no Apêndice C).}
 \scriptsize
 \ajusta{\begin{tabular}{l|l|c|c|c|c}
 \hline

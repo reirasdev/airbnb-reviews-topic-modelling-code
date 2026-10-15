@@ -29,6 +29,15 @@ Segurança & 0,1\% & 0,1\% & cautela\\
 \label{tab:lmg}
 \end{table}
 
+A Figura~\ref{fig:lmg} apresenta as mesmas parcelas, com a classificação de cada aspecto.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{figura_2}
+\caption{Parcela do $R^2$ da nota global atribuída a cada aspecto nos modelos A e B (decomposição LMG), com a classificação do aspecto.}
+\label{fig:lmg}
+\end{figure}
+
 Comodidades responde por 42,5\% do $R^2$ em A e 47,8\% em B, seguida de limpeza (19,6\% e 18,8\%). Satisfação geral e comunicação vêm depois. Localização, custo-benefício e segurança contribuem pouco para a nota global, embora a localização seja o aspecto que mais explica a sua própria subnota (Tabela~\ref{tab:subnotas}). O hóspede parece avaliar o local em separado; a nota global reflete mais o que ele viveu dentro do imóvel. A ordem das parcelas é muito parecida entre os modelos (correlação de postos de 0,99). A diferença mais visível está na satisfação geral, que pesa menos em B. Valem as ressalvas da Seção 4: comodidades e satisfação geral estão na classe de cautela. A importância relativa de um aspecto mistura efeito e confiabilidade da medida, porque aspectos pouco citados, como segurança e custo-benefício, são medidos com mais erro e imputados na maioria dos anúncios.
 
 A Tabela~\ref{tab:subnotas} mostra o mesmo exercício para cada subnota. O aspecto correspondente está entre os que mais a explicam; em localização ela é a primeira. Nas demais subnotas, comodidades tem a maior parcela.
@@ -56,6 +65,36 @@ Modelos mais flexíveis dão a mesma leitura. Um modelo de árvores com gradient
 
 O resultado é estável. Comodidades é o aspecto de maior parcela nos 11 segmentos analisados (tipo de acomodação, idioma predominante e os seis maiores bairros), tanto em A quanto em B, com parcelas de 37\% a 43\% em A e de 38\% a 49\% em B. Também ocupa o primeiro lugar nas cinco sensibilidades: todos os anúncios, apenas tópicos diretos, até 30 avaliações, ao menos três aspectos observados e sem a satisfação geral entre os preditores.
 
+Nos 19.623 anúncios com até 30 avaliações, em que o sentimento e a nota cobrem as mesmas estadias (Seção 3), comodidades responde por 41,2\% do $R^2$ em A e 46,8\% em B e limpeza por 18,5\% e 18,2\%, valores próximos dos da amostra completa. O descompasso de período entre o texto e a nota não altera, portanto, a leitura.
+
+A imputação pela média pode confundir a ausência de menção com opinião neutra. Na repetição da decomposição com um indicador de ausência para cada aspecto (o sentimento imputado e um indicador de presença, 20 preditores), o $R^2$ total sobe de 0,320 para 0,382 em A (de 0,291 para 0,358 em B), porque estar ou não entre os assuntos citados também informa sobre a nota. A ordem dos aspectos não muda. O sentimento de comodidades fica com 34,3\% do $R^2$ em A e 37,3\% em B e com 41,8\% e 45,6\% quando se soma o indicador de ausência do aspecto. O sentimento de limpeza fica com 15,6\% e 14,5\% e o de satisfação geral com 13,4\% e 7,2\%. A leitura da Tabela~\ref{tab:lmg} não depende, portanto, da imputação pela média (aba \texttt{LMG\_ausencia\_v2}).
+
+Comodidades é o aspecto de maior peso e também o mais heterogêneo. Para saber de onde vem o seu peso, os 33 tópicos mapeados a comodidades foram agrupados em sete subaspectos (banheiro e chuveiro, climatização, cozinha e utensílios, cama e colchão, internet, manutenção e reparos e demais comodidades), pela palavra de maior peso de cada tópico e a decomposição da nota global foi refeita com esses subaspectos no lugar do aspecto inteiro. A Tabela~\ref{tab:comodsub} traz o resultado em duas leituras. Na primeira, vale a regra do estudo: o subaspecto só existe no anúncio com ao menos duas sentenças. Como os subaspectos são mais raros (de 5\% a 25\% dos anúncios têm dado próprio e 62\% em demais comodidades), a maior parte dos valores é imputada, o $R^2$ total cai e os subaspectos somam 25,2\% em A e 29,8\% em B. Limpeza (25,3\% nos dois modelos) e satisfação geral em A (23,5\%) passam à frente de qualquer subaspecto. Na segunda, com ao menos uma sentença, o $R^2$ total volta a 0,304 em A e 0,272 em B e a soma dos subaspectos é de 42,1\% e 48,3\%, praticamente a parcela do aspecto inteiro (42,5\% e 47,8\%).
+
+\begin{table}[htb]
+\centering
+\caption{Parcela do $R^2$ da nota global por subaspecto de comodidades, com a regra de duas sentenças (regra do estudo) e com uma sentença (sensibilidade).}
+\small
+\ajusta{\begin{tabular}{l|r|r|r|r|r}
+\hline
+Subaspecto & Anúncios com dado próprio & A (2 sentenças) & B (2 sentenças) & A (1 sentença) & B (1 sentença)\\
+\hline
+Banheiro e chuveiro & 25\% & 6,1\% & 6,8\% & 9,9\% & 10,5\%\\
+Climatização & 12\% & 1,2\% & 1,5\% & 3,5\% & 4,5\%\\
+Cozinha e utensílios & 20\% & 3,9\% & 4,7\% & 6,6\% & 7,5\%\\
+Cama e colchão & 10\% & 1,7\% & 2,0\% & 4,6\% & 5,6\%\\
+Internet & 5\% & 0,7\% & 0,7\% & 1,5\% & 1,7\%\\
+Manutenção e reparos & 9\% & 3,5\% & 4,0\% & 7,8\% & 8,2\%\\
+Demais comodidades & 62\% & 8,1\% & 10,1\% & 8,1\% & 10,4\%\\
+Soma dos sete subaspectos & -- & 25,2\% & 29,8\% & 42,1\% & 48,3\%\\
+$R^2$ total & -- & 0,266 & 0,231 & 0,304 & 0,272\\
+\hline
+\end{tabular}}
+\label{tab:comodsub}
+\end{table}
+
+A divisão muda a leitura de uma forma específica. O peso de comodidades vem do conjunto das instalações e não de um único componente: com a medida mais completa, banheiro e chuveiro é o maior subaspecto (9,9\% em A e 10,5\% em B), seguido de demais comodidades e de manutenção e reparos (7,8\% e 8,2\%), todos abaixo de limpeza (19,0\% e 18,2\%). Banheiro e chuveiro é também a queixa de maior peso entre os tópicos (Tabela~\ref{tab:queixas}). As demais queixas de instalações (ar-condicionado, cozinha, cama, internet e manutenção) têm parcelas menores como subaspectos e as duas leituras, por subaspecto e por tópico, se complementam. O primeiro lugar de comodidades como bloco depende de medi-lo com todas as sentenças; quando o aspecto é fatiado pela regra de duas sentenças, a imputação domina e a posição relativa de limpeza e de satisfação geral sobe. Os resultados dos subaspectos são, portanto, indicativos (abas \texttt{Mapa\_comodidades\_v2} e \texttt{LMG\_comodidades\_v2}).
+
 \subsection{Queixas e elogios por tópico}
 
 A leitura prática está nos tópicos finos, cuja atribuição de aspecto é mais precisa. Para cada tópico, comparou-se o percentil da nota entre anúncios com e sem ao menos uma menção negativa (ou positiva) ao tópico, controlando o volume de avaliações e de sentenças. Foram testadas 68 queixas e 181 elogios com amostra suficiente, com correção de Benjamini e Hochberg. No sentido esperado, 56 queixas e 123 elogios têm $q < 0{,}05$. A Tabela~\ref{tab:queixas} lista as queixas de maior peso, que combina o efeito com a prevalência, no modelo A.
@@ -66,20 +105,20 @@ A leitura prática está nos tópicos finos, cuja atribuição de aspecto é mai
 \small
 \ajusta{\begin{tabular}{p{4.3cm}|p{3.9cm}|r|r}
 \hline
-Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Efeito no percentil\\
+Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Diferença associada (pontos de percentil da nota)\\
 \hline
-banheiro, chuveiro, água, box & Comodidades (cautela) & 14\% & $-20{,}3$ pontos\\
-condicionado, aire, acondicionado, calor & Comodidades (cautela) & 13\% & $-17{,}7$ pontos\\
-sujo, limpeza, chão, \textit{dirty} & Limpeza (confiável) & 7\% & $-26{,}4$ pontos\\
-infelizmente, \textit{leave}, \textit{disappointed}, problemas & Satisfação geral (cautela) & 9\% & $-20{,}0$ pontos\\
-cozinha, cozinhar, \textit{kitchen}, \textit{cocina} & Comodidades (cautela) & 7\% & $-19{,}1$ pontos\\
-anfitrião, anfitriã, hóspedes, \textit{host} & Comunicação (cautela) & 5\% & $-22{,}9$ pontos\\
-barulho, \textit{noise}, ruido, \textit{noisy} & Ruído e conforto (cautela) & 11\% & $-9{,}7$ pontos\\
-cheiro, mofo, forte, olor & Limpeza (confiável) & 5\% & $-21{,}8$ pontos\\
-cama, \textit{bed}, camas, casal & Comodidades (cautela) & 5\% & $-17{,}8$ pontos\\
-dormir, cortina, luz, cortinas & Ruído e conforto (cautela) & 5\% & $-15{,}7$ pontos\\
-reparos, precisa, manutenção, melhorias & Comodidades (cautela) & 3\% & $-21{,}5$ pontos\\
-wifi, sinal, senha, único & Comodidades (cautela) & 3\% & $-19{,}5$ pontos\\
+banheiro, chuveiro, água, box & Comodidades (cautela) & 14\% & $-20{,}3$\\
+condicionado, aire, acondicionado, calor & Comodidades (cautela) & 13\% & $-17{,}7$\\
+sujo, limpeza, chão, \textit{dirty} & Limpeza (confiável) & 7\% & $-26{,}4$\\
+infelizmente, \textit{leave}, \textit{disappointed}, problemas & Satisfação geral (cautela) & 9\% & $-20{,}0$\\
+cozinha, cozinhar, \textit{kitchen}, \textit{cocina} & Comodidades (cautela) & 7\% & $-19{,}1$\\
+anfitrião, anfitriã, hóspedes, \textit{host} & Comunicação (cautela) & 5\% & $-22{,}9$\\
+barulho, \textit{noise}, ruido, \textit{noisy} & Ruído e conforto (cautela) & 11\% & $-9{,}7$\\
+cheiro, mofo, forte, olor & Limpeza (confiável) & 5\% & $-21{,}8$\\
+cama, \textit{bed}, camas, casal & Comodidades (cautela) & 5\% & $-17{,}8$\\
+dormir, cortina, luz, cortinas & Ruído e conforto (cautela) & 5\% & $-15{,}7$\\
+reparos, precisa, manutenção, melhorias & Comodidades (cautela) & 3\% & $-21{,}5$\\
+wifi, sinal, senha, único & Comodidades (cautela) & 3\% & $-19{,}5$\\
 \hline
 \end{tabular}}
 \label{tab:queixas}
@@ -93,21 +132,32 @@ Destacam-se as queixas de instalações e manutenção (banheiro, ar-condicionad
 \small
 \ajusta{\begin{tabular}{p{4.3cm}|p{3.9cm}|r|r}
 \hline
-Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Efeito no percentil\\
+Tópico (palavras de maior peso) & Aspecto (classificação) & Anúncios com menção & Diferença associada (pontos de percentil da nota)\\
 \hline
-anfitriã, anfitrião, \textit{host}, anfitriões & Comunicação (cautela) & 84\% & $+8{,}5$ pontos\\
-rio, janeiro, río, \textit{rock} & Satisfação geral (cautela) & 56\% & $+7{,}5$ pontos\\
-casa, senti, sentimos, sentir & Satisfação geral (cautela) & 34\% & $+10{,}9$ pontos\\
-voltaremos, voltar, esperamos, iremos & Satisfação geral (cautela) & 44\% & $+8{,}2$ pontos\\
-agradeço, \textit{gracias}, agradecer, atenção & Comunicação (cautela) & 31\% & $+5{,}7$ pontos\\
-limpo, organizado, \textit{limpio}, \textit{clean} & Limpeza (confiável) & 34\% & $+4{,}8$ pontos\\
+anfitriã, anfitrião, \textit{host}, anfitriões & Comunicação (cautela) & 84\% & $+8{,}5$\\
+rio, janeiro, río, \textit{rock} & Satisfação geral (cautela) & 56\% & $+7{,}5$\\
+casa, senti, sentimos, sentir & Satisfação geral (cautela) & 34\% & $+10{,}9$\\
+voltaremos, voltar, esperamos, iremos & Satisfação geral (cautela) & 44\% & $+8{,}2$\\
+agradeço, \textit{gracias}, agradecer, atenção & Comunicação (cautela) & 31\% & $+5{,}7$\\
+limpo, organizado, \textit{limpio}, \textit{clean} & Limpeza (confiável) & 34\% & $+4{,}8$\\
 \hline
 \end{tabular}}
 \label{tab:elogios}
 \end{table}
 
+A Figura~\ref{fig:dif} mostra as diferenças associadas das Tabelas~\ref{tab:queixas} e~\ref{tab:elogios}, com intervalos de 95\% calculados pela mesma especificação (erro padrão robusto HC3).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{figura_3}
+\caption{Diferença associada no percentil da nota, em pontos de percentil, para as queixas e os elogios das Tabelas~\ref{tab:queixas} e~\ref{tab:elogios}, com intervalo de 95\%.}
+\label{fig:dif}
+\end{figure}
+
+Como a menção negativa vem de uma previsão que acerta 62\% das vezes (Seção 3), a análise das queixas foi repetida exigindo ao menos duas sentenças negativas no tópico, com a mesma especificação, o mesmo piso de 100 anúncios com a menção e a mesma correção de Benjamini e Hochberg. A exigência reduz os anúncios com a menção (por exemplo, de 3.955 para 1.009 no tópico de banheiro) e, com o piso mantido, os tópicos testados caem de 68 para 13 em A. Das 15 queixas de maior peso em A, 11 seguem testáveis e as 11 mantêm o sinal e $q < 0{,}05$. As quatro restantes (reparos, \textit{wi-fi}, um tópico de experiência geral e fechadura eletrônica) deixam de ser testáveis, com 52 a 86 anúncios com duas menções. Nas 11 testáveis, a diferença associada média passa de $-18{,}9$ para $-20{,}9$ pontos, com variação de $-5{,}3$ a $+0{,}1$ ponto por tópico. Em B, 10 das 15 seguem testáveis e a média passa de $-20{,}0$ para $-23{,}2$. Dez tópicos coincidem nas 15 queixas de maior peso dos dois modelos. Exigir duas menções não enfraquece as associações; elas ficam um pouco maiores, como seria de esperar se uma única sentença negativa isolada contivesse ruído de classificação (aba \texttt{Queixas\_min2\_v2}).
+
 A queixa genérica (decepção e problemas) e os elogios genéricos (sentir-se em casa, voltar) pertencem à satisfação geral, aspecto que pede cautela e funcionam sobretudo como termômetro.
 
 \subsection{Cuidados de interpretação}
 
-Os resultados não têm leitura causal. Um anúncio com queixa de banheiro tem nota menor e isso não permite afirmar que consertar o banheiro eleve a nota. O efeito apresentado é a diferença média, na cidade, entre anúncios com e sem a menção, controlada por volume. A atribuição de aspecto acerta entre 52\% e 66\% na população (Seção 4). A importância por aspecto fica abaixo da dos tópicos em confiabilidade, o que reforça a leitura por tópico.
+Os resultados não têm leitura causal. Um anúncio com queixa de banheiro tem nota menor e isso não permite afirmar que consertar o banheiro eleve a nota. A diferença associada apresentada é a diferença média, na cidade, entre anúncios com e sem a menção, controlada por volume. A atribuição de aspecto acerta entre 52\% e 66\% na população (Seção 4). A importância por aspecto fica abaixo da dos tópicos em confiabilidade, o que reforça a leitura por tópico.

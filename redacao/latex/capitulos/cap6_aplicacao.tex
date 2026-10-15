@@ -6,4 +6,33 @@ O primeiro é o sentimento médio do anúncio em cada aspecto e a sua posição 
 
 Para a comparação foram construídas tabelas de referência com 66 grupos de bairro e tipo de acomodação que têm ao menos 30 anúncios e 3 grupos por tipo na cidade. Cada grupo traz a mediana e os quartis do sentimento por aspecto e da nota. O relatório respeita a classificação da Seção 4. Uma nota metodológica acompanha o documento e informa a precisão da atribuição por aspecto. Os aspectos que pedem cautela não devem orientar decisões isoladamente. Os aspectos classificados como confiáveis são limpeza, localização e custo-benefício.
 
-Foram gerados três exemplos anonimizados: um anúncio de nota alta, um de nota baixa e um com poucas avaliações. No de nota baixa, o relatório aponta comodidades e satisfação geral muito abaixo dos pares e destaca as queixas de banheiro e cozinha. No de poucas avaliações, a maior parte dos aspectos aparece com evidência baixa. O relatório indica onde investigar. Ele não prevê a nota do anúncio e não prescreve causas, porque as associações da Seção 5 são médias da cidade e não efeitos sobre um anúncio específico.
+A Figura~\ref{fig:relatorio} reproduz o relatório do exemplo de nota baixa e o Apêndice B traz os três relatórios. Foram gerados três exemplos anonimizados: um anúncio de nota alta, um de nota baixa e um com poucas avaliações. No de nota baixa, o relatório aponta comodidades e satisfação geral muito abaixo dos pares e destaca as queixas de banheiro e cozinha. No de poucas avaliações, a maior parte dos aspectos aparece com evidência baixa. O relatório indica onde investigar. Ele não prevê a nota do anúncio e não prescreve causas, porque as associações da Seção 5 são médias da cidade e não efeitos sobre um anúncio específico.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{figura_4}
+\caption{Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior do relatório).}
+\label{fig:relatorio}
+\end{figure}
+
+\subsection{Produto técnico}
+
+A ferramenta é formalizada como produto técnico desta dissertação. A descrição abaixo segue os itens usuais de um produto técnico.
+
+\textbf{Finalidade.} Gerar, a pedido, o relatório de diagnóstico de um único anúncio do Airbnb, que indica em que aspectos o anúncio se afasta dos pares do mesmo bairro e tipo de acomodação e que queixas e elogios se repetem nas suas avaliações.
+
+\textbf{Público.} Anfitriões e empresas gestoras de imóveis por temporada.
+
+\textbf{Entradas.} O identificador do anúncio e as tabelas produzidas pelo \textit{pipeline} de análise: o perfil por aspecto de cada anúncio, as tabelas de referência por bairro e tipo, as associações dos tópicos com o percentil da nota e a classificação dos aspectos. O \textit{pipeline} é executado antes, sobre os dados do Inside Airbnb.
+
+\textbf{Saídas.} Um arquivo HTML autocontido com os quatro componentes descritos acima e uma nota metodológica com a precisão de atribuição por aspecto. Há uma versão anonimizada, sem identificador, sem bairro e sem trechos das avaliações, para uso em publicações.
+
+\textbf{Como executar.} Com o \textit{pipeline} já executado, o relatório de um anúncio é gerado com o comando \texttt{python diagnostico.py --id <identificador>}. A opção \texttt{--anonimizar} gera a versão anonimizada e a opção \texttt{--sem-frases} omite as frases de exemplo. A execução usa apenas as tabelas já geradas, em processador comum e sem GPU.
+
+\textbf{Repositório e licença.} [PENDENTE: URL pública do repositório e licença do código.] Os dados de origem estão sob a licença CC BY 4.0 do Inside Airbnb.
+
+\textbf{Limites.} O relatório é descritivo. Ele não prevê a nota do anúncio nem prescreve causas, porque as associações são médias da cidade. Os aspectos que pedem cautela não devem orientar decisões isoladamente e aspectos com poucas sentenças recebem a marca de evidência baixa. Os resultados valem para o Rio de Janeiro e para a coleta de março de 2025 e as estimativas de anúncios com poucas avaliações são instáveis.
+
+\textbf{Categoria do produto.} [PENDENTE: categoria do produto técnico na classificação da CAPES, a confirmar com o orientador.]
+
+\textbf{Avaliação de utilidade.} [PENDENTE: avaliação de utilidade por um anfitrião ou uma gestora de imóveis, se houver.]

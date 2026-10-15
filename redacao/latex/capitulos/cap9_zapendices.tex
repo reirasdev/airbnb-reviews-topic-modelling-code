@@ -1,0 +1,104 @@
+\appendix
+
+\section{REGISTRO DATADO DA REGRA DE ESCOLHA DO MODELO PRINCIPAL}
+
+Este apêndice documenta que a regra de escolha do modelo principal foi fixada antes da execução do modelo B sobre o corpus. O registro está no histórico de decisões do projeto (seção 30 do arquivo \texttt{historico/HISTORICO\_DECISOES.md}) e no repositório de versões, cujos \textit{commits} têm data e hora.
+
+A regra, como registrada antes da execução, é a seguinte. O modelo principal é B se o intervalo de confiança de 95\% (\textit{bootstrap} estratificado) da diferença B menos A no kappa ponderado linear populacional de sentimento, calculado nas frases rotuladas com os pesos de população dos estratos originais (aspecto e polaridade previstos por A), exclui zero a favor de B, isto é, tem limite inferior maior que zero. Caso contrário, o modelo principal continua sendo A. O outro modelo é sempre reportado integralmente como robustez.
+
+A Tabela~\ref{tab:registro} lista os eventos, com data e hora no fuso de Brasília (UTC$-3$).
+
+\begin{table}[htb]
+\centering
+\caption{Sequência datada do registro da regra e da execução do modelo B.}
+\small
+\ajusta{\begin{tabular}{p{6.2cm}|l|p{5.4cm}}
+\hline
+Evento & Data e hora & Registro\\
+\hline
+Regra registrada no histórico de decisões (seção 30) e no repositório & 09/10/2026, 20:22:25 & \textit{commit} \texttt{c6e72df984e8}\\
+Início da inferência do modelo B no corpus & 09/10/2026, 20:39:12 & registro de execução da inferência de B\\
+Código de inferência do modelo B no repositório & 09/10/2026, 20:40:50 & \textit{commit} \texttt{6a82cbe861b3}\\
+Fim da inferência do modelo B (757,1 minutos) & 10/10/2026, 09:16:20 & registro de execução da inferência de B\\
+Avaliação de A e B nas frases rotuladas, aplicação da regra e resultados & 10/10/2026, 09:31:11 & \textit{commit} \texttt{ae38e3e16343}\\
+\hline
+\end{tabular}}
+\label{tab:registro}
+\end{table}
+
+O \textit{commit} da regra (hash completo \texttt{c6e72df984e856dce62c7e3a9719a4ddc47e7a7c}) é anterior em 17 minutos ao início da inferência de B e em 18 minutos e 25 segundos ao \textit{commit} do código que a executa. O resultado da regra é a diferença de $-0{,}141$ (IC 95\% de $-0{,}272$ a $-0{,}012$), que exclui zero a favor de A. O modelo principal é, portanto, A.
+
+\section{RELATÓRIOS DE DIAGNÓSTICO DOS TRÊS EXEMPLOS}
+
+As figuras a seguir reproduzem os três relatórios de diagnóstico gerados pela ferramenta (Seção 6) na versão anonimizada, com o identificador do anúncio substituído por um código, o bairro omitido e sem trechos de avaliações. Cada relatório é dividido em duas partes para caber na página. O primeiro exemplo é um anúncio de nota alta, o segundo de nota baixa e o terceiro, com poucas avaliações.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_2_a}
+\caption{Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte superior).}
+\label{fig:rel2a}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_2_b}
+\caption{Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte inferior).}
+\label{fig:rel2b}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_3_a}
+\caption{Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior).}
+\label{fig:rel3a}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_3_b}
+\caption{Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte inferior).}
+\label{fig:rel3b}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_1_a}
+\caption{Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte superior).}
+\label{fig:rel1a}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{relatorio_1_b}
+\caption{Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte inferior).}
+\label{fig:rel1b}
+\end{figure}
+
+\section{GANHO DE $R^2$ FORA DA AMOSTRA: TABELA COMPLETA}
+
+A Tabela~\ref{tab:ganhocompleto} traz as 12 comparações (três desfechos em quatro escopos) cuja versão resumida está na Seção 7. Cada célula mostra a média entre dobras e, entre colchetes, o intervalo de 2,5\% a 97,5\% entre dobras. As comparações são M1 $-$ M0 (nota oficial além dos controles), M2 $-$ M1 (índice no lugar da nota) e M3 $-$ M1 (índice além da nota), esta última nos dois modelos de sentimento. Nos escopos de teto, o escopo é o conjunto de anúncios com nota oficial igual ou superior ao valor indicado.
+
+\begin{table}[htb]
+\centering
+\caption{Ganho de $R^2$ fora da amostra nos 12 escopos: média entre dobras e intervalo entre dobras.}
+\scriptsize
+\ajusta{\begin{tabular}{l|l|r|c|c|c|c}
+\hline
+Desfecho & Escopo & $n$ & M1 $-$ M0 (A) & M2 $-$ M1 (A) & M3 $-$ M1 (A) & M3 $-$ M1 (B)\\
+\hline
+Índice de ocupação & amostra completa & 20.882 & $+0{,}0079$ [$+0{,}0052$; $+0{,}0099$] & $-0{,}0050$ [$-0{,}0070$; $-0{,}0020$] & $+0{,}0000$ [$-0{,}0005$; $+0{,}0002$] & $+0{,}0002$ [$-0{,}0007$; $+0{,}0006$]\\
+Índice de ocupação & nota $\geq$ 4,8 & 14.451 & $+0{,}0063$ [$+0{,}0038$; $+0{,}0091$] & $-0{,}0059$ [$-0{,}0083$; $-0{,}0033$] & $+0{,}0000$ [$-0{,}0003$; $+0{,}0002$] & $+0{,}0002$ [$-0{,}0005$; $+0{,}0006$]\\
+Índice de ocupação & nota $\geq$ 4,9 & 9.747 & $+0{,}0033$ [$+0{,}0009$; $+0{,}0057$] & $-0{,}0033$ [$-0{,}0055$; $-0{,}0010$] & $-0{,}0001$ [$-0{,}0003$; $+0{,}0000$] & $+0{,}0000$ [$-0{,}0006$; $+0{,}0002$]\\
+Índice de ocupação & nota = 5,0 & 4.711 & $+0{,}0000$ & $-0{,}0002$ [$-0{,}0009$; $+0{,}0000$] & $-0{,}0002$ [$-0{,}0009$; $+0{,}0000$] & $-0{,}0002$ [$-0{,}0007$; $+0{,}0000$]\\
+Índice de receita (log) & amostra completa & 20.882 & $+0{,}0174$ [$+0{,}0089$; $+0{,}0239$] & $-0{,}0132$ [$-0{,}0206$; $-0{,}0050$] & $+0{,}0010$ [$-0{,}0013$; $+0{,}0025$] & $+0{,}0014$ [$-0{,}0015$; $+0{,}0027$]\\
+Índice de receita (log) & nota $\geq$ 4,8 & 14.451 & $+0{,}0039$ [$-0{,}0001$; $+0{,}0073$] & $-0{,}0037$ [$-0{,}0080$; $+0{,}0009$] & $-0{,}0002$ [$-0{,}0012$; $+0{,}0001$] & $-0{,}0002$ [$-0{,}0008$; $+0{,}0000$]\\
+Índice de receita (log) & nota $\geq$ 4,9 & 9.747 & $+0{,}0009$ [$-0{,}0015$; $+0{,}0028$] & $-0{,}0002$ [$-0{,}0029$; $+0{,}0029$] & $+0{,}0004$ [$-0{,}0010$; $+0{,}0012$] & $+0{,}0004$ [$-0{,}0016$; $+0{,}0015$]\\
+Índice de receita (log) & nota = 5,0 & 4.711 & $+0{,}0000$ & $+0{,}0019$ [$-0{,}0040$; $+0{,}0059$] & $+0{,}0019$ [$-0{,}0040$; $+0{,}0059$] & $+0{,}0016$ [$-0{,}0019$; $+0{,}0040$]\\
+Avaliações em 12 meses (log) & amostra completa & 20.882 & $+0{,}0163$ [$+0{,}0108$; $+0{,}0208$] & $-0{,}0116$ [$-0{,}0157$; $-0{,}0067$] & $+0{,}0006$ [$-0{,}0009$; $+0{,}0014$] & $+0{,}0012$ [$-0{,}0008$; $+0{,}0025$]\\
+Avaliações em 12 meses (log) & nota $\geq$ 4,8 & 14.451 & $+0{,}0060$ [$+0{,}0033$; $+0{,}0088$] & $-0{,}0055$ [$-0{,}0088$; $-0{,}0026$] & $-0{,}0001$ [$-0{,}0005$; $+0{,}0001$] & $+0{,}0001$ [$-0{,}0008$; $+0{,}0006$]\\
+Avaliações em 12 meses (log) & nota $\geq$ 4,9 & 9.747 & $+0{,}0028$ [$-0{,}0008$; $+0{,}0059$] & $-0{,}0020$ [$-0{,}0045$; $+0{,}0014$] & $+0{,}0003$ [$-0{,}0004$; $+0{,}0007$] & $+0{,}0000$ [$-0{,}0006$; $+0{,}0002$]\\
+Avaliações em 12 meses (log) & nota = 5,0 & 4.711 & $+0{,}0000$ & $+0{,}0015$ [$-0{,}0020$; $+0{,}0041$] & $+0{,}0015$ [$-0{,}0020$; $+0{,}0041$] & $+0{,}0005$ [$-0{,}0018$; $+0{,}0017$]\\
+\hline
+\end{tabular}}
+\label{tab:ganhocompleto}
+\end{table}

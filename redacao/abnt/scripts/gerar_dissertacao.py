@@ -247,7 +247,7 @@ def read_arg(s: str, i: int) -> tuple[str, int]:
 
 def math_runs(m: str, st: dict) -> list[tuple[str, dict]]:
     m = m.replace(BS + ";", " ").replace(BS + ",", " ").replace("{,}", ",")
-    for a, b in [(BS + "cdot", "·"), (BS + "times", "×"), (BS + "rho", "ρ"), (BS + "pm", "±"), (BS + "sum", "Σ"), (BS + "min", "min"), (BS + "max", "max")]:
+    for a, b in [(BS + "cdot", "·"), (BS + "times", "×"), (BS + "rho", "ρ"), (BS + "pm", "±"), (BS + "geq", "≥"), (BS + "leq", "≤"), (BS + "sum", "Σ"), (BS + "min", "min"), (BS + "max", "max")]:
         m = m.replace(a, b)
     m = re.sub(re.escape(BS) + r"text\{([^}]*)\}", r"\1", m)
     runs: list[tuple[str, dict]] = []
@@ -340,7 +340,7 @@ def parse_inline(s: str, st: dict | None = None) -> list[tuple[str, dict]]:
                         i += 1
                 continue
             nxt = s[i + 1] if i + 1 < len(s) else ""
-            if nxt in "%&_#{}":
+            if nxt in "%&_#{}$":
                 buf += nxt
             elif nxt in ";,":
                 buf += " "
@@ -482,6 +482,22 @@ def table_blocks(text: str):
         elif ln.startswith(BS + "subsection{"):
             flush()
             blocks.append(("h2", read_braced(ln, ln.index("{"))[0]))
+        elif ln == BS + "appendix":
+            flush()
+            blocks.append(("appendix", None))
+        elif ln.startswith(BS + "begin{figure}"):
+            flush()
+            buf = []
+            while not lines[n].strip().startswith(BS + "end{figure}"):
+                buf.append(lines[n])
+                n += 1
+            body = "\n".join(buf)
+            ci = body.index(BS + "caption{") + len(BS + "caption")
+            cap, _ = read_braced(body, ci)
+            lab = re.search(re.escape(BS) + r"label\{(.*?)\}", body).group(1)
+            ig = re.search(re.escape(BS) + r"includegraphics\[(.*?)\]\{(.*?)\}", body)
+            wm = re.search(r"width=([0-9.]+)", ig.group(1))
+            blocks.append(("figure", {"caption": cap, "label": lab, "arquivo": ig.group(2), "largura": float(wm.group(1)) if wm else 1.0}))
         elif ln.startswith(BS + "begin{table}"):
             flush()
             buf = []
@@ -511,7 +527,7 @@ def spec_align(spec: str, ncols: int) -> list[str]:
     return (al + ["r"] * ncols)[:ncols]
 
 
-def build_table(doc, anchor, tb: dict, num: int):
+def build_table(doc, anchor, tb: dict, num: int, larg_cm: float = 16.0):
     # legenda (acima)
     cp = anchor.insert_paragraph_before("", style="Caption")
     cp.paragraph_format.keep_with_next = True
@@ -541,7 +557,7 @@ def build_table(doc, anchor, tb: dict, num: int):
     w = [max(len(re.sub(r"[$" + re.escape(BS) + "{}]", "", c[ci])) if ci < len(c) else 0 for c in rows) for ci in range(ncols)]
     w = [min(max(x, 6), 42) + 3 for x in w]
     tot = sum(w)
-    widths = [Cm(16.0 * x / tot) for x in w]
+    widths = [Cm(larg_cm * x / tot) for x in w]
     table.autofit = False
     for ri, row in enumerate(rows):
         for ci in range(ncols):
@@ -689,7 +705,7 @@ def main():
             elif kind == "p":
                 par = anchor.insert_paragraph_before("", style="Corpo do texto")
                 add_runs(par, parse_inline(val))
-            else:
+            elif kind == "table":
                 tnum += 1
                 build_table(doc, anchor, val, tnum)
     # --- referencias
