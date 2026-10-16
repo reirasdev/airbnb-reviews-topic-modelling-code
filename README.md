@@ -13,3 +13,17 @@ confrontado com as notas e subnotas oficiais. Ver `redacao/00_enquadramento.md` 
 ## Diagnóstico por anúncio
 `python diagnostico.py --id 12345` gera um relatório HTML (perfil por aspecto, comparação com anúncios do mesmo bairro e tipo, queixas e elogios recorrentes).
 Para exemplos publicáveis: `--anonimizar`. Exemplos anonimizados em `redacao/exemplos_diagnostico/`. Requer o pipeline já executado (etapas 1 a 17).
+
+## Citação
+
+Se este código ou modelo foi útil para a sua pesquisa, por favor cite a dissertação de mestrado correspondente:
+
+@mastersthesis{eiras2026airbnb,
+  author       = {Eiras, Raphael},
+  title        = {{O QUE AS AVALIAÇÕES REVELAM SOBRE A NOTA}: decomposição por aspecto do sentimento em avaliações de hóspedes do {Airbnb} no {Rio de Janeiro}},
+  school       = {Universidade Católica de Petrópolis},
+  year         = {2026},
+  type         = {Dissertação (Mestrado)},
+  address      = {Petrópolis / RJ, Brasil},
+  url          = {https://github.com/reirasdev/airbnb-reviews-topic-modelling-code}
+}
