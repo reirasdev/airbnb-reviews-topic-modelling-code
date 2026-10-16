@@ -18,6 +18,7 @@ Para exemplos publicáveis: `--anonimizar`. Exemplos anonimizados em `redacao/ex
 
 Se este código ou modelo foi útil para a sua pesquisa, por favor cite a dissertação de mestrado correspondente:
 
+```bibtex
 @mastersthesis{eiras2026airbnb,
   author       = {Eiras, Raphael},
   title        = {{O QUE AS AVALIAÇÕES REVELAM SOBRE A NOTA}: decomposição por aspecto do sentimento em avaliações de hóspedes do {Airbnb} no {Rio de Janeiro}},
@@ -27,3 +28,10 @@ Se este código ou modelo foi útil para a sua pesquisa, por favor cite a disser
   address      = {Petrópolis / RJ, Brasil},
   url          = {https://github.com/reirasdev/airbnb-reviews-topic-modelling-code}
 }
+```
+
+## Licença
+
+Este projeto está licenciado sob a **GNU Affero General Public License v3.0 (AGPLv3)**. 
+
+Isso significa que o código é livre para uso acadêmico, pessoal e modificações. No entanto, se você modificar este código ou integrá-lo a um serviço hospedado em rede (como uma API ou plataforma SaaS), você é obrigado a disponibilizar o código-fonte completo da sua aplicação sob a mesma licença AGPLv3. Veja o arquivo `LICENSE` para mais detalhes.
