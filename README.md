@@ -32,6 +32,6 @@ Se este código ou modelo foi útil para a sua pesquisa, por favor cite a disser
 
 ## Licença
 
-Este projeto está licenciado sob a **GNU Affero General Public License v3.0 (AGPLv3)**. 
+Este projeto está licenciado sob a **GNU General Public License v3.0 (GPLv3)**.
 
-Isso significa que o código é livre para uso acadêmico, pessoal e modificações. No entanto, se você modificar este código ou integrá-lo a um serviço hospedado em rede (como uma API ou plataforma SaaS), você é obrigado a disponibilizar o código-fonte completo da sua aplicação sob a mesma licença AGPLv3. Veja o arquivo `LICENSE` para mais detalhes.
+Isso significa que o código é livre para uso acadêmico, pessoal e modificações. Se você distribuir este código ou uma versão modificada dele, deve disponibilizar o código-fonte correspondente sob a mesma licença GPLv3. Veja o arquivo `LICENSE` para mais detalhes.
