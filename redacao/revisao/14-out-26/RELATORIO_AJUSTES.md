@@ -11,7 +11,7 @@ A numeração de seções é a da versão UCP já com as inclusões: a nova Seç
 | F1 | Cinco figuras (pipeline; parcelas LMG de A e B com a classificação; diferenças associadas com intervalos de 95%; relatório de diagnóstico; histograma da nota oficial e do índice na mesma amostra de 22.564), vetorial e PNG 300 dpi, legenda e "Fonte: Elaborada pelo autor." | Figuras 1 a 5: Seção 2 (20), 4.1 (34), 4.2 (38), 5 (41), 6.2 (45) |
 | F2 | Lista de Figuras e Lista de Abreviaturas e Siglas (24 siglas, todas usadas no texto, inclusive ABSA, BH e PLN, definidas na primeira ocorrência) | Pré-textuais (7 e 9) |
 | F3 | Tabela de 12 linhas em página paisagem; versão resumida mantida no corpo com remissão | Apêndice D, Tabela 17 (69); Tabela 13 (46) |
-| F4 | Produto técnico: finalidade, público, entradas, saídas, execução, repositório, licença, limites, categoria e avaliação de utilidade (os três últimos com `[PENDENTE]`); Figura 4 na Seção 5; três relatórios no Apêndice B (seis figuras, duas por relatório); repositório (público, AGPLv3), categoria e critérios da CAPES e ausência de avaliação por usuários declaradas | Seção 5.1 (41 a 42); Apêndice B (62 a 67) |
+| F4 | Produto técnico: finalidade, público, entradas, saídas, execução, repositório, licença, limites, categoria e avaliação de utilidade (os três últimos com `[PENDENTE]`); Figura 4 na Seção 5; três relatórios no Apêndice B (seis figuras, duas por relatório); repositório (público, GPLv3), categoria e critérios da CAPES e ausência de avaliação por usuários declaradas | Seção 5.1 (41 a 42); Apêndice B (62 a 67) |
 | F5 | Subseção "Aspectos éticos, ambiente de execução e disponibilidade": licença CC BY 4.0 (conferida no site em 15/10/2026), LGPD e anonimização, dispensa de avaliação ética (Resolução CNS n. 510/2016, art. 1º, parágrafo único, II e III, conferida no texto oficial do Ministério da Saúde), hardware, versões, tempos de execução, revisões dos modelos, repositório | Seção 2.2 (21 e 22) |
 | F6 | `[S. l.]` retirado dos periódicos; prenomes por extenso (Efron, Spearman, Thorndike); 13 referências novas (sete de ABSA e teoria, seis da lista do Consensus sobre tópicos em avaliações do Airbnb); Kano et al. (1984) retirado; 64 referências, todas citadas | Referências (55 a 60) |
 | F7 | "Keywords:" | Abstract (6) |
@@ -40,12 +40,9 @@ Desdobramentos sugeridos nos comentários (classificador direto de aspecto; test
 4. **Indicadores de ausência (R4).** Nada contradiz: a ordem dos aspectos não muda (comodidades 34,3% e 37,3% só com o sentimento; 41,8% e 45,6% somando a ausência).
 5. Nenhuma conclusão do texto foi invertida.
 
-## 3. Pendências do pesquisador (marcadores `[PENDENTE]` em amarelo no .docx)
+## 3. Pendências do pesquisador
 
-1. Período de publicação considerado na busca bibliográfica (Seção 1.8). As bases, as datas (maio a outubro de 2026), os idiomas, os tipos de documento e as consultas foram preenchidos com o que você informou.
-2. Enquadramento e subtipo do produto técnico no documento da Área Interdisciplinar (área 45) (Seção 5.1). O texto diz que a ferramenta é software ou aplicativo (programa de computador) na taxonomia geral da CAPES; não encontrei o documento da área para confirmar.
-
-Resolvidas com as suas respostas: linha de pesquisa e área de concentração; dispensa de avaliação ética; URL, repositório público e licença; 66 tópicos contidos nos 80; avaliação de utilidade (declarada como não feita, impacto potencial); Kano et al. (1984) retirado (a teoria é atribuída a Matzler e Sauerwein, 2002, e a Füller e Matzler, 2008).
+Nenhum marcador `[PENDENTE]` resta no texto. Último pedido atendido: o período de publicação não foi limitado (o texto diz "sem restrição de período de publicação") e o produto técnico foi enquadrado na categoria "Software/Aplicativo (Programa de computador)", prevista na Ficha de Avaliação da Área Interdisciplinar (Área 45) para 2025 a 2028, conforme a redação que você forneceu. Conferi que o Documento de Área 2025–2028 não lista essa categoria (ela não aparece nele) e não tive acesso à Ficha de Avaliação; a atribuição à Ficha segue a sua indicação.
 
 Continuam em aberto os itens institucionais anteriores (folha de aprovação, ficha catalográfica, centro e título do grau na capa).
 
@@ -59,7 +56,7 @@ Continuam em aberto os itens institucionais anteriores (folha de aprovação, fi
 
 ## 5. Ressalvas
 
-- **Licença do repositório:** o `README.md` diz AGPLv3, mas o arquivo `LICENSE` que veio no merge do `main` traz o texto da GNU General Public License v3 (GPLv3), e não o da Affero. O texto da dissertação diz AGPLv3, como você informou. Para ficar coerente, substitua o `LICENSE` pelo texto da AGPLv3 (`https://www.gnu.org/licenses/agpl-3.0.txt`) antes da defesa.
+- **Licença do repositório:** o texto da dissertação diz GPLv3, como o arquivo `LICENSE` do repositório. O `README.md` ainda diz AGPLv3; para ficar coerente, ajuste o README (ou troque o `LICENSE` pelo texto da AGPLv3 e me peça para atualizar o texto).
 
 - Os relatórios anonimizados usam como código os seis primeiros caracteres do MD5 do identificador do anúncio, sem sal: não há nome, bairro, frase ou identificador, mas o código pode ser recalculado por quem testar identificadores. Se o PPG exigir anonimização mais forte, gerar o código com sal.
 - As versões em LaTeX (fonte) e ABNT: os `.tex` foram atualizados (inclusive figuras, apêndices e bib), mas o PDF do LaTeX e o `.docx` ABNT não foram regenerados (o gerador ABNT não desenha figuras). Compile o LaTeX para conferir; o campo `pendente` do `.bib` (Kano 1984) é ignorado pelo BibTeX.
