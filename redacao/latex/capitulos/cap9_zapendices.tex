@@ -74,6 +74,36 @@ As figuras a seguir reproduzem os três relatórios de diagnóstico gerados pela
 \label{fig:rel1b}
 \end{figure}
 
+\section{ESTRATÉGIAS DE BUSCA BIBLIOGRÁFICA}
+
+A Tabela~\ref{tab:busca} lista as principais consultas da busca descrita na Seção 2. Todas foram executadas nas bases Scopus, Web of Science e Google Acadêmico, entre maio e outubro de 2026, com termos em inglês e, quando indicado, em português. Outras consultas exploratórias, redundantes com estas, não são listadas.
+
+\begin{table}[htb]
+\centering
+\caption{Principais consultas da busca bibliográfica.}
+\small
+\ajusta{\begin{tabular}{r|p{11cm}|p{4.5cm}}
+\hline
+Nº & Consulta & Tema\\
+\hline
+1 & Airbnb AND (“aspect-based sentiment analysis” OR “aspect-level sentiment analysis”) & análise por aspecto no Airbnb\\
+2 & Airbnb AND (“guest reviews” OR “online reviews”) AND (“guest satisfaction” OR “customer satisfaction” OR “service quality”) & satisfação do hóspede\\
+3 & Airbnb AND (“textual reviews” OR “review text” OR “review comments”) AND (ratings OR scores) AND (aspects OR attributes OR sentiment) & relação entre texto e nota\\
+4 & Airbnb AND “Rio de Janeiro” & recorte geográfico\\
+5 & Airbnb AND “Rio de Janeiro” AND (“sentiment analysis” OR “text mining” OR “topic modeling” OR reviews) & recorte geográfico e análise textual\\
+6 & Airbnb AND “Rio de Janeiro” AND (“análise de sentimento” OR “mineração de texto” OR avaliações OR comentários) & recorte geográfico, em português\\
+7 & Airbnb AND (“rating inflation” OR “reputation inflation” OR “ceiling effect” OR “positivity bias”) & compressão das notas no Airbnb\\
+8 & “online reviews” AND (“rating compression” OR “J-shaped distribution” OR “reporting bias”) & compressão das notas e vieses de relato\\
+9 & (“aspect-based sentiment analysis” OR “aspect-level sentiment analysis”) AND (hospitality OR tourism OR hotels) AND (validation OR annotation OR multilingual) & análise por aspecto em hospedagem e turismo\\
+10 & “aspect-based sentiment analysis” AND (“inter-annotator agreement” OR “construct validity” OR “domain adaptation”) & validação da análise por aspecto\\
+11 & (BERTopic OR “latent Dirichlet allocation”) AND (Airbnb OR hospitality OR “hotel reviews”) & modelagem de tópicos em avaliações\\
+12 & “multilingual sentiment analysis” AND (Portuguese OR “Brazilian Portuguese” OR hospitality) & sentimento multilíngue e em português\\
+13 & (Airbnb OR hospitality OR hotels) AND (“three-factor theory” OR Kano OR “penalty-reward contrast analysis” OR “asymmetric effects”) & teoria dos três fatores\\
+\hline
+\end{tabular}}
+\label{tab:busca}
+\end{table}
+
 \section{GANHO DE $R^2$ FORA DA AMOSTRA: TABELA COMPLETA}
 
 A Tabela~\ref{tab:ganhocompleto} traz as 12 comparações (três desfechos em quatro escopos) cuja versão resumida está na Seção 7. Cada célula mostra a média entre dobras e, entre colchetes, o intervalo de 2,5\% a 97,5\% entre dobras. As comparações são M1 $-$ M0 (nota oficial além dos controles), M2 $-$ M1 (índice no lugar da nota) e M3 $-$ M1 (índice além da nota), esta última nos dois modelos de sentimento. Nos escopos de teto, o escopo é o conjunto de anúncios com nota oficial igual ou superior ao valor indicado.
