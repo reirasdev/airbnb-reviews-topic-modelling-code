@@ -1,0 +1,20 @@
+# Versões usadas nas execuções da dissertação (ambiente virtual em Python 3.11.0, Windows 10, CPU).
+# Lidas do ambiente em 2026-10-14; não foram registradas nos logs da época.
+# Instalar torch (CPU) antes: pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+numpy==2.4.6
+pandas==3.0.6
+pyarrow==25.0.1
+openpyxl==3.1.5
+scipy==1.17.1
+scikit-learn==1.9.1
+statsmodels==0.15.0
+transformers==5.18.0
+sentence-transformers==6.1.0
+bertopic==0.17.4
+umap-learn==0.5.12
+gensim==4.4.0
+lingua-language-detector==2.1.1
+sentencepiece==0.2.2
+protobuf==7.36.2
+stopwordsiso==0.7.1
+holidays==0.105

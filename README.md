@@ -11,6 +11,13 @@ Texto de resultados vigente: `redacao/01_resultados_unificado.md` (gerado por `p
 3. `python run_pipeline.py --stages 1 2 3 4` (horas em CPU; retomável), revisar `data/mapa_aspecto_confirmado.xlsx`, depois `--stages 5 6 7 8 9 ...`.
 4. Resultados em `outputs/` (log e Excel com uma aba por resultado). Parâmetros apenas em `config.py`.
 
+## Reprodução e verificação
+- Versões exatas dos pacotes: `requirements-lock.txt`. Dados de origem, somas de verificação e o que o repositório publica: `DADOS.md`.
+- Análises de sensibilidade pedidas na revisão (Wilson, queixas com duas menções, subaspectos de comodidades, indicadores de ausência, Tabela 12 completa, dados das figuras): `python ajustes_v2.py` (grava `outputs/ajustes_v2/*.parquet` e uma cópia da planilha final com as abas `_v2`; aceita o nome de uma etapa, por exemplo `python ajustes_v2.py queixas_min2`).
+- Figuras: `python redacao/figuras/gerar_figuras.py` e, para os relatórios anonimizados, `--relatorios` (dependências extras em `requirements-figuras.txt`).
+- Conferências: `python redacao/verificar_numeros_v2.py` (números novos contra as abas e o cache) e `python redacao/verificar_referencias.py` (entradas do `.bib` com DOI contra o Crossref).
+- Dissertação no formato do Guia da UCP: `python redacao/UCP/scripts/gerar_dissertacao_ucp.py`; os campos do Word são atualizados por `redacao/UCP/scripts/atualizar_campos.ps1`.
+
 ## Diagnóstico por anúncio
 `python diagnostico.py --id 12345` gera um relatório HTML (perfil por aspecto, comparação com anúncios do mesmo bairro e tipo, queixas e elogios recorrentes).
 Para exemplos publicáveis: `--anonimizar`. Exemplos anonimizados em `redacao/exemplos_diagnostico/`. Requer o pipeline já executado (etapas 1 a 17).

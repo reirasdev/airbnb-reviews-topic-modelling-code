@@ -1,0 +1,6 @@
+# Dependências extras para gerar as figuras (redacao/figuras/gerar_figuras.py) e verificar os números novos
+# (redacao/verificar_numeros_v2.py). Usadas com o Python do sistema (3.11), fora do ambiente do pipeline.
+matplotlib==3.10.3
+pillow==11.2.1
+pandas==3.0.6
+pyarrow==25.0.1
