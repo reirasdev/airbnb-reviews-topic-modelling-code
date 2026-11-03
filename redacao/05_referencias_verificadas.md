@@ -6,7 +6,7 @@ Arquivo BibTeX: `redacao/latex/referencias.bib` (52 entradas). Cada uma foi conf
 | Chave | Referência | Para que serve |
 |---|---|---|
 | `zervas2021` | Zervas, Proserpio & Byers (2021), *Marketing Letters* 32(1) | Notas do Airbnb concentradas no topo da escala (compressão) |
-| `bridges2018` | Bridges & Vásquez (2018), *Current Issues in Tourism* 21(18) | Avaliações do Airbnb majoritariamente positivas; análise de linguagem |
+| `bridges2016` | Bridges & Vásquez (2016, versão publicada online), *Current Issues in Tourism* | Avaliações do Airbnb majoritariamente positivas; análise de linguagem |
 | `fradkin2021` | Fradkin, Grewal & Holtz (2021), *Marketing Science* 40(6) | Reciprocidade e viés nas avaliações do Airbnb |
 | `hu2009` | Hu, Zhang & Pavlou (2009), *Communications of the ACM* 52(10) | Distribuição em J das avaliações online |
 | `chevalier2006` | Chevalier & Mayzlin (2006), *Journal of Marketing Research* 43(3) | Avaliações online e vendas |
