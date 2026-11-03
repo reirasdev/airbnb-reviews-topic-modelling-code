@@ -285,16 +285,13 @@ def main():
     subtitulo = "decomposição por aspecto do sentimento em avaliações de hóspedes do Airbnb no Rio de Janeiro"
     palavras = "análise de sentimento por aspecto; avaliações online; Airbnb; modelagem de tópicos; diagnóstico de anúncios"
     abstract = (
-        "Ratings on Airbnb are concentrated at the top of the scale and say little about the reasons for guest satisfaction. "
-        "This study uses the text of 995,072 reviews of listings in Rio de Janeiro (Inside Airbnb) to decompose the rating by aspect and by specific complaint. "
-        "Sentence-level sentiment is measured by two multilingual models, and the choice of the main model follows a rule fixed before the second model was run. "
-        "Aspects come from topics obtained with BERTopic and are checked with a second method (LDA) and with a second annotator. "
-        "The measurement is validated with the official subscores and with labeled sentences weighted by the population. "
-        "Only cleanliness, location and value meet the adopted confidence criterion. "
-        "Amenities and cleanliness concentrate most of the explained variation of the overall rating. "
-        "Complaints about facilities, cleanliness and host response are the most associated with lower ratings, with a similar order in both models. "
-        "A synthetic index built from the text adds no explanatory power, beyond the official rating, over indices of review volume. "
-        "The results are associations, and the proposed application is a listing-level diagnosis compared with the neighborhood and the type of accommodation."
+        "Ratings on Airbnb are concentrated at the top of the scale: in Rio de Janeiro, 32.4% of listings have a 5.0 rating. What does the text of the reviews reveal about the rating? "
+        "This study decomposes the rating by aspect and by specific complaint using 995,072 reviews from Inside Airbnb. Sentence-level sentiment is measured by two multilingual models, "
+        "and the choice of the main model follows a rule fixed before the second model was run. Aspects come from topics obtained with BERTopic and are validated with labeled sentences "
+        "weighted by the population, with the official subscores, with a second topic method and with a second annotator. Amenities and cleanliness account for 42% and 20% of the "
+        "explained variation of the overall rating. Complaints about the bathroom, air conditioning, dirt and host response are associated with drops of 10 to 26 points in the rating percentile. "
+        "Only cleanliness, location and value meet the confidence criterion, and this classification is indicative. A synthetic index built from the text adds no explanatory power "
+        "to the official rating. The results are associations. The application is a listing-level diagnosis compared with the neighborhood and the type of accommodation."
     )
     keywords = "aspect-based sentiment analysis; online reviews; Airbnb; topic modeling; listing diagnosis"
 
