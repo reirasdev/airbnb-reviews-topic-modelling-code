@@ -45,36 +45,38 @@ Ratings on Airbnb are concentrated at the top of the scale: in Rio de Janeiro, 3
 Keywords: aspect-based sentiment analysis; online reviews; Airbnb; topic modeling; listing diagnosis.
 
 LISTA DE FIGURAS
-Figura 1 – Etapas do estudo: da base do Inside Airbnb à validação e às análises.
-Figura 2 – Parcela do R2 da nota global atribuída a cada aspecto nos modelos A e B (decomposição LMG), com a classificação do aspecto.
-Figura 3 – Diferença associada no percentil da nota, em pontos de percentil, para as queixas e os elogios das Tabelas 10 e 11, com intervalo de 95%.
-Figura 4 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior do relatório).
-Figura 5 – Distribuição da nota oficial e do índice sintético (modelo A) nos 22.564 anúncios com índice.
-Figura 6 – Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte superior).
-Figura 7 – Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte inferior).
-Figura 8 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior).
-Figura 9 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte inferior).
-Figura 10 – Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte superior).
-Figura 11 – Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte inferior).
+Figura 1 – Etapas do estudo: da base do Inside Airbnb à validação e às análises.	19
+Figura 2 – Parcela do R2 da nota global atribuída a cada aspecto nos modelos A e B (decomposição LMG), com a classificação do aspecto.	33
+Figura 3 – Diferença associada no percentil da nota, em pontos de percentil, para as queixas e os elogios das Tabelas 10 e 11, com intervalo de 95%.	37
+Figura 4 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior do relatório).	40
+Figura 5 – Distribuição da nota oficial e do índice sintético (modelo A) nos 22.564 anúncios com índice.	44
+Figura 6 – Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte superior).	61
+Figura 7 – Relatório de diagnóstico de um anúncio de nota alta (exemplo anonimizado; parte inferior).	62
+Figura 8 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte superior).	63
+Figura 9 – Relatório de diagnóstico de um anúncio de nota baixa (exemplo anonimizado; parte inferior).	64
+Figura 10 – Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte superior).	65
+Figura 11 – Relatório de diagnóstico de um anúncio com poucas avaliações (exemplo anonimizado; parte inferior).	66
+
 
 LISTA DE TABELAS
-Tabela 1 – Participação dos aspectos nas sentenças e anúncios com perfil disponível.
-Tabela 2 – Sentimento: desempenho dos modelos A e B nas 297 sentenças rotuladas.
-Tabela 3 – Precisão da atribuição de aspecto, por aspecto previsto (27 sentenças rotuladas em cada).
-Tabela 4 – Correlação entre o sentimento do aspecto e a subnota oficial correspondente, no nível do anúncio.
-Tabela 5 – Checagem com LDA: correlação do perfil, validade de construto e parcela do R2 da nota global.
-Tabela 6 – Classificação indicativa dos aspectos: precisão de atribuição com intervalo de Wilson, precisão com os dois anotadores e correlação com a subnota.
-Tabela 7 – Parcela do R2 da nota global atribuída a cada aspecto (decomposição LMG).
-Tabela 8 – Decomposição LMG de cada subnota: parcela do aspecto correspondente.
-Tabela 9 – Parcela do R2 da nota global por subaspecto de comodidades, com a regra de duas sentenças (regra do estudo) e com uma sentença (sensibilidade).
-Tabela 10 – Queixas de maior peso e associação com o percentil da nota (modelo A).
-Tabela 11 – Elogios de maior peso e associação com o percentil da nota (modelo A).
-Tabela 12 – Anúncios de nota 5,0 com e sem índice sintético (preço por diária em reais).
-Tabela 13 – Ganho de R2 fora da amostra: média entre dobras e intervalo entre dobras (versão resumida; as 12 comparações estão no Apêndice D).
-Tabela 14 – Correlação de postos com o índice de ocupação residualizado, por faixa da nota oficial.
-Tabela 15 – Sequência datada do registro da regra e da execução do modelo B.
-Tabela 16 – Principais consultas da busca bibliográfica.
-Tabela 17 – Ganho de R2 fora da amostra nos 12 escopos: média entre dobras e intervalo entre dobras.
+Tabela 1 – Participação dos aspectos nas sentenças e anúncios com perfil disponível.	24
+Tabela 2 – Sentimento: desempenho dos modelos A e B nas 297 sentenças rotuladas.	26
+Tabela 3 – Precisão da atribuição de aspecto, por aspecto previsto (27 sentenças rotuladas em cada).	27
+Tabela 4 – Correlação entre o sentimento do aspecto e a subnota oficial correspondente, no nível do anúncio.	28
+Tabela 5 – Checagem com LDA: correlação do perfil, validade de construto e parcela do R2 da nota global.	30
+Tabela 6 – Classificação indicativa dos aspectos: precisão de atribuição com intervalo de Wilson, precisão com os dois anotadores e correlação com a subnota.	31
+Tabela 7 – Parcela do R2 da nota global atribuída a cada aspecto (decomposição LMG).	32
+Tabela 8 – Decomposição LMG de cada subnota: parcela do aspecto correspondente.	34
+Tabela 9 – Parcela do R2 da nota global por subaspecto de comodidades, com a regra de duas sentenças (regra do estudo) e com uma sentença (sensibilidade).	35
+Tabela 10 – Queixas de maior peso e associação com o percentil da nota (modelo A).	36
+Tabela 11 – Elogios de maior peso e associação com o percentil da nota (modelo A).	37
+Tabela 12 – Anúncios de nota 5,0 com e sem índice sintético (preço por diária em reais).	44
+Tabela 13 – Ganho de R2 fora da amostra: média entre dobras e intervalo entre dobras (versão resumida; as 12 comparações estão no Apêndice D).	45
+Tabela 14 – Correlação de postos com o índice de ocupação residualizado, por faixa da nota oficial.	46
+Tabela 15 – Sequência datada do registro da regra e da execução do modelo B.	60
+Tabela 16 – Principais consultas da busca bibliográfica.	67
+Tabela 17 – Ganho de R2 fora da amostra nos 12 escopos: média entre dobras e intervalo entre dobras.	68
+
 
 LISTA DE ABREVIATURAS E SIGLAS
 ABSA	Aspect-Based Sentiment Analysis (análise de sentimento por aspecto)
@@ -103,14 +105,63 @@ URL	Uniform Resource Locator (endereço eletrônico)
 UTC	Tempo Universal Coordenado
 
 SUMÁRIO
-Clique neste campo e pressione F9 (ou clique com o botão direito e escolha Atualizar campo) para gerar o sumário.
+INTRODUÇÃO	11
+1 REFERENCIAL TEÓRICO	14
+1.1 FORMAÇÃO DA SATISFAÇÃO E TEORIA DOS TRÊS FATORES	14
+1.2 AVALIAÇÕES ONLINE: COMPRESSÃO DAS NOTAS E VIESES DE RELATO	14
+1.3 AS AVALIAÇÕES DO AIRBNB E O SEU CONTEÚDO	15
+1.4 DETERMINANTES DE PREÇO E DE REPUTAÇÃO	16
+1.5 ANÁLISE DE SENTIMENTO POR ASPECTO E MODELOS DE LINGUAGEM	16
+1.6 MODELAGEM DE TÓPICOS	17
+1.7 VALIDAÇÃO, CONCORDÂNCIA E IMPORTÂNCIA RELATIVA	17
+1.8 BUSCA BIBLIOGRÁFICA	18
+1.9 LACUNA	18
+2 DADOS E MÉTODO	19
+2.1 BASE E RECORTE	19
+2.2 ASPECTOS ÉTICOS, AMBIENTE DE EXECUÇÃO E DISPONIBILIDADE	20
+2.3 O QUE A BASE PERMITE MEDIR	21
+2.4 MEDIÇÃO DO SENTIMENTO	22
+2.5 TÓPICOS E ASPECTOS	23
+2.6 PERFIL POR ANÚNCIO	24
+2.7 DESENHO ANALÍTICO	24
+3 VALIDAÇÃO DA MEDIÇÃO	26
+3.1 EVIDÊNCIA DIRETA: FRASES ROTULADAS	26
+3.2 CONCORDÂNCIA ENTRE OS DOIS MODELOS	27
+3.3 REGRA DE ESCOLHA FIXADA DE ANTEMÃO E MODELO PRINCIPAL	28
+3.4 VALIDADE DE CONSTRUTO: CONCORDÂNCIA COM AS SUBNOTAS OFICIAIS	28
+3.5 CHECAGEM COM UM SEGUNDO MÉTODO DE TÓPICOS E COM UM SEGUNDO ANOTADOR	29
+3.6 CLASSIFICAÇÃO DOS ASPECTOS	30
+4 O QUE O TEXTO REVELA SOBRE A NOTA	32
+4.1 IMPORTÂNCIA DOS ASPECTOS	32
+4.2 QUEIXAS E ELOGIOS POR TÓPICO	36
+4.3 CUIDADOS DE INTERPRETAÇÃO	38
+5 APLICAÇÃO: DIAGNÓSTICO POR ANÚNCIO	39
+5.1 PRODUTO TÉCNICO	40
+6 UM ÍNDICE ÚNICO ACRESCENTA ALGO?	43
+6.1 CONSTRUÇÃO DO ÍNDICE	43
+6.2 COMPRESSÃO DA NOTA OFICIAL E REORDENAMENTO	43
+6.3 PODER EXPLICATIVO SOBRE OS ÍNDICES DE VOLUME	44
+6.4 MONOTONICIDADE E REORDENAMENTO	46
+6.5 SENSIBILIDADE	46
+6.6 COMO LER O RESULTADO	47
+7 DISCUSSÃO E LIMITAÇÕES	48
+7.1 OS RESULTADOS À LUZ DA LITERATURA	48
+7.2 IMPLICAÇÕES PARA ANFITRIÕES E EMPRESAS GESTORAS	49
+7.3 LIMITAÇÕES	49
+CONCLUSÕES	52
+REFERÊNCIAS	54
+APÊNDICE A – REGISTRO DATADO DA REGRA DE ESCOLHA DO MODELO PRINCIPAL	60
+APÊNDICE B – RELATÓRIOS DE DIAGNÓSTICO DOS TRÊS EXEMPLOS	61
+APÊNDICE C – ESTRATÉGIAS DE BUSCA BIBLIOGRÁFICA	67
+APÊNDICE D – GANHO DE R2 FORA DA AMOSTRA: TABELA COMPLETA	68
+
 
 INTRODUÇÃO
 A nota média de um anúncio no Airbnb resume a opinião de dezenas ou centenas de hóspedes em um único número entre 1 e 5. Esse número é quase sempre alto. Em uma análise de anúncios da plataforma, Zervas, Proserpio e Byers (2021) encontraram que cerca de 95% dos anúncios exibem média de 4,5 ou 5 estrelas. A literatura sobre avaliações online descreve distribuições concentradas no topo da escala em outros mercados (Filippas; Horton; Golden, 2022; Hu; Zhang; Pavlou, 2009). Os dados deste estudo repetem o padrão: entre os 28.890 anúncios do Rio de Janeiro analisados, 9.373 (32,4%) têm nota exatamente igual a 5,0. Uma nota tão comprimida distingue mal os anúncios entre si e diz pouco sobre o que levou o hóspede a avaliar bem ou mal.
 A informação que falta à nota está no texto. Ao escrever, o hóspede menciona a limpeza, a localização, a comunicação com o anfitrião, o estado do banheiro ou o ruído da rua, em linguagem própria, frequentemente em mais de um idioma. Esse conteúdo raramente é examinado de forma sistemática por quem administra o anúncio. Para o anfitrião ou para uma empresa gestora, a pergunta útil vai além da nota: em que aspecto o anúncio se afasta dos pares e que queixas se repetem.
 Este trabalho investiga, com avaliações de hóspedes do Airbnb no Rio de Janeiro (Inside Airbnb), o que o texto das avaliações revela sobre a nota. A pergunta central desdobra-se em quatro perguntas específicas. A primeira trata da medição: para quais aspectos é possível medir, de forma confiável, o sentimento do hóspede a partir de milhões de frases em português, inglês e espanhol? A segunda trata da associação com a nota: quais aspectos e quais queixas e elogios concretos mais se associam à nota global e às subnotas oficiais? A terceira trata da aplicação: como transformar esse resultado em um diagnóstico por anúncio, comparado ao bairro e ao tipo de acomodação? A quarta, de caráter secundário, trata do índice único: um índice sintético construído a partir do texto acrescenta poder explicativo à nota oficial?
 Comodidades e limpeza concentram a maior parte da variação explicada da nota global (42,5% e 19,6% no modelo principal). As queixas de maior peso, como banheiro, ar-condicionado, sujeira, cozinha, cama e resposta do anfitrião, se associam a quedas de 10 a 26 pontos no percentil da nota nos anúncios que as recebem. Apenas limpeza, localização e custo-benefício atendem ao critério de confiança da medição, e essa classificação é indicativa. Um índice sintético construído do texto não acrescenta poder explicativo à nota oficial.
-Objetivo geral. Decompor, por aspecto e por tópico, o que o texto das avaliações de hóspedes do Airbnb no Rio de Janeiro revela sobre a nota dos anúncios, com medição validada e limites declarados e disponibilizar o resultado como um instrumento de diagnóstico por anúncio.
+Objetivo geral. Decompor, por aspecto e por tópico, o que o texto das avaliações de hóspedes do Airbnb no Rio de Janeiro revela sobre a nota dos anúncios, com medição validada e limites declarados, e disponibilizar o resultado como instrumento de diagnóstico por anúncio.
 Objetivos específicos. Os objetivos seguem a ordem das perguntas. O primeiro é medir o sentimento por aspecto a partir das sentenças das avaliações e classificar os aspectos segundo a confiança da medida. O segundo é estimar a associação dos aspectos, das queixas e dos elogios com a nota global e com as subnotas oficiais. O terceiro é construir o diagnóstico por anúncio, comparado ao bairro e ao tipo de acomodação e formalizá-lo como produto técnico. O quarto é testar se um índice sintético construído a partir do texto acrescenta poder explicativo à nota oficial.
 Justificativa. A nota concentrada no topo da escala orienta pouco quem administra um anúncio. Anfitriões e empresas gestoras precisam saber que queixas se repetem e quanto elas pesam e a plataforma não entrega essa leitura. Do ponto de vista científico, a literatura descreve a compressão das notas e os temas das avaliações, mas a validação explícita da medida por aspecto, com amostra ponderada pela população e mais de um anotador, é rara, sobretudo para avaliações em português. Do ponto de vista técnico, o estudo parte de dados públicos e produz um procedimento reprodutível, cujo resultado final é uma ferramenta de uso prático.
 Aderência à área. O trabalho se insere no Programa de Mestrado Profissional em Gestão de Sistemas de Engenharia por tratar da gestão da qualidade de serviços e do apoio à decisão. Ele transforma dados não estruturados, as avaliações de hóspedes, em indicadores de qualidade percebida por aspecto, com método de validação e entrega um produto técnico para gestores de hospedagem. A dissertação vincula-se à área de concentração em Sistemas de Engenharia e à linha de pesquisa Modelagem Computacional do programa.
@@ -130,7 +181,7 @@ Diversos estudos aplicam mineração de texto às avaliações do Airbnb. Cheng 
 1.4 DETERMINANTES DE PREÇO E DE REPUTAÇÃO
 Outra vertente da literatura procura explicar o preço e a demanda dos anúncios. Estudos de preço com regressão hedônica, quantílica e espacial mostram que localização, tamanho, comodidades e reputação online se associam ao preço (Chica-Olmo; González-Morales; Zafra-Gómez, 2020; Gyódi; Nawaro, 2021; Wang; Nicolau, 2017). Em Nova York, com dados de agosto de 2014 a setembro de 2016, a localização, sobretudo o acesso a empregos por transporte público, tem grande efeito sobre o preço por noite e sobre a receita mensal e a profissionalização do mercado direciona a receita a um grupo menor de anfitriões (Deboosere et al., 2019). Esses trabalhos tomam preço, ocupação ou receita como variáveis de interesse. Neste estudo o objeto é a nota e o texto que a acompanha. As medidas de volume entram como desfecho auxiliar, com a ressalva, estabelecida na Seção 2, de que os campos de ocupação e receita estimadas da base são funções do número de avaliações.
 1.5 ANÁLISE DE SENTIMENTO POR ASPECTO E MODELOS DE LINGUAGEM
-A análise de sentimento por aspecto (aspect-based sentiment analysis, ABSA) consiste em identificar os aspectos de uma entidade mencionados no texto e o sentimento expresso sobre cada um (Liu, 2012). As tarefas compartilhadas do SemEval consolidaram a formulação e os conjuntos de dados da área (Pontiki et al., 2014; Pontiki et al., 2016) e levantamentos recentes organizam os métodos e os desafios (Schouten; Frasincar, 2016; Zhang et al., 2023). Os modelos atuais de processamento de linguagem natural (PLN) derivam do BERT (Devlin et al., 2019). Para corpora multilíngues como o desta pesquisa, empregam-se modelos multilíngues como o XLM-T, treinado em mensagens de uma rede social em vários idiomas (Barbieri; Espinosa Anke; Camacho-Collados, 2022). Para o português, existem modelos específicos, como o BERTimbau (Souza, 2020) e trabalhos de mineração de opinião sobre avaliações em português (Freitas; Vieira, 2013). Estudos de 2020 em diante aplicam a análise por aspecto à hospedagem e ao turismo. Vassilikopoulou, Kamenidou e Priporas (2022) analisam avaliações negativas do Airbnb por aspecto. Suryabrata, Warnars e Muyeba (2026) comparam modelos de transformadores multilíngues em avaliações de hotéis de Jacarta. Trabalhos recentes avaliam grandes modelos de linguagem (LLM) na mesma tarefa, em avaliações de turismo (Xu et al., 2026) e de hotéis de Chipre (Giritli; Erensel; Öztüren, Ali, 2026). Os LLM ampliam o repertório de métodos, mas exigem custo de inferência e controle de versão que um corpus de 1,5 milhão de sentenças torna relevantes. Este estudo usa classificadores de sentimento de porte menor, executáveis em processador comum e dedica a validação a medir o que eles acertam. A busca bibliográfica que sustenta esta revisão é descrita no fim da seção.
+A análise de sentimento por aspecto (aspect-based sentiment analysis, ABSA) consiste em identificar os aspectos de uma entidade mencionados no texto e o sentimento expresso sobre cada um (Liu, 2012). As tarefas compartilhadas do SemEval consolidaram a formulação e os conjuntos de dados da área (Pontiki et al., 2014; Pontiki et al., 2016) e levantamentos recentes organizam os métodos e os desafios (Schouten; Frasincar, 2016; Zhang et al., 2023). Os modelos atuais de processamento de linguagem natural (PLN) derivam do BERT (Devlin et al., 2019). Para corpora multilíngues como o desta pesquisa, empregam-se modelos multilíngues como o XLM-T, treinado em mensagens de uma rede social em vários idiomas (Barbieri; Espinosa Anke; Camacho-Collados, 2022). Para o português, existem modelos específicos, como o BERTimbau (Souza, 2020) e trabalhos de mineração de opinião sobre avaliações em português (Freitas; Vieira, 2013). Estudos de 2020 em diante aplicam a análise por aspecto à hospedagem e ao turismo. Vassilikopoulou, Kamenidou e Priporas (2022) analisam avaliações negativas do Airbnb por aspecto. Suryabrata, Warnars e Muyeba (2026) comparam modelos de transformadores multilíngues em avaliações de hotéis de Jacarta. Trabalhos recentes avaliam grandes modelos de linguagem (LLM) na mesma tarefa, em avaliações de turismo (Xu et al., 2026) e de hotéis de Chipre (Giritli; Erensel; Öztüren, 2026). Os LLM ampliam o repertório de métodos, mas exigem custo de inferência e controle de versão que um corpus de 1,5 milhão de sentenças torna relevantes. Este estudo usa classificadores de sentimento de porte menor, executáveis em processador comum e dedica a validação a medir o que eles acertam. A busca bibliográfica que sustenta esta revisão é descrita no fim da seção.
 1.6 MODELAGEM DE TÓPICOS
 O LDA (Blei; Ng; Jordan, 2003) é o método clássico de modelagem de tópicos probabilística. O BERTopic (Grootendorst, 2022) agrupa representações vetoriais de sentenças (Reimers; Gurevych, 2019; Reimers; Gurevych, 2020), após redução de dimensão por UMAP (McInnes; Healy; Melville, 2018) e agrupamento por densidade (McInnes; Healy; Astels, 2017) e descreve cada grupo por termos de maior peso. O BERTopic já foi aplicado a avaliações do Airbnb e de hotéis em estudo sobre satisfação e confiança nas transações (Rey-Moreno; Sánchez-Franco; Rey-Tienda, 2023). A coerência Cv (Röder; Both; Hinneburg, 2015) é a medida usual para comparar a qualidade interpretável dos tópicos e neste estudo é empregada apenas de forma descritiva.
 1.7 VALIDAÇÃO, CONCORDÂNCIA E IMPORTÂNCIA RELATIVA
@@ -288,7 +339,7 @@ A Figura 2 apresenta as mesmas parcelas, com a classificação de cada aspecto.
 Figura 2 – Parcela do R2 da nota global atribuída a cada aspecto nos modelos A e B (decomposição LMG), com a classificação do aspecto.
 
 Fonte: Elaborada pelo autor.
-Comodidades responde por 42,5% do R2 em A e 47,8% em B, seguida de limpeza (19,6% e 18,8%). Satisfação geral e comunicação vêm depois. Localização, custo-benefício e segurança contribuem pouco para a nota global, embora a localização seja o aspecto que mais explica a sua própria subnota (Tabela 8). O hóspede parece avaliar o local em separado; a nota global reflete mais o que ele viveu dentro do imóvel. A ordem das parcelas é muito parecida entre os modelos (correlação de postos de 0,99). A diferença mais visível está na satisfação geral, que pesa menos em B. Valem as ressalvas da Seção 3: comodidades e satisfação geral estão na classe de cautela. A importância relativa de um aspecto mistura efeito e confiabilidade da medida, porque aspectos pouco citados, como segurança e custo-benefício, são medidos com mais erro e imputados na maioria dos anúncios.
+Comodidades responde por 42,5% do R2 em A e 47,8% em B, seguida de limpeza (19,6% e 18,8%). Satisfação geral e comunicação vêm depois. Localização, custo-benefício e segurança contribuem pouco para a nota global, embora a localização seja o aspecto que mais explica a sua própria subnota (Tabela 8). Uma hipótese, que os dados não testam, é que o hóspede avalia o local em separado e que a nota global reflete mais o que ele viveu dentro do imóvel. A ordem das parcelas é muito parecida entre os modelos (correlação de postos de 0,99). A diferença mais visível está na satisfação geral, que pesa menos em B. Valem as ressalvas da Seção 3: comodidades e satisfação geral estão na classe de cautela. A importância relativa de um aspecto mistura efeito e confiabilidade da medida, porque aspectos pouco citados, como segurança e custo-benefício, são medidos com mais erro e imputados na maioria dos anúncios.
 A Tabela 8 mostra o mesmo exercício para cada subnota. O aspecto correspondente está entre os que mais a explicam; em localização ela é a primeira. Nas demais subnotas, comodidades tem a maior parcela.
 Tabela 8 – Decomposição LMG de cada subnota: parcela do aspecto correspondente.
 Subnota | R2 total (A) | Aspecto correspondente | Parcela (A) | Parcela (B) | Maior parcela (A)
@@ -353,7 +404,7 @@ A queixa genérica (decepção e problemas) e os elogios genéricos (sentir-se e
 4.3 CUIDADOS DE INTERPRETAÇÃO
 Os resultados não têm leitura causal. Um anúncio com queixa de banheiro tem nota menor e isso não permite afirmar que consertar o banheiro eleve a nota. A diferença associada apresentada é a diferença média, na cidade, entre anúncios com e sem a menção, controlada por volume. A atribuição de aspecto acerta entre 52% e 66% na população (Seção 3). A importância por aspecto fica abaixo da dos tópicos em confiabilidade, o que reforça a leitura por tópico.
 5 APLICAÇÃO: DIAGNÓSTICO POR ANÚNCIO
-A Seção 4 mostra o que se associa à nota. Esta seção descreve como um anfitrião ou uma empresa gestora pode usar esse resultado. A ferramenta de diagnóstico gera, a pedido, o relatório de um único anúncio com quatro componentes.
+Um anfitrião ou uma empresa gestora pode usar o resultado da Seção 4 por meio de uma ferramenta de diagnóstico, que gera, a pedido, o relatório de um único anúncio com quatro componentes.
 O primeiro é o sentimento médio do anúncio em cada aspecto e a sua posição (percentil) entre os anúncios do mesmo bairro e do mesmo tipo de acomodação. Quando o bairro tem poucos anúncios, a comparação passa para o tipo de acomodação na cidade. O segundo componente é a evidência de cada aspecto. Aspectos com poucas sentenças recebem a marca de evidência baixa, sem rótulo de ponto forte ou de ponto de atenção, para que um número sustentado em duas frases não seja lido como diagnóstico. O terceiro componente reúne as queixas e os elogios recorrentes do anúncio, junto com a associação média, na cidade, desses tópicos com o percentil da nota (Seção 4). O quarto mostra a evolução do sentimento nas avaliações mais recentes. A ferramenta funciona também para anúncios novos: em vez de omitir um aspecto sem dados, marca a evidência como baixa.
 Para a comparação foram construídas tabelas de referência com 66 grupos de bairro e tipo de acomodação que têm ao menos 30 anúncios e 3 grupos por tipo na cidade. Cada grupo traz a mediana e os quartis do sentimento por aspecto e da nota. O relatório respeita a classificação da Seção 3. Uma nota metodológica acompanha o documento e informa a precisão da atribuição por aspecto. Os aspectos que pedem cautela não devem orientar decisões isoladamente. Os aspectos classificados como confiáveis são limpeza, localização e custo-benefício.
 A Figura 4 reproduz o relatório do exemplo de nota baixa e o Apêndice B traz os três relatórios. Foram gerados três exemplos anonimizados: um anúncio de nota alta, um de nota baixa e um com poucas avaliações. No de nota baixa, o relatório aponta comodidades e satisfação geral muito abaixo dos pares e destaca as queixas de banheiro e cozinha. No de poucas avaliações, a maior parte dos aspectos aparece com evidência baixa. O relatório indica onde investigar. Ele não prevê a nota do anúncio e não prescreve causas, porque as associações da Seção 4 são médias da cidade e não efeitos sobre um anúncio específico.
@@ -470,7 +521,7 @@ FILIPPAS, Apostolos; HORTON, John J.; GOLDEN, Joseph M. Reputation Inflation. Ma
 FRADKIN, Andrey; GREWAL, Elena; HOLTZ, David. Reciprocity and Unveiling in Two-Sided Reputation Systems: Evidence from an Experiment on Airbnb. Marketing Science, v. 40, n. 6, p. 1013-1029, 2021. DOI: 10.1287/mksc.2021.1311.
 FREITAS, Larissa A.; VIEIRA, Renata. Ontology based feature level opinion mining for Portuguese reviews. In: INTERNATIONAL CONFERENCE ON WORLD WIDE WEB, 22., 2013, [S. l.]. Proceedings [...]. [S. l.]: [s. n.], 2013. p. 367-370. DOI: 10.1145/2487788.2487944.
 FÜLLER, Johann; MATZLER, Kurt. Customer delight and market segmentation: an application of the three-factor theory of customer satisfaction on life style groups. Tourism Management, v. 29, n. 1, p. 116-126, 2008. DOI: 10.1016/j.tourman.2007.03.021.
-GIRITLI, Ayçin; ERENSEL, Salahi; ÖZTÜREN, ALI. Evaluating the performance of large language models in aspect-based sentiment analysis: Cyprus hotel reviews. In: IEEE ANNUAL COMPUTERS, SOFTWARE, AND APPLICATIONS CONFERENCE (COMPSAC), 50., 2026, [S. l.]. Proceedings [...]. [S. l.]: IEEE, 2026. p. 2296-2301. DOI: 10.1109/compsac69091.2026.00342.
+GIRITLI, Ayçin; ERENSEL, Salahi; ÖZTÜREN, Ali. Evaluating the performance of large language models in aspect-based sentiment analysis: Cyprus hotel reviews. In: IEEE ANNUAL COMPUTERS, SOFTWARE, AND APPLICATIONS CONFERENCE (COMPSAC), 50., 2026, [S. l.]. Proceedings [...]. [S. l.]: IEEE, 2026. p. 2296-2301. DOI: 10.1109/compsac69091.2026.00342.
 GRÖMPING, Ulrike. Relative Importance for Linear Regression in R : The Package relaimpo. Journal of Statistical Software, v. 17, n. 1, p. 1-27, 2006. DOI: 10.18637/jss.v017.i01.
 GRÖMPING, Ulrike. Estimators of Relative Importance in Linear Regression Based on Variance Decomposition. The American Statistician, v. 61, n. 2, p. 139-147, 2007. DOI: 10.1198/000313007x188252.
 GROOTENDORST, Maarten. BERTopic: Neural topic modeling with a class-based TF-IDF procedure. [S. l.]: arXiv, 2022. Disponível em: https://arxiv.org/abs/2203.05794. Acesso em: 10 out. 2026.
